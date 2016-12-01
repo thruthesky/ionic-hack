@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,8 +6,5 @@ import { Component } from '@angular/core';
 })
 export class AboutPage {
   title: string = "Aboutd";
-  constructor() {
-    
-  }
-
+  constructor() { }
 }
