@@ -3,6 +3,12 @@
 ionic cli hack for angular 2 framework.
 
 
+# TODO
+
+* complete templating for RWD design.
+* @see 'TODO' list of philgo-api REDME
+* after complete, fork out and continue a new project. if there is update, submit full request.
+
 
 
 # Installation
