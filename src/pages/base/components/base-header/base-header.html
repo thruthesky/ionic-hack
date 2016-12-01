@@ -1,0 +1,54 @@
+<header>
+  <nav class="navbar navbar-fixed-top">
+
+  <a routerLink="/" title="Home">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+      </span>
+  </a>
+
+    <a routerLink="/help" title="Help">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-question fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+
+    <a routerLink="/user/register" title="Register">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+
+    <a routerLink="/user/login" title="Register">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+
+    <a routerLink="/user/login" title="Forums">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-comment-o fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+
+    <a routerLink="/user/login" title="All Menu">
+      <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x"></i>
+        <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
+      </span>
+    </a>
+
+    <div style="display:none;" class="more" [class.active]="isNavMoreActive">
+      <b>{{ title }} </b>
+      <a routerLink="/about">About</a>
+      <a routerLink="/user/login">User Login</a>
+      <a routerLink="/user/profile">My Page</a>
+    </div>
+  </nav>
+</header>
+

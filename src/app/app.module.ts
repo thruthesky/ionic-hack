@@ -1,38 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
+//import { FormsModule } from '@angular/forms';
+
 import { RootComponent } from './app.component';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { BaseModule, ROUTES as BASE_ROUTES } from '../pages/base/base.module';
 
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
-
-import { HomePage } from '../pages/home/home';
-import { HelpPage } from '../pages/help/help';
-import { AboutPage } from '../pages/about/about';
-import { FileNotFoundPage } from '../pages/file-not-found/file-not-found';
-
-const appRoutes: Routes = [
-  { path: 'help', component: HelpPage },
-  { path: 'user/login', component: HelpPage },
-  { path: 'about', component: AboutPage },
-  { path: '', component: HomePage },
-  { path: '**', component: FileNotFoundPage }
-];
+const appRoutes: Routes = BASE_ROUTES;
+//BASE_ROUTES.map( e => appRoutes.unshift( e ) );
 
 @NgModule({
   declarations: [
-    RootComponent,
-    HomePage,
-    AboutPage,
-    HelpPage,
-    FileNotFoundPage
+    RootComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot( appRoutes ),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    BaseModule
   ],
   bootstrap: [ RootComponent ],
   providers: [ ]
