@@ -8,10 +8,12 @@ import { RootComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BaseModule, ROUTES as BASE_ROUTES } from '../pages/base/base.module';
+import { PhilgoApiModule, ROUTES as PHILGO_ROUTES } from '../api/philgo-api/v2/philgo-api-module';
+
 
 
 const appRoutes: Routes = BASE_ROUTES;
-//BASE_ROUTES.map( e => appRoutes.unshift( e ) );
+PHILGO_ROUTES.map( e => appRoutes.unshift( e ) );
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ const appRoutes: Routes = BASE_ROUTES;
     BrowserModule,
     RouterModule.forRoot( appRoutes ),
     NgbModule.forRoot(),
-    BaseModule
+    BaseModule,
+    PhilgoApiModule
   ],
   bootstrap: [ RootComponent ],
   providers: [ ]

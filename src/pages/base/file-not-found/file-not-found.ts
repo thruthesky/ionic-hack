@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class FileNotFoundPage {
 
+  title: string = 'Page Not Found';
   constructor() { }
 
 }
