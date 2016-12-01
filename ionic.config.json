@@ -1,0 +1,13 @@
+{
+  "name": "hack2",
+  "app_id": "",
+  "v2": true,
+  "typescript": true,
+
+  "proxies": [
+    {
+      "path": "/[a-zA-Z0-9\/]+",
+      "proxyUrl": "http://localhost:8100/"
+    }
+  ]
+}
