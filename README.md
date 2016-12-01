@@ -1,7 +1,17 @@
-# ionic hack
+# Ionic Hack
 
-ionic cli hack for angular 2 framework.
+Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
+
+## Work Environment
+
+* When you do project, fork http://github.com/thruthesky/ionic-hack and use it.
+    * for instance, there is a forked project at http://github.com/withcenter/sonub
+    * all sonub developers should clone 'http://github.com/withcenter/sonub'
+    * so, when there is any update, you can do pull request.
+
+* Local clone should be 'ionic-hack' to avoid confusion which means, when you work on 'ionic-hack' repository, clone the project with same folder name.
+    * work folder: c:/work/www/ionic/ionic-hack
 
 # TODO
 
