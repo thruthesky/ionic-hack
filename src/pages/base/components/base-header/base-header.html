@@ -36,19 +36,20 @@
       </span>
     </a>
 
-    <a routerLink="/user/login" title="All Menu">
+    <span title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
       <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x"></i>
         <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
       </span>
-    </a>
-
-    <div style="display:none;" class="more" [class.active]="isNavMoreActive">
-      <b>{{ title }} </b>
-      <a routerLink="/about">About</a>
-      <a routerLink="/user/login">User Login</a>
-      <a routerLink="/user/profile">My Page</a>
-    </div>
+    </span>
   </nav>
+  <div style="display:none;" class="all-menu" [class.active]="isAllMenuActive">
+
+    <h3>{{ title }} </h3>
+    <hr>
+    <a routerLink="/about">About</a>
+    <a routerLink="/user/login">User Login</a>
+    <a routerLink="/user/profile">My Page</a>
+  </div>
 </header>
 

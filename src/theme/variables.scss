@@ -1,31 +1,7 @@
 
-$background_color: #f7f7f7;
-$toolbar_height: 60px;
-$toolbar_color: #d3e3f3;
-$content_background_color: #f0f0f0;
 
 
-body {
-    background-color: $background_color;
-}
-
-header {
-    height: $toolbar_height;
-    overflow: hidden;
-    nav {
-        height: $toolbar_height;
-        background-color: $toolbar_color;
-    }
-}
-footer {
-    height: $toolbar_height;
-    nav {
-        height: $toolbar_height;
-        background-color: $toolbar_color;
-    }
-}
-section.content {
-    margin: 4px;
-    padding: 6px;
-    background-color: $content_background_color;
-}
+@import './vars';
+@import './layout';
+@import './module';
+@import './state';

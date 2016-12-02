@@ -1,17 +1,21 @@
 <base-header [title]="title"></base-header>
-
 <section class="content">
-  <a routerLink="/about">About</a>
-  <a routerLink="help">help</a>
-  <a routerLink="/user/login">User Login</a>
-  <a routerLink="/my-page">My Page</a>
-<div>
-  This is homepage...
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2">
+        <base-left-side></base-left-side>
+      </aside>
+      <div class="col-sm-8 col-md-9 col-lg-6 col-xl-8">
+        <section class="center base-center">
+          <div>
+            <h1>Home Page</h1>
+          </div>
+        </section>
+      </div>
+      <aside class="right col-sm-12 col-lg-3 col-xl-2">
+        <base-right-side></base-right-side>
+      </aside>
+    </div>
   </div>
 </section>
-
-<footer>
-  <nav class="navbar navbar-fixed-bottom">
-    <h2>www.sonub.com</h2>
-  </nav>
-</footer>
+<base-footer></base-footer>

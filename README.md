@@ -17,7 +17,9 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 * complete templating for RWD design.
 * @see 'TODO' list of philgo-api REDME
-* after complete, fork out and continue a new project. if there is update, submit full request.
+* apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub
+* let developers clone https://github.com/withcenter/sonub
+* since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
 
 
 

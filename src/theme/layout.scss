@@ -1,0 +1,44 @@
+@mixin no-gutter() {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+body {
+    background-color: $background_color;
+}
+
+header {
+    height: $toolbar_height;
+    overflow: hidden;
+    nav {
+        height: $toolbar_height;
+        background-color: $toolbar_color;
+    }
+}
+footer {
+    height: $toolbar_height;
+    nav {
+        height: $toolbar_height;
+        background-color: $toolbar_color;
+    }
+}
+section.content {
+    margin: 4px;
+    padding: 6px;
+    background-color: $content_background_color;
+    .container, .container-fluid {
+        @include no-gutter();
+        & > .row {
+            @include no-gutter();
+            & > aside {
+                @include no-gutter();
+            }
+        }
+    }
+}
+article .meta.container {
+   width: 100%;
+   max-width: 100%;
+}

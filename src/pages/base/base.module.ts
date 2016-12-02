@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { BaseHeader } from './components/base-header/base-header';
+import { BaseFooter } from './components/base-footer/base-footer';
+import { BaseLeftSide } from './components/base-left-side/base-left-side';
+import { BaseRightSide } from './components/base-right-side/base-right-side';
+
 import { HomePage } from './home/home';
 import { HelpPage } from './help/help';
 import { AboutPage } from './about/about';
@@ -25,6 +29,9 @@ export let ROUTES: Routes = [
 @NgModule({
     declarations: [
         BaseHeader,
+        BaseFooter,
+        BaseLeftSide,
+        BaseRightSide,
         HomePage,
         HelpPage,
         AboutPage,

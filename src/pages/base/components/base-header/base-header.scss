@@ -1,0 +1,12 @@
+@import '../../../../theme/vars';
+.all-menu {
+    &.active {
+        display: block!important;
+        position: fixed;
+        top: $toolbar_height + 6px;
+        left: 0;
+        right: 0;
+        background-color: #efefef;
+        padding: 1em;
+    }
+}
