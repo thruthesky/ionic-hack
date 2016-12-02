@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: 'help.html'
 })
 export class HelpPage {
-
+  title: string = '';
   constructor() {
     
   }
