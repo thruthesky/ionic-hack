@@ -1,6 +1,34 @@
 
 <footer>
   <nav class="navbar navbar-fixed-bottom">
-    <h2>www.sonub.com</h2>
+    <table cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="99%">
+          
+            <a routerLink="/forum" title="Forums">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+
+            <a routerLink="/forum" title="Forums">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+
+        </td>
+        <td>
+          <span title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-gear fa-stack-1x fa-inverse"></i>
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
   </nav>
 </footer>

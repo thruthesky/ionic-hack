@@ -10,17 +10,17 @@ body {
 }
 
 header {
-    height: $toolbar_height;
+    height: $header_toolbar_height;
     overflow: hidden;
     nav {
-        height: $toolbar_height;
+        height: $header_toolbar_height;
         background-color: $toolbar_color;
     }
 }
 footer {
-    height: $toolbar_height;
+    height: $footer_toolbar_height;
     nav {
-        height: $toolbar_height;
+        height: $footer_toolbar_height;
         background-color: $toolbar_color;
     }
 }
@@ -32,7 +32,7 @@ section.content {
         @include no-gutter();
         & > .row {
             @include no-gutter();
-            & > aside {
+            & > aside, & > div {
                 @include no-gutter();
             }
         }

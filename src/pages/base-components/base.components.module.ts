@@ -1,4 +1,4 @@
-/*
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,8 +19,13 @@ import { BaseRightSide } from './base-right-side/base-right-side';
         BrowserModule,
         RouterModule
     ],
+    exports: [
+        BaseHeader,
+        BaseFooter,
+        BaseLeftSide,
+        BaseRightSide
+    ],
     providers: []
 })
 export class BaseComponentsModule {}
 
-*/

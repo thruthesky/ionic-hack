@@ -3,14 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-
-
-
-import { BaseHeader } from '../base-components/base-header/base-header';
-import { BaseFooter } from '../base-components/base-footer/base-footer';
-import { BaseLeftSide } from '../base-components/base-left-side/base-left-side';
-import { BaseRightSide } from '../base-components/base-right-side/base-right-side';
-
+import { BaseComponentsModule } from '../base-components/base.components.module';
 
 import { HomePage } from './home/home';
 import { HelpPage } from './help/help';
@@ -32,12 +25,6 @@ export let ROUTES: Routes = [
 
 @NgModule({
     declarations: [
-            BaseHeader,
-        BaseFooter,
-        BaseLeftSide,
-        BaseRightSide,
-
-
         HomePage,
         HelpPage,
         AboutPage,
@@ -49,7 +36,8 @@ export let ROUTES: Routes = [
     imports: [
         BrowserModule,
         RouterModule,
-        FormsModule
+        FormsModule,
+        BaseComponentsModule
     ],
     providers: []
 })

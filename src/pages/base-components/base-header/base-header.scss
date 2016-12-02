@@ -1,12 +1,29 @@
 @import '../../../theme/vars';
+
+header nav {
+    .menu {
+        display: block;
+        text-decoration: none;
+        em {
+            display: block;
+            text-align: center;
+            font-size: .8em;
+        }
+    }
+    em {
+        font-style: normal;
+    }
+}
+
 .all-menu {
     &.active {
         display: block!important;
         position: fixed;
-        top: $toolbar_height + 6px;
+        z-index: 100;
+        top: $header_toolbar_height + 6px;
         left: 0;
         right: 0;
-        background-color: #efefef;
+        background-color: #71b3f4;
         padding: 1em;
     }
 }

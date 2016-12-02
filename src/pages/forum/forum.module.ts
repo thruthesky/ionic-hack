@@ -5,7 +5,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 
-//import { BaseComponentsModule } from '../base/components/base.components.module';
+import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
+
+import { BaseComponentsModule } from '../base-components/base.components.module';
 import { ForumIndexPage } from './forum-index/forum-index';
 
 
@@ -20,8 +22,9 @@ export let ROUTES: Routes = [
     imports: [
         BrowserModule,
         RouterModule,
-        FormsModule
-  //      BaseComponentsModule
+        FormsModule,
+        BaseComponentsModule,
+        LanguagePipeModule
     ],
     providers: []
 })

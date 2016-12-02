@@ -1,0 +1,28 @@
+<base-header [title]="title"></base-header>
+<section class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2">
+        <base-left-side></base-left-side>
+      </aside>
+      <div class="col-sm-8 col-md-9 col-lg-6 col-xl-8">
+        <section class="center base-center">
+          
+            <h1>{{ title }}</h1>
+            <ul class="list-group" class="list-group-item" *ngFor=" let name of forum_names ">
+              <li class="list-group-item active">{{ 'forum.' + name | ln }}</li>
+              <li class="list-group-item" *ngFor=" let post_id of forums[ name ] " (click)="onClickForum( post_id ) ">
+                {{ 'forum.' + post_id | ln }}
+              </li>
+            </ul>
+            
+            
+        </section>
+      </div>
+      <aside class="right col-sm-12 col-lg-3 col-xl-2">
+        <base-right-side></base-right-side>
+      </aside>
+    </div>
+  </div>
+</section>
+<base-footer></base-footer>

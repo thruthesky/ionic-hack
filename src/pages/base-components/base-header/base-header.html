@@ -1,55 +1,74 @@
 <header>
   <nav class="navbar navbar-fixed-top">
+    <table cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td width="99%">
+          <table cellpadding="0" cellspacing="0">
+            <tr valign="top">
+              <td>
+                <a class="menu" routerLink="/" title="Home">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Sonub</em>
+                </a>
+              </td>
+              <a class="menu" routerLink="/help" title="Help">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-question fa-stack-1x fa-inverse"></i>
+                </span>
+                <em>Help</em>
+              </a>
+              <td>
+              <a class="menu" routerLink="/user/register" title="Register">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+                </span>
+                <em>User</em>
+              </a>
+              </td>
+              <a class="menu" routerLink="/user/login" title="Register">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
+                </span>
+                <em>Login</em>
+              </a>
 
-  <a routerLink="/" title="Home">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-home fa-stack-1x fa-inverse"></i>
-      </span>
-  </a>
+              <td>
 
-    <a routerLink="/help" title="Help">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-question fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
+              <a class="menu" routerLink="/forum" title="Forums">
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa fa-comment-o fa-stack-1x fa-inverse"></i>
+                </span>
+                <em>Forum</em>
+              </a>
+            </td>
+          </tr>
+        </table>
 
-    <a routerLink="/user/register" title="Register">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-
-    <a routerLink="/user/login" title="Register">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-
-    <a routerLink="/forum" title="Forums">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-comment-o fa-stack-1x fa-inverse"></i>
-      </span>
-    </a>
-
-    <span title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
-      <span class="fa-stack fa-lg">
-        <i class="fa fa-circle fa-stack-2x"></i>
-        <i class="fa fa-list-ul fa-stack-1x fa-inverse"></i>
-      </span>
-    </span>
+        <td>
+          <span class="menu" title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-reorder fa-stack-1x fa-inverse"></i>
+            </span>
+            <em>Menu</em>
+          </span>
+        </td>
+      </tr>
+    </table>
   </nav>
-  <div style="display:none;" class="all-menu" [class.active]="isAllMenuActive">
-
+  <em style="display:none;" class="all-menu" [class.active]="isAllMenuActive">
     <h3>{{ title }} </h3>
     <hr>
     <a routerLink="/about">About</a>
     <a routerLink="/user/login">User Login</a>
     <a routerLink="/user/profile">My Page</a>
-  </div>
+  </em>
 </header>
 

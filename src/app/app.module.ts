@@ -11,7 +11,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
-// import { BaseComponentsModule } from '../pages/base-components/base.components.module';
 import { BaseModule, ROUTES as BASE_ROUTES } from '../pages/base/base.module';
 
 import { ForumModule, ROUTES as FORUM_ROUTES } from '../pages/forum/forum.module';
