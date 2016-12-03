@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
+import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
+
 import { BaseHeader } from './base-header/base-header';
 import { BaseFooter } from './base-footer/base-footer';
 import { BaseLeftSide } from './base-left-side/base-left-side';
@@ -17,7 +19,8 @@ import { BaseRightSide } from './base-right-side/base-right-side';
     ],
     imports: [
         BrowserModule,
-        RouterModule
+        RouterModule,
+        LanguagePipeModule
     ],
     exports: [
         BaseHeader,

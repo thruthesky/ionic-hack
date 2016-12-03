@@ -38,6 +38,17 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 
 
 
+
+
+
+
+# Locations of Philippines
+
+* @see philgo api.
+
+
+
+
 # history
 
 2016-12-02

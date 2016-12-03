@@ -1,5 +1,13 @@
 export let languageText = {
     home:               { en : 'Home', ko: '홈' },
+    help:               { en : 'Help', ko: '도움말' },
+    login:               { en : 'Login', ko: '로그인' },
+    menu:               { en : 'Menu', ko: '메뉴' },
+    
+    error:              { en: 'Error', ko: '에러' },
+    
+    'input id':         { en: 'Input User ID', ko: '아이디를 입력하십시오.' },
+    
     forum:              { en: 'Forum', ko: '게시판'},
     'forum.community':  { en: 'Community', ko: '커뮤니티' },
     'forum.buyandsell': { en: 'Buy & Sell', ko: '회원장터' },

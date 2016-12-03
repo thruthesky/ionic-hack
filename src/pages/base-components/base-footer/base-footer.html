@@ -21,10 +21,10 @@
 
         </td>
         <td>
-          <span title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
+          <span title="Settings">
             <span class="fa-stack fa-lg">
               <i class="fa fa-circle fa-stack-2x"></i>
-              <i class="fa fa-gear fa-stack-1x fa-inverse"></i>
+              <i class="fa fa-gear fa-stack-1x fa-inverse" [class.fa-spin]="process.loader"></i>
             </span>
           </span>
         </td>

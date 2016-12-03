@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
+import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 import { BaseComponentsModule } from '../base-components/base.components.module';
 
 import { HomePage } from './home/home';
@@ -37,6 +38,7 @@ export let ROUTES: Routes = [
         BrowserModule,
         RouterModule,
         FormsModule,
+        LanguagePipeModule,
         BaseComponentsModule
     ],
     providers: []
