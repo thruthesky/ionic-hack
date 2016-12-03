@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_LOGIN_DATA } from '../../../../api/philgo-api/v2/member';
+import { FirebaseAuth } from '../../../../api/firebase-api/firebase-auth';
 import { LanguagePipe } from '../../../../pipes/language/language.pipe';
 @Component({
     selector: 'login-page',
@@ -12,6 +13,7 @@ export class LoginPage {
     process = formProcess;
     constructor(
         private member: Member,
+        private auth: FirebaseAuth,
         private ln: LanguagePipe
     ) {
 
