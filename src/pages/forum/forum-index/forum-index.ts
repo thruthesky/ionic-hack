@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Member, MEMBER_LOGIN_DATA } from '../../../api/philgo-api/v2/member';
-import { Post, SEARCH_QUERY_DATA } from '../../../api/philgo-api/v2/post';
+import { Member } from '../../../api/philgo-api/v2/member';
+import { Post  } from '../../../api/philgo-api/v2/post';
 type FORUMS = Array< { name: Array<string> } >;
 
 
