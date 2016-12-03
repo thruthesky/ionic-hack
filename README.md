@@ -37,6 +37,9 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule foreach git checkout master
 
 
+# Language Translation
+
+There are two language translation pipe. ln and ek.
 
 
 
