@@ -9,18 +9,12 @@ import { RootComponent } from './app.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AppRouteModule } from './app.route.module';
 
 
-import { BaseModule, ROUTES as BASE_ROUTES } from '../pages/base/base.module';
-
-import { ForumModule, ROUTES as FORUM_ROUTES } from '../pages/forum/forum.module';
-
-import { PhilgoApiModule, ROUTES as PHILGO_ROUTES } from '../api/philgo-api/v2/philgo-api-module';
-
-
-const appRoutes: Routes = BASE_ROUTES;
-FORUM_ROUTES.map( e => appRoutes.unshift( e ) );
-PHILGO_ROUTES.map( e => appRoutes.unshift( e ) );
+import { BaseModule } from '../pages/base/base.module';
+import { ForumModule } from '../pages/forum/forum.module';
+import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
 
 @NgModule({
   declarations: [
@@ -28,8 +22,8 @@ PHILGO_ROUTES.map( e => appRoutes.unshift( e ) );
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot( appRoutes ),
     IonicApiModule,
+    AppRouteModule,
     NgbModule.forRoot(),
     BaseModule,
     PhilgoApiModule,
