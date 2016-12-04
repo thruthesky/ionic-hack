@@ -24,6 +24,18 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
 
 
+## TODO : BUGS
+
+* sharing place holder of formProcess does not work on IE.
+
+
+````
+    <i class="fa fa-gear fa-stack-1x fa-inverse" [class.fa-spin]="process.loader"></i>
+````
+
+* [class.fa-spin]="process.loader" is not working when it is changed in other component.
+
+
 
 # Installation
 
@@ -39,9 +51,23 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule foreach git checkout master
 
 
+
+# Form Submission
+
+* When you submit a form, Use 'share.formProcess'
+
 # Language Translation
 
 There are two language translation pipe. ln and ek.
+
+'ln' uses the language in language-text.ts while 'ek' uses the input of pipe.
+
+````
+    {{ ['Register', '회원가입'] | ek }}
+````
+
+* The first string is English, and the second string is Korean.
+
 
 
 

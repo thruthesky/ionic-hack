@@ -2,11 +2,11 @@
   <nav class="navbar navbar-fixed-top">
     <table cellpadding="0" cellspacing="0">
       <tr valign="top">
-        <td width="99%">
-          <table cellpadding="0" cellspacing="0">
+        <td class="left" width="99%">
+          <table cellpadding="0" cellspacing="0" border="0">
             <tr valign="top">
               <td>
-                <a class="menu" routerLink="/" title="Home">
+                <a class="menu home" routerLink="/" title="Home">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-home fa-stack-1x fa-inverse"></i>
@@ -14,44 +14,49 @@
                   <em>Sonub</em>
                 </a>
               </td>
-              <a class="menu" routerLink="/help" title="Help">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-question fa-stack-1x fa-inverse"></i>
-                </span>
-                <em>{{ 'help' | ln }}</em>
-              </a>
               <td>
-              <a class="menu" routerLink="/user/register" title="Register">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
-                </span>
-                <em>{{ ['User', '사용자'] | ek }}</em>
-              </a>
+                <a class="menu" routerLink="/help" title="Help">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-question fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>{{ 'help' | ln }}</em>
+                </a>
               </td>
-              <a class="menu" routerLink="/user/login" title="Register">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
-                </span>
-                <em>Login</em>
-              </a>
+              
+              <td>
+                <a class="menu" routerLink="/user/register" title="Register">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-user-plus fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>{{ ['Register', '회원가입'] | ek }}</em>
+                </a>
+              </td>
 
               <td>
+                <a class="menu" routerLink="/user/login" title="Register">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-unlock fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Login</em>
+                </a>
+              </td>
 
-              <a class="menu" routerLink="/forum" title="Forums">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x"></i>
-                  <i class="fa fa-comment-o fa-stack-1x fa-inverse"></i>
-                </span>
-                <em>Forum</em>
-              </a>
-            </td>
-          </tr>
-        </table>
-
-        <td>
+              <td>
+                <a class="menu" routerLink="/forum" title="Forums">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-comment-o fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Forum</em>
+                </a>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="right">
           <span class="menu" title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
             <span class="fa-stack fa-lg">
               <i class="fa fa-circle fa-stack-2x"></i>

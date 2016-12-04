@@ -5,8 +5,8 @@ import { formProcess } from '../../../etc/share';
     templateUrl: 'base-footer.html'
 })
 export class BaseFooter {
-    process = formProcess;
+    // process = formProcess;
     constructor() {
-        console.log("BaseFooter::constructor() ", this.process);
+        console.log("BaseFooter::constructor() ");
     }
 }
