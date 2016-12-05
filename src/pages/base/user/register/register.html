@@ -22,8 +22,21 @@
             <table border="0">
               <tr>
                 <td colspan="2">
-                  <div><img [src]="pathPhoto"></div>
-                  <input type="file" #file (change)="onChangeFile($event, file.value)">
+                  <div class="primary-photo"><img [src]="urlPhoto"></div>
+                  <div *ngIf=" urlPhoto != urlDefault ">
+                    <button (click)="onDeletePhoto()">DELETE PHOTO</button>
+                  </div>
+
+                  <input type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
+
+<!-- This supports IE 9. IE 9 does not support HTML 5 -->
+<progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+  <div class="progress">
+    <span class="progress-bar" [style.width]="widthProgress"></span>
+  </div>
+</progress>
+
+
                 </td>
               </tr>
               <tr>
@@ -45,7 +58,7 @@
               <tr>
                 <td><label for="inputMobile">Mobile</label></td>
                 <td>
-                  <input [(ngModel)]="form.mobile" class="form-control" name="mobile" type="mobile" id="inputMobile" placeholder="Input your phone number." autocomplete="off">
+                  <input [(ngModel)]="form.mobile" class="form-control" name="mobile" type="number" id="inputMobile" placeholder="Input your phone number." autocomplete="off">
                   <div class="text-muted">Input digits only</div>
                 </td>
               </tr>
