@@ -3,6 +3,7 @@ export interface FORM_PROCESS {
     error?: string;
     reset(): FORM_PROCESS ;
     startLoader(): FORM_PROCESS ;
+    begin(): FORM_PROCESS;
     stopLoader(): FORM_PROCESS ;
     setError( message: string ) : FORM_PROCESS;
 };
@@ -19,6 +20,9 @@ export let formProcess: FORM_PROCESS = {
         this.loader = true;
         this.error = '';
         return this;
+    },
+    begin: function() : FORM_PROCESS {
+        return this.startLoader();
     },
     stopLoader: function() : FORM_PROCESS {
         this.loader = false;

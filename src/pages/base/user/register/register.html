@@ -1,3 +1,10 @@
+<!--
+  Registration form
+
+  @note this is not RWD page. so, no need to use grid.
+
+ -->
+
 <base-header [title]="title"></base-header>
 <section class="content">
   <div class="container-fluid">
@@ -9,55 +16,88 @@
       <section class="center base-center col-sm-8 col-md-9 col-lg-6 col-xl-8">
         
           <h1>{{ title }} ...</h1>
-          <div class="container-fluid">
+
+          
           <form>
+            <table border="0">
+              <tr>
+                <td colspan="2">
+                  <div><img [src]="pathPhoto"></div>
+                  <input type="file" #file (change)="onChangeFile($event, file.value)">
+                </td>
+              </tr>
+              <tr>
+                <td><label for="inputID">User ID</label></td>
+                <td><input [(ngModel)]="form.id" class="form-control" name="id" type="text" id="inputID" placeholder="Input User ID" autocomplete="off"></td>
+              </tr>
+              <tr>
+                <td><label for="inputPassword">Password</label></td>
+                <td><input [(ngModel)]="form.password" class="form-control" name="password" type="password" id="inputPassword" placeholder="Input Password" autocomplete="off"></td>
+              </tr>
+              <tr>
+                <td><label for="inputName">Name</label></td>
+                <td><input [(ngModel)]="form.name" class="form-control" name="name" type="text" id="inputName" placeholder="Input Name" autocomplete="off"></td>
+              </tr>
+              <tr>
+                <td><label for="inputEmail">Email</label></td>
+                <td><input [(ngModel)]="form.email" class="form-control" name="email" type="email" id="inputEmail" placeholder="Input Email" autocomplete="off"></td>
+              </tr>
+              <tr>
+                <td><label for="inputMobile">Mobile</label></td>
+                <td>
+                  <input [(ngModel)]="form.mobile" class="form-control" name="mobile" type="mobile" id="inputMobile" placeholder="Input your phone number." autocomplete="off">
+                  <div class="text-muted">Input digits only</div>
+                </td>
+              </tr>
 
-            <div class="row form-group">
-              <label for="inputID" class="col-md-2 col-form-label">User ID</label>
-              <div class="col-md-10">
-                <input [(ngModel)]="form.id" name="id" type="text" class="form-control" id="inputID" placeholder="Input User ID">
-                <small class="form-text text-muted">Input your login user id.</small>
-              </div>
-            </div>
+              <tr>
+                <td>Gender</td>
+                <td>
+  
+    
+                  <label for="inputGenderM" class="form-check-inline">
+                    
+                    <input [(ngModel)]="form.gender" class="form-check-input" name="gender" type="radio" id="inputGenderM" value='M'>
+                    Male
+                  </label>
+                  <label for="inputGenderF" class="form-check-inline">
+                    <input [(ngModel)]="form.gender" class="form-check-input" name="gender" type="radio" id="inputGenderF" value='F'>
+                    Female
+                  </label>
+  
+                  
+                </td>
+              </tr>
+              
+              <tr>
+                <td><label for="inputBirthday">Birth Day</label></td>
+                <td><input [(ngModel)]="form.birthday" class="form-control" name="birthday" type="date" id="inputBirthday"></td>
+              </tr>
 
-
-            <div class="row form-group">
-              <label for="inputPassword" class="col-md-2 col-form-label">Password</label>
-              <div class="col-md-10">
-                <input [(ngModel)]="form.password" name="password" type="password" class="form-control" id="inputPassword" placeholder="Input Login Password">
-                <small class="form-text text-muted">Input login password.</small>
-              </div>
-            </div>
-
- <div class="form-group">
-      <label for="inputEmail3" class="col-form-label">Email</label>
-      <div class="">
-        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-      </div>
-    </div>
-
-
-
-            <div class="row form-group">
-              <div class="col-sm-12">
-                <button (click)="onClickLogin()" type="submit" class="btn btn-primary">
-                  <i class="fa fa-sign-in"></i> LOGIN</button>
-                <button routerLink="/" type="button" class="btn btn-secondary">
-                  <i class="fa fa-times"></i> Cancel
-                </button>
-
-                <div class="process">
-                  <div *ngIf=" process.loader ">
-                    <i class="fa fa-spinner fa-spin"></i> Connecting to server ...
+              
+              <tr>
+                <td></td>
+                <td>
+                  <button (click)="onClickRegister()" type="submit" class="btn btn-primary">
+                  <i class="fa fa-sign-in"></i> {{ ['REGISTER', '회원가입'] | ek }}</button>
+                  <button routerLink="/" type="button" class="btn btn-secondary">
+                    <i class="fa fa-times"></i> {{ ['Cancel', '취소'] | ek }}
+                  </button>
+                  <div class="process">
+                    <div *ngIf=" process.loader ">
+                      <i class="fa fa-spinner fa-spin"></i> Connecting to server ...
+                    </div>
+                    <div *ngIf=" process.error " class="alert alert-danger" role="alert">
+                      <strong>{{ 'error' | ln }} !</strong> {{ process.error }}
+                    </div>
                   </div>
-                  <div *ngIf=" process.error " class="alert alert-danger" role="alert">
-                    <strong>{{ 'error' | ln }} !</strong> {{ process.error }}
-                  </div>
-                </div>
-              </div>
-            </div>
+                </td>
+              </tr>
+            </table>
+
+
           </form>
-        </div>
+          
       </section>
 
       <aside class="right hidden-xs-down col-sm-12 col-lg-3 col-xl-2">

@@ -7,12 +7,17 @@ header nav {
         &.home {
             padding-left: 0;
         }
+        color: #0275d8;
         text-decoration: none;
         text-align: center;
         em {
             display: block;
             font-size: .8em;
         }
+        cursor: pointer;
+    }
+    .all.menu {
+        color: black;
     }
     em {
         font-style: normal;

@@ -59,6 +59,8 @@ export class LoginPage {
         let password = this.member.getApiPassword(login);
         this.auth.register( email, password, firebaseUser => { // register
             console.log("firebase register success.");
+            // every thing is good. go home.
+            this.route.go('/');
         }, (code, message ) => {
             if ( code == 'auth/email-already-in-use' ) { // if already registred, login
                 console.log('firebase: already registered. try to login');

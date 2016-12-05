@@ -15,7 +15,9 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
-* complete templating for RWD design.
+* philgo Member primary photo
+    * with firebase auth.
+* [50%] complete templating for RWD design.
     * [loader](https://docs.google.com/document/d/1ZEplms60Dr9U4gMCvqxjMEAbyrH5duPkifEqxuPUiYc/edit#heading=h.dtpu4gybsdzf)
 * @see 'TODO' list of philgo-api REDME
 * apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub

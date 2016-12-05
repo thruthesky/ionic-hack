@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { formProcess } from '../../../etc/share';
+//import { formProcess } from '../../../etc/share';
 @Component({
     selector: 'base-footer',
     templateUrl: 'base-footer.html'
