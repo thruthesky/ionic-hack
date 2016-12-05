@@ -2,7 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AppRoute } from '../../../../app/app.route';
 import { formProcess } from '../../../../etc/share';
-import { Member, MEMBER_REGISTER_DATA } from '../../../../api/philgo-api/v2/member';
+import { Member, MEMBER_DATA, MEMBER_REGISTER_DATA } from '../../../../api/philgo-api/v2/member';
 import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../../api/philgo-api/v2/data';
 
 
@@ -33,8 +33,19 @@ export class RegisterPage {
         private ngZone: NgZone
     ) {
         this.gid = data.uniqid();
-        this.setTemporaryValues();
+        // this.setTemporaryValues();
         // this.register();
+        this.member.debug = true;
+        this.member.data( (data:MEMBER_DATA) => {
+            console.log(data);
+            this.urlPhoto = data.user_url_primary_photo;
+            this.form.name = data.name;
+            this.form.email = data.email;
+            this.form.gender = data.gender;
+            this.form.mobile = data.mobile;
+        }, error => {
+            console.log('error: ', error);
+        });
     }
     
 
@@ -65,9 +76,18 @@ export class RegisterPage {
 
     register() {
         this.process.begin();
+        this.form.nickname = this.form.name;
         this.member.register( this.form, (login) => {
+            // register success
             console.log('onClickRegister(), registration sucess: ', login );
-            this.route.go('/');
+            //
+            if ( this.photoUploaded() ) {
+                this.data.updateMemberIdx( this.gid, login.idx_member, re => {
+                    console.log("file 'idx_member' update success: ", re );
+                    this.route.go('/');
+                }, error => alert( 'file idx_member update error: ' + error ) );
+            }
+            else this.route.go('/');
         },
         e => {
             console.log("onClickRegister() error: " + e);
@@ -80,8 +100,11 @@ export class RegisterPage {
         if ( files === void 0 ) return;
         console.log('onChangeFile(): file: ', files);
         console.log('onChangeFile(): file value: ', value);
+
+        // @todo wrap this with member.uploadPhoto();, member.deletePhoto(), member.updatePhoto();
         files.gid = this.gid;
         files.login = 'pass';
+        files.varname = 'primary-photo';
         // delete file if a file is uploaded while uploading and don't care about the file deleting error.
 
         this.showProgress = true;
@@ -108,9 +131,8 @@ export class RegisterPage {
         this.deletePrimaryPhoto();
     }
     deletePrimaryPhoto( silent?: boolean ) {
-
         try {
-            if ( this.uploadData && this.uploadData.idx ) {
+            if ( this.photoUploaded() ) {
                 console.log("deletePrimaryPhoto(). idx: ", this.uploadData.idx );
                 this.uploadData.gid = this.gid;
                 this.data.delete( this.uploadData, (re) => {
@@ -128,6 +150,11 @@ export class RegisterPage {
         catch ( e ) {
             console.error("failed on deleting file: ", e);
         }
+    }
+
+
+    photoUploaded() : boolean {
+        return !! ( this.uploadData && this.uploadData.idx );
     }
 
 
