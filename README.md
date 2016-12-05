@@ -44,6 +44,8 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * npm install
 
 
+
+
 ## Submodule Installation
 
 If you clone a repository which was forked, then you do not need to do 'git submodule update --init'. but may need to do 'git checkout master'.
@@ -51,6 +53,12 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule update --init
 * git submodule foreach git branch
 * git submodule foreach git checkout master
+
+
+## Packages installed by 'npm install'
+
+* npm i ng2-file-upload --save
+* npm i lodash --save
 
 
 

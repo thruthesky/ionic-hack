@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppRoute } from '../../../../app/app.route';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_REGISTER_DATA } from '../../../../api/philgo-api/v2/member';
-import { FirebaseAuth } from '../../../../api/firebase-api/firebase-auth';
+import { Data } from '../../../../api/philgo-api/v2/data';
 
 
 @Component({
@@ -19,11 +19,11 @@ export class RegisterPage {
 
     constructor(
         private member: Member,
-        private auth: FirebaseAuth,
+        private data: Data,
         private route: AppRoute
     ) {
         this.setTemporaryValues();
-        this.register();
+        // this.register();
     }
     
     setTemporaryValues(pre='') {
@@ -50,15 +50,7 @@ export class RegisterPage {
         this.process.begin();
         this.member.register( this.form, (login) => {
             console.log('onClickRegister(), registration sucess: ', login );
-            let email = this.member.getApiEmail( login );
-            let password = this.member.getApiPassword( login );
-            this.auth.register( email, password, FirebaseAuth => {
-                // firebase registration ok
-                this.route.go('/');
-            }, (code, message) => {
-                message = 'Warning! Registration Error. Error Code: ' + code + ' : ' + message + ' Please report this error message to admin.';
-                this.process.setError( message );
-            })
+            this.route.go('/');
         },
         e => {
             console.log("onClickRegister() error: " + e);
@@ -67,13 +59,20 @@ export class RegisterPage {
     }
     
     onChangeFile(event, value) {
-        let file = event.target.files[0];
-        if ( file === void 0 ) return;
-        console.log('onChangeFile(): file: ', file);
+        let files = event.target.files;
+        if ( files === void 0 ) return;
+        console.log('onChangeFile(): file: ', files);
         console.log('onChangeFile(): file value: ', value);
-        this.pathPhoto = value;
         
+        this.data.upload( files, ( re ) => {
+            //
+            console.log(re);
+            let data = JSON.parse( re['response'] );
+            console.log("data.upload() success: data: ", data);
+        }, error => alert( error ));
     }
 
 
 }
+
+
