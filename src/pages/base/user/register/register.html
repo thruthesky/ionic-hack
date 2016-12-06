@@ -22,12 +22,24 @@
             <table border="0">
               <tr>
                 <td colspan="2">
-                  <div class="primary-photo"><img [src]="urlPhoto"></div>
+                  is cordova? {{ cordova | json }}
+
+                  <div class="primary-photo" (click)="onClickPrimaryPhoto()">
+                    <span class="camera fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <img [src]="urlPhoto">
+                    <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
+                  </div><!--/primary-photo-->
+                  
+
+                  
+
+
                   <div *ngIf=" urlPhoto != urlDefault ">
                     <button (click)="onDeletePhoto()">DELETE PHOTO</button>
                   </div>
-
-                  <input type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
 
                   <!-- This supports IE 9. IE 9 does not support HTML 5 -->
                   <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">

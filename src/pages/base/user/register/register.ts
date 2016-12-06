@@ -4,7 +4,13 @@ import { AppRoute } from '../../../../app/app.route';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_DATA, MEMBER_REGISTER_DATA, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../../api/philgo-api/v2/data';
+import * as share from '../../../../etc/share';
 
+
+declare var navigator;
+declare var Camera;
+declare var FileUploadOptions;
+declare var FileTransfer;
 
 @Component({
     selector: 'register-page',
@@ -28,6 +34,8 @@ export class RegisterPage {
     progress: number = 0;
     widthProgress: any;
     inputFileValue: string = null;
+
+    cordova: boolean = share.isCordova();
     constructor(
         private member: Member,
         private data: Data,
@@ -35,9 +43,18 @@ export class RegisterPage {
         private sanitizer: DomSanitizer,
         private ngZone: NgZone
     ) {
-        member.getLogin( x => this.login = x );
-        this.loadFormData();
+        
         this.gid = data.uniqid();
+        member.getLogin( x => {
+            this.login = x;
+            this.gid = this.login.id;
+        });
+        this.loadFormData();
+
+        setTimeout( () => {
+        // this.fileTransfer( 'file:///storage/emulated/0/Android/data/com.ionicframework.hack2778871/cache/1481039907916.jpg' );
+
+        }, 3000);
     }
     
 
@@ -49,7 +66,7 @@ export class RegisterPage {
     loadFormData() {
         // don't check login here since, login is non-blocking code.
         this.member.data( (data:MEMBER_DATA) => {
-            // console.log(data);
+            console.log(data);
             this.memberData = data;
             if ( data.user_url_primary_photo ) this.urlPhoto = data.user_url_primary_photo;
             this.form.name = data.name;
@@ -90,7 +107,7 @@ export class RegisterPage {
             console.log('onClickRegister(), registration sucess: ', login );
             //
             if ( this.photoUploaded() ) {
-                this.data.updateMemberIdx( this.gid, login.idx_member, re => {
+                this.data.updateMemberIdx( this.gid, re => {
                     console.log("file 'idx_member' update success: ", re );
                     this.route.go('/');
                 }, error => alert( 'file idx_member update error: ' + error ) );
@@ -103,9 +120,17 @@ export class RegisterPage {
         });
     }
 
-
     onClickUpdate() {
+        this.process.begin();
+        this.member.update( this.form, login => {
+            alert("User profile updated!");
+        },
+        error => {
+            alert('error on update user profile: ' + error );
+        },
+        () => {
 
+        })
     }
     
     onChangeFile(event, value) {
@@ -113,13 +138,8 @@ export class RegisterPage {
         if ( files === void 0 ) return;
         console.log('onChangeFile(): file: ', files);
         console.log('onChangeFile(): file value: ', value);
-
-        // @todo wrap this with member.uploadPhoto();, member.deletePhoto(), member.updatePhoto();
-        // delete file if a file is uploaded while uploading and don't care about the file deleting error.
-
         this.showProgress = true;
-        this.deletePrimaryPhoto( true );
-
+        if ( this.login == null ) this.deletePrimaryPhoto( true ); // delete only when user did not logged in. when a user logged in, the primary photo will be automatically deleted.
         if ( this.login ) {
             this.data.uploadPrimaryPhoto( files,
                 x => this.successPrimaryPhotoUpload( x ),
@@ -134,55 +154,103 @@ export class RegisterPage {
                 p => this.progressPrimaryPhotoUpload( p )
             );
         }
+    }
+    
+    onClickPrimaryPhoto() {
+        if ( ! this.cordova ) return;
+        console.log("in cordova, onClickPrimaryPhoto(): ");
 
-/*
-        this.member.uploadAnonymousPrimaryPhoto( this.gid, files, ( re: FILE_UPLOAD_RESPONSE ) => {
-            //
-            this.uploadData = re.data;
-            console.log("data.upload() success: re: ", re);
-            this.urlPhoto = re.data.url_thumbnail;
-            this.progress = 0;
-            this.showProgress = false;
-            },
-            error => alert( error ),
-            progress => {
-                this.progress = progress;
-                // console.log("file uploading: ", this.progress);
-                this.renderPage();
-                this.widthProgress = this.sanitizer.bypassSecurityTrustStyle('width:'  + progress + '%' );
+        let type = null;
+        let re = confirm("Click 'YES' to take photo. Click 'NO' to get photo from library.");
+        if ( re ) {
+            // get the picture from camera.
+            type = Camera.PictureSourceType.CAMERA;
+        }
+        else {
+            // get the picture from library.
+            type = Camera.PictureSourceType.PHOTOLIBRARY
+        }
+        
+        console.log("in cordova, type: ", type);
+
+        let options = {
+            quality: 60,
+            sourceType: type
+        };
+        navigator.camera.getPicture( path => {
+            console.log('photo: ', path);
+            // transfer the photo to the server.
+            this.fileTransfer( path );
+        }, e => {
+            console.error( 'camera error: ', e );
+            alert("camera error");
+        }, options);
+    }
+
+
+    fileTransfer( fileURL: string ) {
+        var options = new FileUploadOptions();
+        options.fileKey="file";
+        options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
+        options.mimeType="image/jpeg";
+        var ft = new FileTransfer();
+        let percentage = 0;
+        ft.onprogress = progressEvent => {
+            // @todo This is not working....
+            if (progressEvent.lengthComputable) {
+                try {
+                    percentage = Math.round( progressEvent.loaded / progressEvent.total );
+                }
+                catch ( e ) {
+                    console.error( 'percentage computation error' );
+                    percentage = 10;
+                }
             }
-        );
-        */
-        /*
-        this.data.upload( files, ( re: FILE_UPLOAD_RESPONSE ) => {
-            //
-            this.uploadData = re.data;
-            console.log("data.upload() success: re: ", re);
-            this.urlPhoto = re.data.url_thumbnail;
-            this.progress = 0;
-            this.showProgress = false;
-            },
-            error => alert( error ),
-            progress => {
-                this.progress = progress;
-                // console.log("file uploading: ", this.progress);
-                this.renderPage();
-                this.widthProgress = this.sanitizer.bypassSecurityTrustStyle('width:'  + progress + '%' );
+            else percentage = 10; // progressive does not work. it is not computable.
+            this.renderPage();
+        };
+
+        let uri: string;
+        if ( this.login ) uri = this.data.getUploadUrlPrimaryPhoto();
+        else uri = this.data.getUploadUrlAnonymousPrimaryPhoto( this.gid );
+        
+        console.log("file transfer to : ", uri);
+        uri = encodeURI( uri );
+        
+        this.deletePrimaryPhoto( true ); // delete current photo if ever.
+        ft.upload(fileURL, uri, r => {
+            console.log("Code = " + r.responseCode);
+            console.log("Response = " + r.response);
+            console.log("Sent = " + r.bytesSent);
+            let re;
+            try {
+                re = JSON.parse( r.response );
             }
-        );
-        */
+            catch ( e ) {
+                this.failurePrimaryPhotoUpload( "JOSN parse error on server response while file transfer..." );
+                return;
+            }
+            this.successPrimaryPhotoUpload( re );
+
+        }, e => {
+            // alert("An error has occurred: Code = " + e.code);
+            console.log("upload error source " + e.source);
+            console.log("upload error target " + e.target);
+            this.failurePrimaryPhotoUpload( e.code );
+        }, options);
     }
 
     successPrimaryPhotoUpload( re: FILE_UPLOAD_RESPONSE ) {
-        this.uploadData = re.data;
         console.log("data.upload() success: re: ", re);
+        this.uploadData = re.data;
         this.urlPhoto = re.data.url_thumbnail;
         this.progress = 0;
         this.showProgress = false;
+        setTimeout( () => this.renderPage(), 200 );
     }
 
     failurePrimaryPhotoUpload( e ) {
-        alert( e );
+        alert( "An error has occured while uploading: Code = " + e );
     }
 
     progressPrimaryPhotoUpload( p ) {
@@ -232,6 +300,7 @@ export class RegisterPage {
         if ( this.memberData && this.memberData.user_url_primary_photo ) return this.data.getIdxFromUrl( this.memberData.user_url_primary_photo );
         return 0;
     }
+
 
 
 }

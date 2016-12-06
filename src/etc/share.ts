@@ -1,3 +1,5 @@
+
+
 export interface FORM_PROCESS {
     loader?: boolean;
     error?: string;
@@ -34,3 +36,12 @@ export let formProcess: FORM_PROCESS = {
         return this;
     }
 };
+
+
+
+export function isCordova () { 
+  if ( window['device'] !== void 0 && window['device'] ) {
+    return true;
+  }
+  else return false;
+}
