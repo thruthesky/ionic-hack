@@ -1,6 +1,6 @@
 register-page .center form {
     table {
-        background-color: white;
+        background-color: inherit;
         width: 94%;
         tr {
             td {
@@ -9,6 +9,10 @@ register-page .center form {
         }
     }
     .primary-photo {
+        max-width: 14em;
+        max-height: 14em;
+
+        overflow: hidden;
         img {
             width: 100%;
         }

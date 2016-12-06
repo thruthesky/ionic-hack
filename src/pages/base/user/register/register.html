@@ -15,9 +15,9 @@
       
       <section class="center base-center col-sm-8 col-md-9 col-lg-6 col-xl-8">
         
-          <h1>{{ title }} ...</h1>
+          <h1 *ngIf=" ! login ">{{ ['User Registration', '회원가입'] | ek }}</h1>
+          <h1 *ngIf=" login ">{{ ['Account Update', '회원 정보 수정'] | ek }}</h1>
 
-          
           <form>
             <table border="0">
               <tr>
@@ -29,21 +29,21 @@
 
                   <input type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
 
-<!-- This supports IE 9. IE 9 does not support HTML 5 -->
-<progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
-  <div class="progress">
-    <span class="progress-bar" [style.width]="widthProgress"></span>
-  </div>
-</progress>
-
+                  <!-- This supports IE 9. IE 9 does not support HTML 5 -->
+                  <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+                    <div class="progress">
+                      <span class="progress-bar" [style.width]="widthProgress"></span>
+                    </div>
+                  </progress>
 
                 </td>
               </tr>
-              <tr>
+
+              <tr *ngIf=" ! login ">
                 <td><label for="inputID">User ID</label></td>
                 <td><input [(ngModel)]="form.id" class="form-control" name="id" type="text" id="inputID" placeholder="Input User ID" autocomplete="off"></td>
               </tr>
-              <tr>
+              <tr *ngIf=" ! login ">
                 <td><label for="inputPassword">Password</label></td>
                 <td><input [(ngModel)]="form.password" class="form-control" name="password" type="password" id="inputPassword" placeholder="Input Password" autocomplete="off"></td>
               </tr>
@@ -91,8 +91,16 @@
               <tr>
                 <td></td>
                 <td>
-                  <button (click)="onClickRegister()" type="submit" class="btn btn-primary">
-                  <i class="fa fa-sign-in"></i> {{ ['REGISTER', '회원가입'] | ek }}</button>
+                  
+                  <button *ngIf=" ! login " (click)="onClickRegister()" type="submit" class="btn btn-primary">
+                    <i class="fa fa-sign-in"></i> {{ ['REGISTER', '회원가입'] | ek }}
+                  </button>
+                  
+                  <button *ngIf=" login " (click)="onClickUpdate()" type="submit" class="btn btn-primary">
+                    <i class="fa fa-sign-in"></i> {{ ['UPDATE', '정보수정'] | ek }}
+                  </button>
+
+
                   <button routerLink="/" type="button" class="btn btn-secondary">
                     <i class="fa fa-times"></i> {{ ['Cancel', '취소'] | ek }}
                   </button>

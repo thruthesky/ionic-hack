@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 export class BaseFooter {
     // process = formProcess;
     constructor() {
-        console.log("BaseFooter::constructor() ");
+        // console.log("BaseFooter::constructor() ");
     }
 }

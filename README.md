@@ -19,6 +19,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
     * update 하면서 코드를 정리하고,
     * 모바일 사진 업로드하면서, 파일 업로드 관련 코드를 
         완전히 간결하게 한다.
+* /user/profile to show user profile to others.
 * philgo Member primary photo
     * with firebase auth.
 * [50%] complete templating for RWD design.
