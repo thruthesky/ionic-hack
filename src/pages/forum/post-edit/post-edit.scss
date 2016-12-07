@@ -13,4 +13,24 @@ post-edit-page {
             }
         }
     }
+
+    .files {
+        overflow: auto;
+        .file {
+            position: relative;
+            display: block;
+            float: left;
+            width: 50%;
+            height: 45vw;
+            img {
+                width: 100%;
+            }
+            .trash {
+                position: absolute;
+                z-index: 100;
+                left: 10%;
+                bottom: 10%;
+            }
+        }
+    }
 }

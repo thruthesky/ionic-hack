@@ -1,3 +1,6 @@
+<base-header [title]="title"></base-header>
+
+<section class="content">
 <h1>Post edit page</h1>
 
 <form>
@@ -26,11 +29,26 @@
         </progress>
     </div>
 
-    <div *ngFor=" let file of files ">
-        <img [src]=" file.url_thumbnail ">
-        Delete
-    </div>
 
-    <button type='button' (click)="onClickSubmit()">Submit</button>
+
+
+    <section *ngIf=" files.length " class="files">
+        <div class="file" *ngFor=" let file of files " (click)="onClickDeleteFile( file )">
+            <img [src]=" file.url_thumbnail ">
+            <span class="trash fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+            </span>
+        </div>
+    </section>
+
+    <button *ngIf=" post_idx " type="button" (click)="onClickEditSubmit()">Edit</button>
+    <button *ngIf=" post_id " type='button' (click)="onClickSubmit()">Submit</button>
 
 </form>
+
+
+</section>
+
+<base-footer></base-footer>
+

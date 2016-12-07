@@ -1,4 +1,5 @@
 <base-header [title]="title"></base-header>
+
 <section class="content">
     post list html
     <button (click)="onClickPostCreate()">Post Write</button>
@@ -6,10 +7,20 @@
 
     <article *ngFor=" let post of data.posts ">
         <div class="post-header">
-        <h2 class="post-header-title">{{ post.subject }}</h2>
+            <h2 class="post-header-title">{{ post.subject }}</h2>
+            <button (click)="onClickPostEdit( post.idx )">Edit</button>
         </div>
+
         <div class="post-content" innerHTML="{{ post.content }}">
         </div>
+        
+        <div *ngIf=" post.photos.length " class="files">
+            <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
+        </div>
     </article>
+
 </section>
+
+
 <base-footer></base-footer>
+

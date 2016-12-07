@@ -6,7 +6,7 @@ export class AppRouter {
     constructor(
         private router: Router
     ) {
-        console.log("AppRoute::constructor()");
+        // console.log("AppRoute::constructor()");
     }
     
     go( url ) {

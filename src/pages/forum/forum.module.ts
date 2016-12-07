@@ -16,7 +16,8 @@ import { PostEditPage } from './post-edit/post-edit';
 export let ROUTES: Routes = [
   { path: 'forum', component: ForumIndexPage },
   { path: 'forum/:post_id', component: PostListPage },
-  { path: 'post/create/:post_id', component: PostEditPage }
+  { path: 'post/create/:post_id', component: PostEditPage },
+  { path: 'post/edit/:post_idx', component: PostEditPage }
 ];
 
 @NgModule({

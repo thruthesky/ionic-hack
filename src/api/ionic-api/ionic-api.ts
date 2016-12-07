@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Push, PushToken } from '@ionic/cloud-angular';
-import { API_Token } from './ionic-api.module';
+// import { API_Token } from './ionic-api.module';
 
 @Injectable()
 export class IonicApi {
@@ -9,7 +9,7 @@ export class IonicApi {
         private http: Http,
         private push: Push 
     ) {
-        console.log("IonicApi::constructor()");
+        // console.log("IonicApi::constructor()");
     }
 
 
