@@ -5,7 +5,7 @@
   "typescript": true,
 
   "proxies": [{
-    "path": "/[a-zA-Z0-9\/]+",
+    "path": "/[^\\.]+",
     "proxyUrl": "http://192.168.26.2:8000/"
   }]
 

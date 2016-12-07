@@ -15,6 +15,7 @@ import { AppRouteModule } from './app.route.module';
 import { BaseModule } from '../pages/base/base.module';
 import { ForumModule } from '../pages/forum/forum.module';
 import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
+import { PushModule } from  '../apps/push/push.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
     NgbModule.forRoot(),
     BaseModule,
     PhilgoApiModule,
-    ForumModule
+    ForumModule,
+    PushModule
   ],
   bootstrap: [ RootComponent ],
   providers: [ ]
