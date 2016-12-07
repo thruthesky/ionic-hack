@@ -1,6 +1,6 @@
 import { Component, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AppRoute } from '../../../../app/app.route';
+import { AppRouter } from '../../../../app/app.router';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_DATA, MEMBER_REGISTER_DATA, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../../api/philgo-api/v2/data';
@@ -39,7 +39,7 @@ export class RegisterPage {
     constructor(
         private member: Member,
         private data: Data,
-        private route: AppRoute,
+        private router: AppRouter,
         private sanitizer: DomSanitizer,
         private ngZone: NgZone
     ) {
@@ -109,10 +109,10 @@ export class RegisterPage {
             if ( this.photoUploaded() ) {
                 this.data.updateMemberIdx( this.gid, re => {
                     console.log("file 'idx_member' update success: ", re );
-                    this.route.go('/');
+                    this.router.go('/');
                 }, error => alert( 'file idx_member update error: ' + error ) );
             }
-            else this.route.go('/');
+            else this.router.go('/');
         },
         e => {
             console.log("onClickRegister() error: " + e);

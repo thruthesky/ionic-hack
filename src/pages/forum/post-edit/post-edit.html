@@ -1,0 +1,36 @@
+<h1>Post edit page</h1>
+
+<form>
+
+
+    subject: <input name="subject" [(ngModel)]="form.subject"><br>
+    content: <textarea name="content" [(ngModel)]="form.content"></textarea><br>
+    
+    
+    <div class="file-upload">
+        
+        <div class="file-upload-button" (click)="onClickFileUploadButton()">
+            <span class="camera fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+            </span>
+            
+            <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
+        </div><!--/file-upload-button-->
+        
+        <!-- This supports IE 9. IE 9 does not support HTML 5 -->
+        <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+        <div class="progress">
+            <span class="progress-bar" [style.width]="widthProgress"></span>
+        </div>
+        </progress>
+    </div>
+
+    <div *ngFor=" let file of files ">
+        <img [src]=" file.url_thumbnail ">
+        Delete
+    </div>
+
+    <button type='button' (click)="onClickSubmit()">Submit</button>
+
+</form>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Push, PushToken } from '@ionic/cloud-angular';
+import { API_Token } from './ionic-api.module';
 
 @Injectable()
 export class IonicApi {
@@ -10,7 +11,6 @@ export class IonicApi {
     ) {
         console.log("IonicApi::constructor()");
     }
-
 
 
     registerPushNotfication() {
@@ -23,9 +23,9 @@ export class IonicApi {
                 this.push.saveToken(pushToken) // after save, you can send notificaton.
                     .then(
                         (pushToken: PushToken) => { },
-                        (error) => alert('error on saveToken()')
-                     );
-            }, ( e ) => {
+                        (error) => alert('error on saveToken()') );
+                },
+                ( e ) => {
                 console.log(e);
                 alert("Error on registerPushNotfication( )"); } );
     }

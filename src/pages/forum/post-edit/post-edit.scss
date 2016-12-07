@@ -1,0 +1,16 @@
+post-edit-page {
+    .file-upload {
+        .file-upload-button {
+            position: relative;
+            overflow: hidden;
+            input {
+                position: absolute;
+                z-index: 100;
+                top: 0;
+                left: 0;
+                font-size: 10em;
+                opacity: .001;
+            }
+        }
+    }
+}

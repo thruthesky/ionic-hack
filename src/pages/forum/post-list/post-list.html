@@ -1,0 +1,15 @@
+<base-header [title]="title"></base-header>
+<section class="content">
+    post list html
+    <button (click)="onClickPostCreate()">Post Write</button>
+
+
+    <article *ngFor=" let post of data.posts ">
+        <div class="post-header">
+        <h2 class="post-header-title">{{ post.subject }}</h2>
+        </div>
+        <div class="post-content" innerHTML="{{ post.content }}">
+        </div>
+    </article>
+</section>
+<base-footer></base-footer>

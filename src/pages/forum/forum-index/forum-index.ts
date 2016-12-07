@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppRouter } from '../../../app/app.router';
 import { Member } from '../../../api/philgo-api/v2/member';
 import { Post  } from '../../../api/philgo-api/v2/post';
 type FORUMS = Array< { name: Array<string> } >;
@@ -18,7 +19,8 @@ export class ForumIndexPage {
 
   constructor(
      private member: Member,
-     private post: Post 
+     private post: Post,
+     private router: AppRouter
    ) {
 
     this.forums['community'] = ['greeting', 'knowhow', 'wanted', 'case', 'lookfor', 'phil_life_tip', 'freetalk', 'caution', 'qna', 'party'];
@@ -29,16 +31,10 @@ export class ForumIndexPage {
     this.forums['news'] = ['reminder', 'database', 'typoon', 'news'];
     this.forums['info'] = ['business', 'info', 'internet', 'newcomer'];
 
-/*
+  }
 
-    this.post.getForums(
-      re => console.log("success: ", re),
-      er => console.log("error: ", er),
-      () => console.log("GetForum : complete")
-    );
-    */
-    
-
+  onClickForum( post_id ) {
+    this.router.go("/forum/" + post_id);
   }
 
 }

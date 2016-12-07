@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppRoute } from './app.route';
+import { AppRouter } from './app.router';
 import { ROUTES as BASE_ROUTES } from '../pages/base/base.module';
 import { ROUTES as FORUM_ROUTES } from '../pages/forum/forum.module';
 import { ROUTES as PHILGO_ROUTES } from '../api/philgo-api/v2/philgo-api-module';
@@ -19,6 +19,6 @@ PHILGO_ROUTES.map( e => appRoutes.unshift( e ) );
     exports: [
         RouterModule
     ],
-    providers: [ AppRoute ]
+    providers: [ AppRouter ]
 })
 export class AppRouteModule {}

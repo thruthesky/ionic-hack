@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
+export { ActivatedRoute } from '@angular/router';
 @Injectable()
-export class AppRoute {
+export class AppRouter {
     constructor(
         private router: Router
     ) {
-        // console.log("AppRoute::constructor()");
+        console.log("AppRoute::constructor()");
     }
     
     go( url ) {

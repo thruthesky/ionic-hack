@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppRoute } from '../../../../app/app.route';
+import { AppRouter } from '../../../../app/app.router';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_LOGIN_DATA } from '../../../../api/philgo-api/v2/member';
 import { FirebaseAuth } from '../../../../api/firebase-api/firebase-auth';
@@ -16,7 +16,7 @@ export class LoginPage {
         private member: Member,
         private auth: FirebaseAuth,
         private ln: LanguagePipe,
-        private route: AppRoute
+        private router: AppRouter
     ) {
 
         this.form.id = 'thruthesky';
@@ -60,7 +60,7 @@ export class LoginPage {
         this.auth.register( email, password, firebaseUser => { // register
             console.log("firebase register success.");
             // every thing is good. go home.
-            this.route.go('/');
+            this.router.go('/');
         }, (code, message ) => {
             if ( code == 'auth/email-already-in-use' ) { // if already registred, login
                 console.log('firebase: already registered. try to login');
@@ -68,7 +68,7 @@ export class LoginPage {
                     console.log('firebase: login success');
                     this.process.loader = false;
                     // every thing is good. go home.
-                    this.route.go('/');
+                    this.router.go('/');
                 }, (code, message) => {
                     message = 'Warning! Login Error. Error Code: ' + code + ' : ' + message + ' Please report this error message to admin.';
                     // this.process.error = message;

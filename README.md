@@ -16,6 +16,12 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * Local clone should be 'ionic-hack' to avoid confusion which means, when you work on 'ionic-hack' repository, clone the project with same folder name.
     * work folder: c:/work/www/ionic/ionic-hack
 
+* Test on web
+    * ionic serve --address 192.168.26.2 --port 8000
+* Test on mobile and web
+    * ionic serve -lc
+
+
 # TODO
 
 
@@ -35,6 +41,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
 
 * clould based backend without philgo api. hosting, database with full text search, file storage.
+
 
 
 ## TODO : BUGS

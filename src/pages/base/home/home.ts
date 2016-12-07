@@ -20,6 +20,17 @@ export class HomePage {
     member.getLogin( x => this.login = x );
     // setTimeout(() => this.login = this.member.logged(), 10);
 
+    this.testPush();
   }
+
+  testPush() {
+    this.onClickRegisterPushNotification();
+  }
+
+  onClickRegisterPushNotification() {
+    this.ionic.registerPushNotfication();
+  }
+
+
 
 }
