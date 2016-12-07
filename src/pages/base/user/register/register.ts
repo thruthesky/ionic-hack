@@ -217,7 +217,7 @@ export class RegisterPage {
         console.log("file transfer to : ", uri);
         uri = encodeURI( uri );
         
-        this.deletePrimaryPhoto( true ); // delete current photo if ever.
+        if ( this.login == null ) this.deletePrimaryPhoto( true ); // delete current photo if ever.
         ft.upload(fileURL, uri, r => {
             console.log("Code = " + r.responseCode);
             console.log("Response = " + r.response);
@@ -227,7 +227,7 @@ export class RegisterPage {
                 re = JSON.parse( r.response );
             }
             catch ( e ) {
-                this.failurePrimaryPhotoUpload( "JOSN parse error on server response while file transfer..." );
+                this.failurePrimaryPhotoUpload( "JSON parse error on server response while file transfer..." );
                 return;
             }
             this.successPrimaryPhotoUpload( re );

@@ -2,6 +2,9 @@
 
 Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
+## Repository
+
+* We work on master branch. So, Modularity and Refactoring of folders, source files, asessts are highly important because many app will be made upon this single source repository.
 
 ## Work Environment
 
@@ -14,6 +17,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
     * work folder: c:/work/www/ionic/ionic-hack
 
 # TODO
+
 
 * base/user/register 에서 update 를 한다.
     * update 하면서 코드를 정리하고,
@@ -29,6 +33,8 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
     * @see angular/sonub/README.md
 * let developers clone https://github.com/withcenter/sonub
 * since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
+
+* clould based backend without philgo api. hosting, database with full text search, file storage.
 
 
 ## TODO : BUGS
@@ -64,6 +70,18 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 
 * npm i ng2-file-upload --save
 * npm i lodash --save
+
+
+
+# Folder Structure
+
+* Since this single repository is used for many apps, this actually has different kinds of app source codes.
+* All the source code for each app must be kept inside src/apps folder.
+    * For instance, you want to build an app named 'sonub'.
+        * put all your code under 'src/apps/sonub' foler and don't touch outside.
+        
+
+
 
 
 
