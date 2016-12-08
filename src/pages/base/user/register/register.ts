@@ -134,23 +134,21 @@ export class RegisterPage {
     }
     
     onChangeFile(event, value) {
-        let files = event.target.files;
-        if ( files === void 0 ) return;
-        console.log('onChangeFile(): file: ', files);
-        console.log('onChangeFile(): file value: ', value);
         this.showProgress = true;
         if ( this.login == null ) this.deletePrimaryPhoto( true ); // delete only when user did not logged in. when a user logged in, the primary photo will be automatically deleted.
         if ( this.login ) {
-            this.data.uploadPrimaryPhoto( files,
+            this.data.uploadPrimaryPhoto( event,
                 x => this.successPrimaryPhotoUpload( x ),
                 e => this.failurePrimaryPhotoUpload( e ),
+                c => console.log("completeCode: ", c),
                 p => this.progressPrimaryPhotoUpload( p )
             );
         }
         else {
-            this.data.uploadAnonymousPrimaryPhoto( this.gid, files,
+            this.data.uploadAnonymousPrimaryPhoto( this.gid, event,
                 x => this.successPrimaryPhotoUpload( x ),
                 e => this.failurePrimaryPhotoUpload( e ),
+                c => console.log("completeCode: ", c),
                 p => this.progressPrimaryPhotoUpload( p )
             );
         }
