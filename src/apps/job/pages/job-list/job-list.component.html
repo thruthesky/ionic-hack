@@ -1,0 +1,37 @@
+<header>
+  <nav class="navbar navbar-fixed-top bg-faded">
+    <a routerLink="/job" routerLinkActive="active"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+    JOB List
+    <a (click)="onClickBack()"> <i class="fa fa-long-arrow-left" aria-hidden="true"></i>back</a>
+
+    <a routerLink="/job/post" routerLinkActive="active">POST</a>
+    <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+  </nav>
+</header>
+
+<section class="content">
+  <h2 align="center">JOB Listing Page</h2>
+  <div class="row">
+    <div class="col-sm-12" *ngFor=" let post of posts; let i = index; ">
+      <div class="card card-block">
+        <img class="card-img-top" src='' alt="Card image {{i+1}}">
+        <div>
+          <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
+          <p class="card-text">{{post.varchar_6}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary">More</button>
+          <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
+          <button type="button" class="btn btn-secondary">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <nav class="navbar navbar-fixed-bottom bg-faded">
+    <a class="navbar-brand" routerLink="">Copyright (c) 2016 ~ www.sonub.com</a>
+  </nav>
+</footer>

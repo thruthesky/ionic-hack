@@ -1,0 +1,131 @@
+<header>
+  <nav class="navbar navbar-fixed-top bg-faded">
+    <a routerLink="" routerLinkActive="active">HOME</a>
+    <a routerLink="/job" routerLinkActive="active">JOB</a>
+    <a routerLink="/job/post" routerLinkActive="active">POST</a>
+    <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+    JOB Post
+    <a (click)="onClickBack()"> <i class="fa fa-long-arrow-left" aria-hidden="true"></i>back</a>
+  </nav>
+
+</header>
+<section class="content">
+  <h2 align="center">JOB Posting/Editing PAGE</h2>
+  <form>
+    <div class="form-group row">
+      <label for="first_name" class="col-xs-3 col-form-label">First Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="first_name" name="first_name" [(ngModel)]="form.text_1" placeholder="Input First Name...">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="middle_name" class="col-xs-3 col-form-label">Middle Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="middle_name" name="middle_name" [(ngModel)]="form.text_2" placeholder="Input Middle Name...">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="last_name" class="col-xs-3 col-form-label">Last Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="last_name" name="last_name" [(ngModel)]="form.text_3" placeholder="Input Last Name...">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="mobile" class="col-xs-3 col-form-label">Mobile #</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="mobile" name="mobile"  [(ngModel)]="form.varchar_4" placeholder="Input Mobile">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="address" class="col-xs-3 col-form-label">Address</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="address" name="address" [(ngModel)]="form.varchar_1" placeholder="Input Address">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="birthday" class="col-xs-3 col-form-label">Date</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="date" name="birthday" id="birthday" [(ngModel)]="form.varchar_5" >
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label">Gender</label>
+      <div class="col-xs-9">
+        <label class="form-check-inline col-xs-5">
+          <input class="form-check-input" type="radio" name="genderRadio" id="male" value="M" [(ngModel)]="form.char_1" > Male
+        </label>
+        <label class="form-check-inline col-xs-5">
+          <input class="form-check-input" type="radio" name="genderRadio" id="female" value="F" [(ngModel)]="form.char_1"> Female
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3" for="workExperience">Work Experience</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="workExperience" name="workExperience" [(ngModel)]="form.int_1">
+          <option value="0">No work Experience</option>
+          <option *ngFor="let number of numbers" [value]="number">{{number}} years</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label">Province</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="province" name="province" [(ngModel)]="form.varchar_2" (change)="onClickProvince()">
+          <option value="all">All</option>
+          <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="showCities">
+      <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="city" name="city" [(ngModel)]="form.varchar_3">
+          <option *ngFor="let key of cityKeys" [value]="key">{{cities[key]}}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label"  for="workProfession">Work Profession</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="workProfession" name="workProfession" [(ngModel)]="form.sub_category">
+          <option value="housemaid">House Maid</option>
+          <option value="driver">Driver</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="personalContent">Personal Message</label>
+      <textarea class="form-control" name="personalContent" id="personalContent" rows="3" [(ngModel)]="form.varchar_6"></textarea>
+    </div>
+
+
+    <div warning *ngIf="errorOnPost">{{errorOnPost}}</div>
+    <div *ngIf="loader"><i class="fa fa-spinner fa-pulse fa-fw"></i>Connecting to server...</div>
+
+    <button type="button" class="btn btn-primary btn-block" (click)="onClickSubmit()">Submit</button>
+
+
+  </form>
+
+
+
+
+</section>
+<footer>
+  <nav class="navbar navbar-fixed-bottom bg-faded">
+    <a class="navbar-brand" routerLink="">Copyright (c) 2016 ~ www.sonub.com</a>
+  </nav>
+</footer>
