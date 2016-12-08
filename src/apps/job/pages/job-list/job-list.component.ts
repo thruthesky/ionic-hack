@@ -50,8 +50,7 @@ export class JobListComponent implements OnInit {
   }
 
   onClickEdit(idx){
-    localStorage.setItem("post_idx", idx);
-    this.router.navigate(['/job/post']);
+    this.router.navigate(['/job/post', idx]);
   }
 
   onClickBack(){

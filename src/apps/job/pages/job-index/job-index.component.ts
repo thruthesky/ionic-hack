@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from "rxjs";
-import { Location } from  '../../providers/location'
+import { Router } from '@angular/router';
+import { PhilippineRegion } from  '../../providers/philippine-region'
 import { Post, SEARCH_QUERY_DATA } from '../../../../api/philgo-api/v2/post';
+
 
 
 @Component({
   selector: 'app-job-index',
-  templateUrl: 'job-index.component.html',
+  templateUrl: 'job-index.component.html'
 })
 export class JobIndexComponent implements OnInit {
 
@@ -32,10 +34,12 @@ export class JobIndexComponent implements OnInit {
     male: false,
     female: false
   };
-  constructor(private location: Location,
-              private post: Post
+  constructor(private region: PhilippineRegion,
+              private post: Post,
+              private router: Router,
+
   ) {
-    location.get_province( re => {
+    region.get_province( re => {
       this.provinces = re;
     }, e => {
       console.log('error location.get_province::', e);
@@ -52,7 +56,7 @@ export class JobIndexComponent implements OnInit {
     return Object.keys( this.cities );
   }
 
-  search( $event? ) {
+  search() {
     this.showLoader();
     console.log("search() form has changed. you can search now: data: ", this.query);
     let cond = '';
@@ -101,7 +105,7 @@ export class JobIndexComponent implements OnInit {
   onClickProvince() {
     if( this.query.varchar_2 != 'all') {
       this.query.varchar_3 = this.query.varchar_2;
-      this.location.get_cities( this.query.varchar_2, re => {
+      this.region.get_cities( this.query.varchar_2, re => {
         console.log('cities', re);
         if(re) {
           this.cities = re;
@@ -120,6 +124,10 @@ export class JobIndexComponent implements OnInit {
   }
   hideLoader() {
     this.searching = false;
+  }
+
+  onClickEdit(idx){
+    this.router.navigate(['/job/post', idx]);
   }
 
   onChange() {

@@ -1,12 +1,10 @@
-<header>
-  <nav class="navbar navbar-fixed-top bg-faded">
-    <a routerLink="" routerLinkActive="active"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+<base-header [title]="title"></base-header>
+<section class="content">
+  <nav>
+    <a routerLink="/job" routerLinkActive="active">JOB</a>
     <a routerLink="/job/post" routerLinkActive="active">POST</a>
     <a routerLink="/job/list" routerLinkActive="active">LIST</a>
   </nav>
-</header>
-
-<section class="content">
   <div class="form-group row">
     <label class="col-xs-3 col-form-label"  for="workProfession">Work Profession</label>
     <div class="col-xs-9">
@@ -90,14 +88,6 @@
       </div>
     </div>
   </div>
-
-
-
-
 </section>
+<base-footer></base-footer>
 
-<footer>
-  <nav class="navbar navbar-fixed-bottom bg-faded">
-    <a class="navbar-brand" routerLink="">Copyright (c) 2016 ~ www.sonub.com</a>
-  </nav>
-</footer>

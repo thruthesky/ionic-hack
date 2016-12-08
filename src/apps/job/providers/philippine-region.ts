@@ -9,7 +9,7 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class Location {
+export class PhilippineRegion {
 
   constructor(public http: Http) {
     console.log('Location::constructor');

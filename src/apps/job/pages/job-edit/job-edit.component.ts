@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from  '../../providers/location'
+import { PhilippineRegion } from  '../../providers/philippine-region'
 import { Post, POST_DATA } from '../../../../api/philgo-api/v2/post';
-import { Router } from '@angular/router';
-import { Location as _Location } from '@angular/common';
+import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-edit',
-  templateUrl: 'job-edit.component.html',
+  templateUrl: 'job-edit.component.html'
 })
 export class JobEditComponent implements OnInit {
 
@@ -36,25 +36,36 @@ export class JobEditComponent implements OnInit {
   provinces: Array<string> = [];
   cities = [];
   showCities: boolean = false;
+  login: MEMBER_LOGIN = null;
+  gid: string = null;
 
   constructor(
-    private location: Location,
-    private _location: _Location,
+    private region: PhilippineRegion,
     private post: Post,
-    private router: Router
+    private member: Member,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    location.get_province( re => {
+    region.get_province( re => {
       this.provinces = re;
     }, e => {
       console.log('error location.get_province::', e);
     });
 
+    let idx = this.route.snapshot.params['idx'];
+    console.log('idx:: ',idx);
+    //member.getLogin( x => this.login = x );
+    //this.login = localStorage.getItem( 'philgo-login');
 
-    let idx = localStorage.getItem("post_idx");
+    member.getLogin( x => {
+      this.login = x;
+      this.gid = this.login.id;
+    });
+    console.log('loginData:: ', this.login);
+    console.log('logingid:: ', this.gid);
     if( idx ){
       this.post.get(idx, re=> {
         console.log('re data',re.post);
-        localStorage.removeItem("post_idx");
         if(re.post) {
           this.form = re.post;
         }
@@ -74,7 +85,7 @@ export class JobEditComponent implements OnInit {
   onClickProvince() {
     if( this.form.varchar_2 != 'all') {
       this.form.varchar_3 = this.form.varchar_2;
-      this.location.get_cities( this.form.varchar_2, re => {
+      this.region.get_cities( this.form.varchar_2, re => {
         console.log('cities', re);
         if(re) {
           this.cities = re;
@@ -155,9 +166,5 @@ export class JobEditComponent implements OnInit {
       int_4: '', //day
     };
     this.showCities = false;
-  }
-
-  onClickBack(){
-    this._location.back();
   }
 }
