@@ -37,11 +37,3 @@ export let formProcess: FORM_PROCESS = {
     }
 };
 
-
-
-export function isCordova () { 
-  if ( window['device'] !== void 0 && window['device'] ) {
-    return true;
-  }
-  else return false;
-}

@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Post, POST_DATA } from '../../../api/philgo-api/v2/post';
-import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, POST_RESPONSE } from '../../../api/philgo-api/v2/data';
+import { Member, MEMBER_LOGIN } from '../../../api/philgo-api/v2/member';
+import { Post, POST_DATA, POST_RESPONSE } from '../../../api/philgo-api/v2/post';
+import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS } from '../../../api/philgo-api/v2/data';
+
 import * as _ from 'lodash';
+import * as app from '../../../etc/app.helper';
+declare var navigator;
+declare var Camera;
 @Component({
     selector: 'post-edit-page',
     templateUrl: 'post-edit.html'
 })
 export class PostEditPage {
-
+    cordova: boolean = app.isCordova();
+    login: MEMBER_LOGIN = null;
     post_id: string = null;
     post_idx: string = null;
     form: POST_DATA = <POST_DATA> {};
     showProgress: boolean = false;
+    progress: number = 0;
     files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
-    constructor( activated: ActivatedRoute, private post: Post, private data: Data ) {
+    constructor(
+        private ngZone: NgZone,
+        activated: ActivatedRoute,
+        private member: Member,
+        private post: Post,
+        private data: Data ) {
+        
+        member.getLogin( x => this.login = x );
         this.form.gid = data.uniqid(); // for file upload of new post
         this.post_id = activated.snapshot.params['post_id']; // it is safe to use activatedRoute even if it clicked over again on the same page.
         console.log("this.post_id", this.post_id);
@@ -23,10 +37,6 @@ export class PostEditPage {
         console.log("this.post_idx", this.post_idx);
         
         if ( this.post_idx ) this.loadFormData();
-
-
-
-
 
         // this.form.subject = "Hello, nice to meet you";
         // this.form.content = "I am J. Who are you?";
@@ -63,46 +73,86 @@ export class PostEditPage {
         }, error => alert("update error: " + error) );
     }
 
+
+    // for camera.
     onClickFileUploadButton() {
-        // for camera.
-        //
+        if ( ! this.cordova ) return;
+        let type = null;
+        let re = confirm("Click 'YES' to take photo. Click 'NO' to get photo from library.");
+        if ( re ) {
+            // get the picture from camera.
+            type = Camera.PictureSourceType.CAMERA;
+        }
+        else {
+            // get the picture from library.
+            type = Camera.PictureSourceType.PHOTOLIBRARY
+        }
+        console.log("in cordova, type: ", type);
+        let options = {
+            quality: 80,
+            sourceType: type
+        };
+        navigator.camera.getPicture( path => {
+            console.log('photo: ', path);
+            // transfer the photo to the server.
+            this.fileTransfer( path );
+        }, e => {
+            console.error( 'camera error: ', e );
+            alert("camera error");
+        }, options);
     }
 
+    
+    fileTransfer( fileURL: string ) {
+        this.showProgress = true;
+        let options: DATA_UPLOAD_OPTIONS = {
+            module_name: 'post',
+            gid: this.form.gid
+        };
+        this.data.transfer( options,
+            fileURL,
+            s => this.onSuccessFileUpload(s),
+            f => this.onFailureFileUpload(f),
+            c => this.onCompleteFileUpload(c),
+            p => this.onProgressFileUpload(p)
+        );
+    }
+
+
     onChangeFile( event ) {
-
         this.showProgress = true;
-        this.data.uploadPostFile( this.form.gid, event, (re: FILE_UPLOAD_RESPONSE) => {
-            this.files.push( re.data );
-            this.showProgress = false;
-        }, error => {
-            this.showProgress = false;
-        }, completeCode => {
-            console.log("completeCode: ", completeCode);
-        }, percentage => {
-            console.log("percentag uploaded: ", percentage);
-        })
+        this.data.uploadPostFile( this.form.gid, event,
+            s => this.onSuccessFileUpload(s),
+            f => this.onFailureFileUpload(f),
+            c => this.onCompleteFileUpload(c),
+            p => this.onProgressFileUpload(p)
+        );
+    }
 
-        /*
-
-        let files = event.target.files;
-        if ( files === void 0 ) return;
-
-        this.showProgress = true;
-        files.gid = this.form.gid;
-        files.module_name = 'post';
-        this.data.upload( files, (re: FILE_UPLOAD_RESPONSE) => {
-            console.log("file upload success: ", re);
-            this.files.push( re.data );
-            this.showProgress = false;
-        }, error => {
-            alert("file upload failed: " + error);
-        }, percentage => {
-            console.log("percentag uploaded: ", percentage);
-        });
-        */
+    onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
+        console.log('re.data: ', re.data);
+        this.files.push( re.data );
+        this.showProgress = false;
+        this.renderPage();
+    }
+    onFailureFileUpload ( error ) {
+        this.showProgress = false;
+        alert( error );
+    }
+    onCompleteFileUpload( completeCode ) {
+        console.log("completeCode: ", completeCode);
+    }
+    onProgressFileUpload( percentage ) {
+        console.log("percentag uploaded: ", percentage);
+        this.progress = percentage;
+        this.renderPage();
     }
 
     onClickDeleteFile( file ) {
+
+        let re = confirm("Do you want to delete?");
+        if ( re == false ) return;
+
         console.log("onClickDeleteFile: ", file);
         let data = {
             idx: file.idx
@@ -119,4 +169,11 @@ export class PostEditPage {
         } );
 
     }
+    
+    renderPage() {
+        this.ngZone.run(() => {
+            console.log('ngZone.run()');
+        });
+    }
+
 }

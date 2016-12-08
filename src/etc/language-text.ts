@@ -58,7 +58,7 @@ export let languageText = {
     'forum.travel_story':   { en: 'Travel Story', ko: '여행 후기'},
 
 
-    'forum.mary':   { en: 'Mary', ko: '국제결혼'},
+    'forum.marry':   { en: 'Marry', ko: '국제결혼'},
     'forum.marriage_process':   { en: 'Marriage Process', ko: '결혼 절차'},
     'forum.new_marrage_story':   { en: 'Marriage Story', ko: '신혼이야기'},
     'forum.group__kopino':   { en: 'Kopino', ko: '코피노'},

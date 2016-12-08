@@ -4,7 +4,7 @@ import { AppRouter } from '../../../../app/app.router';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_DATA, MEMBER_REGISTER_DATA, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS, CODE_PRIMARY_PHOTO } from '../../../../api/philgo-api/v2/data';
-import * as share from '../../../../etc/share';
+import * as app from '../../../../etc/app.helper';
 
 
 declare var navigator;
@@ -35,7 +35,7 @@ export class RegisterPage {
     widthProgress: any;
     inputFileValue: string = null;
 
-    cordova: boolean = share.isCordova();
+    cordova: boolean = app.isCordova();
     constructor(
         private member: Member,
         private data: Data,
@@ -171,7 +171,7 @@ export class RegisterPage {
         }
         console.log("in cordova, type: ", type);
         let options = {
-            quality: 60,
+            quality: 80,
             sourceType: type
         };
         navigator.camera.getPicture( path => {
