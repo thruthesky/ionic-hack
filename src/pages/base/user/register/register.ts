@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AppRouter } from '../../../../app/app.router';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_DATA, MEMBER_REGISTER_DATA, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
-import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../../api/philgo-api/v2/data';
+import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS, CODE_PRIMARY_PHOTO } from '../../../../api/philgo-api/v2/data';
 import * as share from '../../../../etc/share';
 
 
@@ -107,6 +107,7 @@ export class RegisterPage {
             console.log('onClickRegister(), registration sucess: ', login );
             //
             if ( this.photoUploaded() ) {
+                // if user uploaded primary photo on register, then update the file.idx_member
                 this.data.updateMemberIdx( this.gid, re => {
                     console.log("file 'idx_member' update success: ", re );
                     this.router.go('/');
@@ -134,23 +135,22 @@ export class RegisterPage {
     }
     
     onChangeFile(event, value) {
-        let files = event.target.files;
-        if ( files === void 0 ) return;
-        console.log('onChangeFile(): file: ', files);
-        console.log('onChangeFile(): file value: ', value);
         this.showProgress = true;
+        // if not logged in, then delete previous primary photo. If logged in, automatically deleted.
         if ( this.login == null ) this.deletePrimaryPhoto( true ); // delete only when user did not logged in. when a user logged in, the primary photo will be automatically deleted.
         if ( this.login ) {
-            this.data.uploadPrimaryPhoto( files,
+            this.data.uploadPrimaryPhoto( event, // without gid.
                 x => this.successPrimaryPhotoUpload( x ),
                 e => this.failurePrimaryPhotoUpload( e ),
+                c => console.log("completeCode: ", c),
                 p => this.progressPrimaryPhotoUpload( p )
             );
         }
         else {
-            this.data.uploadAnonymousPrimaryPhoto( this.gid, files,
+            this.data.uploadAnonymousPrimaryPhoto( this.gid, event, // with gid.
                 x => this.successPrimaryPhotoUpload( x ),
                 e => this.failurePrimaryPhotoUpload( e ),
+                c => console.log("completeCode: ", c),
                 p => this.progressPrimaryPhotoUpload( p )
             );
         }
@@ -159,7 +159,6 @@ export class RegisterPage {
     onClickPrimaryPhoto() {
         if ( ! this.cordova ) return;
         console.log("in cordova, onClickPrimaryPhoto(): ");
-
         let type = null;
         let re = confirm("Click 'YES' to take photo. Click 'NO' to get photo from library.");
         if ( re ) {
@@ -170,9 +169,7 @@ export class RegisterPage {
             // get the picture from library.
             type = Camera.PictureSourceType.PHOTOLIBRARY
         }
-        
         console.log("in cordova, type: ", type);
-
         let options = {
             quality: 60,
             sourceType: type
@@ -187,8 +184,34 @@ export class RegisterPage {
         }, options);
     }
 
-
     fileTransfer( fileURL: string ) {
+        this.showProgress = true;
+        let options: DATA_UPLOAD_OPTIONS = {
+            module_name: 'member',
+            code: CODE_PRIMARY_PHOTO
+        };
+        if ( this.login == null ) {
+            options.gid = this.gid,
+            options.finish = '0';
+            options.login = 'pass';
+            // if not logged in, then delete previous primary photo. If logged in, automatically deleted.
+            this.deletePrimaryPhoto( true ); // delete only when user did not logged in. when a user logged in, the primary photo will be automatically deleted.
+        }
+        else {
+            options.gid = this.login.id;
+            options.finish = '1';
+        }
+
+        this.data.transfer( options,
+            fileURL,
+            x => this.successPrimaryPhotoUpload( x ),
+            e => this.failurePrimaryPhotoUpload( e ),
+            c => console.log("completeCode: ", c),
+            p => this.progressPrimaryPhotoUpload( p )
+        );
+    }
+
+    fileTransfer_old( fileURL: string ) {
         var options = new FileUploadOptions();
         options.fileKey="file";
         options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
@@ -239,6 +262,7 @@ export class RegisterPage {
             this.failurePrimaryPhotoUpload( e.code );
         }, options);
     }
+
 
     successPrimaryPhotoUpload( re: FILE_UPLOAD_RESPONSE ) {
         console.log("data.upload() success: re: ", re);

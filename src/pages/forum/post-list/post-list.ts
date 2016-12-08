@@ -9,11 +9,19 @@ export class PostListPage {
 
 
     post_id: string = null;
-    data;
+    data = null;
 
     constructor( private post: Post, private router: AppRouter, private activatedRoute: ActivatedRoute ) {
 
-        this. post_id = activatedRoute.snapshot.params['post_id'];
+        this.post_id = activatedRoute.snapshot.params['post_id'];
+        if ( this.post_id ) {
+            this.loadPage();
+        }
+        else {
+            alert("No post id provided");
+        }
+    }
+    loadPage() {
         // console.log( 'post_id: ' + this.post_id );
         this.post.page( {post_id: this.post_id, page_no: 1}, (posts: POSTS) => {
             console.log('posts:', posts);
@@ -32,7 +40,7 @@ export class PostListPage {
     onClickPostEdit( post_idx ) {
         console.log("post edit: ", post_idx);
         this.router.go("/post/edit/" + post_idx );
-        
+
     }
 
 

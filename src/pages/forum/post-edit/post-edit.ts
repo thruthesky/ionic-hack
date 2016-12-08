@@ -69,6 +69,21 @@ export class PostEditPage {
     }
 
     onChangeFile( event ) {
+
+        this.showProgress = true;
+        this.data.uploadPostFile( this.form.gid, event, (re: FILE_UPLOAD_RESPONSE) => {
+            this.files.push( re.data );
+            this.showProgress = false;
+        }, error => {
+            this.showProgress = false;
+        }, completeCode => {
+            console.log("completeCode: ", completeCode);
+        }, percentage => {
+            console.log("percentag uploaded: ", percentage);
+        })
+
+        /*
+
         let files = event.target.files;
         if ( files === void 0 ) return;
 
@@ -84,6 +99,7 @@ export class PostEditPage {
         }, percentage => {
             console.log("percentag uploaded: ", percentage);
         });
+        */
     }
 
     onClickDeleteFile( file ) {

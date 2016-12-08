@@ -25,23 +25,41 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* improve philgo api uniqid(). it is too simple and may cause problem.
 
-* base/user/register 에서 update 를 한다.
+* 게시판 첨부 파일 업로드. post-edit.ts onChangeFile() 에 있는 데로
+    data.uploadPostFile( gid, event ) 형식을 값을 받는다.
+    이것은 회원 정보에서 사진 업로드 마찬가지로 한다.
+
+* cordova-plugin-transfer 를 philgo api data.ts 에 포함해서
+    보다 쉽게 사용 할 수 있도록 한다.
+    
+* 게시판 글을 보여 줄 때, loader 를 보여 준다. 특히, 캐시가 없을 때, 시간이 걸린다.
+* 글 수정을 bootstrap modal 로 한다.
+    * 글 수정 후, 원래 글 업데이트.
+* 글 삭제.
+* 글 추천, 리포트,
+* 코멘트 CRUD, vote, report, 사진 업로드.
+
+* 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
+*
+* @see 'TODO' list of philgo-api REDME
+* apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub
+    * @see angular/sonub/README.md
+ 
+* @done base/user/register 에서 update 를 한다.
     * update 하면서 코드를 정리하고,
     * 모바일 사진 업로드하면서, 파일 업로드 관련 코드를 
         완전히 간결하게 한다.
 * /user/profile to show user profile to others.
-* philgo Member primary photo
+* @done philgo Member primary photo
     * with firebase auth.
-* [50%] complete templating for RWD design.
+* @done complete templating for RWD design.
     * [loader](https://docs.google.com/document/d/1ZEplms60Dr9U4gMCvqxjMEAbyrH5duPkifEqxuPUiYc/edit#heading=h.dtpu4gybsdzf)
-* @see 'TODO' list of philgo-api REDME
-* apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub
-    * @see angular/sonub/README.md
-* let developers clone https://github.com/withcenter/sonub
-* since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
+* @deprecated let developers clone https://github.com/withcenter/sonub
+    since this, fork out 'https://github.com/thruthesky/ionic-hack' and continue a new project. if there is update, submit full request.
 
-* clould based backend without philgo api. hosting, database with full text search, file storage.
+* @depcreated. clould based backend without philgo api. hosting, database with full text search, file storage.
 
 
 
