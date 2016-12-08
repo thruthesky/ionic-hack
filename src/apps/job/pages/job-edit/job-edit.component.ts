@@ -63,6 +63,7 @@ export class JobEditComponent implements OnInit {
     });
     console.log('loginData:: ', this.login);
     console.log('logingid:: ', this.gid);
+    console.log('localStorage.getItem:: ' ,localStorage.getItem( 'philgo-login'));
     if( idx ){
       this.post.get(idx, re=> {
         console.log('re data',re.post);
