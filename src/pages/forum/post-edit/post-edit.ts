@@ -77,7 +77,7 @@ export class PostEditPage {
         }, error => {
             this.showProgress = false;
         }, completeCode => {
-
+            console.log("completeCode: ", completeCode);
         }, percentage => {
             console.log("percentag uploaded: ", percentage);
         })
