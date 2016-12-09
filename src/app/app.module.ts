@@ -16,6 +16,7 @@ import { BaseModule } from '../pages/base/base.module';
 import { ForumModule } from '../pages/forum/forum.module';
 import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
 import { PushModule } from  '../apps/push/push.module';
+import { JobModule } from '../apps/job/app/job.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PushModule } from  '../apps/push/push.module';
     BaseModule,
     PhilgoApiModule,
     ForumModule,
-    PushModule
+    PushModule,
+    JobModule
   ],
   bootstrap: [ RootComponent ],
   providers: [ ]

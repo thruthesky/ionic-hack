@@ -1,0 +1,93 @@
+<base-header [title]="title"></base-header>
+<section class="content">
+  <nav>
+    <a routerLink="/job" routerLinkActive="active">JOB</a>
+    <a routerLink="/job/post" routerLinkActive="active">POST</a>
+    <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+  </nav>
+  <div class="form-group row">
+    <label class="col-xs-3 col-form-label"  for="workProfession">Work Profession</label>
+    <div class="col-xs-9">
+      <select class="form-control" id="workProfession" name="workProfession" [(ngModel)]="query.sub_category" (change)="search()">
+        <option value="all">All</option>
+        <option value="housemaid">House Maid</option>
+        <option value="driver">Driver</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-xs-3" for="workExperience">Work Experience</label>
+    <div class="col-xs-9">
+      <select class="form-control" id="workExperience" name="workExperience" [(ngModel)]="query.int_1" (change)="search()">
+        <option value="all">All</option>
+        <option value="0">No Work Experience</option>
+        <option *ngFor="let number of numbers" [value]="number">{{number}} years</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-xs-3 col-form-label">Province</label>
+    <div class="col-xs-9">
+      <select class="form-control" id="searchByProvince" name="province" [(ngModel)]="query.varchar_2" (change)="onClickProvince()">
+        <option value="all">All</option>
+        <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row" *ngIf="showCities">
+    <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
+    <div class="col-xs-9">
+      <select class="form-control" id="searchByCities" name="city" [(ngModel)]="query.varchar_3" (change)="search()">
+        <option value="all">All</option>
+        <option *ngFor="let key of cityKeys" [value]="key">{{cities[key]}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="name" class="col-xs-3 col-form-label">Search By Name</label>
+    <div class="col-xs-9">
+      <input class="form-control" type="text" id="name"  [(ngModel)]="query.name" (keyup)="onChange()" placeholder="Input Name...">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-xs-3 col-form-label">Gender</label>
+    <div class="col-xs-9">
+      <label class="form-check-inline col-xs-3">
+        <input class="form-check-input" type="radio" name="genderRadio" id="both" value="all" [(ngModel)]="query.gender" (change)="search()"> All
+      </label>
+      <label class="form-check-inline col-xs-3">
+        <input class="form-check-input" type="radio" name="genderRadio" id="male" value="M" [(ngModel)]="query.gender" (change)="search()"> Male
+      </label>
+      <label class="form-check-inline col-xs-3">
+        <input class="form-check-input" type="radio" name="genderRadio" id="female" value="F" [(ngModel)]="query.gender" (change)="search()"> Female
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="searching">
+    <i class="fa fa-spinner fa-pulse fa-fw"></i>
+    <span class="sr-only">Loading...</span>
+  </div>
+
+  <div class="col-sm-12" *ngFor=" let post of search_result; let i = index; ">
+    <div class="card card-block">
+      <img class="card-img-top" src='' alt="Card image {{i+1}}">
+      <div>
+        <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
+        <p class="card-text">{{post.varchar_6}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-secondary">More</button>
+        <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
+        <button type="button" class="btn btn-secondary">Delete</button>
+      </div>
+    </div>
+  </div>
+</section>
+<base-footer></base-footer>
+

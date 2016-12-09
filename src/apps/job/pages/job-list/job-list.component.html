@@ -1,0 +1,27 @@
+<base-header [title]="title"></base-header>
+
+<section class="content">
+  <a routerLink="/job" routerLinkActive="active">JOB</a>
+  <a routerLink="/job/post" routerLinkActive="active">POST</a>
+  <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+  <h2 align="center">JOB Listing Page</h2>
+  <div class="row">
+    <div class="col-sm-12" *ngFor=" let post of posts; let i = index; ">
+      <div class="card card-block">
+        <img class="card-img-top" src='' alt="Card image {{i+1}}">
+        <div>
+          <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
+          <p class="card-text">{{post.varchar_6}}</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary">More</button>
+          <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
+          <button type="button" class="btn btn-secondary">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<base-footer></base-footer>
