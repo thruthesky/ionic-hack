@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-
+import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 
@@ -32,7 +32,8 @@ export let ROUTES: Routes = [
         RouterModule,
         FormsModule,
         BaseComponentsModule,
-        LanguagePipeModule
+        LanguagePipeModule,
+        InfiniteScrollModule
     ],
     providers: [],
     entryComponents: [ CommentEditComponent ]

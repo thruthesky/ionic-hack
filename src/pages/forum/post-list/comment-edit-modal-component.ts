@@ -31,13 +31,29 @@ export class CommentEditComponent {
     submit() {
       console.log('comment edit modal form submitted.', this.comment);
       
-      this.post.update( this.comment, (re:POST_RESPONSE) => {
-          console.log( 'create comment success: ', re);
-          this.activeModal.close('updated');
-      }, error => {
-          alert('error:' + error);
-      }, () => {
+      if ( this.comment.idx ) {
+        this.post.update( this.comment,
+          r => this.onSuccessCommentEdit( r ),
+          e => this.onFailureCommentEdit( e ),
+          () => this.onCompleteCommentEdit());
+      }
+      else {
+        console.log("this.comment: ", this.comment);
+        this.post.createComment( this.comment,
+          r => this.onSuccessCommentEdit( r ),
+          e => this.onFailureCommentEdit( e ),
+          () => this.onCompleteCommentEdit());
+      }
+    }
 
-      });
+    onSuccessCommentEdit(re:POST_RESPONSE) {
+        console.log( 'create comment success: ', re);
+        this.activeModal.close(re);
+    }
+    onFailureCommentEdit( error ) {
+        alert('error:' + error);
+    };
+    onCompleteCommentEdit() {
+
     }
 }

@@ -96,8 +96,11 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 
 ## Packages installed by 'npm install'
 
+You do not need to install these module one by one. these are installed by 'npm install'.
+
 * npm i ng2-file-upload --save
 * npm i lodash --save
+* npm install angular2-infinite-scroll --save
 
 
 
