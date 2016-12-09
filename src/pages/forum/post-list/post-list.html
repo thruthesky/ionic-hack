@@ -44,7 +44,9 @@
 
             <div class="comments" *ngIf=" post.comments ">
                 <article class="comment" *ngFor=" let comment of post.comments ">
+                    No. {{ comment.idx }}
                     <div innerHTML="{{ comment.content }}"></div>
+                    <button (click)="onClickReply( comment )">Reply</button>
                     <button (click)="onClickEditComment( comment )">Edit</button>
                 </article>
             </div>

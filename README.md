@@ -25,6 +25,8 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* 글 쓰기 외에, 글 수정/코멘트쓰기/수정 등을 모두 modal popup 으로 한다.
+
 * improve philgo api uniqid(). it is too simple and may cause problem.
 
 * 게시판 첨부 파일 업로드. post-edit.ts onChangeFile() 에 있는 데로

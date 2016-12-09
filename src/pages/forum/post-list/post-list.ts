@@ -22,10 +22,10 @@ export class PostListPage {
         private modalService: NgbModal ) {
 
 
+        /* test on comment edit.
         let c = {"idx":"1272584620","member":{"id":"second","name":"second","nickname":"second","idx_primary_photo":"1483471"},"idx_root":"1272582904","idx_parent":"1272582904","gid":"","post_id":"greeting","photos":[],"content":"I am fine. and you?","user_name":"second","stamp":"1481214157","idx_member":"9182","deleted":"0","blind":"","good":"0","bad":"0","depth":"1","int_10":"0"};
-
         this.onClickEditComment( c );
-
+        */
         this.post_id = activatedRoute.snapshot.params['post_id'];
         if ( this.post_id ) {
             this.loadPage();
@@ -64,10 +64,12 @@ export class PostListPage {
             idx_parent: idx,
             content: this.comments[ idx ]
         };
-
-
         this.post.createComment( data, (re:POST_RESPONSE) => {
             console.log( 'create comment success: ', re);
+            // insert at the bottom.
+            let idx_root = re.post.idx_root;
+            let idx_parent = re.post.idx_parent;
+
         }, error => {
             alert('error:' + error);
         }, () => {
@@ -80,7 +82,11 @@ export class PostListPage {
         let modalRef = this.modalService.open( CommentEditComponent );
         let modal = modalRef.componentInstance;
         modal.comment = comment;
+        modalRef.result.then(( code ) => {
+            console.log(`Modal closed with: ${code}`);
+        }, (reason) => {
+            console.log( `Modal dismissed.`);
+        });
     }
-
 
 }

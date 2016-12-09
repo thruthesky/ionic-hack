@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
-
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import { Post, POSTS, POST_RESPONSE, POST_DATA } from '../../../api/philgo-api/v2/post';
+
 
 @Component({
   selector: 'comment-edit-modal',
@@ -13,18 +14,30 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
     </div>
     <div class="modal-body">
       
-      <textarea>{{comment.content}}</textarea>
+      <textarea name="content" [(ngModel)]="comment.content"></textarea>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="submit('submit')">EDIT SUBMIT</button>
-      <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Close</button>
+      <button type="button" class="btn btn-primary" (click)="submit()">EDIT SUBMIT</button>
+      <button type="button" class="btn btn-secondary" (click)="activeModal.close('cancel')">Cancel</button>
     </div>
   `
 })
 export class CommentEditComponent {
     @Input() comment;
-    constructor(public activeModal: NgbActiveModal) {}
-    submit( str ) {
-      console.log('submit: ', str);
+    constructor(
+      public activeModal: NgbActiveModal,
+      private post: Post
+    ) {}
+    submit() {
+      console.log('comment edit modal form submitted.', this.comment);
+      
+      this.post.update( this.comment, (re:POST_RESPONSE) => {
+          console.log( 'create comment success: ', re);
+          this.activeModal.close('updated');
+      }, error => {
+          alert('error:' + error);
+      }, () => {
+
+      });
     }
 }
