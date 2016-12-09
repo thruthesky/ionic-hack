@@ -4,6 +4,8 @@ import { Post, POST_DATA } from '../../../../api/philgo-api/v2/post';
 import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Router, ActivatedRoute } from '@angular/router';
 
+declare var Array;
+
 @Component({
   selector: 'app-job-edit',
   templateUrl: 'job-edit.component.html'
