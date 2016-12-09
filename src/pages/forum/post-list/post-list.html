@@ -1,12 +1,12 @@
+<template ngbModalContainer></template>
 <base-header [title]="title"></base-header>
 
 <section class="content">
     post list html
     <button (click)="onClickPostCreate()">Post Write</button>
 
-
     <div *ngIf=" data " class="posts">
-        <article *ngFor=" let post of data.posts ">
+        <article class="post" *ngFor=" let post of data.posts ">
             <div class="post-header">
                 <h2 class="post-header-title">{{ post.subject }}</h2>
                 <button (click)="onClickPostEdit( post.idx )">Edit</button>
@@ -18,10 +18,42 @@
             <div *ngIf=" post.photos.length " class="files">
                 <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
             </div>
-        </article>
-    </div>
 
+
+
+            
+            <table class="comment-form" cellpadding='0' cellspacing='0'>
+                <tr>
+                    <td width="1%">
+                        <div class="file-upload-button" (click)="onClickFileUploadButton()">
+                            <span class="camera fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                            </span>
+                            <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
+                        </div><!--/file-upload-button-->
+                    </td>
+                    <td>
+                        <input name="content" [(ngModel)]="comments[post.idx.toString()]" (keyup.enter)="onEnterComment( post.idx )">
+                    </td>
+                    <td width="1%" nowrap (click)="onEnterComment( post.idx )">
+                        &nbsp;<i class="fa fa-arrow-right"></i>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="comments" *ngIf=" post.comments ">
+                <article class="comment" *ngFor=" let comment of post.comments ">
+                    <div innerHTML="{{ comment.content }}"></div>
+                    <button (click)="onClickEditComment( comment )">Edit</button>
+                </article>
+            </div>
+
+
+        </article><!-- post -->
+    </div>
 </section>
+
 
 
 <base-footer></base-footer>
