@@ -1,7 +1,7 @@
 
     <table class="comment-form"
-        [class.comment-reply-form-active]="comment_reply_form_active[ post.idx.toString() ]"
-        (click)="onClickCommentForm(post)"
+        [class.active]="active"
+        (click)="onClickCommentForm()"
         cellpadding='0' cellspacing='0'>
         <tr valign="top">
             <td width="1%">
@@ -10,16 +10,16 @@
                         <i class="fa fa-circle fa-stack-2x"></i>
                         <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
                     </span>
-                    <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event, post)">
+                    <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event)">
                 </div><!--/file-upload-button-->
             </td>
             <td>
-                <textarea name="content" [(ngModel)]="comments[post.idx.toString()]"></textarea>
+                <textarea name="content" [(ngModel)]="comment.content"></textarea>
                 
 
                 <!-- show uploaded files while creating a comment -->
-                <section *ngIf=" files.length " class="files">
-                    <div class="file" *ngFor=" let file of files " (click)="onClickDeleteFile( file )">
+                <section *ngIf=" comment.photos " class="files">
+                    <div class="file" *ngFor=" let file of comment.photos " (click)="onClickDeleteFile( file )">
                         <img [src]=" file.url_thumbnail ">
                         <span class="trash fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
@@ -37,7 +37,7 @@
 
 
             </td>
-            <td width="1%" nowrap (click)="onClickCommentCreate( post )">
+            <td width="1%" nowrap (click)="onClickCommentCreate()">
                 &nbsp;<i class="fa fa-arrow-right"></i>
             </td>
         </tr>

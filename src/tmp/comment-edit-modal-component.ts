@@ -1,3 +1,4 @@
+/*
 import {Component, Input, ViewChild, ElementRef } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { Post, POST_RESPONSE } from '../../../api/philgo-api/v2/post';
@@ -63,3 +64,4 @@ export class CommentEditComponent {
 
     }
 }
+*/

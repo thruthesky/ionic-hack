@@ -89,7 +89,7 @@ just use a bootstrap modal popup.
 ## TODO : BUGS
 
 * ng-boostrap modal was removed although it does not look like an error of bootstrap modal ( it looks like an error of @ionic/app-scripts. there is an issue. ), it is an disturbance to code.
-
+    * wait until the issue disappears.
 * sharing place holder of formProcess does not work on IE.
 
 

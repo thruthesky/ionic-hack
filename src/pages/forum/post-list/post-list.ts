@@ -6,24 +6,18 @@ import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../api/philg
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
-import { CommentEditComponent } from './comment-edit-modal-component';
 
 @Component({
     selector: 'post-list-page',
     templateUrl: 'post-list.html'
 })
 export class PostListPage {
-
-
+    comments = {};
+    comments_hidden = {};
+    comment_edit_mode: 'edit' | 'reply' = null;
     post_id: string = null;
     page: number = 1;
     pages: Array<POSTS> = [];
-    comments = {};
-    comment_gid: string = null; // gid for comment creating. this must be re-generated after every comment creation.
-    comment_reply_form_active = {};
-    showProgress: boolean = false;
-    progress: number = 0;
-    widthProgress: any;
     files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
     constructor(
         private ngZone: NgZone,
@@ -34,7 +28,6 @@ export class PostListPage {
         // private modalService: NgbModal,
         private activatedRoute: ActivatedRoute
         ) {
-        this.comment_gid = post.uniqid();
         this.post_id = activatedRoute.snapshot.params['post_id'];
         if ( this.post_id ) {
             this.loadPage();
@@ -67,50 +60,6 @@ export class PostListPage {
 
     }
 
-
-    /**
-     * When a user click on the form to input content of comemnt for creating a comment.
-     */
-    onClickCommentForm( post ) {
-        this.comment_reply_form_active[ post.idx.toString() ] = true; // add CSS class
-
-    }
-
-    /**
-     * Query to philog server to create a comment.
-     */
-    onClickCommentCreate( post ) {
-        console.log("comments: ", this.comments);
-        let idx = post.idx.toString();
-        let data: POST_DATA = {
-            idx_parent: idx,
-            gid: this.comment_gid,
-            content: this.comments[ idx ]
-        };
-        this.post.createComment( data, (re:POST_RESPONSE) => {
-            console.log( 'create comment success: ', re);
-            if ( post.comments ) post.comments.unshift( <COMMENT> re.post ); // if there are other comments,
-            else post['comments'] = [ <COMMENT> re.post ]; // if there is no comments.
-            this.comments = {};
-            if ( this.comment_reply_form_active[ idx ] ) delete this.comment_reply_form_active[ idx ];
-        }, error => {
-            alert('error:' + error);
-        }, () => {
-            //
-        });
-    }
-
-    onClickCommentEdit( comment, post ) {
-        // this.showCommentEditModal( comment, post );
-    }
-
-    
-    onClickCommentReply( comment, post ) {
-        comment = {
-            idx_parent: comment.idx
-        };
-        this.showCommentEditModal( comment, post );
-    }
 
     showCommentEditModal( comment: COMMENT, post: POST ) {
         
@@ -153,57 +102,35 @@ export class PostListPage {
         console.log('scrolled up!!')
     }
 
+
     /**
-     * This is for camera.
+     * 
+     * @note it only opens a form at a time.
      */
-    onClickCommentFileUploadButton() {
-        //
-        console.log("onClickCommentFileUploadButton()");
+    onClickCommentEdit( comment ) {
+        this.comment_edit_mode = 'edit';
+        this.comments = {};
+        this.comments[ comment.idx.toString() ] = true;
     }
-    /**
-     * This is for web.
-     */
-    onChangeCommentFile( event, post ) {
-        //
-        console.log("onChangeCommentFile()");
-        let idx_parent = post.idx.toString();
-        console.log("this.comments: ", this.comments);
-        this.showProgress = true;
-        this.data.uploadPostFile( this.comment_gid, event,
-            s => this.onSuccessFileUpload(s),
-            f => this.onFailureFileUpload(f),
-            c => this.onCompleteFileUpload(c),
-            p => this.onProgressFileUpload(p)
-        );
-    }
+
     
-    onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
-        console.log('re.data: ', re.data);
-        this.files.push( re.data );
-        this.showProgress = false;
-        this.renderPage();
-    }
-    onFailureFileUpload ( error ) {
-        this.showProgress = false;
-        alert( error );
-    }
-    onCompleteFileUpload( completeCode ) {
-        console.log("completeCode: ", completeCode);
-    }
-    onProgressFileUpload( p ) {
-        console.log("percentag uploaded: ", p);
-        this.progress = p;
-        this.widthProgress = this.sanitizer.bypassSecurityTrustStyle('width:'  + p + '%' );
-        this.renderPage();
-
-
-        this.renderPage();
+    onClickCommentReply( comment ) {
+        this.comment_edit_mode = 'reply';
+        this.comments = {};
+        this.comments[ comment.idx.toString() ] = true;
     }
 
-    renderPage() {
-        this.ngZone.run(() => {
-            console.log('ngZone.run()');
-        });
-    }
 
+    onClickCommentDelete( comment ) {
+        
+    }
+    onClickCommentLike( comment ) {
+        
+    }
+    onClickCommentDislike( comment ) {
+        
+    }
+    onClickCommentReport( comment ) {
+        
+    }
 }

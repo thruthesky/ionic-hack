@@ -29,28 +29,36 @@
                     <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
                 </div>
 
-                <comment-edit></comment-edit>
+                <comment-edit [parent]="post"></comment-edit>
                 
                 <div class="comments" *ngIf=" post.comments ">
-                    <article class="comment" *ngFor=" let comment of post.comments " [attr.depth]="comment.depth">
-                        No. {{ comment.idx }}
+                    <article class="comment" *ngFor=" let comment of post.comments "
+                        [attr.depth]="comment.depth"
+                        [class.hidden]=" comments_hidden[ comment.idx.toString() ] "
+                    >
+                        <div class="content">
+                            No. {{ comment.idx }}
+                            
+                            <button (click)="onClickCommentReply( comment )">Reply</button>
+                            <button (click)="onClickCommentEdit( comment )">Edit</button>
+                            <button (click)="onClickCommentDelete( comment  )">DELETE</button>
+                            <button (click)="onClickCommentLike( comment  )">Like</button>
+                            <button (click)="onClickCommentDislike( comment  )">Dislike</button>
+                            <button (click)="onClickCommentReport( comment  )">Report</button>
                         
-                        <button (click)="onClickCommentReply( comment, post )">Reply</button>
-                        <button (click)="onClickCommentEdit( comment, post )">Edit</button>
-                        <button (click)="onClickCommentDelete( comment, post )">DELETE</button>
-                        <button (click)="onClickCommentLike( comment, post )">Like</button>
-                        <button (click)="onClickCommentDislike( comment, post )">Dislike</button>
-                        <button (click)="onClickCommentReport( comment, post )">Report</button>
-                        <button (click)="onClickCommentMove( comment, post )">Move</button>
-                    
 
-                        <div innerHTML="{{ comment.content }}"></div>
-                        
-                        <div *ngIf=" comment.photos.length " class="comment-uploaded-files">
-                            <img *ngFor=" let photo of comment.photos " [src]=" photo.url_thumbnail ">
-                        </div>
-
-
+                            <div innerHTML="{{ comment.content }}"></div>
+                            <div *ngIf=" comment.photos.length " class="comment-uploaded-files">
+                                <img *ngFor=" let photo of comment.photos " [src]=" photo.url_thumbnail ">
+                            </div>
+                        </div><!--/content-->
+                        <comment-edit *ngIf=" comments[ comment.idx.toString() ] "
+                            [root] = " post "
+                            [parent] = " comment "
+                            [active] = " true "
+                            [mode] = " comment_edit_mode "
+                            (hideComment) = " comments_hidden = {}; comments_hidden[ comment.idx.toString() ] = true "
+                        ></comment-edit>
                     </article>
                 </div>
 
