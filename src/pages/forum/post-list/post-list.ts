@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { AppRouter, ActivatedRoute } from '../../../app/app.router';
 import { Post, POSTS, POST_RESPONSE, POST_DATA, POST, COMMENT } from '../../../api/philgo-api/v2/post';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
+
+//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { CommentEditComponent } from './comment-edit-modal-component';
 
@@ -16,13 +18,20 @@ export class PostListPage {
     page: number = 1;
     pages: Array<POSTS> = [];
     comments = {};
+    comment_gid: string = null; // gid for comment creating. this must be re-generated after every comment creation.
     comment_reply_form_active = {};
+    showProgress: boolean = false;
+    progress: number = 0;
+    files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
     constructor(
+        private ngZone: NgZone,
         private post: Post,
+        private data: Data,
         private router: AppRouter,
-        private activatedRoute: ActivatedRoute,
-        private modalService: NgbModal ) {
-
+        // private modalService: NgbModal,
+        private activatedRoute: ActivatedRoute
+        ) {
+        this.comment_gid = post.uniqid();
         this.post_id = activatedRoute.snapshot.params['post_id'];
         if ( this.post_id ) {
             this.loadPage();
@@ -56,6 +65,17 @@ export class PostListPage {
     }
 
 
+    /**
+     * When a user click on the form to input content of comemnt for creating a comment.
+     */
+    onClickCommentForm( post ) {
+        this.comment_reply_form_active[ post.idx.toString() ] = true; // add CSS class
+
+    }
+
+    /**
+     * Query to philog server to create a comment.
+     */
     onClickCommentCreate( post ) {
         console.log("comments: ", this.comments);
         let idx = post.idx.toString();
@@ -95,6 +115,7 @@ export class PostListPage {
             comment_clone.content = this.post.strip_tags( comment_clone.content );
         }
         console.log("onClickEditComment()", comment_clone);
+        /*
         let modalRef = this.modalService.open( CommentEditComponent );
         let modal = modalRef.componentInstance;
         modal.comment = comment_clone;
@@ -116,6 +137,7 @@ export class PostListPage {
         }, (reason) => {
             console.log( `Modal dismissed.`);
         });
+        */
         
     }
     onScrollDown () {
@@ -127,11 +149,53 @@ export class PostListPage {
         console.log('scrolled up!!')
     }
 
+    /**
+     * This is for camera.
+     */
     onClickCommentFileUploadButton() {
         //
+        console.log("onClickCommentFileUploadButton()");
     }
-    onChangeCommentFile() {
+    /**
+     * This is for web.
+     */
+    onChangeCommentFile( event, post ) {
         //
-
+        console.log("onChangeCommentFile()");
+        let idx_parent = post.idx.toString();
+        console.log("this.comments: ", this.comments);
+        this.showProgress = true;
+        this.data.uploadPostFile( this.comment_gid, event,
+            s => this.onSuccessFileUpload(s),
+            f => this.onFailureFileUpload(f),
+            c => this.onCompleteFileUpload(c),
+            p => this.onProgressFileUpload(p)
+        );
     }
+    
+    onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
+        console.log('re.data: ', re.data);
+        this.files.push( re.data );
+        this.showProgress = false;
+        this.renderPage();
+    }
+    onFailureFileUpload ( error ) {
+        this.showProgress = false;
+        alert( error );
+    }
+    onCompleteFileUpload( completeCode ) {
+        console.log("completeCode: ", completeCode);
+    }
+    onProgressFileUpload( percentage ) {
+        console.log("percentag uploaded: ", percentage);
+        this.progress = percentage;
+        this.renderPage();
+    }
+
+    renderPage() {
+        this.ngZone.run(() => {
+            console.log('ngZone.run()');
+        });
+    }
+
 }

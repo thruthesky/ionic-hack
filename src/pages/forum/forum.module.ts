@@ -11,7 +11,7 @@ import { BaseComponentsModule } from '../base-components/base.components.module'
 import { ForumIndexPage } from './forum-index/forum-index';
 import { PostListPage } from './post-list/post-list';
 import { PostEditPage } from './post-edit/post-edit';
-import { CommentEditComponent } from './post-list/comment-edit-modal-component';
+// import { CommentEditComponent } from './post-list/comment-edit-modal-component';
 
 export let ROUTES: Routes = [
   { path: 'forum', component: ForumIndexPage },
@@ -24,8 +24,8 @@ export let ROUTES: Routes = [
     declarations: [
         ForumIndexPage,
         PostListPage,
-        PostEditPage,
-        CommentEditComponent
+        PostEditPage
+//        CommentEditComponent
     ],
     imports: [
         BrowserModule,
@@ -36,6 +36,8 @@ export let ROUTES: Routes = [
         InfiniteScrollModule
     ],
     providers: [],
-    entryComponents: [ CommentEditComponent ]
+    entryComponents: [
+//         CommentEditComponent
+    ]
 })
 export class ForumModule {}

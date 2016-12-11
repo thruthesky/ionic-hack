@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppRouter } from '../../../../app/app.router';
 import { formProcess } from '../../../../etc/share';
 import { Member, MEMBER_LOGIN_DATA } from '../../../../api/philgo-api/v2/member';
-import { FirebaseAuth } from '../../../../api/firebase-api/firebase-auth';
+//import { FirebaseAuth } from '../../../../api/firebase-api/firebase-auth';
 import { LanguagePipe } from '../../../../pipes/language/language.pipe';
 @Component({
     selector: 'login-page',
@@ -14,13 +14,13 @@ export class LoginPage {
     process = formProcess.reset();
     constructor(
         private member: Member,
-        private auth: FirebaseAuth,
+//        private auth: FirebaseAuth,
         private ln: LanguagePipe,
         private router: AppRouter
     ) {
 
-        this.form.id = 'thruthesky';
-        this.form.password = '1111';
+//        this.form.id = 'thruthesky';
+//        this.form.password = '1111';
         //this.onClickLogin();
 
 //        this.login();
@@ -41,7 +41,8 @@ export class LoginPage {
         this.member.login( this.form,
             login => {
                 console.log('philgo login success: ', login);
-                this.loginFirebase( login );
+                this.router.go('/');
+                // this.loginFirebase( login );
             },
             er => {
                 // alert("login error:" + er);
@@ -57,6 +58,8 @@ export class LoginPage {
     loginFirebase( login ) {
         let email = this.member.getApiEmail(login);
         let password = this.member.getApiPassword(login);
+
+        /*
         this.auth.register( email, password, firebaseUser => { // register
             console.log("firebase register success.");
             // every thing is good. go home.
@@ -83,5 +86,6 @@ export class LoginPage {
             }
 
         });
+        */
     }
 }

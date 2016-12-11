@@ -29,10 +29,9 @@
                     <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
                 </div>
 
-
                 <table class="comment-form"
                     [class.comment-reply-form-active]="comment_reply_form_active[ post.idx.toString() ]"
-                    (click)="comment_reply_form_active[ post.idx.toString() ]=true"
+                    (click)="onClickCommentForm(post)"
                     cellpadding='0' cellspacing='0'>
                     <tr valign="top">
                         <td width="1%">
@@ -41,7 +40,7 @@
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
                                 </span>
-                                <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event, file.value)">
+                                <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event, post)">
                             </div><!--/file-upload-button-->
                         </td>
                         <td>
@@ -53,7 +52,6 @@
                     </tr>
                 </table>
 
-
                 <div class="comments" *ngIf=" post.comments ">
                     <article class="comment" *ngFor=" let comment of post.comments " [attr.depth]="comment.depth">
                         No. {{ comment.idx }}
@@ -63,7 +61,6 @@
                         <button (click)="onClickCommentDelete( comment, post )">DELETE</button>
                     </article>
                 </div>
-
 
             </article><!-- post -->
         </div><!--/page posts-->
