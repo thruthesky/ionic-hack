@@ -1,0 +1,44 @@
+
+    <table class="comment-form"
+        [class.comment-reply-form-active]="comment_reply_form_active[ post.idx.toString() ]"
+        (click)="onClickCommentForm(post)"
+        cellpadding='0' cellspacing='0'>
+        <tr valign="top">
+            <td width="1%">
+                <div class="file-upload-button" (click)="onClickCommentFileUploadButton()">
+                    <span class="camera fa-stack fa-lg">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event, post)">
+                </div><!--/file-upload-button-->
+            </td>
+            <td>
+                <textarea name="content" [(ngModel)]="comments[post.idx.toString()]"></textarea>
+                
+
+                <!-- show uploaded files while creating a comment -->
+                <section *ngIf=" files.length " class="files">
+                    <div class="file" *ngFor=" let file of files " (click)="onClickDeleteFile( file )">
+                        <img [src]=" file.url_thumbnail ">
+                        <span class="trash fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </div>
+                </section>
+
+                <!-- This supports IE 9. IE 9 does not support HTML 5 -->
+                <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+                <div class="progress">
+                    <span class="progress-bar" [style.width]="widthProgress"></span>
+                </div>
+                </progress>
+
+
+            </td>
+            <td width="1%" nowrap (click)="onClickCommentCreate( post )">
+                &nbsp;<i class="fa fa-arrow-right"></i>
+            </td>
+        </tr>
+    </table>

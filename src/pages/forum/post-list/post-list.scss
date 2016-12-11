@@ -4,9 +4,9 @@ post-list-page {
         padding: 1em;
         border-bottom: 1px solid grey;
 
-        .files {
+        .post-uploaded-files, .comment-uploaded-files {
             img {
-                max-width: 100%;
+                max-width: 49%;
             }
         }
         

@@ -25,40 +25,32 @@
                 <div class="post-content" innerHTML="{{ post.content }}">
                 </div>
                 
-                <div *ngIf=" post.photos.length " class="files">
+                <div *ngIf=" post.photos.length " class="post-uploaded-files">
                     <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
                 </div>
 
-                <table class="comment-form"
-                    [class.comment-reply-form-active]="comment_reply_form_active[ post.idx.toString() ]"
-                    (click)="onClickCommentForm(post)"
-                    cellpadding='0' cellspacing='0'>
-                    <tr valign="top">
-                        <td width="1%">
-                            <div class="file-upload-button" (click)="onClickCommentFileUploadButton()">
-                                <span class="camera fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
-                                </span>
-                                <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeCommentFile($event, post)">
-                            </div><!--/file-upload-button-->
-                        </td>
-                        <td>
-                            <textarea name="content" [(ngModel)]="comments[post.idx.toString()]"></textarea>
-                        </td>
-                        <td width="1%" nowrap (click)="onClickCommentCreate( post )">
-                            &nbsp;<i class="fa fa-arrow-right"></i>
-                        </td>
-                    </tr>
-                </table>
-
+                <comment-edit></comment-edit>
+                
                 <div class="comments" *ngIf=" post.comments ">
                     <article class="comment" *ngFor=" let comment of post.comments " [attr.depth]="comment.depth">
                         No. {{ comment.idx }}
-                        <div innerHTML="{{ comment.content }}"></div>
+                        
                         <button (click)="onClickCommentReply( comment, post )">Reply</button>
                         <button (click)="onClickCommentEdit( comment, post )">Edit</button>
                         <button (click)="onClickCommentDelete( comment, post )">DELETE</button>
+                        <button (click)="onClickCommentLike( comment, post )">Like</button>
+                        <button (click)="onClickCommentDislike( comment, post )">Dislike</button>
+                        <button (click)="onClickCommentReport( comment, post )">Report</button>
+                        <button (click)="onClickCommentMove( comment, post )">Move</button>
+                    
+
+                        <div innerHTML="{{ comment.content }}"></div>
+                        
+                        <div *ngIf=" comment.photos.length " class="comment-uploaded-files">
+                            <img *ngFor=" let photo of comment.photos " [src]=" photo.url_thumbnail ">
+                        </div>
+
+
                     </article>
                 </div>
 

@@ -1,4 +1,5 @@
 import { Component, NgZone } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AppRouter, ActivatedRoute } from '../../../app/app.router';
 import { Post, POSTS, POST_RESPONSE, POST_DATA, POST, COMMENT } from '../../../api/philgo-api/v2/post';
 import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
@@ -22,12 +23,14 @@ export class PostListPage {
     comment_reply_form_active = {};
     showProgress: boolean = false;
     progress: number = 0;
+    widthProgress: any;
     files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
     constructor(
         private ngZone: NgZone,
         private post: Post,
         private data: Data,
         private router: AppRouter,
+        private sanitizer: DomSanitizer,
         // private modalService: NgbModal,
         private activatedRoute: ActivatedRoute
         ) {
@@ -81,6 +84,7 @@ export class PostListPage {
         let idx = post.idx.toString();
         let data: POST_DATA = {
             idx_parent: idx,
+            gid: this.comment_gid,
             content: this.comments[ idx ]
         };
         this.post.createComment( data, (re:POST_RESPONSE) => {
@@ -97,7 +101,7 @@ export class PostListPage {
     }
 
     onClickCommentEdit( comment, post ) {
-        this.showCommentEditModal( comment, post );
+        // this.showCommentEditModal( comment, post );
     }
 
     
@@ -186,9 +190,13 @@ export class PostListPage {
     onCompleteFileUpload( completeCode ) {
         console.log("completeCode: ", completeCode);
     }
-    onProgressFileUpload( percentage ) {
-        console.log("percentag uploaded: ", percentage);
-        this.progress = percentage;
+    onProgressFileUpload( p ) {
+        console.log("percentag uploaded: ", p);
+        this.progress = p;
+        this.widthProgress = this.sanitizer.bypassSecurityTrustStyle('width:'  + p + '%' );
+        this.renderPage();
+
+
         this.renderPage();
     }
 
