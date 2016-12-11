@@ -91,6 +91,9 @@ export class PostListPage {
     showCommentEditModal( comment: COMMENT, post: POST ) {
         
         let comment_clone = _.cloneDeep( comment );
+        if ( comment_clone.content ) {
+            comment_clone.content = this.post.strip_tags( comment_clone.content );
+        }
         console.log("onClickEditComment()", comment_clone);
         let modalRef = this.modalService.open( CommentEditComponent );
         let modal = modalRef.componentInstance;
