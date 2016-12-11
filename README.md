@@ -28,7 +28,9 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * 모듈화 & 컴포넌트 디렉티브 화. 그래서 philgo api 관련된 코드를 직접 작성하는 것이 아니라,
     그냥 directive 를 추가하므로서 글 CRUD, 코멘트 쓰기 CRUD 를 할 수 있도록.
     단, 글 목록은 directive 로 하지 않는다.
-
+* git pull 에서 philgo-api 에서,
+    * branch master FETCH_HEAD 에러가 나온다.
+    * 해결이 안되면, philgo-api 를 없애고 다시 load 한다.
 * 글 쓰기 외에, 글 수정/코멘트쓰기/수정 등을 모두 modal popup 으로 한다.
 
 * improve philgo api uniqid(). it is too simple and may cause problem.
