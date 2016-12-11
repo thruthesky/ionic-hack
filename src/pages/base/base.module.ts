@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 import { BaseComponentsModule } from '../base-components/base.components.module';
 
-import { FirebaseApiModule } from '../../api/firebase-api/firebase-api-module';
+// import { FirebaseApiModule } from '../../api/firebase-api/firebase-api-module';
 
 import { HomePage } from './home/home';
 import { HelpPage } from './help/help';
@@ -40,7 +40,7 @@ export let ROUTES: Routes = [
         BrowserModule,
         RouterModule,
         FormsModule,
-        FirebaseApiModule,
+//        FirebaseApiModule,
         LanguagePipeModule,
         BaseComponentsModule
     ],

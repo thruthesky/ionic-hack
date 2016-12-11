@@ -25,6 +25,10 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* 모듈화 & 컴포넌트 디렉티브 화. 그래서 philgo api 관련된 코드를 직접 작성하는 것이 아니라,
+    그냥 directive 를 추가하므로서 글 CRUD, 코멘트 쓰기 CRUD 를 할 수 있도록.
+    단, 글 목록은 directive 로 하지 않는다.
+
 * 글 쓰기 외에, 글 수정/코멘트쓰기/수정 등을 모두 modal popup 으로 한다.
 
 * improve philgo api uniqid(). it is too simple and may cause problem.
@@ -44,7 +48,22 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * 코멘트 CRUD, vote, report, 사진 업로드.
 
 * 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
-*
+– form validity.
+– Ux for navigating the site. proper buttons on proper place.
+for instance, show ‘edit’, ‘delete’ buttons only to those who has permission. and show ‘report’, ‘spam’, ‘like’, ‘dislike’ to those who are not the owner of the user.
+– Show proper infomrmation on proper place. For instance) show ‘date of post’, ‘number of comments’, ‘number of likes’, ‘number of views’ on post header part and comment header part.
+– Routing on each post and expose the URL of the post so user can share the post. which means, provides URL and let users actually visit the post with the uRL.
+– Show 5 comments at the bottom of the post by default and show ‘show more’ button. Once clicked show all the comments.
+– Show comment box at the bottom of the post. When enter key clicked, post the comemnt.
+– show all the buttons of the post and comment properly.
+– Do infinite scroll.
+– Do file upload.
+– Use bootstrap v4 and use it properly.
+– Expose all the data so users can view without login.
+– Post search, comment search, search by category, search by user, date, search by fields
+– gropu list ( for instance, qna + freetalk forum ), gorup search and all the fields combination search.
+– post create/edit: do not reload/move page to show edit form or after edit.
+just use a bootstrap modal popup.
 * @see 'TODO' list of philgo-api REDME
 * apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub
     * @see angular/sonub/README.md
@@ -83,7 +102,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * npm install
 * ionic plugin add cordova-plugin-camera
 * ionic plugin add cordova-plugin-file-transfer
-
+* ionic plugin add phonegap-plugin-push
 
 ## Submodule Installation
 

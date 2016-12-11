@@ -1,6 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewChild, ElementRef } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { Post, POSTS, POST_RESPONSE, POST_DATA } from '../../../api/philgo-api/v2/post';
+import { Post, POST_RESPONSE } from '../../../api/philgo-api/v2/post';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { Post, POSTS, POST_RESPONSE, POST_DATA } from '../../../api/philgo-api/v
     </div>
     <div class="modal-body">
       
-      <textarea name="content" [(ngModel)]="comment.content"></textarea>
+      <textarea #content name="content" [(ngModel)]="comment.content"></textarea>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary" (click)="submit()">EDIT SUBMIT</button>
@@ -23,21 +23,27 @@ import { Post, POSTS, POST_RESPONSE, POST_DATA } from '../../../api/philgo-api/v
   `
 })
 export class CommentEditComponent {
+  @ViewChild('content') content: ElementRef;
     @Input() comment;
     constructor(
       public activeModal: NgbActiveModal,
       private post: Post
-    ) {}
+    ) {
+
+    }
+    ngAfterViewInit() {
+      this.content.nativeElement.focus();
+    }
     submit() {
       console.log('comment edit modal form submitted.', this.comment);
       
-      if ( this.comment.idx ) {
+      if ( this.comment.idx ) { // comment edit.
         this.post.update( this.comment,
           r => this.onSuccessCommentEdit( r ),
           e => this.onFailureCommentEdit( e ),
           () => this.onCompleteCommentEdit());
       }
-      else {
+      else { // create new comment.
         console.log("this.comment: ", this.comment);
         this.post.createComment( this.comment,
           r => this.onSuccessCommentEdit( r ),

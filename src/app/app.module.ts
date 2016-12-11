@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // import { Routes } from '@angular/router';
 //import { FormsModule } from '@angular/forms';
 
-import { IonicApiModule } from '../api/ionic-api/ionic-api.module';
+//import { IonicApiModule } from '../api/ionic-api/ionic-api.module';
 
 import { RootComponent } from './app.component';
 
@@ -24,7 +24,7 @@ import { JobModule } from '../apps/job/app/job.module';
   ],
   imports: [
     BrowserModule,
-    IonicApiModule,
+//    IonicApiModule,
     AppRouteModule,
     NgbModule.forRoot(),
     BaseModule,
