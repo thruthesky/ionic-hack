@@ -1,10 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { PhilippineRegion } from  '../../providers/philippine-region'
 import { Post, POST_DATA } from '../../../../api/philgo-api/v2/post';
-import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
+import { Member, MEMBER_LOGIN, MEMBER_DATA } from '../../../../api/philgo-api/v2/member';
+import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS, CODE_PRIMARY_PHOTO } from '../../../../api/philgo-api/v2/data';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import * as app from '../../../../etc/app.helper';
+import * as _ from 'lodash';
+
 declare var Array;
+declare var navigator;
+declare var Camera;
+
 
 @Component({
   selector: 'app-job-edit',
@@ -13,6 +21,7 @@ declare var Array;
 export class JobEditComponent implements OnInit {
 
   form : POST_DATA = <POST_DATA> {
+    gid: '',
     subject: 'Job Post Title',
     content: 'Job Post Content',
     post_id: 'jobs',
@@ -31,6 +40,7 @@ export class JobEditComponent implements OnInit {
     int_2: '', //day
     int_3: '', //month
     int_4: '', //day
+    photos: []
   };
   loader: boolean = false;
   errorOnPost = null;
@@ -41,12 +51,24 @@ export class JobEditComponent implements OnInit {
   login: MEMBER_LOGIN = null;
   gid: string = null;
 
+  urlDefault: string = "assets/img/anonymous.gif";
+  urlPhoto: string = this.urlDefault;
+  files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
+  showProgress: boolean = false;
+  progress: number = 0;
+  widthProgress: any;
+  inputFileValue: string = null;
+  cordova: boolean = app.isCordova();
+
   constructor(
     private region: PhilippineRegion,
     private post: Post,
+    private data: Data,
     private member: Member,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
+    private ngZone: NgZone
   ) {
     region.get_province( re => {
       this.provinces = re;
@@ -54,16 +76,12 @@ export class JobEditComponent implements OnInit {
       console.log('error location.get_province::', e);
     });
 
+    this.login = member.getLoginData();
+    this.form.gid = data.uniqid(); // for file upload of new post
     let idx = this.route.snapshot.params['idx'];
     console.log('idx:: ',idx);
-    //member.getLogin( x => this.login = x );
-    //this.login = localStorage.getItem( 'philgo-login');
-
-    this.login = member.getLoginData();
     console.log('loginData:: ', this.login);
-    console.log('logingid:: ', this.gid);
-    console.log('localStorage.getItem:: ' ,localStorage.getItem( 'philgo-login'));
-    if( idx ){
+    if( idx ){ //if idx exist then edit
       this.post.get(idx, re=> {
         console.log('re data',re.post);
         if(re.post) {
@@ -164,7 +182,115 @@ export class JobEditComponent implements OnInit {
       int_2: '', //day
       int_3: '', //month
       int_4: '', //day
+      photos: []
     };
+    this.urlPhoto = this.urlDefault;
     this.showCities = false;
   }
+
+
+
+  // for camera.
+  onClickFileUploadButton() {
+    if ( ! this.cordova ) return;
+    let type = null;
+    let re = confirm("Click 'YES' to take photo. Click 'NO' to get photo from library.");
+    if ( re ) {
+      // get the picture from camera.
+      type = Camera.PictureSourceType.CAMERA;
+    }
+    else {
+      // get the picture from library.
+      type = Camera.PictureSourceType.PHOTOLIBRARY
+    }
+    console.log("in cordova, type: ", type);
+    let options = {
+      quality: 80,
+      sourceType: type
+    };
+    navigator.camera.getPicture( path => {
+      console.log('photo: ', path);
+      // transfer the photo to the server.
+      this.fileTransfer( path );
+    }, e => {
+      console.error( 'camera error: ', e );
+      alert("camera error");
+    }, options);
+  }
+
+
+  fileTransfer( fileURL: string ) {
+    this.showProgress = true;
+    let options: DATA_UPLOAD_OPTIONS = {
+      module_name: 'post',
+      gid: this.form.gid
+    };
+    this.data.transfer( options,
+      fileURL,
+      s => this.onSuccessFileUpload(s),
+      f => this.onFailureFileUpload(f),
+      c => this.onCompleteFileUpload(c),
+      p => this.onProgressFileUpload(p)
+    );
+  }
+
+
+  onChangeFile( event ) {
+    this.showProgress = true;
+    this.data.uploadPostFile( this.form.gid, event,
+      s => this.onSuccessFileUpload(s),
+      f => this.onFailureFileUpload(f),
+      c => this.onCompleteFileUpload(c),
+      p => this.onProgressFileUpload(p)
+    );
+  }
+
+  onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
+    console.log('re.data: ', re.data);
+    this.form.photos =  re.data;
+    this.urlPhoto = re.data.url_thumbnail;
+    this.showProgress = false;
+    this.renderPage();
+  }
+  onFailureFileUpload ( error ) {
+    this.showProgress = false;
+    alert( error );
+  }
+  onCompleteFileUpload( completeCode ) {
+    console.log("completeCode: ", completeCode);
+  }
+  onProgressFileUpload( percentage ) {
+    console.log("percentag uploaded: ", percentage);
+    this.progress = percentage;
+    this.renderPage();
+  }
+
+  onClickDeleteFile( file ) {
+
+    let re = confirm("Do you want to delete?");
+    if ( re == false ) return;
+
+    console.log("onClickDeleteFile: ", file);
+    let data = {
+      idx: file.idx
+    };
+    this.data.delete( data, (re) => {
+      console.log("file deleted: ", re);
+      _.remove( this.files, x => {
+        console.log('x:', x);
+        return x.idx == data.idx;
+      } );
+      console.log( this.files );
+    }, error => {
+      alert( error );
+    } );
+
+  }
+
+  renderPage() {
+    this.ngZone.run(() => {
+      console.log('ngZone.run()');
+    });
+  }
+
 }
