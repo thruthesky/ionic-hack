@@ -49,18 +49,6 @@ export class EditComponent {
         if ( this.mode == 'edit-post' || this.mode == 'edit-comment' ) { //
             console.log('without loading. mode: ', this.mode);
             this.temp = _.cloneDeep( this.current );
-            /*
-            let comment = this.current;
-            this.post.get( this.current.idx, ( re: POST_RESPONSE ) => {
-                console.log("current: ", re );
-                this.temp = re.post;
-                this.temp.content = this.post.strip_tags(this.temp.content);
-                this.postLoad.emit();
-            },
-            error => alert( 'error on loading post/comment: ' + error ),
-            () => {
-
-            });*/
         }
         else if ( this.mode == 'create-post' || this.mode == 'create-comment' ) {
 
