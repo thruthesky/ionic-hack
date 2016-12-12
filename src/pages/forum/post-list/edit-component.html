@@ -14,12 +14,12 @@
                 </div><!--/file-upload-button-->
             </td>
             <td>
-                <textarea name="content" [(ngModel)]="comment.content"></textarea>
+                <textarea name="content" [(ngModel)]="temp.content"></textarea>
                 
 
                 <!-- show uploaded files while creating a comment -->
-                <section *ngIf=" comment.photos " class="files">
-                    <div class="file" *ngFor=" let file of comment.photos " (click)="onClickDeleteFile( file )">
+                <section *ngIf=" temp.photos " class="files">
+                    <div class="file" *ngFor=" let file of temp.photos " (click)="onClickDeleteFile( file )">
                         <img [src]=" file.url_thumbnail ">
                         <span class="trash fa-stack fa-lg">
                             <i class="fa fa-circle fa-stack-2x"></i>
@@ -37,7 +37,7 @@
 
 
             </td>
-            <td width="1%" nowrap (click)="onClickCommentCreate()">
+            <td width="1%" nowrap (click)="onClickSubmit()">
                 &nbsp;<i class="fa fa-arrow-right"></i>
             </td>
         </tr>
