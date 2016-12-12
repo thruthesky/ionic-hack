@@ -29,38 +29,43 @@
                     <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
                 </div>
 
-                <comment-edit [parent]="post"></comment-edit>
+                <edit-component
+                    [current]="post"
+                    [mode]=" 'create-comment' "
+                    (error) = " onError( $event ) "
+                    (success) = " onSuccess() "
+                ></edit-component>
                 
                 <div class="comments" *ngIf=" post.comments ">
                     <article class="comment" *ngFor=" let comment of post.comments "
                         [attr.depth]="comment.depth"
-                        [class.hidden]=" comments_hidden[ comment.idx.toString() ] "
+                        [class.hidden]=" showEditComponent[ comment.idx.toString() ] "
                     >
-                        <div class="content">
+                        <div class="header">
                             No. {{ comment.idx }}
-                            
                             <button (click)="onClickCommentReply( comment )">Reply</button>
                             <button (click)="onClickCommentEdit( comment )">Edit</button>
                             <button (click)="onClickCommentDelete( comment  )">DELETE</button>
                             <button (click)="onClickCommentLike( comment  )">Like</button>
                             <button (click)="onClickCommentDislike( comment  )">Dislike</button>
                             <button (click)="onClickCommentReport( comment  )">Report</button>
-                        
-
+                        </div>
+                        <div class="content">
                             <div innerHTML="{{ comment.content }}"></div>
                             <div *ngIf=" comment.photos.length " class="comment-uploaded-files">
                                 <img *ngFor=" let photo of comment.photos " [src]=" photo.url_thumbnail ">
                             </div>
                         </div><!--/content-->
-                        <comment-edit *ngIf=" comments[ comment.idx.toString() ] "
-                            [root] = " post "
-                            [parent] = " comment "
+                        <edit-component *ngIf=" showEditComponent[ comment.idx.toString() ] "
+                            [current] = " comment "
                             [active] = " true "
-                            [mode] = " comment_edit_mode "
-                            (hideComment) = " comments_hidden = {}; comments_hidden[ comment.idx.toString() ] = true "
-                        ></comment-edit>
+                            [mode] = " mode "
+                            (error) = " onError( $event ) "
+                            (success) = " onSuccess() "
+                        ></edit-component>
                     </article>
                 </div>
+
 
             </article><!-- post -->
         </div><!--/page posts-->

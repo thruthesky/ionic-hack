@@ -13,7 +13,7 @@ import { PostListPage } from './post-list/post-list';
 import { PostEditPage } from './post-edit/post-edit';
 // import { CommentEditComponent } from './post-list/comment-edit-modal-component';
 
-import { CommentEditComponent } from './post-list/comment-edit-component';
+import { EditComponent } from './post-list/edit-component';
 
 export let ROUTES: Routes = [
   { path: 'forum', component: ForumIndexPage },
@@ -27,7 +27,7 @@ export let ROUTES: Routes = [
         ForumIndexPage,
         PostListPage,
         PostEditPage,
-        CommentEditComponent
+        EditComponent
     ],
     imports: [
         BrowserModule,
@@ -39,7 +39,7 @@ export let ROUTES: Routes = [
     ],
     providers: [],
     entryComponents: [
-         CommentEditComponent
+         EditComponent
     ]
 })
 export class ForumModule {}

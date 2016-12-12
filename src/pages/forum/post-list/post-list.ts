@@ -12,9 +12,9 @@ import * as _ from 'lodash';
     templateUrl: 'post-list.html'
 })
 export class PostListPage {
-    comments = {};
+    showEditComponent = {};
     comments_hidden = {};
-    comment_edit_mode: 'edit' | 'reply' = null;
+    mode: 'create-post' | 'edit-post' | 'create-comment' | 'edit-comment' = null;
     post_id: string = null;
     page: number = 1;
     pages: Array<POSTS> = [];
@@ -57,42 +57,8 @@ export class PostListPage {
     onClickPostEdit( post_idx ) {
         console.log("post edit: ", post_idx);
         this.router.go("/post/edit/" + post_idx );
-
     }
 
-
-    showCommentEditModal( comment: COMMENT, post: POST ) {
-        
-        let comment_clone = _.cloneDeep( comment );
-        if ( comment_clone.content ) {
-            comment_clone.content = this.post.strip_tags( comment_clone.content );
-        }
-        console.log("onClickEditComment()", comment_clone);
-        /*
-        let modalRef = this.modalService.open( CommentEditComponent );
-        let modal = modalRef.componentInstance;
-        modal.comment = comment_clone;
-        modalRef.result.then(( re: POST_RESPONSE ) => {
-            console.log(`Modal closed with:`, re);
-            if ( re.code === void 0 ) return; // cancelled by cancel button click.
-            console.log('parent post: ', post);
-            console.log('comment: ', re.post);
-
-            if ( comment.idx !== void 0 ) { // comment edit.
-                comment.content = re.post.content;
-            }
-            else { // reply under another comment.
-                let iParent = _.findIndex( post.comments, comment => {
-                    return comment.idx == re.post.idx_parent;
-                });
-                post.comments.splice( iParent + 1, 0, <COMMENT>re.post);
-            }
-        }, (reason) => {
-            console.log( `Modal dismissed.`);
-        });
-        */
-        
-    }
     onScrollDown () {
         console.log('scrolled down!!');
         this.loadPage();
@@ -108,18 +74,16 @@ export class PostListPage {
      * @note it only opens a form at a time.
      */
     onClickCommentEdit( comment ) {
-        this.comment_edit_mode = 'edit';
-        this.comments = {};
-        this.comments[ comment.idx.toString() ] = true;
+        this.mode = 'edit-comment';
+        this.showEditComponent = {};
+        this.showEditComponent[ comment.idx.toString() ] = true;
     }
 
-    
     onClickCommentReply( comment ) {
-        this.comment_edit_mode = 'reply';
-        this.comments = {};
-        this.comments[ comment.idx.toString() ] = true;
+        this.mode = 'edit-comment';
+        this.showEditComponent = {};
+        this.showEditComponent[ comment.idx.toString() ] = true;
     }
-
 
     onClickCommentDelete( comment ) {
         
@@ -132,5 +96,16 @@ export class PostListPage {
     }
     onClickCommentReport( comment ) {
         
+    }
+
+    onEditPostLoad() {
+
+    }
+
+    onError( event ) {
+        alert("error: " + event );
+    }
+    onSuccess() {
+        this.showEditComponent = {};
     }
 }
