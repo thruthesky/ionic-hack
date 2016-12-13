@@ -21,7 +21,8 @@ export class JobIndexComponent implements OnInit {
   showCities: boolean = false;
   pages: Array<POSTS> = [];
   condition: string = '';
-
+  urlDefault: string = "assets/img/anonymous.gif";
+  urlPhoto: string = this.urlDefault;
   query = {
     sub_category: 'all',
     name: '',
@@ -75,12 +76,13 @@ export class JobIndexComponent implements OnInit {
 
   doSearch() {
     let data = <SEARCH_QUERY_DATA> {};
-    data.fields = "idx, sub_category, post_id, text_1,text_2,text_3, int_1, char_1, varchar_2,varchar_3,varchar_6";
+    data.fields = "idx,gid, sub_category, post_id, text_1,text_2,text_3, int_1, char_1, varchar_2,varchar_3,varchar_6";
     data.from = "sf_post_data";
-    data.where = "post_id = 'jobs'" + this.condition;
+    data.where = "post_id = 'jobs' AND idx_parent=0" + this.condition;
     data.limit = "5";
     data.orderby = "idx desc";
     data.page = this.page++;
+    data.post = 1;
     this.post.debug = true;
     this.post.search( data, re => {
       console.log("search result: ", re);
@@ -98,8 +100,9 @@ export class JobIndexComponent implements OnInit {
   displayPosts( page ) {
     console.log( 'success', page );
     if(page.search.length){
-      if ( page.page_no == 1 ) this.pages[0] = page;
-      else this.pages.push( page );
+      this.pages.push(page);
+      /*if ( page.page_no == 1 ) this.pages[0] = page;
+      else this.pages.push( page );*/
     }
     else {
       console.log('No More Post');

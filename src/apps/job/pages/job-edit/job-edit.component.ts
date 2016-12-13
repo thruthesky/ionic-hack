@@ -86,6 +86,11 @@ export class JobEditComponent implements OnInit {
         console.log('re data',re.post);
         if(re.post) {
           this.form = re.post;
+          re.post.photos.map( e => this.files.push(e) );
+
+          if((re.post.photos) && (re.post.photos[0].url_thumbnail != void 0)) {
+            this.urlPhoto = re.post.photos[0].url_thumbnail;
+          }
         }
       }, e => {
         console.log('error on getting idx', e);
@@ -247,6 +252,7 @@ export class JobEditComponent implements OnInit {
 
   onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
     console.log('re.data: ', re.data);
+    this.deleteFile( this.form.photos[0] );
     this.form.photos =  re.data;
     this.urlPhoto = re.data.url_thumbnail;
     this.showProgress = false;
@@ -270,6 +276,11 @@ export class JobEditComponent implements OnInit {
     let re = confirm("Do you want to delete?");
     if ( re == false ) return;
 
+    this.deleteFile( file );
+
+  }
+
+  deleteFile( file ){
     console.log("onClickDeleteFile: ", file);
     let data = {
       idx: file.idx
@@ -284,7 +295,6 @@ export class JobEditComponent implements OnInit {
     }, error => {
       alert( error );
     } );
-
   }
 
   renderPage() {

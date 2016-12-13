@@ -12,16 +12,20 @@
     <div *ngFor=" let page of pages " class="page posts">
       <div class="post" *ngFor=" let post of page.posts; let i = index; ">
         <div class="card card-block">
-          <img class="card-img-top" src='' alt="Card image {{i+1}}">
-          <div>
-            <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
-            <p class="card-text">{{post.varchar_6}}</p>
-            <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
+          <div class="profile col-sm-3 col-md-3">
+            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{i+1}}">
           </div>
-          <div class="btn-group" role="group">
-            <button type="button" class="btn btn-secondary">More</button>
-            <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
-            <button type="button" class="btn btn-secondary">Delete</button>
+          <div class="col-sm-9 col-md-9">
+            <div>
+              <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
+              <p class="card-text">{{post.varchar_6}}</p>
+              <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
+            </div>
+            <div class="btn-group" role="group">
+              <button type="button" class="btn btn-secondary">More</button>
+              <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
+              <button type="button" class="btn btn-secondary">Delete</button>
+            </div>
           </div>
         </div>
       </div>
