@@ -1,9 +1,12 @@
-import { Component, Input, NgZone } from '@angular/core';
+import { Component, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Post, POST_RESPONSE, POST_DATA, POST, COMMENT } from '../../../api/philgo-api/v2/post';
-import { Data, FILE_UPLOAD_RESPONSE } from '../../../api/philgo-api/v2/data';
+import { Data, FILE_UPLOAD_RESPONSE, DATA_UPLOAD_OPTIONS } from '../../../api/philgo-api/v2/data';
 import * as _ from 'lodash';
+import * as app from '../../../etc/app.helper';
 
+declare let navigator: any;
+declare var Camera;
 @Component({
     selector: 'edit-component',
     templateUrl: 'edit-component.html'
@@ -26,17 +29,18 @@ export class EditComponent {
     @Input() current: POST;
     selectForm: boolean = false; // adding '.show' CSS Class to FORM
     @Input() mode: 'create-post' | 'edit-post' | 'create-comment' | 'edit-comment';
-    // @Output() postLoad = new EventEmitter();
-
-    // @Output() error = new EventEmitter();
-    // @Output() success = new EventEmitter();
-    // @Output() cancel = new EventEmitter();
+    @Output() postLoad = new EventEmitter();
+    @Output() error = new EventEmitter();
+    @Output() success = new EventEmitter();
+    @Output() cancel = new EventEmitter();
     
     showProgress: boolean = false;
     progress: number = 0;
     widthProgress: any;
     //files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
     temp = <POST_DATA> {};
+    
+    cordova: boolean = app.isCordova();
     constructor(
         private ngZone: NgZone,
         private post: Post,
@@ -98,7 +102,7 @@ export class EditComponent {
     }
 
     onClickCancel() {
-        // this.cancel.emit();
+        this.cancel.emit();
     }
 
     createPost() {
@@ -194,6 +198,64 @@ export class EditComponent {
         );
     }
     
+    /**
+     * This is for camera.
+     */
+    onClickFileUploadButton() {
+        //
+        console.log("onClickCommentFileUploadButton()");
+
+        navigator.notification.confirm(
+            'Please select how you want to take photo.', // message
+            i => this.onCameraConfirm( i ),
+            'Take Photo',           // title
+            ['Camera','Cancel', 'Gallery']     // buttonLabels
+        );
+
+
+    }
+    onCameraConfirm( index ) {
+        console.log("confirm: index: ", index);
+        if ( index == 2 ) return;
+        let type = null;
+        if ( index == 1 ) { // get the picture from camera.
+            type = Camera.PictureSourceType.CAMERA;
+        }
+        else { // get the picture from library.
+            type = Camera.PictureSourceType.PHOTOLIBRARY
+        }
+        console.log("in cordova, type: ", type);
+        let options = {
+            quality: 80,
+            sourceType: type
+        };
+        navigator.camera.getPicture( path => {
+            console.log('photo: ', path);
+            this.fileTransfer( path ); // transfer the photo to the server.
+        }, e => {
+            console.error( 'camera error: ', e );
+            alert("camera error");
+        }, options);
+    }
+    
+    fileTransfer( fileURL: string ) {
+        this.showProgress = true;
+        let options: DATA_UPLOAD_OPTIONS = {
+            module_name: 'post',
+            gid: this.temp.gid
+        };
+        
+        this.data.transfer( options,
+            fileURL,
+            x => this.onSuccessFileUpload( x ),
+            e => this.onFailureFileUpload( e ),
+            c => console.log("completeCode: ", c),
+            p => this.onProgressFileUpload( p )
+        );
+    }
+
+
+    
     onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
         console.log('re.data: ', re.data);
         if ( this.temp.photos === void 0 ) this.temp['photos'] = [];
@@ -216,15 +278,7 @@ export class EditComponent {
         this.renderPage();
         this.renderPage();
     }
-    /**
-     * This is for camera.
-     */
-    onClickFileUploadButton() {
-        //
-        console.log("onClickCommentFileUploadButton()");
-    }
     
-
     
     onClickDeleteFile( file ) {
 
