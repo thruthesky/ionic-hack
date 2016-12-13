@@ -80,13 +80,7 @@
     <i class="fa fa-spinner fa-pulse fa-fw"></i>
     <span class="sr-only">Loading...</span>
   </div>
-  <div *ngIf=" pages.length " class="pages"
-       infinite-scroll
-       [infiniteScrollDistance]="0.5"
-       [infiniteScrollUpDistance]="1.1"
-       [infiniteScrollThrottle]="500"
-       (scrolled)="onScrollDown()"
-  >
+  <div *ngIf=" pages.length " class="pages">
     <div *ngFor=" let page of pages " class="page posts">
       <div class="post" *ngFor=" let post of page.search; let i = index; ">
         <div class="card card-block">

@@ -93,6 +93,7 @@
             </article><!-- post -->
         </div><!--/page posts-->
     </div><!--pages-->
+    <div *ngIf=" inPageLoading " class="in-page-loading"><i class="fa fa-spinner fa-spin"></i> Loading ...</div>
     <div *ngIf=" noMorePosts " class="no-more-posts">No more posts</div>
 </section>
 
