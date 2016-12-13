@@ -9,8 +9,6 @@ import * as app from '../../../../etc/app.helper';
 
 declare var navigator;
 declare var Camera;
-declare var FileUploadOptions;
-declare var FileTransfer;
 
 @Component({
     selector: 'register-page',
@@ -211,57 +209,6 @@ export class RegisterPage {
         );
     }
 
-    fileTransfer_old( fileURL: string ) {
-        var options = new FileUploadOptions();
-        options.fileKey="file";
-        options.fileName=fileURL.substr(fileURL.lastIndexOf('/')+1);
-        options.mimeType="image/jpeg";
-        var ft = new FileTransfer();
-        let percentage = 0;
-        ft.onprogress = progressEvent => {
-            // @todo This is not working....
-            if (progressEvent.lengthComputable) {
-                try {
-                    percentage = Math.round( progressEvent.loaded / progressEvent.total );
-                }
-                catch ( e ) {
-                    console.error( 'percentage computation error' );
-                    percentage = 10;
-                }
-            }
-            else percentage = 10; // progressive does not work. it is not computable.
-            this.renderPage();
-        };
-
-        let uri: string;
-        if ( this.login ) uri = this.data.getUploadUrlPrimaryPhoto();
-        else uri = this.data.getUploadUrlAnonymousPrimaryPhoto( this.gid );
-        
-        console.log("file transfer to : ", uri);
-        uri = encodeURI( uri );
-        
-        if ( this.login == null ) this.deletePrimaryPhoto( true ); // delete current photo if ever.
-        ft.upload(fileURL, uri, r => {
-            console.log("Code = " + r.responseCode);
-            console.log("Response = " + r.response);
-            console.log("Sent = " + r.bytesSent);
-            let re;
-            try {
-                re = JSON.parse( r.response );
-            }
-            catch ( e ) {
-                this.failurePrimaryPhotoUpload( "JSON parse error on server response while file transfer..." );
-                return;
-            }
-            this.successPrimaryPhotoUpload( re );
-
-        }, e => {
-            // alert("An error has occurred: Code = " + e.code);
-            console.log("upload error source " + e.source);
-            console.log("upload error target " + e.target);
-            this.failurePrimaryPhotoUpload( e.code );
-        }, options);
-    }
 
 
     successPrimaryPhotoUpload( re: FILE_UPLOAD_RESPONSE ) {
