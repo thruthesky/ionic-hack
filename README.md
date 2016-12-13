@@ -27,6 +27,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* 게시글을 가져 올 때, 필요한 필드만 가져올 수 있도록 한다. 전체 필드를 가져오니 양이 너무 많고, 홈페이지/앱이 느린 것 같다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
 * 글 삭제.
 * 글 정보 표시. 글 쓴이, 날짜, 조회수, 추천, 반대 등.
@@ -115,12 +116,12 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 # Installation
 
 * npm install
+
 * ionic plugin add cordova-plugin-camera
 * ionic plugin add cordova-plugin-file-transfer
 * ionic plugin add cordova-plugin-dialogs
 
-* ionic plugin add phonegap-plugin-push
-
+* ionic plugin add phonegap-plugin-push // ???
 
 ## Submodule Installation
 
@@ -130,17 +131,6 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule foreach git branch
 * git submodule foreach git checkout master
 
-
-## Packages installed by 'npm install'
-
-You do not need to install these module one by one. these are installed by 'npm install'.
-
-* npm i ng2-file-upload --save
-* npm i lodash --save
-* npm install angular2-infinite-scroll --save
-
-
-# HOW TO Hack
 
 ## Update @ionic/app-scripts copy.config.js
 
@@ -166,6 +156,18 @@ module.exports = {
 
 ````
 
+
+
+
+
+
+
+## Packages installed by 'npm install'
+
+You do not need to install these module one by one. these are installed by 'npm install'.
+
+* npm i ng2-file-upload --save
+* npm i lodash --save
 
 
 

@@ -172,7 +172,7 @@ export class EditComponent {
 
         this.reset();
         this.selectForm = false; // remove '.show' css class.  it cannot be inside this.clear()
-        // this.success.emit();
+        this.success.emit();
     }
     errorCallback( error ) {
         alert( error );
@@ -202,6 +202,7 @@ export class EditComponent {
      * This is for camera.
      */
     onClickFileUploadButton() {
+        if ( ! this.cordova ) return;
         //
         console.log("onClickCommentFileUploadButton()");
 
