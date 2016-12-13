@@ -1,13 +1,37 @@
 <base-header [title]="title"></base-header>
 <section class="content">
-
-  <nav >
-    <a routerLink="/job" routerLinkActive="active">JOB</a>
-    <a routerLink="/job/post" routerLinkActive="active">POST</a>
-    <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+  <nav>
+    <a class="btn btn-primary" role="button" routerLink="/job" routerLinkActive="active">JOB</a>
+    <a class="btn btn-primary" role="button" routerLink="/job/post" routerLinkActive="active">POST</a>
+    <a class="btn btn-primary" role="button" routerLink="/job/list" routerLinkActive="active">LIST</a>
   </nav>
+  <br/>
   <h2 align="center">JOB Posting/Editing PAGE</h2>
   <form>
+
+
+    <div class="form-group row">
+      <div class="primary-photo" (click)="onClickFileUploadButton()">
+                    <span class="camera fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-camera fa-stack-1x fa-inverse"></i>
+                    </span>
+        <img [src]="urlPhoto">
+        <input *ngIf=" ! cordova " type="file" name="inputFile" [(ngModel)]="inputFileValue" #file (change)="onChangeFile($event, file.value)">
+      </div><!--/primary-photo-->
+
+      <div *ngIf=" urlPhoto != urlDefault ">
+        <button (click)="onDeletePhoto()">DELETE PHOTO</button>
+      </div>
+
+      <!-- This supports IE 9. IE 9 does not support HTML 5 -->
+      <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+        <div class="progress">
+          <span class="progress-bar" [style.width]="widthProgress"></span>
+        </div>
+      </progress>
+    </div>
+
     <div class="form-group row">
       <label for="first_name" class="col-xs-3 col-form-label">First Name</label>
       <div class="col-xs-9">
@@ -32,7 +56,7 @@
     <div class="form-group row">
       <label for="mobile" class="col-xs-3 col-form-label">Mobile #</label>
       <div class="col-xs-9">
-        <input class="form-control" type="text" id="mobile" name="mobile"  [(ngModel)]="form.varchar_4" placeholder="Input Mobile">
+        <input class="form-control" type="number" id="mobile" name="mobile"  [(ngModel)]="form.varchar_4" placeholder="Input Mobile">
       </div>
     </div>
 

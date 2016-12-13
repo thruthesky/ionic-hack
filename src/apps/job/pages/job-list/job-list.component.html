@@ -1,23 +1,34 @@
 <base-header [title]="title"></base-header>
 
 <section class="content">
-  <a routerLink="/job" routerLinkActive="active">JOB</a>
-  <a routerLink="/job/post" routerLinkActive="active">POST</a>
-  <a routerLink="/job/list" routerLinkActive="active">LIST</a>
+  <nav>
+    <a class="btn btn-primary" role="button" routerLink="/job" routerLinkActive="active">JOB</a>
+    <a class="btn btn-primary" role="button" routerLink="/job/post" routerLinkActive="active">POST</a>
+    <a class="btn btn-primary" role="button" routerLink="/job/list" routerLinkActive="active">LIST</a>
+  </nav>
+  <br/>
   <h2 align="center">JOB Listing Page</h2>
-  <div class="row">
-    <div class="col-sm-12" *ngFor=" let post of posts; let i = index; ">
-      <div class="card card-block">
-        <img class="card-img-top" src='' alt="Card image {{i+1}}">
-        <div>
-          <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
-          <p class="card-text">{{post.varchar_6}}</p>
-          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        </div>
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-secondary">More</button>
-          <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
-          <button type="button" class="btn btn-secondary">Delete</button>
+  <div *ngIf=" pages.length " class="pages"
+       infinite-scroll
+       [infiniteScrollDistance]="0.5"
+       [infiniteScrollUpDistance]="1.1"
+       [infiniteScrollThrottle]="500"
+       (scrolled)="onScrollDown()"
+  >
+    <div *ngFor=" let page of pages " class="page posts">
+      <div class="post" *ngFor=" let post of page.posts; let i = index; ">
+        <div class="card card-block">
+          <img class="card-img-top" src='' alt="Card image {{i+1}}">
+          <div>
+            <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
+            <p class="card-text">{{post.varchar_6}}</p>
+            <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-secondary">More</button>
+            <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
+            <button type="button" class="btn btn-secondary">Delete</button>
+          </div>
         </div>
       </div>
     </div>
