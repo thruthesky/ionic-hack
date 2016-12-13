@@ -28,47 +28,55 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 # TODO
 
 * sanitizing erorr 를 reproduce 하지 못하겠다.
+* 글 삭제.
+* 글 정보 표시. 글 쓴이, 날짜, 조회수, 추천, 반대 등.
+* 글 추천, 리포트,
+* 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
+    웹에서는 progress 가 잘되는데, 모바일에서는 잘 안되는 것 같다.
+* Routing on each post and expose the URL of the post so user can share the post. which means, provides URL and let users actually visit the post with the uRL.
+* 헬로필리핀은 필고 방식으로 글 목록.
+    제목만 보여주고, 클릭하면 전체를 보여 줄 것.
+* Post search, comment search, search by category, search by user, date, search by fields
 
-* 모듈화 & 컴포넌트 디렉티브 화. 그래서 philgo api 관련된 코드를 직접 작성하는 것이 아니라,
+* 글 게시판 아이디를 통한 몇몇 게시판만 출력.
+    * 메인 화면, 커뮤니티, 질문, 여행, 광고 등 몇 개의 메뉴만으로 게시판 전체를 사용 할 수 있도록 함.
+
+
+* 필리핀 도시 선택을 캡슐화 할 것.
+
+
+
+* @recheck - 개념은 좋은 뭘 어떻게 하라는 건지 명확하지 않다. 즉, 짧고 명료하게 재 작성해야 한다.
+    모듈화 & 컴포넌트 디렉티브 화. 그래서 philgo api 관련된 코드를 직접 작성하는 것이 아니라,
     그냥 directive 를 추가하므로서 글 CRUD, 코멘트 쓰기 CRUD 를 할 수 있도록.
     단, 글 목록은 directive 로 하지 않는다.
 
 * @deprecated. 글 쓰기 외에, 글 수정/코멘트쓰기/수정 등을 모두 modal popup 으로 한다. modal popup 이 ui 상으로 좋지 못하다.
 
 
-* improve philgo api uniqid(). it is too simple and may cause problem.
+* @done improve philgo api uniqid(). it is too simple and may cause problem.
 
-* 게시판 첨부 파일 업로드. post-edit.ts onChangeFile() 에 있는 데로
+* @done 게시판 첨부 파일 업로드. post-edit.ts onChangeFile() 에 있는 데로
     data.uploadPostFile( gid, event ) 형식을 값을 받는다.
     이것은 회원 정보에서 사진 업로드 마찬가지로 한다.
 
-* cordova-plugin-transfer 를 philgo api data.ts 에 포함해서
+* @done cordova-plugin-transfer 를 philgo api data.ts 에 포함해서
     보다 쉽게 사용 할 수 있도록 한다.
     
-* 게시판 글을 보여 줄 때, loader 를 보여 준다. 특히, 캐시가 없을 때, 시간이 걸린다.
-* 글 수정을 bootstrap modal 로 한다.
+* @done 게시판 글을 보여 줄 때, loader 를 보여 준다. 특히, 캐시가 없을 때, 시간이 걸린다.
+* @rejected 글 수정을 bootstrap modal 로 한다.
     * 글 수정 후, 원래 글 업데이트.
-* 글 삭제.
-* 글 추천, 리포트,
-* 코멘트 CRUD, vote, report, 사진 업로드.
+* @duplication 코멘트 CRUD, vote, report, 사진 업로드.
 
-* 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
-– form validity.
-– Ux for navigating the site. proper buttons on proper place.
-for instance, show ‘edit’, ‘delete’ buttons only to those who has permission. and show ‘report’, ‘spam’, ‘like’, ‘dislike’ to those who are not the owner of the user.
-– Show proper infomrmation on proper place. For instance) show ‘date of post’, ‘number of comments’, ‘number of likes’, ‘number of views’ on post header part and comment header part.
-– Routing on each post and expose the URL of the post so user can share the post. which means, provides URL and let users actually visit the post with the uRL.
-– Show 5 comments at the bottom of the post by default and show ‘show more’ button. Once clicked show all the comments.
-– Show comment box at the bottom of the post. When enter key clicked, post the comemnt.
-– show all the buttons of the post and comment properly.
-– Do infinite scroll.
-– Do file upload.
-– Use bootstrap v4 and use it properly.
-– Expose all the data so users can view without login.
-– Post search, comment search, search by category, search by user, date, search by fields
-– gropu list ( for instance, qna + freetalk forum ), gorup search and all the fields combination search.
-– post create/edit: do not reload/move page to show edit form or after edit.
-just use a bootstrap modal popup.
+– @ok form validity.
+– @done Show comment box at the bottom of the post. When enter key clicked, post the comemnt.
+– @done show all the buttons of the post and comment properly.
+– @done Do infinite scroll.
+– @done Do file upload.
+– @done Use bootstrap v4 and use it properly.
+– @done Expose all the data so users can view without login.
+– @done post create/edit: do not reload/move page to show edit form or after edit.
+- @reject just use a bootstrap modal popup.
 * @see 'TODO' list of philgo-api REDME
 * apply c:\work\angular\sonub as much as it can be on https://github.com/withcenter/sonub
     * @see angular/sonub/README.md
