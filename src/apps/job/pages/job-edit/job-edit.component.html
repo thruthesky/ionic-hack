@@ -68,7 +68,26 @@
     </div>
 
     <div class="form-group row">
-      <label for="birthday" class="col-xs-3 col-form-label">Date</label>
+      <label class="col-xs-3 col-form-label">Province</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="province" name="province" [(ngModel)]="form.varchar_2" (change)="onClickProvince()">
+          <option value="all">All</option>
+          <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="showCities">
+      <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
+      <div class="col-xs-9">
+        <select class="form-control" id="city" name="city" [(ngModel)]="form.varchar_3">
+          <option *ngFor="let key of cityKeys" [value]="key">{{cities[key]}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="birthday" class="col-xs-3 col-form-label">Birthday</label>
       <div class="col-xs-9">
         <input class="form-control" type="date" name="birthday" id="birthday" [(ngModel)]="form.varchar_5" >
       </div>
@@ -92,25 +111,6 @@
         <select class="form-control" id="workExperience" name="workExperience" [(ngModel)]="form.int_1">
           <option value="0">No work Experience</option>
           <option *ngFor="let number of numbers" [value]="number">{{number}} years</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label class="col-xs-3 col-form-label">Province</label>
-      <div class="col-xs-9">
-        <select class="form-control" id="province" name="province" [(ngModel)]="form.varchar_2" (change)="onClickProvince()">
-          <option value="all">All</option>
-          <option *ngFor="let province of provinces" [value]="province">{{province}}</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="form-group row" *ngIf="showCities">
-      <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
-      <div class="col-xs-9">
-        <select class="form-control" id="city" name="city" [(ngModel)]="form.varchar_3">
-          <option *ngFor="let key of cityKeys" [value]="key">{{cities[key]}}</option>
         </select>
       </div>
     </div>
