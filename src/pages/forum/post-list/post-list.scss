@@ -22,10 +22,19 @@ post-list-page {
                 &[depth='10'] { margin-left: 5em; }
                 &[depth='11'] { margin-left: 5.2em; }
             }
-            .comment.hidden {
-                .content {
-                    display: none;
-                }
+        }
+
+
+        
+        &.hidden {
+            & > .content {
+                display: none;
+            }
+            & > .uploaded-files {
+                display: none;
+            }
+            & .buttons {
+                display: none;
             }
         }
     }

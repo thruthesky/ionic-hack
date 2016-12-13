@@ -2,67 +2,90 @@
 <base-header [title]="title"></base-header>
 
 <section class="content">
-    post list html
-    <button (click)="onClickPostCreate()">Post Write</button>
+    
+    <edit-component *ngIf=" showPostCreateForm "
+        [post_id] = " post_id "
+        [mode] = " 'create-post' "
+        (error) = " onError( $event ) "
+        (cancel) = " onCancel() "
+        (success) = " onSuccess() "
+    ></edit-component>
 
-    <div *ngIf=" pages.length " class="pages"
-        infinite-scroll
-            [infiniteScrollDistance]="0.5"
-            [infiniteScrollUpDistance]="1.1"
-            [infiniteScrollThrottle]="500"
-            (scrolled)="onScrollDown()"
-            (scrolledUp)="onScrollUp()"
-    >
+    <div *ngIf=" pages.length " class="pages">
         <div *ngFor=" let page of pages " class="page posts">
-            <article class="post" *ngFor=" let post of page.posts ">
-                <div class="post-header">
+        {{ 'forum.' + title | ln }}
+        <button (click)="onClickPostCreate()">Post Write</button>
+            <article
+                class="post"
+                *ngFor=" let post of page.posts; trackBy post.idx "
+                [class.hidden]=" hideContent[ post.idx.toString() ] "
+            >
+                <div class="header">
                     <h2 class="post-header-title">{{ post.subject }}</h2>
                     idx: {{ post.idx }}
-                    <button (click)="onClickPostEdit( post.idx )">Edit</button>
-                    <button (click)="onClickPostDelete( post.idx )">Delete</button>
+                    <button (click)="onClickPostEdit( post )">Edit</button>
+                    <button (click)="onClickPostDelete( post )">Delete</button>
                 </div>
 
-                <div class="post-content" innerHTML="{{ post.content }}">
+                <div class="content" innerHTML="{{ post.content }}">
                 </div>
                 
-                <div *ngIf=" post.photos.length " class="post-uploaded-files">
+                <div *ngIf=" post.photos.length " class="uploaded-files">
                     <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
                 </div>
 
-                <edit-component
-                    [current]="post"
+                <!-- edit post -->
+                <edit-component *ngIf=" showEditComponent[ post.idx.toString() ] "
+                    [current] = " post "
+                    [mode] = " mode "
+                    (error) = " onError( $event ) "
+                    (cancel) = " onCancel() "
+                    (success) = " onSuccess() "
+                ></edit-component>
+                
+                <!-- reply a comment -->
+                <edit-component *ngIf=" ! hideContent[ post.idx.toString() ] "
+                    [root] = " post "
+                    [current]=" post "
                     [mode]=" 'create-comment' "
                     (error) = " onError( $event ) "
+                    (cancel) = " onCancel() "
                     (success) = " onSuccess() "
                 ></edit-component>
                 
                 <div class="comments" *ngIf=" post.comments ">
-                    <article class="comment" *ngFor=" let comment of post.comments "
+                    <article class="comment" *ngFor=" let comment of post.comments; trackBy comment?.idx "
                         [attr.depth]="comment.depth"
-                        [class.hidden]=" showEditComponent[ comment.idx.toString() ] "
+                        [class.hidden]=" hideContent[ comment.idx.toString() ] "
                     >
                         <div class="header">
                             No. {{ comment.idx }}
-                            <button (click)="onClickCommentReply( comment )">Reply</button>
-                            <button (click)="onClickCommentEdit( comment )">Edit</button>
-                            <button (click)="onClickCommentDelete( comment  )">DELETE</button>
-                            <button (click)="onClickCommentLike( comment  )">Like</button>
-                            <button (click)="onClickCommentDislike( comment  )">Dislike</button>
-                            <button (click)="onClickCommentReport( comment  )">Report</button>
+                            <span class="buttons">
+                                <button (click)="onClickCommentReply( comment )">Reply</button>
+                                <button (click)="onClickCommentEdit( comment )">Edit</button>
+                                <button (click)="onClickCommentDelete( comment  )">DELETE</button>
+                                <button (click)="onClickCommentLike( comment  )">Like</button>
+                                <button (click)="onClickCommentDislike( comment  )">Dislike</button>
+                                <button (click)="onClickCommentReport( comment  )">Report</button>
+                            </span>
                         </div>
                         <div class="content">
                             <div innerHTML="{{ comment.content }}"></div>
-                            <div *ngIf=" comment.photos.length " class="comment-uploaded-files">
+                            <div *ngIf=" comment.photos.length " class="uploaded-files">
                                 <img *ngFor=" let photo of comment.photos " [src]=" photo.url_thumbnail ">
                             </div>
                         </div><!--/content-->
+                        
+                        <!-- reply or edit a comment -->
                         <edit-component *ngIf=" showEditComponent[ comment.idx.toString() ] "
+                            [root] = " post "
                             [current] = " comment "
-                            [active] = " true "
                             [mode] = " mode "
                             (error) = " onError( $event ) "
+                            (cancel) = " onCancel() "
                             (success) = " onSuccess() "
                         ></edit-component>
+
                     </article>
                 </div>
 
@@ -70,6 +93,7 @@
             </article><!-- post -->
         </div><!--/page posts-->
     </div><!--pages-->
+    <div *ngIf=" noMorePosts " class="no-more-posts">No more posts</div>
 </section>
 
 

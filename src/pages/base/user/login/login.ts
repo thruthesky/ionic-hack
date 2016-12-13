@@ -56,8 +56,8 @@ export class LoginPage {
 
     }
     loginFirebase( login ) {
-        let email = this.member.getApiEmail(login);
-        let password = this.member.getApiPassword(login);
+        // let email = this.member.getApiEmail(login);
+        // let password = this.member.getApiPassword(login);
 
         /*
         this.auth.register( email, password, firebaseUser => { // register

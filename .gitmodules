@@ -1,6 +1,3 @@
-[submodule "src/api/firebase-api"]
-	path = src/api/firebase-api
-	url = http://github.com/thruthesky/firebase-api
 [submodule "src/api/philgo-api"]
 	path = src/api/philgo-api
 	url = https://github.com/thruthesky/philgo-api

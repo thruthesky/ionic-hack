@@ -7,7 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { RootComponent } from './app.component';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRouteModule } from './app.route.module';
 
@@ -26,7 +26,7 @@ import { JobModule } from '../apps/job/app/job.module';
     BrowserModule,
 //    IonicApiModule,
     AppRouteModule,
-    NgbModule.forRoot(),
+//    NgbModule.forRoot(),
     BaseModule,
     PhilgoApiModule,
     ForumModule,

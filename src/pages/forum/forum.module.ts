@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 
@@ -22,6 +21,7 @@ export let ROUTES: Routes = [
   { path: 'post/edit/:post_idx', component: PostEditPage }
 ];
 
+
 @NgModule({
     declarations: [
         ForumIndexPage,
@@ -34,12 +34,8 @@ export let ROUTES: Routes = [
         RouterModule,
         FormsModule,
         BaseComponentsModule,
-        LanguagePipeModule,
-        InfiniteScrollModule
+        LanguagePipeModule
     ],
-    providers: [],
-    entryComponents: [
-         EditComponent
-    ]
+    providers: []
 })
 export class ForumModule {}

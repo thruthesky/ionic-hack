@@ -1,7 +1,7 @@
-import { Component, Input, NgZone, Output, EventEmitter } from '@angular/core';
+import { Component, Input, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Post, POSTS, POST_RESPONSE, POST_DATA, POST, COMMENT } from '../../../api/philgo-api/v2/post';
-import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
+import { Post, POST_RESPONSE, POST_DATA, POST, COMMENT } from '../../../api/philgo-api/v2/post';
+import { Data, FILE_UPLOAD_RESPONSE } from '../../../api/philgo-api/v2/data';
 import * as _ from 'lodash';
 
 @Component({
@@ -9,7 +9,11 @@ import * as _ from 'lodash';
     templateUrl: 'edit-component.html'
 })
 export class EditComponent {
-    @Input() root: POST;
+    /**
+     * 'root' is the root post. It is only needed on creating/editing comment.
+     * It is not needed on POST create/edit.
+     */
+    @Input() root: POST = null;
     /**
      *  @Attention - variable 'current' is the current post or current comment.
      * 
@@ -18,12 +22,16 @@ export class EditComponent {
      *  If you want to reply of a comment, 'parent' is the comment you want to leave a comment on.
      *  If you want to edit a comment, 'current' is the comment.
      */
+    @Input() post_id: string = null;
     @Input() current: POST;
-    @Input() active: boolean = false;
+    selectForm: boolean = false; // adding '.show' CSS Class to FORM
     @Input() mode: 'create-post' | 'edit-post' | 'create-comment' | 'edit-comment';
     // @Output() postLoad = new EventEmitter();
-    @Output() error = new EventEmitter();
-    @Output() success = new EventEmitter();
+
+    // @Output() error = new EventEmitter();
+    // @Output() success = new EventEmitter();
+    // @Output() cancel = new EventEmitter();
+    
     showProgress: boolean = false;
     progress: number = 0;
     widthProgress: any;
@@ -46,27 +54,29 @@ export class EditComponent {
     
     ngOnInit() {
         this.reset();
+        console.log("EditComponent::ngOnInit() current: ", this.current);
+        console.log("mode: ", this.mode);
         if ( this.mode == 'edit-post' || this.mode == 'edit-comment' ) { //
             console.log('without loading. mode: ', this.mode);
             this.temp = _.cloneDeep( this.current );
+            this.temp.content = this.post.strip_tags( this.temp.content );
         }
         else if ( this.mode == 'create-post' || this.mode == 'create-comment' ) {
-
+            //
         }
     }
     
     reset() {
         this.temp = <POST_DATA> {};
         this.temp.gid = this.post.uniqid();
-
     }
 
 
     /**
      * When a user click on the form to input content of comemnt for creating a comment.
      */
-    onClickCommentForm( post ) {
-        this.active = true; // add CSS class
+    onClickForm( post ) {
+        this.selectForm = true; // add CSS class
         
     }
 
@@ -80,8 +90,33 @@ export class EditComponent {
 
         if ( this.mode == 'create-comment' ) this.createComment();
         else if ( this.mode == 'edit-comment' ) this.editComment();
-        else this.error.emit("wrong mode");
+        else if ( this.mode == 'create-post' ) this.createPost();
+        else if ( this.mode == 'edit-post' ) this.editPost();
+        else {
+            // this.error.emit("wrong mode");
+        }
+    }
 
+    onClickCancel() {
+        // this.cancel.emit();
+    }
+
+    createPost() {
+        this.temp.post_id = this.post_id;
+        this.post.create( this.temp,
+            s => this.successCallback( s ),
+            e => this.errorCallback( e ),
+            () => this.completeCallback()
+        );
+    }
+
+    editPost() {
+        this.temp.subject = ''; // to update subject from content.
+        this.post.update( this.temp,
+            s => this.successCallback( s ),
+            e => this.errorCallback( e ),
+            () => this.completeCallback()
+        );
     }
 
     createComment() {
@@ -94,7 +129,7 @@ export class EditComponent {
     }
 
     editComment() {
-        console.log("this.comment: ", this.temp);
+        console.log("this.temp: ", this.temp);
         this.post.update( this.temp,
             s => this.successCallback( s ),
             e => this.errorCallback( e ),
@@ -102,18 +137,38 @@ export class EditComponent {
         );
     }
 
-
     successCallback( re: POST_RESPONSE ) {
         console.log( 'PhilGo API Query success: ', re);
         if ( this.mode == 'create-comment' ) {
-            let current = this.current;
-            if ( current.comments ) current.comments.unshift( <COMMENT> re.post ); // if there are other comments,
-            else current['comments'] = [ <COMMENT> re.post ]; // if there is no comments.
+            let post = this.root;
+            let comment = <COMMENT> re.post;
+            console.log("post: ", post);
+            if ( post.comments ) { // if there are other comments, insert it.
+                let index = _.findIndex( post.comments, c => c.idx == this.current.idx ) + 1;
+                console.log('index: ', index);
+                post.comments.splice(
+                    index,
+                    0,
+                    comment
+                );
+                // post.comments.unshift( comment );
+            }
+            else post['comments'] = [ comment ]; // if there is no comments, give it in an array.
+        }
+        else if ( this.mode == 'edit-comment' ) {
+            // this.current = <POST> re.post;
+            this.current.content = re.post.content;
+            if ( re.post['photos'] ) this.current['photos'] = re.post['photos'];
+        }
+        else if ( this.mode == 'edit-post' ) {
+            this.current.subject = re.post.subject;
+            this.current.content = re.post.content;
+            if ( re.post['photos'] ) this.current['photos'] = re.post['photos'];
         }
 
         this.reset();
-        this.active = false; // remove 'active' css class.  it cannot be inside this.clear()
-        this.success.emit();
+        this.selectForm = false; // remove '.show' css class.  it cannot be inside this.clear()
+        // this.success.emit();
     }
     errorCallback( error ) {
         alert( error );
@@ -126,7 +181,7 @@ export class EditComponent {
     /**
      * This is for web.
      */
-    onChangeCommentFile( event, post ) {
+    onChangeFile( event, post ) {
         //
         console.log("onChangeCommentFile()");
         console.log("this.comments: ", this.temp);
@@ -164,10 +219,34 @@ export class EditComponent {
     /**
      * This is for camera.
      */
-    onClickCommentFileUploadButton() {
+    onClickFileUploadButton() {
         //
         console.log("onClickCommentFileUploadButton()");
     }
     
+
+    
+    onClickDeleteFile( file ) {
+
+        let re = confirm("Do you want to delete?");
+        if ( re == false ) return;
+
+        console.log("onClickDeleteFile: ", file);
+        let data = {
+            idx: file.idx
+        };
+        this.data.delete( data, (re) => {
+            console.log("file deleted: ", re);
+            _.remove( this.temp.photos, x => {
+                console.log('x:', x);
+                return x['idx'] == data.idx;
+            } );
+            console.log( this.temp.photos );
+        }, error => {
+            alert( error );
+        } );
+
+    }
+
 
 }
