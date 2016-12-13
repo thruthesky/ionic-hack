@@ -23,6 +23,8 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 
 
+
+
 # TODO
 
 * sanitizing erorr 를 reproduce 하지 못하겠다.
@@ -125,6 +127,34 @@ You do not need to install these module one by one. these are installed by 'npm 
 * npm i ng2-file-upload --save
 * npm i lodash --save
 * npm install angular2-infinite-scroll --save
+
+
+# HOW TO Hack
+
+## Update @ionic/app-scripts copy.config.js
+
+Copy the code below into @ionic/app-scripts/config/copy.config.js
+
+
+````
+
+module.exports = {
+  copyAssets: {
+    src: ['{{SRC}}/assets/**/*'],
+    dest: '{{WWW}}/assets'
+  },
+  copyIndexContent: {
+    src: ['{{SRC}}/index.html'],
+    dest: '{{WWW}}'
+  },
+  copyPolyfills: {
+    src: ['{{SRC}}/etc/hack/polyfills/polyfills.js'],
+    dest: '{{BUILD}}'
+  }
+}
+
+````
+
 
 
 
