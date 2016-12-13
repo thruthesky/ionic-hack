@@ -8,9 +8,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "config": {
-    "ionic_source_map_type": "source-map",
-    "ionic_copy": "./copy.config.js",
-    "ionic_watch": "./watch.config.js"
+    "ionic_source_map_type": "source-map"
   },
   "dependencies": {
     "@angular/common": "2.2.4",
