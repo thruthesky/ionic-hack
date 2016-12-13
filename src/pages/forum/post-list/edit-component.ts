@@ -12,6 +12,11 @@ declare var Camera;
     templateUrl: 'edit-component.html'
 })
 export class EditComponent {
+
+    /**
+     * This is needed to put newly created post on top of post list.
+     */
+    @Input() pages: any = null;
     /**
      * 'root' is the root post. It is only needed on creating/editing comment.
      * It is not needed on POST create/edit.
@@ -33,6 +38,7 @@ export class EditComponent {
     @Output() error = new EventEmitter();
     @Output() success = new EventEmitter();
     @Output() cancel = new EventEmitter();
+
     
     showProgress: boolean = false;
     progress: number = 0;
@@ -168,6 +174,19 @@ export class EditComponent {
             this.current.subject = re.post.subject;
             this.current.content = re.post.content;
             if ( re.post['photos'] ) this.current['photos'] = re.post['photos'];
+        }
+        else if ( this.mode == "create-post" ) {
+
+            try {
+                if ( this.pages && this.pages.length ) {
+                    console.log("length: ", this.pages.length );
+                    let posts = this.pages[0]['posts'];
+                    console.log("posts: ", posts);
+                    console.log("re: ", re);
+                    posts.unshift( re.post );
+                }
+            }
+            catch ( e ) { alert("Please restart the app."); }
         }
 
         this.reset();

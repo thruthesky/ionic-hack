@@ -6,6 +6,7 @@
     <edit-component *ngIf=" showPostCreateForm "
         [post_id] = " post_id "
         [mode] = " 'create-post' "
+        [pages] = " pages "
         (error) = " onError( $event ) "
         (cancel) = " onCancel() "
         (success) = " onSuccess() "
@@ -22,9 +23,18 @@
             >
                 <div class="header">
                     <h2 class="post-header-title">{{ post.subject }}</h2>
+                     {{ post.member?.nickname }}
                     idx: {{ post.idx }}
-                    <button (click)="onClickPostEdit( post )">Edit</button>
-                    <button (click)="onClickPostDelete( post )">Delete</button>
+                    {{ post.date }}
+
+                    <span class="buttons">
+                                
+                        <button (click)="onClickPostEdit( post )">Edit</button>
+                        <button (click)="onClickDelete( post )">Delete</button>
+                        <button (click)="onClickLike( post  )">Like({{ post.good }})</button>
+                        <button (click)="onClickReport( post  )">Report</button>
+                    </span>
+                            
                 </div>
 
                 <div class="content" innerHTML="{{ post.content }}">
@@ -59,14 +69,17 @@
                         [class.hidden]=" hideContent[ comment.idx.toString() ] "
                     >
                         <div class="header">
+                            
+                            {{ comment.member?.nickname }}
                             No. {{ comment.idx }}
+                    {{ comment.date }}
+
                             <span class="buttons">
                                 <button (click)="onClickCommentReply( comment )">Reply</button>
                                 <button (click)="onClickCommentEdit( comment )">Edit</button>
-                                <button (click)="onClickCommentDelete( comment  )">DELETE</button>
-                                <button (click)="onClickCommentLike( comment  )">Like</button>
-                                <button (click)="onClickCommentDislike( comment  )">Dislike</button>
-                                <button (click)="onClickCommentReport( comment  )">Report</button>
+                                <button (click)="onClickDelete( comment )">Delete</button>
+                                <button (click)="onClickLike( comment  )">Like({{ comment.good }})</button>
+                                <button (click)="onClickReport( comment )">Report</button>
                             </span>
                         </div>
                         <div class="content">

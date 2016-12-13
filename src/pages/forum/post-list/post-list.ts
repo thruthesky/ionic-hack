@@ -83,11 +83,30 @@ export class PostListPage {
             }
             if ( page.page_no == 1 ) this.pages[0] = page;
             else this.pages.push( page );
-
+            setTimeout( () => this.lazyProcess( page ), 100 );
         }, e => {
             this.inPageLoading = false;
             alert(e);
         });
+    }
+    /**
+     * To reduce rendering load.
+     */
+    lazyProcess( page: POSTS ) {
+        if ( page.posts.length == 0 ) return;
+
+        // for date.
+        page.posts.map( post => {
+            post['date'] = this.getDate( post.stamp );
+            if ( post.comments === void 0 ) return;
+            post.comments.map( comment => comment['date'] = this.getDate( comment.stamp ) );
+        });
+        
+    }
+    getDate( stamp ) {
+        let m = parseInt(stamp) * 1000;
+        let d = new Date( m );
+        return d.toLocaleDateString();
     }
 
     ngOnInit() {
@@ -136,34 +155,57 @@ export class PostListPage {
         console.log(this.showEditComponent);
     }
 
-    onClickCommentDelete( comment ) {
-        
+    onClickDelete( post ) {
+        this.post.delete( post.idx, re => {
+            console.log('delete: re: ', re);
+            post['subject'] = "deleted";
+            post['content'] = "deleted";
+            },
+            error => alert("delete error: " + error )
+        );
     }
-    onClickCommentLike( comment ) {
-        
-    }
-    onClickCommentDislike( comment ) {
-        
-    }
-    onClickCommentReport( comment ) {
-        
+    
+    onClickReport( post ) {
+        //console.log("onClickReport()");
+        //this.post.debug = true;
+        this.post.report( post.idx, re => {
+            console.log('delete: re: ', re);
+            alert("You have reported a post. Thank you.");
+        },
+        error => alert("report error: " + error ),
+        () => {
+        });
     }
 
-    onEditPostLoad() {
 
+    onClickLike( post ) {
+        this.post.vote( post.idx, re => {
+            console.log('delete: re: ', re);
+            // alert("You have reported a post. Thank you.");
+            post.good ++;
+        },
+        error => {
+            alert("like error: " + error );
+        },
+        () => {
+        });
     }
-
+    
+    
     onError( event ) {
         alert("error: " + event );
     }
     onSuccess() {
-        this.hideContent = {};
-        this.showEditComponent = {};
-        // this.renderPage();
+        this.closeAllOpenForms();
     }
     onCancel() {
+        this.closeAllOpenForms();
+    }
+
+    closeAllOpenForms() {
         this.hideContent = {};
         this.showEditComponent = {};
+        this.showPostCreateForm = false;
     }
     
     

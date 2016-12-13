@@ -28,9 +28,11 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 # TODO
 
 * 게시글을 가져 올 때, 필요한 필드만 가져올 수 있도록 한다. 전체 필드를 가져오니 양이 너무 많고, 홈페이지/앱이 느린 것 같다.
+    그리고 실제로 binding 하기 전에 필요 없는 property 를 delete 한다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
 * 글 삭제.
 * 글 정보 표시. 글 쓴이, 날짜, 조회수, 추천, 반대 등.
+* 각종 에러 메시지 변환.
 * 글 추천, 리포트,
 * 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
     웹에서는 progress 가 잘되는데, 모바일에서는 잘 안되는 것 같다.
@@ -41,9 +43,14 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 * 글 게시판 아이디를 통한 몇몇 게시판만 출력.
     * 메인 화면, 커뮤니티, 질문, 여행, 광고 등 몇 개의 메뉴만으로 게시판 전체를 사용 할 수 있도록 함.
-
-
 * 필리핀 도시 선택을 캡슐화 할 것.
+
+
+
+
+
+
+
 
 
 
