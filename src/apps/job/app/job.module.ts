@@ -9,7 +9,7 @@ import { PhilippineRegion } from '../providers/philippine-region';
 
 import { BaseComponentsModule } from '../../../pages/base-components/base.components.module';
 
-import { InfiniteScrollModule } from 'angular2-infinite-scroll';
+// import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 //import { NouisliderModule } from 'ng2-nouislider';
 
 
@@ -30,8 +30,8 @@ export let ROUTES = [
       BrowserModule,
       FormsModule,
       RouterModule,
-      BaseComponentsModule,
-      InfiniteScrollModule,
+      BaseComponentsModule
+//      InfiniteScrollModule,
   //    NouisliderModule
   ],
   providers: [ PhilippineRegion ]

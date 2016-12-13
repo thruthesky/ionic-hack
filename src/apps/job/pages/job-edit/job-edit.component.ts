@@ -2,8 +2,8 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PhilippineRegion } from  '../../providers/philippine-region'
 import { Post, POST_DATA } from '../../../../api/philgo-api/v2/post';
-import { Member, MEMBER_LOGIN, MEMBER_DATA } from '../../../../api/philgo-api/v2/member';
-import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS, CODE_PRIMARY_PHOTO } from '../../../../api/philgo-api/v2/data';
+import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
+import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS } from '../../../../api/philgo-api/v2/data';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import * as app from '../../../../etc/app.helper';
