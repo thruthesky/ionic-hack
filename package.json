@@ -8,6 +8,7 @@
     "ionic:serve": "ionic-app-scripts serve"
   },
   "config": {
+    "ionic_source_map_type": "source-map",
     "ionic_copy": "./copy.config.js",
     "ionic_watch": "./watch.config.js"
   },
@@ -28,7 +29,7 @@
     "zone.js": "0.6.26"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "0.0.46",
+    "@ionic/app-scripts": "0.0.47",
     "typescript": "2.0.6"
   },
   "cordovaPlugins": [
