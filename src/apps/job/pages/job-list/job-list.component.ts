@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: 'job-list.component.html',
 })
 export class JobListComponent implements OnInit {
-
+  today = new Date();
+  currentYear = this.today.getFullYear();
+  moreButton = [];
   posts = [];
   post_id = 'jobs';
   page: number = 1;
@@ -54,9 +56,19 @@ export class JobListComponent implements OnInit {
     this.router.navigate(['/job/post', idx]);
   }
 
-  onScrollDown () {
-    console.log('scrolled down!!');
-    this.loadPage();
+
+  onClickDelete( post ) {
+    let re = confirm("Are you sure you want to delete this post?");
+    if ( re ) {
+      this.post.delete( post.idx, re => {
+            console.log('delete: re: ', re);
+          },
+          error => alert("delete error: " + error )
+      );
+    }
+    else {
+      console.log('delete Was Canceled');
+    }
   }
 
 

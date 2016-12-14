@@ -18,13 +18,23 @@
           <div class="col-sm-9 col-md-9">
             <div>
               <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
-              <p class="card-text">{{post.varchar_6}}</p>
-              <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
+              <p class="card-text">Profession : {{post.sub_category}}</p>
+              <p class="card-text">Work Experience : {{post.int_1}}</p>
             </div>
+            <ul class="list-group list-group-flush" *ngIf="moreButton[i]">
+              <li class="list-group-item">Gender : {{ post.char_1=='M' ? 'Male' : 'Female'}}</li>
+              <li class="list-group-item">Age : {{currentYear - post.int_2}}</li>
+              <li class="list-group-item">Mobile : {{post.varchar_4}}</li>
+              <li class="list-group-item">Address : {{post.varchar_1}}</li>
+              <li class="list-group-item">Province : {{post.varchar_2}}</li>
+              <li class="list-group-item">City : {{post.varchar_3}}</li>
+              <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
+            </ul>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-secondary">More</button>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <button type="button" class="btn btn-secondary" (click)="moreButton[i] = !moreButton[i]" >{{moreButton[i] ? 'Less' : 'More' }}</button>
               <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
-              <button type="button" class="btn btn-secondary">Delete</button>
+              <button type="button" class="btn btn-secondary" (click)="onClickDelete(post.idx)">Delete</button>
             </div>
           </div>
         </div>
