@@ -37,7 +37,7 @@ export class JobEditComponent implements OnInit {
     varchar_5: '2010-01-25', //birthday
     varchar_6: '', //Personal Content
     int_1: '0', //work experience
-    int_2: '', //day
+    int_2: '', //year
     int_3: '', //month
     int_4: '', //day
     photos: []
@@ -118,6 +118,10 @@ export class JobEditComponent implements OnInit {
         console.log('error location.get_cities::', e);
       });
     }
+    else {
+      this.form.varchar_3 = 'all';
+      this.showCities = false;
+    }
   }
 
 
@@ -127,9 +131,9 @@ export class JobEditComponent implements OnInit {
     this.errorOnPost = null;
     if(this.form['varchar_5']) {
       let str = this.form['varchar_5'].split('-');
-      this.form['int_2'] = parseInt(str[0]);
-      this.form['int_3'] = parseInt(str[1]);
-      this.form['int_4'] = parseInt(str[2]);
+      this.form['int_2'] = parseInt(str[0]); //year
+      this.form['int_3'] = parseInt(str[1]); //month
+      this.form['int_4'] = parseInt(str[2]); //day
     }
     if(this.form.idx) {
       this.updatePost();
@@ -184,7 +188,7 @@ export class JobEditComponent implements OnInit {
       varchar_5: '2010-01-25', //birthday
       varchar_6: '', //Personal Content
       int_1: '0', //work experience
-      int_2: '', //day
+      int_2: '', //year
       int_3: '', //month
       int_4: '', //day
       photos: []

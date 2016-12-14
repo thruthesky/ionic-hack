@@ -69,12 +69,25 @@
     </div>
   </div>
 
-  <!--div class="form-group row">
-    <label class="col-xs-3 col-form-label">Age</label>
-    <div class="col-xs-9">
-  <nouislider [connect]="true" [min]="18" [max]="60" [step]="1" [(ngModel)]="Range" (ngModelChange)="search()"></nouislider>
+<div class="form-group row">
+  <label class="col-xs-3 col-form-label">Age Range</label>
+  <div class="col-xs-9">
+    <label class="col-sm-2">Min</label>
+    <div class="col-sm-4">
+      <select class="form-control" id="searchByMinAge" name="minAge" [(ngModel)]="minAgeSelected" (change)="minRangeChange()">
+        <option [value]="minAge">{{minAge}}</option>
+        <option *ngFor="let min of minAgeRange" [value]="min+minAge">{{min+minAge}}</option>
+      </select>
     </div>
-  </div-->
+    <label class="col-sm-2">Max</label>
+    <div class="col-sm-4">
+      <select class="form-control" id="searchByMaxAge" name="maxAge" [(ngModel)]="maxAgeSelected" (change)="maxRangeChange()">
+        <option *ngFor="let max of maxAgeRange" [value]="max+betweenAge">{{max+betweenAge}}</option>
+        <option [value]="maxAge">{{maxAge}}</option>
+      </select>
+    </div>
+  </div>
+</div>
 
   <div *ngIf="searching">
     <i class="fa fa-spinner fa-pulse fa-fw"></i>
@@ -90,13 +103,23 @@
           <div class="col-sm-9 col-md-9">
             <div>
               <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
-              <p class="card-text">{{post.varchar_6}}</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <p class="card-text">Profession : {{post.sub_category}}</p>
+              <p class="card-text">Work Experience : {{post.int_1}}</p>
             </div>
+            <ul class="list-group list-group-flush" *ngIf="moreButton[i]">
+              <li class="list-group-item">Gender : {{ post.char_1=='M' ? 'Male' : 'Female'}}</li>
+              <li class="list-group-item">Age : {{currentYear - post.int_2}}</li>
+              <li class="list-group-item">Mobile : {{post.varchar_4}}</li>
+              <li class="list-group-item">Address : {{post.varchar_1}}</li>
+              <li class="list-group-item">Province : {{post.varchar_2}}</li>
+              <li class="list-group-item">City : {{post.varchar_3}}</li>
+              <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
+            </ul>
             <div class="btn-group" role="group">
-              <button type="button" class="btn btn-secondary">More</button>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              <button type="button" class="btn btn-secondary" (click)="moreButton[i] = !moreButton[i]" >{{moreButton[i] ? 'Less' : 'More' }}</button>
               <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
-              <button type="button" class="btn btn-secondary">Delete</button>
+              <button type="button" class="btn btn-secondary" (click)="onClickDelete(post)">Delete</button>
             </div>
           </div>
         </div>
