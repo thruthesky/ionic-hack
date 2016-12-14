@@ -47,27 +47,29 @@ export class EditComponent {
     temp = <POST_DATA> {};
     
     cordova: boolean = app.isCordova();
+    inDeleting: boolean = false;
+    inPosting: boolean = false;
     constructor(
         private ngZone: NgZone,
         private post: Post,
         private data: Data,
         private sanitizer: DomSanitizer
         ) {
-        console.log("EditComponent::constructor()");
+        // console.log("EditComponent::constructor()");
     }
 
     renderPage() {
         this.ngZone.run(() => {
-            console.log('ngZone.run()');
+            // console.log('ngZone.run()');
         });
     }
     
     ngOnInit() {
         this.reset();
-        console.log("EditComponent::ngOnInit() current: ", this.current);
-        console.log("mode: ", this.mode);
+        // console.log("EditComponent::ngOnInit() current: ", this.current);
+        // console.log("mode: ", this.mode);
         if ( this.mode == 'edit-post' || this.mode == 'edit-comment' ) { //
-            console.log('without loading. mode: ', this.mode);
+            // console.log('without loading. mode: ', this.mode);
             this.temp = _.cloneDeep( this.current );
             this.temp.content = this.post.strip_tags( this.temp.content );
         }
@@ -94,10 +96,12 @@ export class EditComponent {
      * Query to philog server to create/edit a post/comment.
      */
     onClickSubmit() {
-        console.log("mode: ", this.mode);
-        console.log("current: ", this.current);
-        console.log("temp: ", this.temp);
 
+        //console.log("mode: ", this.mode);
+        //console.log("current: ", this.current);
+        //console.log("temp: ", this.temp);
+
+        this.inPosting = true;
         if ( this.mode == 'create-comment' ) this.createComment();
         else if ( this.mode == 'edit-comment' ) this.editComment();
         else if ( this.mode == 'create-post' ) this.createPost();
@@ -139,7 +143,7 @@ export class EditComponent {
     }
 
     editComment() {
-        console.log("this.temp: ", this.temp);
+        // console.log("this.temp: ", this.temp);
         this.post.update( this.temp,
             s => this.successCallback( s ),
             e => this.errorCallback( e ),
@@ -148,14 +152,14 @@ export class EditComponent {
     }
 
     successCallback( re: POST_RESPONSE ) {
-        console.log( 'PhilGo API Query success: ', re);
+        // console.log( 'PhilGo API Query success: ', re);
         if ( this.mode == 'create-comment' ) {
             let post = this.root;
             let comment = <COMMENT> re.post;
-            console.log("post: ", post);
+            // console.log("post: ", post);
             if ( post.comments ) { // if there are other comments, insert it.
                 let index = _.findIndex( post.comments, c => c.idx == this.current.idx ) + 1;
-                console.log('index: ', index);
+                // console.log('index: ', index);
                 post.comments.splice(
                     index,
                     0,
@@ -179,10 +183,10 @@ export class EditComponent {
 
             try {
                 if ( this.pages && this.pages.length ) {
-                    console.log("length: ", this.pages.length );
+                    // console.log("length: ", this.pages.length );
                     let posts = this.pages[0]['posts'];
-                    console.log("posts: ", posts);
-                    console.log("re: ", re);
+                    // console.log("posts: ", posts);
+                    // console.log("re: ", re);
                     posts.unshift( re.post );
                 }
             }
@@ -197,7 +201,7 @@ export class EditComponent {
         alert( error );
     }
     completeCallback() {
-
+        this.inPosting = false;
     }
 
 
@@ -206,8 +210,8 @@ export class EditComponent {
      */
     onChangeFile( event, post ) {
         //
-        console.log("onChangeCommentFile()");
-        console.log("this.comments: ", this.temp);
+        // console.log("onChangeCommentFile()");
+        // console.log("this.comments: ", this.temp);
         this.showProgress = true;
         this.data.uploadPostFile( this.temp.gid, event,
             s => this.onSuccessFileUpload(s),
@@ -223,7 +227,7 @@ export class EditComponent {
     onClickFileUploadButton() {
         if ( ! this.cordova ) return;
         //
-        console.log("onClickCommentFileUploadButton()");
+        // console.log("onClickCommentFileUploadButton()");
 
         navigator.notification.confirm(
             'Please select how you want to take photo.', // message
@@ -235,7 +239,7 @@ export class EditComponent {
 
     }
     onCameraConfirm( index ) {
-        console.log("confirm: index: ", index);
+        // console.log("confirm: index: ", index);
         if ( index == 2 ) return;
         let type = null;
         if ( index == 1 ) { // get the picture from camera.
@@ -244,16 +248,16 @@ export class EditComponent {
         else { // get the picture from library.
             type = Camera.PictureSourceType.PHOTOLIBRARY
         }
-        console.log("in cordova, type: ", type);
+        // console.log("in cordova, type: ", type);
         let options = {
             quality: 80,
             sourceType: type
         };
         navigator.camera.getPicture( path => {
-            console.log('photo: ', path);
+            // console.log('photo: ', path);
             this.fileTransfer( path ); // transfer the photo to the server.
         }, e => {
-            console.error( 'camera error: ', e );
+            // console.error( 'camera error: ', e );
             alert("camera error");
         }, options);
     }
@@ -269,7 +273,7 @@ export class EditComponent {
             fileURL,
             x => this.onSuccessFileUpload( x ),
             e => this.onFailureFileUpload( e ),
-            c => console.log("completeCode: ", c),
+            c => {},
             p => this.onProgressFileUpload( p )
         );
     }
@@ -277,7 +281,7 @@ export class EditComponent {
 
     
     onSuccessFileUpload (re: FILE_UPLOAD_RESPONSE) {
-        console.log('re.data: ', re.data);
+        // console.log('re.data: ', re.data);
         if ( this.temp.photos === void 0 ) this.temp['photos'] = [];
         this.temp.photos.push( re.data );
         // this.files.push( re.data );
@@ -289,10 +293,10 @@ export class EditComponent {
         alert( error );
     }
     onCompleteFileUpload( completeCode ) {
-        console.log("completeCode: ", completeCode);
+        // console.log("completeCode: ", completeCode);
     }
     onProgressFileUpload( p ) {
-        console.log("percentag uploaded: ", p);
+        // console.log("percentag uploaded: ", p);
         this.progress = p;
         this.widthProgress = this.sanitizer.bypassSecurityTrustStyle('width:'  + p + '%' );
         this.renderPage();
@@ -305,18 +309,21 @@ export class EditComponent {
         let re = confirm("Do you want to delete?");
         if ( re == false ) return;
 
-        console.log("onClickDeleteFile: ", file);
+        // console.log("onClickDeleteFile: ", file);
         let data = {
             idx: file.idx
         };
+        this.inDeleting = true;
         this.data.delete( data, (re) => {
-            console.log("file deleted: ", re);
+            this.inDeleting = false;
+            // console.log("file deleted: ", re);
             _.remove( this.temp.photos, x => {
-                console.log('x:', x);
+                // console.log('x:', x);
                 return x['idx'] == data.idx;
             } );
-            console.log( this.temp.photos );
+            // console.log( this.temp.photos );
         }, error => {
+            this.inDeleting = false;
             alert( error );
         } );
 

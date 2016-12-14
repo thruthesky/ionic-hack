@@ -6,6 +6,8 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 * We work on master branch. So, Modularity and Refactoring of folders, source files, asessts are highly important because many app will be made upon this single source repository.
 
+
+
 ## Work Environment
 
 * When you do project, fork http://github.com/thruthesky/ionic-hack and use it.
@@ -27,32 +29,63 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
-* 게시글을 가져 올 때, 필요한 필드만 가져올 수 있도록 한다. 전체 필드를 가져오니 양이 너무 많고, 홈페이지/앱이 느린 것 같다.
-    그리고 실제로 binding 하기 전에 필요 없는 property 를 delete 한다.
+
+* cordova 에서는 URL 링크를 숨긴다. URL 이 file:///-/123 과 같이 나온다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
-* 글 삭제.
-* 글 정보 표시. 글 쓴이, 날짜, 조회수, 추천, 반대 등.
-* 각종 에러 메시지 변환.
-* 글 추천, 리포트,
-* 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
-    웹에서는 progress 가 잘되는데, 모바일에서는 잘 안되는 것 같다.
-* Routing on each post and expose the URL of the post so user can share the post. which means, provides URL and let users actually visit the post with the uRL.
+
+
+## TODO For hello philippines and sonub.com
+
 * 헬로필리핀은 필고 방식으로 글 목록.
-    제목만 보여주고, 클릭하면 전체를 보여 줄 것.
-* Post search, comment search, search by category, search by user, date, search by fields
+    보여줄 내용은 다 가져와서 제목만 보여주고, 클릭하면 전체를 보여 줄 것.
+    이렇게하면, 코멘트가 많을 때, 5개만 먼저 보여 줄 필요가 없다. 더 간단하다.
+
+* 검색 기능 : Post search, comment search, search by category, search by user, date, search by fields
 
 * 글 게시판 아이디를 통한 몇몇 게시판만 출력.
     * 메인 화면, 커뮤니티, 질문, 여행, 광고 등 몇 개의 메뉴만으로 게시판 전체를 사용 할 수 있도록 함.
+
+* 글 목록과 component 글 쓰기, 수정, 삭제 등을 component 화 한다.
+    특히, 글 목록에서는 글을 표시 하는 것 자체를 하나의 component 로 만들고,
+    글 목록과 글 읽기에서 동일한 컴포넌트를 사용 할 수 있도록 한다.
+
+    즉, 하나의 글 보기 component 가 글 수정/삭제/각종 버튼을 하면서 동시에 코멘트의 것도 한다.
+    특히, 글 하나 보기 컴포넌트에서 글 수정, 삭제, 코멘트, 파일 업로드등을 다 할 수 있도록 한다.
+    즉, 글 목록과 글 보기 페이지 두개의 장소에서 하나의 컴포넌트를 만든다.
+    edit-component 에 form 이 2개가 있는데 하나로 만들 것.
+    두개를 만들어 놓으니 확실히 많이 헷갈린다.
+
+
+
+
 * 필리핀 도시 선택을 캡슐화 할 것.
 
 
+## TODO Much laster
+
+* lazy loading.
 
 
 
 
+## DONE list
+
+* @done - partly - need to update - 각종 에러 메시지 변환.
+
+* @done 글 작성/수정 페이지에서 사진 업로드/삭제시에 확실하게 loader 를 표시한다.
+    웹에서는 progress 가 잘되는데, 모바일에서는 잘 안되는 것 같다.
 
 
+* @done URL 로 접속 할 수 있는 라우팅.
 
+
+* @done 게시글을 가져 올 때, 필요한 필드만 가져올 수 있도록 한다. 전체 필드를 가져오니 양이 너무 많고, 홈페이지/앱이 느린 것 같다.
+    그리고 실제로 binding 하기 전에 필요 없는 property 를 delete 한다.
+
+
+* @done 글/코멘트 삭제.
+* @done 글 정보 표시. 글 쓴이, 날짜, 조회수, 추천, 반대 등.
+* @done 글 추천, 리포트,
 
 * @recheck - 개념은 좋은 뭘 어떻게 하라는 건지 명확하지 않다. 즉, 짧고 명료하게 재 작성해야 한다.
     모듈화 & 컴포넌트 디렉티브 화. 그래서 philgo api 관련된 코드를 직접 작성하는 것이 아니라,

@@ -18,6 +18,9 @@
             <textarea name="content" [(ngModel)]="temp.content"></textarea>
             <!-- show uploaded files while creating a comment -->
             <section *ngIf=" temp.photos " class="files">
+                <div *ngIf=" inDeleting " class="loader">
+                    <i class="fa fa-spinner fa-spin"></i> Deleting ...
+                </div>
                 <div class="file" *ngFor=" let file of temp.photos " (click)="onClickDeleteFile( file )">
                     <img [src]=" file.url_thumbnail ">
                     <span class="trash fa-stack fa-lg">
@@ -28,16 +31,20 @@
             </section>
 
             <!-- This supports IE 9. IE 9 does not support HTML 5 -->
-            <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
+            <progress *ngIf=" !cordova && showProgress " class="progress" value="{{ progress }}" max="100">
             <div class="progress">
                 <span class="progress-bar" [style.width]="widthProgress"></span>
             </div>
             </progress>
+            <div *ngIf=" cordova && showProgress" class="progress loader">
+                <i class="fa fa-spinner fa-spin"></i> Uploading ...
+            </div>
 
 
         </td>
         <td width="1%" nowrap (click)="onClickSubmit()">
             &nbsp;<i class="fa fa-arrow-right"></i>
+            <i *ngIf=" inPosting " class="fa fa-spinner fa-spin"></i>
         </td>
     </tr>
 </table>
@@ -63,6 +70,9 @@
             <td width="98%">
                 <!-- show uploaded files while creating a post/comment -->
                 <section *ngIf=" temp.photos " class="files">
+                    <div *ngIf=" inDeleting " class="loader">
+                        <i class="fa fa-spinner fa-spin"></i> Deleting ...
+                    </div>
                     <div class="file" *ngFor=" let file of temp.photos " (click)="onClickDeleteFile( file )">
                         <img [src]=" file.url_thumbnail ">
                         <span class="trash fa-stack fa-lg">
@@ -72,11 +82,14 @@
                     </div>
                 </section>
                 <!-- This supports IE 9. IE 9 does not support HTML 5 -->
-                <progress *ngIf=" showProgress " class="progress" value="{{ progress }}" max="100">
-                <div class="progress">
-                    <span class="progress-bar" [style.width]="widthProgress"></span>
-                </div>
+                <progress *ngIf=" !cordova && showProgress " class="progress" value="{{ progress }}" max="100">
+                    <div class="progress">
+                        <span class="progress-bar" [style.width]="widthProgress"></span>
+                    </div>
                 </progress>
+                <div *ngIf=" cordova && showProgress" class="progress loader">
+                    <i class="fa fa-spinner fa-spin"></i> Uploading ...
+                </div>
             </td>
             <td width="1%" nowrap>
                 <button (click)="onClickCancel()">
@@ -85,6 +98,8 @@
                 <button (click)="onClickSubmit()">
                     SUBMIT
                 </button>
+                
+                <i *ngIf=" inPosting " class="fa fa-spinner fa-spin"></i>
             </td>
         </tr>
     </table>

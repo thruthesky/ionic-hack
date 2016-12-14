@@ -37,5 +37,11 @@ post-list-page {
                 display: none;
             }
         }
+
+        .uploaded-files {
+            img {
+                max-width: 100%;
+            }
+        }
     }
 }

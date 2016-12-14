@@ -23,18 +23,20 @@
             >
                 <div class="header">
                     <h2 class="post-header-title">{{ post.subject }}</h2>
+                    <a href="{{ post.link }}">{{ post.link }}</a><br />
                      {{ post.member?.nickname }}
                     idx: {{ post.idx }}
                     {{ post.date }}
 
                     <span class="buttons">
-                                
                         <button (click)="onClickPostEdit( post )">Edit</button>
-                        <button (click)="onClickDelete( post )">Delete</button>
-                        <button (click)="onClickLike( post  )">Like({{ post.good }})</button>
-                        <button (click)="onClickReport( post  )">Report</button>
+                        <button *ngIf=" ! post.inDeleting " (click)="onClickDelete( post )">Delete</button>
+                        <i *ngIf=" post.inDeleting " class="fa fa-spinner fa-spin"></i>
+                        <button *ngIf=" !post.inLike " (click)="onClickLike( post  )">Like({{ post.good }})</button>
+                        <i *ngIf=" post.inLike " class="fa fa-spinner fa-spin"></i>
+                        <button *ngIf=" !post.inReport " (click)="onClickReport( post  )">Report</button>
+                        <i *ngIf=" post.inReport " class="fa fa-spinner fa-spin"></i>
                     </span>
-                            
                 </div>
 
                 <div class="content" innerHTML="{{ post.content }}">
@@ -77,9 +79,12 @@
                             <span class="buttons">
                                 <button (click)="onClickCommentReply( comment )">Reply</button>
                                 <button (click)="onClickCommentEdit( comment )">Edit</button>
-                                <button (click)="onClickDelete( comment )">Delete</button>
-                                <button (click)="onClickLike( comment  )">Like({{ comment.good }})</button>
-                                <button (click)="onClickReport( comment )">Report</button>
+                                <button *ngIf=" !comment.inDeleting " (click)="onClickDelete( comment )">Delete</button>
+                                <i *ngIf=" comment.inDeleting " class="fa fa-spinner fa-spin"></i>
+                                <button *ngIf=" !comment.inLike " (click)="onClickLike( comment  )">Like({{ comment.good }})</button>
+                                <i *ngIf=" comment.inLike " class="fa fa-spinner fa-spin"></i>
+                                <button *ngIf=" !comment.inReport " (click)="onClickReport( comment )">Report</button>
+                                <i *ngIf=" comment.inReport " class="fa fa-spinner fa-spin"></i>
                             </span>
                         </div>
                         <div class="content">

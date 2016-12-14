@@ -6,8 +6,8 @@
  *  so, be sure you call it after 'deviceready' event.
  */
 export function isCordova () { 
-  if ( window['device'] !== void 0 && window['device'] ) {
-    return true;
-  }
-  else return false;
+  //if ( window['device'] !== void 0 && window['device'] ) return true;
+  if ( document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 ) return true;
+  if ( !! window['cordova'] ) return true;
+  return false;
 }

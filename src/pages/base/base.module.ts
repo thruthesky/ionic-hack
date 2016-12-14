@@ -16,7 +16,7 @@ import { LoginPage } from './user/login/login';
 import { ProfilePage } from './user/profile/profile';
 import { FileNotFoundPage } from './file-not-found/file-not-found';
 
-export let ROUTES: Routes = [
+export let BASE_ROUTES: Routes = [
   { path: 'help', component: HelpPage },
   { path: 'user/register', component: RegisterPage },
   { path: 'user/login', component: LoginPage },
