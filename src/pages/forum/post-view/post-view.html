@@ -1,0 +1,36 @@
+<base-header [title]="title"></base-header>
+
+<section class="content">
+    
+
+                <div class="header">
+                    <h2 class="post-header-title">{{ post.subject }}</h2>
+                    <a href="{{ post.link }}">{{ post.link }}</a><br />
+                     {{ post.member?.nickname }}
+                    idx: {{ post.idx }}
+                    {{ post.date }}
+
+                    <span class="buttons">
+                        <button>Edit</button>
+                        <button>Delete</button>
+                        <button>Like</button>
+                        <button>Report</button>
+                    </span>
+                            
+                </div>
+
+                <div class="content" innerHTML="{{ post.content }}">
+                </div>
+                
+                <div *ngIf=" post?.photos?.length " class="uploaded-files">
+                    <img *ngFor=" let photo of post.photos " [src]=" photo.url_thumbnail ">
+                </div>
+
+<hr>
+
+{{ post | json }}
+
+</section>
+
+<base-footer></base-footer>
+
