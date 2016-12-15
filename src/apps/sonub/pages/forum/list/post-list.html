@@ -1,0 +1,19 @@
+<base-header [title]="title"></base-header>
+<section class="content">
+
+    <h1>Sonub Post List Page</h1>
+    
+    
+    <div class="page" *ngFor=" let page of pages ">
+        <div class="post" *ngFor=" let post of page.posts ">
+            <view-component [post]="post"></view-component>
+            <div class="comment" *ngFor=" let comment of post.comments ">
+                <view-component [post]="comment"></view-component>
+            </div>
+        </div>
+    </div>
+        
+
+
+</section>
+<base-footer></base-footer>
