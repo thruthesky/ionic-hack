@@ -36,16 +36,35 @@ import { JobIndexComponent } from '../apps/job/pages/job-index/job-index.compone
 import { JobListComponent } from "../apps/job/pages/job-list/job-list.component";
 import { JobEditComponent } from "../apps/job/pages/job-edit/job-edit.component";
 
+
+// sonub forum index.
+import { SonubForumIndexPage } from '../apps/sonub/pages/forum/index/forum-index';
+import { SonubPostListPage } from '../apps/sonub/pages/forum/list/post-list';
+import { SonubPostViewPage } from '../apps/sonub/pages/forum/view/post-view';
+
 let appRoutes: Routes = [
+
+    // for new forum.
+    { path: "forum", component: SonubForumIndexPage },
+    { path: "forum/:post_id", component: SonubPostListPage },
+    { path: "-/:idx_post", component: SonubPostViewPage },
+
+    // job
     { path: "job", component: JobIndexComponent },
     { path: "job/post", component: JobEditComponent },
     { path: "job/post/:idx", component: JobEditComponent },
     { path: "job/list", component: JobListComponent },
-    { path: 'forum', component: ForumIndexPage },
-    { path: 'forum/:post_id', component: PostListPage },
-    { path: '-/:idx_post', component: PostViewPage },
+
+    // forum
+    { path: 'forum-b', component: ForumIndexPage },
+    { path: 'forum-b/:post_id', component: PostListPage },
+    { path: 'b-/:idx_post', component: PostViewPage },
+    
+    // base user
     { path: 'user/register', component: RegisterPage },
     { path: 'user/login', component: LoginPage },
+
+    // default pages.
     { path: '', component: HomePage },
     { path: '**', component: FileNotFoundPage }
 ];

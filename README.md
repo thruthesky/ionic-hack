@@ -165,7 +165,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * ionic plugin add cordova-plugin-camera
 * ionic plugin add cordova-plugin-file-transfer
 * ionic plugin add cordova-plugin-dialogs
-
+* cordova plugin add ionic-plugin-deploy
 * ionic plugin add phonegap-plugin-push // ???
 
 ## Submodule Installation
