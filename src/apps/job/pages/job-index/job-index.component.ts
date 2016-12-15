@@ -50,6 +50,10 @@ export class JobIndexComponent implements OnInit {
     female: false
   };
 
+  searchByLocation:boolean = false;
+  searchByProfession:boolean = false;
+  searchByAdvance:boolean = false;
+
   constructor(private region: PhilippineRegion,
               private post: Post,
               private router: Router,
@@ -58,7 +62,7 @@ export class JobIndexComponent implements OnInit {
     region.get_province( re => {
       this.provinces = re;
     }, e => {
-      console.log('error location.get_province::', e);
+      //console.log('error location.get_province::', e);
     });
 
   }
@@ -73,14 +77,13 @@ export class JobIndexComponent implements OnInit {
 
   search() {
     this.showLoader();
-    console.log("search() form has changed. you can search now: data: ", this.query);
+    //console.log("search() form has changed. you can search now: data: ", this.query);
     this.condition = '';
     this.pages = [];
     this.page = 1;
 
     let min = this.currentYear-this.minAgeSelected;
     let max = this.currentYear-this.maxAgeSelected;
-    console.log('1988 <='+ min  +' and 1988 >=' + max);
     //ageRange
     this.condition+= " AND int_2 <= '"+ min +"'"; //min age
     this.condition+= " AND int_2 >= '"+ max +"'"; //max age
@@ -114,29 +117,33 @@ export class JobIndexComponent implements OnInit {
     data.orderby = "idx desc";
     data.page = this.page++;
     data.post = 1;
-    this.post.debug = true;
+    //this.post.debug = true;
     this.post.search( data, re => {
-      console.log("search result: ", re);
+      //console.log("search result: ", re);
       this.onSearchComplete( re );
     }, error => alert("error on search: " + error ) );
   }
 
+  onClickLocation() {
+
+  }
+
 
   onSearchComplete( data ) {
-    console.log('onSearchComplete()');
+    //console.log('onSearchComplete()');
     this.hideLoader();
     this.displayPosts( data );
   }
 
   displayPosts( page ) {
-    console.log( 'success', page );
+    //console.log( 'success', page );
     if(page.search.length){
       this.pages.push(page);
       /*if ( page.page_no == 1 ) this.pages[0] = page;
       else this.pages.push( page );*/
     }
     else {
-      console.log('No More Post');
+      //console.log('No More Post');
       this.page--;
     }
   }
@@ -145,14 +152,14 @@ export class JobIndexComponent implements OnInit {
     if( this.query.varchar_2 != 'all') {
       this.query.varchar_3 = this.query.varchar_2;
       this.region.get_cities( this.query.varchar_2, re => {
-        console.log('cities', re);
+        //console.log('cities', re);
         if(re) {
           this.cities = re;
-          console.log(re);
+          //console.log(re);
           this.showCities = true;
         }
       }, e => {
-        console.log('error location.get_cities::', e);
+        //console.log('error location.get_cities::', e);
       });
     }
     else {
@@ -177,13 +184,13 @@ export class JobIndexComponent implements OnInit {
     let re = confirm("Are you sure you want to delete this post?");
     if ( re ) {
       this.post.delete( post.idx, re => {
-            console.log('delete: re: ', re);
+            //console.log('delete: re: ', re);
           },
           error => alert("delete error: " + error )
       );
     }
     else {
-      console.log('delete Was Canceled');
+      //console.log('delete Was Canceled');
     }
   }
 

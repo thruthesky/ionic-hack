@@ -1,0 +1,64 @@
+<header>
+  <nav class="navbar navbar-fixed-top">
+    <table cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td class="left" width="99%">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr valign="top">
+              <td>
+                <div class="menu home" routerLink="/" title="Home">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-home fa-stack-2x"></i>
+                  </span>
+                  <em>{{ ['Sonub', '헬로필'] | ek }}</em>
+                </div>
+              </td>
+              <td>
+                <div class="menu" routerLink="/job" title="Job">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-suitcase fa-stack-2x"></i>
+                  </span>
+                  <em>{{ 'Job' | ln }}</em>
+                </div>
+              </td>
+              
+              <td>
+                <div class="menu" routerLink="/job/post" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-pencil-square-o fa-stack-2x"></i>
+                  </span>
+                  <em>{{ ['Posting', 'Posting'] | ek }}</em>
+                </div>
+              </td>
+
+              <td>
+                <div class="menu" routerLink="/job/list" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-list-alt fa-stack-2x"></i>
+                  </span>
+                  <em>{{ ['Listing', 'Listing'] | ek }}</em>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td class="right">
+          <span class="all menu" title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-reorder fa-stack-2x"></i>
+            </span>
+            <em>{{ ['Menu', '메뉴'] | ek }}</em>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </nav>
+  <em style="display:none;" class="all-menu" [class.active]="isAllMenuActive">
+    <h3>{{ title }} </h3>
+    <hr>
+    <a routerLink="/about">About</a>
+    <a routerLink="/user/login">User Login</a>
+    <a routerLink="/user/profile">My Page</a>
+  </em>
+</header>
+

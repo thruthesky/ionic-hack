@@ -1,6 +1,15 @@
-.profile {
-  .profile-photo{
-    width: 100%;
-    max-width: 10em;
+app-job-index {
+  .content {
+    font-size: .8rem;
+
+    .info {
+      padding: 0 5px;
+    }
+  }
+  .profile {
+    .profile-photo{
+      width: 100%;
+      max-width: 10em;
+    }
   }
 }

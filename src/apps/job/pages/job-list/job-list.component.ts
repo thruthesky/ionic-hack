@@ -26,18 +26,18 @@ export class JobListComponent implements OnInit {
 
   loadPage() {
     this.post.page( {post_id: this.post_id, page_no: this.page++, limit: 5}, (page: POSTS) => {
-      console.log('loadpage::success', page);
+      //console.log('loadpage::success', page);
       if(page.posts.length){
         if ( page.page_no == 1 ) this.pages[0] = page;
         else this.pages.push( page );
       }
       else {
-        console.log('No More Post');
+        //console.log('No More Post');
         this.page--;
       }
-      console.log('loadpage::success', this.pages);
+      //console.log('loadpage::success', this.pages);
     }, e => {
-      console.log( "loadpost:: failed: " + e );
+      //console.log( "loadpost:: failed: " + e );
       alert(e);
     });
   }
@@ -61,13 +61,13 @@ export class JobListComponent implements OnInit {
     let re = confirm("Are you sure you want to delete this post?");
     if ( re ) {
       this.post.delete( post.idx, re => {
-            console.log('delete: re: ', re);
+            //console.log('delete: re: ', re);
           },
           error => alert("delete error: " + error )
       );
     }
     else {
-      console.log('delete Was Canceled');
+      //console.log('delete Was Canceled');
     }
   }
 

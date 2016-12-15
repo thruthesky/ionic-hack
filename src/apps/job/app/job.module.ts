@@ -7,11 +7,7 @@ import { JobListComponent } from "../pages/job-list/job-list.component";
 import { JobEditComponent } from "../pages/job-edit/job-edit.component";
 import { PhilippineRegion } from '../providers/philippine-region';
 
-import { BaseComponentsModule } from '../../../pages/base-components/base.components.module';
-
-// import { InfiniteScrollModule } from 'angular2-infinite-scroll';
-//import { NouisliderModule } from 'ng2-nouislider';
-
+import { JobBaseComponentsModule } from '../pages/job-base-components/job.base.components.module';
 
 
 export let ROUTES = [
@@ -30,9 +26,7 @@ export let ROUTES = [
       BrowserModule,
       FormsModule,
       RouterModule,
-      BaseComponentsModule
-//      InfiniteScrollModule,
-  //    NouisliderModule
+      JobBaseComponentsModule
   ],
   providers: [ PhilippineRegion ]
 })

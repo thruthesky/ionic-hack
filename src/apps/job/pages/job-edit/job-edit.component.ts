@@ -79,16 +79,15 @@ export class JobEditComponent implements OnInit {
     this.login = member.getLoginData();
     this.form.gid = data.uniqid(); // for file upload of new post
     let idx = this.route.snapshot.params['idx'];
-    console.log('idx:: ',idx);
-    console.log('loginData:: ', this.login);
     if( idx ){ //if idx exist then edit
-      this.post.get(idx, re=> {
+      this.post.debug = true;
+      this.post.load(idx, re=> {
         console.log('re data',re.post);
         if(re.post) {
           this.form = re.post;
           re.post.photos.map( e => this.files.push(e) );
 
-          if((re.post.photos) && (re.post.photos[0].url_thumbnail != void 0)) {
+          if(re.post.photos.length) {
             this.urlPhoto = re.post.photos[0].url_thumbnail;
           }
         }
@@ -285,6 +284,7 @@ export class JobEditComponent implements OnInit {
   }
 
   deleteFile( file ){
+    if( ! file ) return;
     console.log("onClickDeleteFile: ", file);
     let data = {
       idx: file.idx
