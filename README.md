@@ -33,6 +33,11 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 * cordova 에서는 URL 링크를 숨긴다. URL 이 file:///-/123 과 같이 나온다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
 
+# TODO for fixing ionic-hack.
+
+* dev mode 와 prod 모드에서 따로 index.html 과 ionic.config.json 을 사용 하거나 수정 할 수 있도록.
+    * 그래서 모바일에서 실행 할 때, index.html 의 base href 를 수정하지 않아도 되도록 한다.
+    
 
 ## TODO For hello philippines and sonub.com
 

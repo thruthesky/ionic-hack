@@ -23,7 +23,7 @@
             >
                 <div class="header">
                     <h2 class="post-header-title">{{ post.subject }}</h2>
-                    <a href="{{ post.link }}">{{ post.link }}</a><br />
+                    <a *ngIf=" ! cordova " href="{{ post.link }}">{{ post.link }}</a><br />
                      {{ post.member?.nickname }}
                     idx: {{ post.idx }}
                     {{ post.date }}

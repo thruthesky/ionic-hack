@@ -58,13 +58,13 @@ export class PostListPage {
         this.scrollListener();
     }
     pageScrolled() {
-        // console.log("scrolled:", this.scrollCount++);
+        console.log("scrolled:", this.scrollCount++);
         let pages = document.querySelector(".pages");
         if ( pages === void 0 || ! pages || pages['offsetTop'] === void 0) return; // @attention this is error handling for some reason, especially on first loading of each forum, it creates "'offsetTop' of undefined" error.
         let pagesHeight = pages['offsetTop'] + pages['clientHeight'];
         let pageOffset = window.pageYOffset + window.innerHeight;
         if( pageOffset > pagesHeight - 200) { // page scrolled. the distance to the bottom is within 200 px from 
-            // console.log("page scroll reaches at bottom: pageOffset=" + pageOffset + ", pagesHeight=" + pagesHeight);
+            console.log("page scroll reaches at bottom: pageOffset=" + pageOffset + ", pagesHeight=" + pagesHeight);
             this.loadPage();
         }
     }
@@ -73,18 +73,18 @@ export class PostListPage {
     }
     loadPage() {
         if ( this.inPageLoading ) {
-            // console.info("in paeg loading");
+            console.info("in paeg loading");
             return;
         }
         this.inPageLoading = true;
-        // console.log("page no: ", this.page);
+        console.log("page no: ", this.page);
         let data: PAGE_DATA = {
             post_id: this.post_id, page_no: this.page ++, limit: 6,
             fields: 'idx,idx_parent,subject,content,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
         };
-        // this.post.debug = true;
+        this.post.debug = true;
         this.post.page( data, (page) => {
-            // console.log('PostList::loadPage() page:', page);
+            console.log('PostList::loadPage() page:', page);
             this.inPageLoading = false;
             if ( page.posts.length == 0 ) {
                 this.noMorePosts = true;
