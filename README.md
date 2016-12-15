@@ -65,6 +65,15 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 * 필리핀 도시 선택을 캡슐화 할 것.
 
+## TODO For Aonic = Angular + Ionic
+https://github.com/thruthesky/aonic
+* Put base code, plus
+    * ng-bootstrap
+    * fontawesome
+    * lazy loading
+    * lodash
+    * ionic deploy
+    * firebase auth, db, storage
 
 ## TODO Much laster
 
