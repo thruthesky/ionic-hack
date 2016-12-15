@@ -3,7 +3,19 @@
 <head>
   
   
-  <base href="/">
+  <base id="baseHref" href="">
+  <script src="cordova.js"></script><!-- cordova.js required for cordova apps. For web, it should be null script. -->
+  <script type="text/javascript">
+    if ( window.cordova ) {
+      if ( IonicDevServer ) path = '/'; // live reload. source comes from desktop computer.
+      else path = '/android_asset/www/'; // For mobile app, no none will reload. so, <base href=''> is fine. overwrite emtpy base href to '/' for web.
+    }
+    else path = '/';                                    // For web, change <base href=''> to <base href='/'> for reloading. 
+    var theBase = document.getElementById("baseHref");
+    console.log(theBase);
+    console.log(path);
+    theBase.href = path;
+  </script>
   
   <meta charset="UTF-8">
   <title>Ionic App</title>
@@ -11,12 +23,14 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
 
+
+
+
+
   <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
-  <link rel="manifest" href="manifest.json">
+  <!--No use for webapp or web woker <link rel="manifest" href="manifest.json">-->
   <meta name="theme-color" content="#4e8ef7">
   
-  <!-- cordova.js required for cordova apps -->
-  <script src="cordova.js"></script>
 
   <!-- un-comment this code to enable service worker
   <script>
@@ -33,7 +47,6 @@
 
 </head>
 <body>
-
 
   <!-- Ionic's root component and where the app will load -->
   <root-component></root-component>

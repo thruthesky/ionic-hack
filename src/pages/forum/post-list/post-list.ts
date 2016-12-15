@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AppRouter, ActivatedRoute } from '../../../app/app.router';
 import { Post, POSTS, PAGE_DATA } from '../../../api/philgo-api/v2/post';
 import { Data, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
-
+import * as app from '../../../etc/app.helper';
 
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -15,6 +15,7 @@ import { Data, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
 })
 export class PostListPage {
     title: string = null;
+    cordova: boolean = app.isCordova();
     //@ViewChild('postListContent') postListContent;
     showPostCreateForm: boolean = false;
     hideContent = {};

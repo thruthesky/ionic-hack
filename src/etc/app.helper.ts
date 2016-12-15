@@ -7,7 +7,7 @@
  */
 export function isCordova () { 
   //if ( window['device'] !== void 0 && window['device'] ) return true;
-  if ( document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 ) return true;
   if ( !! window['cordova'] ) return true;
+  if ( document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 ) return true;
   return false;
 }
