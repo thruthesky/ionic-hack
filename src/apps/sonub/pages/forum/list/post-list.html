@@ -7,9 +7,9 @@
     
     <div class="page" *ngFor=" let page of pages ">
         <div class="post" *ngFor=" let post of page.posts ">
-            <view-component [post]="post"></view-component>
+            <view-component [post]="post" [root]="post"></view-component>
             <div class="comment" *ngFor=" let comment of post.comments ">
-                <view-component [post]="comment"></view-component>
+                <view-component [post]="comment" [root]="post"></view-component>
             </div>
         </div>
     </div>
