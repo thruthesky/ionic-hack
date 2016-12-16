@@ -29,7 +29,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
-
+* sonub design : https://drive.google.com/drive/u/0/folders/0B5Phg9Wn9p3EVFRPSnozNTh2czg
 * cordova 에서는 URL 링크를 숨긴다. URL 이 file:///-/123 과 같이 나온다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
 
