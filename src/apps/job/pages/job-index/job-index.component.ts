@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhilippineRegion } from  '../../providers/philippine-region'
 import { POSTS } from '../../../../api/philgo-api/v2/philgo-api-interface';
+import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Post, SEARCH_QUERY_DATA } from '../../../../api/philgo-api/v2/post';
 import * as _ from 'lodash';
 
@@ -13,6 +14,7 @@ declare var Array;
 })
 export class JobIndexComponent implements OnInit {
 
+  login: MEMBER_LOGIN = null;
   page: number = 1;
   range: number[] = [18, 60];
   searching: boolean = false;
@@ -50,15 +52,22 @@ export class JobIndexComponent implements OnInit {
     female: false
   };
 
-  searchByLocation:boolean = false;
-  searchByProfession:boolean = false;
-  searchByAdvance:boolean = false;
+  searchBy: { location?, profession?, more? } = {};
+
+  // searchByLocation:boolean = false;
+  // searchByProfession:boolean = false;
+  // searchByAdvance:boolean = false;
 
   constructor(private region: PhilippineRegion,
               private post: Post,
               private router: Router,
+              private member: Member
 
   ) {
+
+    // this.login = this.member.getLoginData();
+    member.getLogin( x => this.login = x );
+
     region.get_province( re => {
       this.provinces = re;
     }, e => {
@@ -110,7 +119,7 @@ export class JobIndexComponent implements OnInit {
   doSearch() {
     console.log('###############doSearch###############');
     let data = <SEARCH_QUERY_DATA> {};
-    data.fields = "idx,gid,sub_category,post_id,text_1,text_2,text_3,int_1,int_2,int_3,int_4,char_1,varchar_1,varchar_2,varchar_3,varchar_4,varchar_6";
+    data.fields = "idx,idx_member,gid,sub_category,post_id,text_1,text_2,text_3,int_1,int_2,int_3,int_4,char_1,varchar_1,varchar_2,varchar_3,varchar_4,varchar_6";
     data.from = "sf_post_data";
     data.where = "post_id = 'jobs' AND idx_parent=0" + this.condition;
     data.limit = "5";
@@ -119,7 +128,7 @@ export class JobIndexComponent implements OnInit {
     data.post = 1;
     //this.post.debug = true;
     this.post.search( data, re => {
-      //console.log("search result: ", re);
+      console.log("search result: ", re);
       this.onSearchComplete( re );
     }, error => alert("error on search: " + error ) );
   }

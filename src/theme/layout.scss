@@ -27,7 +27,7 @@ footer {
 section.content {
     padding: 6px;
     background-color: $content_background_color;
-    .container, .container-fluid {
+    .layout.container, .layout.container-fluid {
         @include no-gutter();
         & > .row {
             @include no-gutter();

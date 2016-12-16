@@ -1,9 +1,21 @@
 app-job-index {
   .content {
     font-size: .8rem;
-
     .info {
       padding: 0 5px;
+    }
+    nav {
+      button {
+        padding-top: .4em;
+        padding-bottom: .4em;
+        border: 0;
+        border-radius: 0;
+        width: 32%;
+      }
+    }
+    .row {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   .profile {

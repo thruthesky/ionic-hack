@@ -1,15 +1,13 @@
 <job-base-header [title]="title"></job-base-header>
 <section class="content">
-  <h5 align="center">JOB HOME Page</h5>
-
   <nav>
-    <button type="button" class="btn btn-primary btn-sm" (click)="searchByProfession = true; searchByLocation = searchByAdvance = false ">Profession</button>
-    <button type="button" class="btn btn-primary btn-sm" (click)="searchByLocation = true; searchByProfession = searchByAdvance = false">Location</button>
-    <button type="button" class="btn btn-primary btn-sm" (click)="searchByProfession = searchByLocation = searchByAdvance = true">Advance Search</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)=" searchBy = { profession: true } ">Profession</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)=" searchBy = { location: true } ">Location</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)=" searchBy = { more: true } ">More Option</button>
   </nav>
   <br>
-  <nav class="search-form card card-block" *ngIf="searchByProfession || searchByLocation || searchByAdvance">
-    <div class="form-group row" *ngIf="searchByProfession">
+  <nav class="search-form card card-block" *ngIf=" (searchBy | json) != '{}' ">
+    <div class="form-group row" *ngIf=" searchBy.profession ">
       <label class="col-xs-3 col-form-label"  for="workProfession">Profession</label>
       <div class="col-xs-9">
         <select class="form-control" id="workProfession" name="workProfession" [(ngModel)]="query.sub_category" (change)="search()">
@@ -19,7 +17,7 @@
         </select>
       </div>
     </div>
-    <div class="form-group row" *ngIf="searchByAdvance">
+    <div class="form-group row" *ngIf=" searchBy.more ">
       <label class="col-xs-3" for="workExperience">Experience</label>
       <div class="col-xs-9">
         <select class="form-control" id="workExperience" name="workExperience" [(ngModel)]="query.int_1" (change)="search()">
@@ -30,7 +28,7 @@
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="searchByLocation">
+    <div class="form-group row" *ngIf=" searchBy.location ">
       <label class="col-xs-3 col-form-label">Province</label>
       <div class="col-xs-9">
         <select class="form-control" id="searchByProvince" name="province" [(ngModel)]="query.varchar_2" (change)="onClickProvince()">
@@ -40,7 +38,7 @@
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="showCities && searchByLocation">
+    <div class="form-group row" *ngIf="showCities && searchBy.location">
       <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
       <div class="col-xs-9">
         <select class="form-control" id="searchByCities" name="city" [(ngModel)]="query.varchar_3" (change)="search()">
@@ -50,14 +48,14 @@
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="searchByAdvance">
+    <div class="form-group row" *ngIf=" searchBy.more ">
       <label for="name" class="col-xs-3 col-form-label">Name</label>
       <div class="col-xs-9">
         <input class="form-control" type="text" id="name"  [(ngModel)]="query.name" (keyup)="onChange()" placeholder="Input Name...">
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="searchByAdvance">
+    <div class="form-group row" *ngIf=" searchBy.more ">
       <label class="col-xs-3 col-form-label">Gender</label>
       <div class="col-xs-9">
         <label class="form-check-inline col-xs-3">
@@ -72,7 +70,7 @@
       </div>
     </div>
 
-    <div class="form-group row" *ngIf="searchByAdvance">
+    <div class="form-group row" *ngIf=" searchBy.more ">
       <label class="col-xs-3 col-form-label">Age Range</label>
       <div class="col-xs-9">
         <label class="col-sm-2">Min</label>
@@ -91,7 +89,7 @@
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary btn-sm" (click)="searchByProfession = searchByLocation = searchByAdvance = false">Close</button>
+    <button type="button" class="btn btn-primary btn-sm" (click)=" searchBy = {} ">Close</button>
   </nav>
 
   <div *ngIf="searching">
@@ -99,37 +97,41 @@
     <span class="sr-only">Loading...</span>
   </div>
 
-  <div *ngIf=" pages.length " class="pages">
+  <div *ngIf=" pages.length " class="pages container">
     <div *ngFor=" let page of pages " class="page posts row">
-      <div class="card post col-xs-6" *ngFor=" let post of page.search; let i = index; ">
-        <div class="profile col-md-3">
-          <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{i+1}}">
-        </div>
-        <div class="info col-md-9">
-          <div>
-            <p class="title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</p>
-            <p class="text">{{post.sub_category}}</p>
-            <p class="text">Experience : {{post.int_1}}</p>
+      <div class="col-xs-6" *ngFor=" let post of page.search ">
+        <div class="card post">
+          <div class="profile col-md-3">
+            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{i+1}}">
           </div>
-          <ul class="list-group list-group-flush" *ngIf="moreButton[i]">
-            <li class="list-group-item">Gender : {{ post.char_1=='M' ? 'Male' : 'Female'}}</li>
-            <li class="list-group-item">Age : {{currentYear - post.int_2}}</li>
-            <li class="list-group-item">Mobile : {{post.varchar_4}}</li>
-            <li class="list-group-item">Address : {{post.varchar_1}}</li>
-            <li class="list-group-item">Province : {{post.varchar_2}}</li>
-            <li class="list-group-item">City : {{post.varchar_3}}</li>
-            <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
-          </ul>
-          <div class="btn-group" role="group">
-            <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
-            <button type="button" class="btn btn-secondary btn-sm" (click)="moreButton[i] = !moreButton[i]" >{{moreButton[i] ? 'Less' : 'More' }}</button>
-            <button type="button" class="btn btn-secondary btn-sm" (click)="onClickEdit(post.idx)">Edit</button>
-            <button type="button" class="btn btn-secondary btn-sm" (click)="onClickDelete(post)">Delete</button>
+          <div class="info col-md-9">
+            <div>
+              <p class="title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</p>
+              <p class="text">{{post.sub_category}}</p>
+              <p class="text">Experience : {{post.int_1}}</p>
+            </div>
+            <ul class="list-group list-group-flush" *ngIf=" post.more ">
+              <li class="list-group-item">Gender : {{ post.char_1=='M' ? 'Male' : 'Female'}}</li>
+              <li class="list-group-item">Age : {{currentYear - post.int_2}}</li>
+              <li class="list-group-item">Mobile : {{post.varchar_4}}</li>
+              <li class="list-group-item">Address : {{post.varchar_1}}</li>
+              <li class="list-group-item">Province : {{post.varchar_2}}</li>
+              <li class="list-group-item">City : {{post.varchar_3}}</li>
+              <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
+            </ul>
+            <div class="btn-group" role="group">
+              <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
+              <button type="button" class="btn btn-secondary btn-sm" (click)=" post.more = ! post.more " >{{ post.more  ? 'Less' : 'More' }}</button>
+              
+              <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickEdit(post.idx)">Edit</button>
+              <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickDelete(post)">Delete</button>
+
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
+        </div><!--/.card-->
+      </div><!--/.col-xx-x-->
+    </div><!--/.page.posts.row-->
+  </div><!--/.pages.container-->
 </section>
 <job-base-footer></job-base-footer>
 
