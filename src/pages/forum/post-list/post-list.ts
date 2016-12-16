@@ -1,7 +1,7 @@
 import { Component, Renderer } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AppRouter, ActivatedRoute } from '../../../app/app.router';
-import { Post, POSTS, PAGE_DATA } from '../../../api/philgo-api/v2/post';
+import { Post, PAGE, PAGES, PAGE_DATA } from '../../../api/philgo-api/v2/post';
 import { Data, FILE_UPLOAD_DATA } from '../../../api/philgo-api/v2/data';
 import * as app from '../../../etc/app.helper';
 
@@ -24,7 +24,7 @@ export class PostListPage {
     mode: 'create-post' | 'edit-post' | 'create-comment' | 'edit-comment' = null;
     post_id: string = null;
     page: number = 1;
-    pages: Array<POSTS> = [];
+    pages: PAGES = [];
     files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
     scrollListener = null;
     scrollCount = 0;
@@ -80,7 +80,9 @@ export class PostListPage {
         this.inPageLoading = true;
         console.log("page no: ", this.page);
         let data: PAGE_DATA = {
-            post_id: this.post_id, page_no: this.page ++, limit: 6,
+            post_id: this.post_id,
+            page_no: this.page ++,
+            limit: 6,
             fields: 'idx,idx_parent,subject,content,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
         };
         this.post.debug = true;
@@ -105,7 +107,7 @@ export class PostListPage {
     /**
      * To reduce rendering load.
      */
-    lazyProcess( page: POSTS ) {
+    lazyProcess( page: PAGE ) {
         if ( page.posts.length == 0 ) {
             return;
         }

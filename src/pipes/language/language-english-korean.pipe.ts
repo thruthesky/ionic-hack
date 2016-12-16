@@ -1,3 +1,8 @@
+/**
+ * @file language-english-korean.pipes.ts
+ * 
+ * @see ./README.md for details
+ */
 import { Injectable, Pipe, PipeTransform } from '@angular/core';
 import { Config } from '../../etc/config';
 

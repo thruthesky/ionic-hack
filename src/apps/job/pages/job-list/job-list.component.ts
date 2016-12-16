@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post} from '../../../../api/philgo-api/v2/post';
-import { POSTS } from '../../../../api/philgo-api/v2/philgo-api-interface';
+import { PAGE, PAGES } from '../../../../api/philgo-api/v2/philgo-api-interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +14,7 @@ export class JobListComponent implements OnInit {
   posts = [];
   post_id = 'jobs';
   page: number = 1;
-  pages: Array<POSTS> = [];
+  pages: PAGES = [];
   constructor(private post: Post,
               private router: Router,
   ) {
@@ -25,7 +25,7 @@ export class JobListComponent implements OnInit {
   }
 
   loadPage() {
-    this.post.page( {post_id: this.post_id, page_no: this.page++, limit: 5}, (page: POSTS) => {
+    this.post.page( {post_id: this.post_id, page_no: this.page++, limit: 5}, (page: PAGE) => {
       //console.log('loadpage::success', page);
       if(page.posts.length){
         if ( page.page_no == 1 ) this.pages[0] = page;

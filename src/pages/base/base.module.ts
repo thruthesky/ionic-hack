@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 import { BaseComponentsModule } from '../base-components/base.components.module';
-
+import { PhilgoApiModule } from '../../api/philgo-api/v2/philgo-api-module';
 // import { FirebaseApiModule } from '../../api/firebase-api/firebase-api-module';
 
 import { HomePage } from './home/home';
@@ -40,6 +40,7 @@ export let BASE_ROUTES: Routes = [
         BrowserModule,
         RouterModule,
         FormsModule,
+        PhilgoApiModule,
 //        FirebaseApiModule,
         LanguagePipeModule,
         BaseComponentsModule

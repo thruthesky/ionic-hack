@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
+import { PhilgoApiModule } from '../../api/philgo-api/v2/philgo-api-module';
 
 import { BaseHeader } from './base-header/base-header';
 import { BaseFooter } from './base-footer/base-footer';
@@ -20,7 +21,8 @@ import { BaseRightSide } from './base-right-side/base-right-side';
     imports: [
         BrowserModule,
         RouterModule,
-        LanguagePipeModule
+        LanguagePipeModule,
+        PhilgoApiModule
     ],
     exports: [
         BaseHeader,

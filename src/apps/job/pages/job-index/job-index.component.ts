@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhilippineRegion } from  '../../providers/philippine-region'
-import { POSTS } from '../../../../api/philgo-api/v2/philgo-api-interface';
+import { PAGES } from '../../../../api/philgo-api/v2/philgo-api-interface';
 import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Post, SEARCH_QUERY_DATA } from '../../../../api/philgo-api/v2/post';
 import * as _ from 'lodash';
@@ -37,7 +37,7 @@ export class JobIndexComponent implements OnInit {
   provinces: Array<string> = [];
   cities = [];
   showCities: boolean = false;
-  pages: Array<POSTS> = [];
+  pages: PAGES;
   condition: string = '';
   urlDefault: string = "assets/img/anonymous.gif";
   urlPhoto: string = this.urlDefault;

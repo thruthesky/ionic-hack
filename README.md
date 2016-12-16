@@ -243,16 +243,7 @@ You do not need to install these module one by one. these are installed by 'npm 
 
 # Language Translation
 
-There are two language translation pipe. ln and ek.
-
-'ln' uses the language in language-text.ts while 'ek' uses the input of pipe.
-
-````
-    {{ ['Register', '회원가입'] | ek }}
-````
-
-* The first string is English, and the second string is Korean.
-
+* @see README.md at pipes/language folder
 
 
 
