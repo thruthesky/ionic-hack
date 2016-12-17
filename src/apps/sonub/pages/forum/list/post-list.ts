@@ -8,6 +8,7 @@ import { Post, PAGE, POSTS, POST } from "../../../../../api/philgo-api/v2/post";
 export class SonubPostListPage {
     // pages: PAGES = <PAGES> [];
     posts: POSTS = <POSTS> [];
+    showPostCreateFrom: boolean = false;
     constructor( private post: Post, activated: ActivatedRoute ) {
         let post_id = activated.snapshot.params['post_id'];
         post.page( { post_id: post_id }, (page: PAGE) => {
@@ -31,5 +32,11 @@ export class SonubPostListPage {
     pre( post ) : POST {
         post.url = "url";
         return post;
+    }
+    onClickPostCreate( ) {
+        this.showPostCreateFrom = true;
+    }
+    editComponentOnCancel() {
+        this.showPostCreateFrom = false;
     }
 }

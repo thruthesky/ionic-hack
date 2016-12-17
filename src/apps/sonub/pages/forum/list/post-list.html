@@ -4,12 +4,21 @@
     <h1>Sonub Post List Page</h1>
     
     <hr>
+        <!-- create a  post -->
+        <edit-component *ngIf = " showPostCreateFrom "
+            [mode]    = " create-post "
+            [active]  = " true "
+            (error)   = " editComponentOnError( $event ) "
+            (cancel)  = " editComponentOnCancel() "
+            (success) = " editComponentOnSuccess() "
+
+        ></edit-component>
         <button (click)="onClickPostCreate()">Post Write</button>
     <hr>
     <div class="post" *ngFor=" let post of posts; trackBy: post?.idx ">
         <view-component [post]="post" [option]="{ 'show-reply-form': true }"></view-component>
         <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
-            <view-component [post]="comment" [root]="post"  [option]="{ 'show-reply-form': true }"></view-component>
+            <view-component [post]="comment" [root]="post" ></view-component>
         </div>
     </div>
 
