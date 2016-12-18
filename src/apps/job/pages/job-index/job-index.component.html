@@ -102,7 +102,7 @@
       <div class="col-xs-6" *ngFor=" let post of page.search ">
         <div class="card post">
           <div class="profile col-md-3">
-            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{i+1}}">
+            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{post.text_1}}">
           </div>
           <div class="info col-md-9">
             <div>
@@ -122,7 +122,7 @@
             <div class="btn-group" role="group">
               <!--p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p-->
               <button type="button" class="btn btn-secondary btn-sm" (click)=" post.more = ! post.more " >{{ post.more  ? 'Less' : 'More' }}</button>
-              
+
               <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickEdit(post.idx)">Edit</button>
               <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickDelete(post)">Delete</button>
 
