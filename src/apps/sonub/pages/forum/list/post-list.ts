@@ -11,7 +11,10 @@ export class SonubPostListPage {
     showPostCreateFrom: boolean = false;
     constructor( private post: Post, activated: ActivatedRoute ) {
         let post_id = activated.snapshot.params['post_id'];
-        post.page( { post_id: post_id }, (page: PAGE) => {
+
+
+        post.page( { post_id: post_id, limit: 3 }, (page: PAGE) => {
+            if ( page.page_no == 1 ) this.posts = [];
             this.delayPush( page.posts );
         },
         error => alert(error)
@@ -20,19 +23,17 @@ export class SonubPostListPage {
 
     delayPush( arr ) {
         arr.map( ( v, i ) => {
-            let s = 100;
-            if ( i > 10 ) s = 1000;
-            else if ( i > 6 ) s = 500;
             setTimeout( () => {
                 this.posts.push ( this.pre(v) );
             },
-            i * s );
+            100 + i * 10 );
         });
     }
     pre( post ) : POST {
-        post.url = "url";
+        post.url = this.post.getPermalink( post );
         return post;
     }
+    
     onClickPostCreate( ) {
         this.showPostCreateFrom = true;
     }
