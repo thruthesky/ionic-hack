@@ -29,7 +29,14 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
-
+* philgo-api/v2/component/edit-component.html 에서 form 을 글 쓰기에도 적용한다.
+    randy 에게 하라고 했는데 안했다.
+    dev.philgo.com 에 기록을 해야 할 것 같다.
+* 메인 각종 최근 글, 최근 썸네일 사진으로 페이지 글로 꾸미기.
+* 게시판 글 목록을 보여 줄 때, 제목만 보여주는 기능.
+    클릭하면 코멘트 전체를 보여주거나
+    마지막 코멘트 5개만 보여주는 기능.
+* sonub design : https://drive.google.com/drive/u/0/folders/0B5Phg9Wn9p3EVFRPSnozNTh2czg
 * cordova 에서는 URL 링크를 숨긴다. URL 이 file:///-/123 과 같이 나온다.
 * sanitizing erorr 를 reproduce 하지 못하겠다.
 
