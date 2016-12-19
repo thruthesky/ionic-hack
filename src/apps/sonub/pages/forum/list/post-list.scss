@@ -1,0 +1,25 @@
+
+.posts {
+    
+    .uploaded-files {
+        img {
+            max-width: 100%;
+            max-height: 800px;
+        }
+        &[no-files='2'] {
+            img {
+                width: 50%;
+                max-height: 360px;
+            }
+        }
+        @for $i from 3 through 20 {
+            &[no-files='#{$i}'] {
+                img {
+                    max-width: 33.3%;
+                    max-height: 240px;
+                }
+            }
+        }
+    }
+
+}
