@@ -112,7 +112,7 @@
     <div *ngFor=" let page of pages " class="page posts row">
       <div class="post col-xs-6" *ngFor=" let post of page.search ">
         <job-base-list-component
-          [post]="post"
+          [post]="post" [root]="page.search"
           [login]="login"
           [shareUrl]="shareUrl"
         ></job-base-list-component>

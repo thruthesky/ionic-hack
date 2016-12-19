@@ -4,8 +4,9 @@
 import { Component, Input } from '@angular/core';
 import { POST_DATA } from '../../../../../api/philgo-api/v2/philgo-api-interface';
 import { Post } from '../../../../../api/philgo-api/v2/post';
-import { Member, MEMBER_LOGIN } from '../../../../../api/philgo-api/v2/member';
+import { MEMBER_LOGIN } from '../../../../../api/philgo-api/v2/member';
 import { Router } from '@angular/router';
+import * as _ from 'lodash';
 @Component({
   selector: 'job-base-list-component',
   templateUrl: 'job-base-list-component.html',
@@ -25,7 +26,7 @@ export class JobBaseListComponent {
   @Input() login: MEMBER_LOGIN = {
     id: ''
   }; // it is comment or post.
-  //@Input() root: POST = null;
+  @Input() root = [];
 
   //active: boolean = false; // "active==true" means, the use is in editing.
 
@@ -49,7 +50,13 @@ export class JobBaseListComponent {
     let re = confirm("Are you sure you want to delete this post?");
     if ( re ) {
       this._post.delete( post.idx, re => {
-          //console.log('delete: re: ', re);
+          alert("Successful on Deleting this post...");
+
+          let index =  _.findIndex( this.root, data =>{
+            return data.idx == post.idx;
+          } );
+
+          this.root.splice(index, 1);
         },
         error => alert("delete error: " + error )
       );
