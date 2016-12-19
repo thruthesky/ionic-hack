@@ -171,7 +171,7 @@ export class JobEditComponent implements OnInit {
       console.log("post update : ", data);
       this.loader = false;
       this.openConfirmation('Success::Your post has been Updated.');
-      this.router.navigate( [ '/job/list' ] );
+      this.router.navigate( [ '/job/view/'+ data.idx ] );
     }, er => alert( er ));
   }
 

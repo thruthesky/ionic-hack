@@ -8,7 +8,8 @@ import { JobEditComponent } from "../pages/job-edit/job-edit.component";
 import { PhilippineRegion } from '../providers/philippine-region';
 
 import { JobBaseComponentsModule } from '../pages/job-base-components/job.base.components.module';
-import {JobViewComponent} from "../pages/job-view/job-view.component";
+import { JobViewComponent } from "../pages/job-view/job-view.component";
+import { JobBaseListComponent } from "../pages/job-base-components/job-base-list/job-base-list-component";
 
 
 export let ROUTES = [
@@ -23,7 +24,8 @@ export let ROUTES = [
       JobIndexComponent,
       JobListComponent,
       JobEditComponent,
-      JobViewComponent
+      JobViewComponent,
+      JobBaseListComponent
   ],
   imports: [
       BrowserModule,
