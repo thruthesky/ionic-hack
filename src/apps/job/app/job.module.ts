@@ -8,19 +8,22 @@ import { JobEditComponent } from "../pages/job-edit/job-edit.component";
 import { PhilippineRegion } from '../providers/philippine-region';
 
 import { JobBaseComponentsModule } from '../pages/job-base-components/job.base.components.module';
+import {JobViewComponent} from "../pages/job-view/job-view.component";
 
 
 export let ROUTES = [
         { path: "job", component: JobIndexComponent, name: 'JobIndex' },
         { path: "job/post", component: JobEditComponent, name: 'JobEdit' },
         { path: "job/post/:idx", component: JobEditComponent, name: 'JobEdit' },
-        { path: "job/list", component: JobListComponent, name: 'JobList' }
+        { path: "job/list", component: JobListComponent, name: 'JobList' },
+        { path: "job/view/:idx", component: JobViewComponent, name: 'JobView' }
 ];
 @NgModule({
   declarations: [
       JobIndexComponent,
       JobListComponent,
-      JobEditComponent
+      JobEditComponent,
+      JobViewComponent
   ],
   imports: [
       BrowserModule,

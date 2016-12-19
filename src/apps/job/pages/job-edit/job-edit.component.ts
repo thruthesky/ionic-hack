@@ -90,6 +90,7 @@ export class JobEditComponent implements OnInit {
           if(re.post.photos.length) {
             this.urlPhoto = re.post.photos[0].url_thumbnail;
           }
+          this.getCities();
         }
       }, e => {
         console.log('error on getting idx', e);
@@ -107,20 +108,24 @@ export class JobEditComponent implements OnInit {
   onClickProvince() {
     if( this.form.varchar_2 != 'all') {
       this.form.varchar_3 = this.form.varchar_2;
-      this.region.get_cities( this.form.varchar_2, re => {
-        console.log('cities', re);
-        if(re) {
-          this.cities = re;
-          this.showCities = true;
-        }
-      }, e => {
-        console.log('error location.get_cities::', e);
-      });
+      this.getCities();
     }
     else {
       this.form.varchar_3 = 'all';
       this.showCities = false;
     }
+  }
+
+  getCities() {
+    this.region.get_cities( this.form.varchar_2, re => {
+      console.log('cities', re);
+      if(re) {
+        this.cities = re;
+        this.showCities = true;
+      }
+    }, e => {
+      console.log('error location.get_cities::', e);
+    });
   }
 
 

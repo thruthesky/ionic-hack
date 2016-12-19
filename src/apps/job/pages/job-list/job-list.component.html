@@ -1,23 +1,22 @@
 <job-base-header [title]="title"></job-base-header>
 
 <section class="content">
-  <h2 align="center">JOB Listing Page</h2>
-  <div *ngIf=" pages.length " class="pages">
+  <div *ngIf=" pages.length " class="pages container">
     <div *ngFor=" let page of pages " class="page posts">
-      <div class="post" *ngFor=" let post of page.posts; let i = index; ">
-        <div class="card card-block">
-          <div class="profile col-sm-3 col-md-3">
-            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{i+1}}">
+      <div class="post col-xs-6" *ngFor=" let post of page.posts;">
+        <div class="card post">
+          <div class="profile col-md-3">
+            <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{post.text_1}}">
           </div>
-          <div class="col-sm-9 col-md-9">
+          <div class="info col-md-9">
             <div>
-              <h4 class="card-title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</h4>
-              <p class="card-text">Profession : {{post.sub_category}}</p>
-              <p class="card-text">Work Experience : {{post.int_1}}</p>
+              <p class="text">{{post.sub_category}}</p>
+              <p class="text">{{ post.char_1=='M' ? 'Male' : 'Female'}}</p>
+              <p class="text">Age: {{currentYear - post.int_2}}</p>
+              <p class="text">Experience: {{post.int_1}}</p>
+              <p class="title">{{post.text_1}} {{post.text_2}} {{post.text_3}}</p>
             </div>
-            <ul class="list-group list-group-flush" *ngIf="moreButton[i]">
-              <li class="list-group-item">Gender : {{ post.char_1=='M' ? 'Male' : 'Female'}}</li>
-              <li class="list-group-item">Age : {{currentYear - post.int_2}}</li>
+            <ul class="list-group list-group-flush" *ngIf=" post.more ">
               <li class="list-group-item">Mobile : {{post.varchar_4}}</li>
               <li class="list-group-item">Address : {{post.varchar_1}}</li>
               <li class="list-group-item">Province : {{post.varchar_2}}</li>
@@ -25,16 +24,19 @@
               <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
             </ul>
             <div class="btn-group" role="group">
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-              <button type="button" class="btn btn-secondary" (click)="moreButton[i] = !moreButton[i]" >{{moreButton[i] ? 'Less' : 'More' }}</button>
-              <button type="button" class="btn btn-secondary" (click)="onClickEdit(post.idx)">Edit</button>
-              <button type="button" class="btn btn-secondary" (click)="onClickDelete(post.idx)">Delete</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)=" post.more = ! post.more " >{{ post.more  ? 'Less' : 'More' }}</button>
+
+              <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickEdit(post.idx)">Edit</button>
+              <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickDelete(post)">Delete</button>
+
             </div>
           </div>
-        </div>
+        </div><!--/.card-->
       </div>
     </div>
   </div>
+  <div *ngIf=" inPageLoading " class="in-page-loading"><i class="fa fa-spinner fa-spin"></i> Loading ...</div>
+  <div *ngIf=" noMorePosts " class="no-more-posts">No more posts</div>
 </section>
 
 <job-base-footer></job-base-footer>

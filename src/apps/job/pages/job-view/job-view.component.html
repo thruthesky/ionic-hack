@@ -1,0 +1,107 @@
+<job-base-header [title]="title"></job-base-header>
+<section class="content">
+
+  <form>
+    <div class="form-group row">
+      <div class="primary-photo">
+        <img [src]="urlPhoto">
+      </div><!--/primary-photo-->
+    </div>
+
+    <div class="form-group row">
+      <label for="first_name" class="col-xs-3 col-form-label">First Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="first_name" name="first_name" value="{{form.text_1}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="middle_name" class="col-xs-3 col-form-label">Middle Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="middle_name" name="middle_name" value="{{form.text_2}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="last_name" class="col-xs-3 col-form-label">Last Name</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="last_name" name="last_name" value="{{form.text_3}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="mobile" class="col-xs-3 col-form-label">Mobile #</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="number" id="mobile" name="mobile"  value="{{form.varchar_4}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="address" class="col-xs-3 col-form-label">Address</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="address" name="address" value="{{form.varchar_1}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label">Province</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="province" name="province" value="{{form.varchar_2}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row" *ngIf="showCities">
+      <label class="col-xs-3 col-form-label" *ngIf="showCities">City</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="city" name="city" value="{{form.varchar_3}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="birthday" class="col-xs-3 col-form-label">Birthday</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="date" name="birthday" id="birthday" value="{{form.varchar_5}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label">Gender</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" id="gender" name="gender" value="{{form.char_1 == 'm' ? 'Male' : 'Female'}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-xs-3" for="workExperience">Work Experience</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" name="workExperience" id="workExperience" value="{{form.int_1 + ' years'}}" readonly/>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="col-xs-3 col-form-label"  for="workProfession">Work Profession</label>
+      <div class="col-xs-9">
+        <input class="form-control" type="text" name="workProfession" id="workProfession" value="{{form.sub_category}}" readonly/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="personalContent">Personal Message</label>
+      <textarea class="form-control" name="personalContent" id="personalContent" rows="3" value="{{form.varchar_6}}" readonly></textarea>
+    </div>
+
+
+    <div warning *ngIf="errorOnPost">{{errorOnPost}}</div>
+    <div *ngIf="loader"><i class="fa fa-spinner fa-pulse fa-fw"></i>Connecting to server...</div>
+
+    <button type="button" class="btn btn-primary btn-block" (click)="onClickClose()">Close</button>
+
+
+  </form>
+
+
+
+
+</section>
+<job-base-footer></job-base-footer>

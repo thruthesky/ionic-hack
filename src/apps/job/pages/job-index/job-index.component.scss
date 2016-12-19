@@ -1,8 +1,22 @@
 app-job-index {
   .content {
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+      .post {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .btn-group {
+        margin-bottom: 5px;
+      }
+    }
     font-size: .8rem;
     .info {
-      padding: 0 5px;
+      padding: 0;
+      .text {
+        margin-bottom: 5px;
+      }
     }
     nav {
       button {
@@ -12,13 +26,40 @@ app-job-index {
         border-radius: 0;
         width: 32%;
       }
+      .close.fa-times {
+        position: absolute;
+        top: .5rem;
+        right: .5rem;
+      }
+      label {
+        padding: 0;
+      }
+      .range.col-xs-4 {
+        padding: 0;
+        .form-control {
+          padding: .5rem .25rem;
+
+        }
+      }
     }
     .row {
       margin-left: 0;
       margin-right: 0;
     }
   }
+  $break-small: 320px;
+  $break-large: 1200px;
   .profile {
+    @media screen and (min-width: $break-small) {
+      overflow: hidden;
+      width: 65px;
+      height: 65px;
+      float: left;
+      padding: 5px;
+    }
+    @media screen and (min-width: $break-large) {
+      float: left;
+    }
     .profile-photo{
       width: 100%;
       max-width: 10em;
