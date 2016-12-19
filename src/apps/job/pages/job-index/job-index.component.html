@@ -130,12 +130,16 @@
               <li class="list-group-item">City : {{post.varchar_3}}</li>
               <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
             </ul>
+            <div>
+              <label>Share link</label>
+              <input class="shareLink text" onClick="this.setSelectionRange(0, this.value.length)" value="{{shareUrl+post.idx}}" readonly/>
+            </div>
+
+
             <div class="btn-group" role="group">
               <button type="button" class="btn btn-secondary btn-sm" (click)=" post.more = ! post.more " >{{ post.more  ? 'Less' : 'More' }}</button>
-
               <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickEdit(post.idx)">Edit</button>
               <button *ngIf=" post.member.id == login.id " type="button" class="btn btn-secondary btn-sm" (click)="onClickDelete(post)">Delete</button>
-
             </div>
           </div>
         </div><!--/.card-->

@@ -21,6 +21,8 @@ export class JobIndexComponent implements OnInit {
   numbers = Array.from(new Array(20), (x,i) => i+1);
 
   //variables used in range
+
+  shareUrl = 'http://192.168.26.2:8000/job/view/';
   minAge: number = 18;
   maxAge: number = 60;
   minAgeRange = Array.from(new Array( this.maxAge - this.minAge), (x,i) => i+1);
@@ -73,7 +75,7 @@ export class JobIndexComponent implements OnInit {
     }, e => {
       //console.log('error location.get_province::', e);
     });
-    this.beginScroll();
+    //this.beginScroll();
   }
 
   ngOnInit() {
@@ -102,7 +104,7 @@ export class JobIndexComponent implements OnInit {
     }
   }
   ngOnDestroy() {
-    this.endScroll();
+    //this.endScroll();
   }
 
   search() {
@@ -255,6 +257,13 @@ export class JobIndexComponent implements OnInit {
   onClickEdit(idx){
     this.router.navigate(['/job/post', idx]);
   }
+
+  onClickShare(idx) {
+    console.log("onClickShare", idx);
+
+  }
+
+
 
   onClickDelete( post ) {
     let re = confirm("Are you sure you want to delete this post?");
