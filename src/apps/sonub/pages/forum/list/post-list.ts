@@ -10,15 +10,27 @@ export class SonubPostListPage {
     posts: POSTS = <POSTS> [];
     showPostCreateFrom: boolean = false;
     post_id: string = '';
+    page_no: number = 1;
     constructor( private post: Post, activated: ActivatedRoute ) {
-        this.post_id = activated.snapshot.params['post_id'];
+        console.log("SonubPostListPage::constructor()");
+        // this.post_id = activated.snapshot.params['post_id'];
+        activated.params.subscribe( param => {
+            this.post_id = param['post_id'];
+            this.post_id = this.post_id.replace('--', ',');
+            this.page_no = 0;
+            this.loadPage();
+        } );
+    }
+
+    loadPage() {
 
         let option: PAGE_OPTION = {
             post_id: this.post_id,
-            limit: 3
+            page_no: this.page_no,
+            limit: 10
         };
-        // post.debug = true;
-        post.page( option, (page: PAGE) => {
+        // this.post.debug = true;
+        this.post.page( option, (page: PAGE) => {
             if ( page.page_no == 1 ) {
                 this.replacePush( page, option );
                 // this.removeFirstPage( option );

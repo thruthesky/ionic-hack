@@ -1,8 +1,10 @@
-<base-header [title]="title"></base-header>
-<section class="content">
-
-    <h1>Sonub Post List Page</h1>
-    
+<sonub-header></sonub-header>
+  <section class="content container-fluid">
+    <div class="row">
+      <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
+      <section class="center posts col-sm-8 col-md-9 col-lg-6 col-xl-8">
+          
+          
     <hr>
         <!-- create a  post -->
         <edit-component *ngIf = " showPostCreateFrom "
@@ -13,7 +15,6 @@
             (error)   = " editComponentOnError( $event ) "
             (cancel)  = " editComponentOnCancel() "
             (success) = " editComponentOnSuccess() "
-
         ></edit-component>
         <button (click)="onClickPostCreate()">Post Write</button>
     <hr>
@@ -30,7 +31,12 @@
                 [mode] = " 'create-comment' "
             ></view-component>
         </div>
-    </div>
+    </div><!--/.post-->
+          
+      </section><!--/section.center-->
+      <aside class="right col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
+    </div><!--/.row-->
+  </section><!--/section.content-->
+<sonub-footer></sonub-footer>
 
-</section>
-<base-footer></base-footer>
+

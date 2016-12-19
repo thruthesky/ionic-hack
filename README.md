@@ -31,6 +31,7 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 * forum, latest post  and job - show all the data in whatever circumstance. even the internet is offline.
 
+* image 크기를 최대한 resize 해서 작게 한다. 매우 작게 해서, 빨리 로드되도록 한다.
 
 * philgo-api/v2/component/edit-component.html 에서 form 을 글 쓰기에도 적용한다.
     randy 에게 하라고 했는데 안했다.
