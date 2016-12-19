@@ -7,7 +7,7 @@ import { IonicApiModule } from '../api/ionic-api-0.2/ionic-api.module';
 
 import { RootComponent } from './app.component';
 
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+ //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRouteModule } from './app.route.module';
 
@@ -26,7 +26,7 @@ import { SonubModule } from '../apps/sonub/sonub.module';
     BrowserModule,
     IonicApiModule,
     AppRouteModule,
-//    NgbModule.forRoot(),
+ //   NgbModule.forRoot(),
     BaseModule,
     PhilgoApiModule,
     ForumModule,
