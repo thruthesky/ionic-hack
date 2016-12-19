@@ -25,7 +25,7 @@ import { ForumIndexPage } from '../pages/forum/forum-index/forum-index';
 import { PostListPage } from '../pages/forum/post-list/post-list';
 import { PostViewPage } from '../pages/forum/post-view/post-view';
 
-import { HomePage } from '../pages/base/home/home';
+//import { HomePage } from '../pages/base/home/home';
 import { FileNotFoundPage } from '../pages/base/file-not-found/file-not-found';
 
 import { RegisterPage } from '../pages/base/user/register/register';
@@ -37,10 +37,13 @@ import { JobListComponent } from "../apps/job/pages/job-list/job-list.component"
 import { JobEditComponent } from "../apps/job/pages/job-edit/job-edit.component";
 
 
+// sonub site
 // sonub forum index.
 import { SonubForumIndexPage } from '../apps/sonub/pages/forum/index/forum-index';
 import { SonubPostListPage } from '../apps/sonub/pages/forum/list/post-list';
 import { SonubPostViewPage } from '../apps/sonub/pages/forum/view/post-view';
+// sonub home
+import { SonubHomePage } from '../apps/sonub/pages/home/home';
 
 let appRoutes: Routes = [
 
@@ -65,7 +68,7 @@ let appRoutes: Routes = [
     { path: 'user/login', component: LoginPage },
 
     // default pages.
-    { path: '', component: HomePage },
+    { path: '', component: SonubHomePage },
     { path: '**', component: FileNotFoundPage }
 ];
 
