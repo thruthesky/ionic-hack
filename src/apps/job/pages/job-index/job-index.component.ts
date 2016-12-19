@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Renderer, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PhilippineRegion } from  '../../providers/philippine-region'
 import { PAGES } from '../../../../api/philgo-api/v2/philgo-api-interface';
@@ -53,16 +53,16 @@ export class JobIndexComponent implements OnInit {
   };
 
   searchBy: { location?, profession?, more? } = {};
-
-  // searchByLocation:boolean = false;
-  // searchByProfession:boolean = false;
-  // searchByAdvance:boolean = false;
+  scrollListener = null;
+  scrollCount = 0;
+  inPageLoading: boolean = false; // true while loading a page of posts.
+  noMorePosts: boolean = false; // true when there are no more posts of a page.
 
   constructor(private region: PhilippineRegion,
               private post: Post,
               private router: Router,
-              private member: Member
-
+              private member: Member,
+              private renderer: Renderer
   ) {
 
     // this.login = this.member.getLoginData();
@@ -73,7 +73,7 @@ export class JobIndexComponent implements OnInit {
     }, e => {
       //console.log('error location.get_province::', e);
     });
-
+    this.beginScroll();
   }
 
   ngOnInit() {
@@ -82,6 +82,27 @@ export class JobIndexComponent implements OnInit {
 
   get cityKeys() {
     return Object.keys( this.cities );
+  }
+
+  beginScroll() {
+    this.scrollListener = this.renderer.listenGlobal( 'document', 'scroll', _.debounce( () => this.pageScrolled(), 50));
+  }
+  endScroll() {
+    this.scrollListener();
+  }
+  pageScrolled() {
+    console.log("scrolled:", this.scrollCount++);
+    let pages = document.querySelector(".pages");
+    if ( pages === void 0 || ! pages || pages['offsetTop'] === void 0) return; // @attention this is error handling for some reason, especially on first loading of each forum, it creates "'offsetTop' of undefined" error.
+    let pagesHeight = pages['offsetTop'] + pages['clientHeight'];
+    let pageOffset = window.pageYOffset + window.innerHeight;
+    if( pageOffset > pagesHeight - 200) { // page scrolled. the distance to the bottom is within 200 px from
+      console.log("page scroll reaches at bottom: pageOffset=" + pageOffset + ", pagesHeight=" + pagesHeight);
+      this.search();
+    }
+  }
+  ngOnDestroy() {
+    this.endScroll();
   }
 
   search() {
@@ -104,11 +125,16 @@ export class JobIndexComponent implements OnInit {
     if( this.query.varchar_3 != 'all') this.condition += " AND varchar_3 = '"+ this.query.varchar_3 +"'";
     //work experience
     if( this.query.int_1 != 'all') this.condition += " AND int_1 = '"+ this.query.int_1 +"'";
-    //gender
-    if( this.query.gender != 'all') this.condition += " AND char_1 = '"+ this.query.gender +"'";
     //name
     if( this.query.name ) this.condition += " AND text_1 LIKE '%"+ this.query.name +"%'";
 
+    //gender
+    if( this.query.male != this.query.female ) {
+      let gender = '';
+      console.log("Male is " + this.query.male,"Female is " + this.query.female );
+      gender = this.query.male ? 'm' : 'f';
+      this.condition += " AND char_1 = '"+ gender +"'";
+    }
 
     this.debounceDoSearch();
     //this.doSearch();
@@ -133,11 +159,6 @@ export class JobIndexComponent implements OnInit {
     }, error => alert("error on search: " + error ) );
   }
 
-  onClickLocation() {
-
-  }
-
-
   onSearchComplete( data ) {
     //console.log('onSearchComplete()');
     this.hideLoader();
@@ -145,16 +166,58 @@ export class JobIndexComponent implements OnInit {
   }
 
   displayPosts( page ) {
-    //console.log( 'success', page );
-    if(page.search.length){
-      this.pages.push(page);
-      /*if ( page.page_no == 1 ) this.pages[0] = page;
-      else this.pages.push( page );*/
+    if ( page.search.length == 0 ) {
+      this.noMorePosts = true;
+      this.endScroll();
+    }
+    if ( page.page_no == 1 ) this.pages[0] = page;
+    else this.pages.push( page );
+    setTimeout( () => this.lazyProcess( page ), 100 );
+  }
+
+  lazyProcess( page ) {
+    if ( page.search.length == 0 ) {
+      return;
+    }
+
+    // for date.
+    page.search.map( post => {
+      post['date'] = this.getDate( post.stamp );
+      if ( post.comments === void 0 ) return;
+      post.comments.map( comment => comment['date'] = this.getDate( comment.stamp ) );
+    });
+
+    // for link
+    page.search.map( post => post['link'] = this.getLink( post ) );
+
+  }
+  getLink( post ) {
+    let full = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
+    full += '/-/' + post.idx;
+    return full;
+  }
+  getDate( stamp ) {
+    let m = parseInt(stamp) * 1000;
+    let d = new Date( m );
+
+    let post_year = d.getFullYear();
+    let post_month = d.getMonth();
+    let post_date = d.getDate();
+
+    let t = new Date();
+    let today_year = t.getFullYear();
+    let today_month = t.getMonth();
+    let today_date = t.getDate();
+
+
+    let time;
+    if ( today_year == post_year && today_month == post_month && today_date == post_date ) {
+      time = d.getHours() + ':' + d.getMinutes();
     }
     else {
-      //console.log('No More Post');
-      this.page--;
+      time = post_year + '-' + post_month + '-' + post_date;
     }
+    return time;
   }
 
   onClickProvince() {
@@ -179,10 +242,14 @@ export class JobIndexComponent implements OnInit {
   }
 
   showLoader() {
-    this.searching = true;
+    if ( this.inPageLoading ) {
+      console.info("in paeg loading");
+      return;
+    }
+    this.inPageLoading = true;
   }
   hideLoader() {
-    this.searching = false;
+    this.inPageLoading = false;
   }
 
   onClickEdit(idx){
@@ -218,6 +285,21 @@ export class JobIndexComponent implements OnInit {
   }
   getRange(min , max) {
     return Array.from(new Array( max - min), (x,i) => i+1);
+  }
+
+  onClickProfession(){
+    this.searchBy = (!this.searchBy.profession || this.searchBy.more ) ? {profession: true} : {};
+    console.log('SearchBy', this.searchBy);
+  }
+
+  onClickLocation(){
+    this.searchBy = (!this.searchBy.location || this.searchBy.more ) ? {location: true} : {};
+    console.log('SearchBy', this.searchBy);
+  }
+
+
+  onClickMore(){
+    this.searchBy = (!this.searchBy.more) ? this.searchBy = { profession: true, more: true,location: true } : {};
   }
 
 }

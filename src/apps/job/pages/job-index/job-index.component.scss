@@ -28,6 +28,16 @@ app-job-index {
         top: .5rem;
         right: .5rem;
       }
+      label {
+        padding: 0;
+      }
+      .range.col-xs-4 {
+        padding: 0;
+        .form-control {
+          padding: .5rem .25rem;
+
+        }
+      }
     }
     .row {
       margin-left: 0;
@@ -38,7 +48,9 @@ app-job-index {
   $break-large: 1200px;
   .profile {
     @media screen and (min-width: $break-small) {
-      width: 75px;
+      overflow: hidden;
+      width: 65px;
+      height: 65px;
       float: left;
       padding: 5px;
     }

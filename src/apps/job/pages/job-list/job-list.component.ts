@@ -1,6 +1,7 @@
 import { Component,Renderer } from '@angular/core';
 import { Post} from '../../../../api/philgo-api/v2/post';
 import { PAGE, PAGES } from '../../../../api/philgo-api/v2/philgo-api-interface';
+import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
@@ -9,6 +10,8 @@ import * as _ from 'lodash';
   templateUrl: 'job-list.component.html',
 })
 export class JobListComponent {
+
+  login: MEMBER_LOGIN = null;
   today = new Date();
   currentYear = this.today.getFullYear();
   moreButton = [];
@@ -25,12 +28,17 @@ export class JobListComponent {
 
   constructor(private post: Post,
               private router: Router,
-              private renderer: Renderer
+              private renderer: Renderer,
+              private member: Member
   ) {
-    this.loadPage();
-    this.beginScroll();
-
+    member.getLogin( x => {
+      this.login = x;
+      this.loadPage();
+      this.beginScroll();
+    });
   }
+
+
   beginScroll() {
     this.scrollListener = this.renderer.listenGlobal( 'document', 'scroll', _.debounce( () => this.pageScrolled(), 50));
   }
@@ -55,7 +63,7 @@ export class JobListComponent {
 
   loadPage() {
     if ( this.inPageLoading ) {
-      console.info("in paeg loading");
+      console.info("in page loading");
       return;
     }
     this.inPageLoading = true;
