@@ -6,11 +6,24 @@ import { SonubPostListPage } from './pages/forum/list/post-list';
 import { SonubPostViewPage } from './pages/forum/view/post-view';
 import { BaseComponentsModule } from '../../pages/base-components/base.components.module';
 import { PhilgoApiModule } from '../../api/philgo-api/v2/philgo-api-module';
+import { SonubHomePage } from './pages/home/home';
+
+//
+import { SonubHeader } from './components/header/header';
+import { SonubFooter } from './components/footer/footer';
+import { SonubLeft } from './components/left/left';
+import { SonubRight } from './components/right/right';
+
 @NgModule( {
     declarations: [
+        SonubHomePage,
         SonubForumIndexPage,
         SonubPostListPage,
-        SonubPostViewPage
+        SonubPostViewPage,
+        SonubHeader,
+        SonubFooter,
+        SonubRight,
+        SonubLeft
     ],
     imports: [
         BrowserModule,

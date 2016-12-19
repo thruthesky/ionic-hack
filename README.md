@@ -29,6 +29,9 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* forum, latest post  and job - show all the data in whatever circumstance. even the internet is offline.
+
+
 * philgo-api/v2/component/edit-component.html 에서 form 을 글 쓰기에도 적용한다.
     randy 에게 하라고 했는데 안했다.
     dev.philgo.com 에 기록을 해야 할 것 같다.
