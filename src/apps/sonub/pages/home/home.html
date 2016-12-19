@@ -1,15 +1,26 @@
 <sonub-header></sonub-header>
-  <div class="content container-fluid">
+  <section class="content container-fluid">
     <div class="row">
       <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2">
         <sonub-left></sonub-left>
       </aside>
-      <div class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
-          .center
-      </div>
+      <section class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
+          
+          <div *ngFor = " let group of forum_group ">
+            {{ group }}
+
+            
+            <div *ngFor = " let forum of forums[group] ">
+              {{ forum | json }}
+            </div>
+
+            
+          </div>
+          
+      </section><!--/section.center-->
       <aside class="right col-sm-12 col-lg-3 col-xl-2">
         <sonub-right></sonub-right>
       </aside>
     </div>
-  </div><!--/content-->
+  </section><!--/section.content-->
 <sonub-footer></sonub-footer>

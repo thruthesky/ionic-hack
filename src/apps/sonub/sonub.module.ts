@@ -9,11 +9,16 @@ import { PhilgoApiModule } from '../../api/philgo-api/v2/philgo-api-module';
 import { SonubHomePage } from './pages/home/home';
 
 //
+import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
+
+//
 import { SonubHeader } from './components/header/header';
 import { SonubFooter } from './components/footer/footer';
 import { SonubLeft } from './components/left/left';
 import { SonubRight } from './components/right/right';
 
+// services
+import { ForumService } from './providers/forum'
 @NgModule( {
     declarations: [
         SonubHomePage,
@@ -29,7 +34,9 @@ import { SonubRight } from './components/right/right';
         BrowserModule,
         RouterModule,
         BaseComponentsModule,
-        PhilgoApiModule
-    ]
+        PhilgoApiModule,
+        LanguagePipeModule
+    ],
+    providers: [ ForumService ]
 })
 export class SonubModule {}
