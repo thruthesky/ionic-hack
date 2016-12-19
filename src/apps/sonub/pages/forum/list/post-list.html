@@ -6,8 +6,10 @@
     <hr>
         <!-- create a  post -->
         <edit-component *ngIf = " showPostCreateFrom "
-            [mode]    = " create-post "
+            [mode]    = " 'create-post' "
             [active]  = " true "
+            [post_id] = " post_id "
+            [posts]   = " posts "
             (error)   = " editComponentOnError( $event ) "
             (cancel)  = " editComponentOnCancel() "
             (success) = " editComponentOnSuccess() "
