@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { PhilippineRegion } from  '../../providers/philippine-region'
 import { Post, POST_DATA } from '../../../../api/philgo-api/v2/post';
-import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
-import { Data, FILE_UPLOAD_RESPONSE, FILE_UPLOAD_DATA, DATA_UPLOAD_OPTIONS } from '../../../../api/philgo-api/v2/data';
+import { FILE_UPLOAD_DATA } from '../../../../api/philgo-api/v2/data';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import * as app from '../../../../etc/app.helper';
-import * as _ from 'lodash';
 
 declare var Array;
 declare var navigator;
@@ -46,9 +41,7 @@ export class JobViewComponent {
   files: Array<FILE_UPLOAD_DATA> = <Array<FILE_UPLOAD_DATA>>[];
 
   constructor(
-    private region: PhilippineRegion,
     private post: Post,
-    private data: Data,
     private router: Router,
     private route: ActivatedRoute,
   ) {
