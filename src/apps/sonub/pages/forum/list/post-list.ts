@@ -37,7 +37,7 @@ export class SonubPostListPage {
             }
             else this.delayPush( page );
         },
-        error => alert(error)
+        error => alert("Page Load Error: " + error)
         );
     }
 
