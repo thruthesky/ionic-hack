@@ -185,12 +185,8 @@ https://github.com/thruthesky/aonic
 # Installation
 
 * npm install
+* ionic serve ; To create cordova environment. There will be error. Ignore it.
 
-* ionic plugin add cordova-plugin-camera
-* ionic plugin add cordova-plugin-file-transfer
-* ionic plugin add cordova-plugin-dialogs
-* cordova plugin add ionic-plugin-deploy
-* ionic plugin add phonegap-plugin-push // ???
 
 ## Submodule Installation
 
@@ -199,6 +195,14 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule update --init
 * git submodule foreach git branch
 * git submodule foreach git checkout master
+
+## Plugin Insallation
+ionic plugin add cordova-plugin-camera
+ionic plugin add cordova-plugin-file-transfer
+ionic plugin add cordova-plugin-dialogs
+cordova plugin add ionic-plugin-deploy
+* ionic plugin add phonegap-plugin-push // ???
+
 
 
 ## Update @ionic/app-scripts copy.config.js
