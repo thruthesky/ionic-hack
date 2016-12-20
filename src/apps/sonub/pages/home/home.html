@@ -1,23 +1,43 @@
 <sonub-header></sonub-header>
   <section class="content container-fluid">
     <div class="row">
-      <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
-      <section class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
+      <aside class="left hidden-sm-down col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
+      <section class="center col-sm-8 col-md-7 col-lg-6 col-xl-8">
           
-          <div *ngFor = " let group of forum_group ">
-            {{ group }}
 
-            
-            <div *ngFor = " let forum of forums[group] ">
-              {{ forum | json }}
-              <div routerLink="forum/{{forum}}">{{ forum }}</div>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-xs-4 col-sm-4">
+              
+<latest-component
+    [title]     = " ['Discussion', '자유게시판'] | ek "
+    [post_id]   = " 'freetalk' "
+></latest-component>
+
             </div>
+            <div class="col-xs-4 col-sm-4">
+              
+<latest-component
+    [title]     = " ['QnA', '질문과답변'] | ek "
+    [post_id]   = " 'qna' "
+></latest-component>
 
-            
+            </div>
+            <div class="col-xs-4 col-sm-4">
+              
+<latest-component
+    [title]     = " ['Buy&amp;Sell', '회원장터'] | ek "
+    [post_id]   = " 'buyandsell' "
+></latest-component>
+
+            </div>
           </div>
+        </div>
+
+
           
       </section><!--/section.center-->
-      <aside class="right col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
+      <aside class="right hidden-sm-down col-md-2 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
     </div><!--/.row-->
   </section><!--/section.content-->
 <sonub-footer></sonub-footer>
