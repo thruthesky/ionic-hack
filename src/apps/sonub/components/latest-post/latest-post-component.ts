@@ -14,23 +14,62 @@ export class LatestPostComponent {
     @Input() title: string = null;
     @Input() post_id: string = null;
     @Input() limit : number = 5;
+    @Input() options = {
+        right : {
+             icon : "",
+             title : "",  
+             post_id : "",
+             limit : 10
+         },
+         left_top : {
+             icon : "",
+             title : "", 
+             post_id : "", 
+            limit : 5
+         },
+         left_bottom :{
+             icon : "",
+             title : "",
+             post_id : "",
+             limit : 5
+         }
+
+    };
     posts: POSTS = <POSTS> [];
+    latest = {
+         right :  <POSTS>[],
+         left_top :  <POSTS>[],
+         left_bottom :  <POSTS>[]
+     };
+
+
     constructor( private post: Post ) {
         //console.log("LatestComponent::constructor()");
     }
     ngOnInit() {
-        let option: PAGE_OPTION = {
-            post_id: this.post_id,
-            limit: this.limit,
-            expire: ONE_HOUR_STAMP,
+        this.loadPosts( this.options.right.post_id,    this.options.right.limit,    this.latest.right);
+        this.loadPosts( this.options.left_top.post_id,   this.options.left_top.limit,   this.latest.left_top);
+        this.loadPosts( this.options.left_bottom.post_id,   this.options.left_bottom.limit,   this.latest.left_bottom);
+    }
+
+
+
+    loadPosts(post_id,limit, posts){
+
+         let option: PAGE_OPTION = {
+            post_id: post_id,
+            limit: limit,
+            // expire: ONE_HOUR_STAMP,
             fields: 'idx,idx_parent,subject,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
         };
-        this.post.page( option, ( page: PAGE ) => {
-            console.log("latest: ", page);
+
+
+          this.post.page( option, ( page: PAGE ) => {
+            console.log("latest: ", page);        
             page.posts.map( ( v, i ) => {
                 setTimeout( () => {
                     v.url = this.post.getLink( v );
-                    this.posts.push( v );
+                    posts.push( v );
                 }, i * 50 );
             } );
         },
@@ -38,3 +77,5 @@ export class LatestPostComponent {
         () => {});
     }
 }
+
+
