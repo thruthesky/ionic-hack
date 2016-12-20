@@ -1,38 +1,41 @@
 <sonub-header></sonub-header>
-  <section class="content container-fluid">
+    <section class="content container-fluid">
     <div class="row">
-      <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
-      <section class="center posts col-sm-8 col-md-9 col-lg-6 col-xl-8">
-    <hr>
-        <!-- create a  post -->
-        <edit-component *ngIf = " showPostCreateFrom "
-            [mode]    = " 'create-post' "
-            [active]  = " true "
-            [post_id] = " post_id "
-            [posts]   = " posts "
-            (error)   = " editComponentOnError( $event ) "
-            (cancel)  = " editComponentOnCancel() "
-            (success) = " editComponentOnSuccess() "
-        ></edit-component>
-        <button (click)="onClickPostCreate()">Post Write</button>
-    <hr>
-    <div class="post" *ngFor=" let post of posts; trackBy: post?.idx ">
-        <view-component
-            [post]="post" [root]="post"
-            [show]="true"
-            [mode] = " 'create-comment' "
-        ></view-component>
-        <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
-            <view-component
-                [post]="comment" [root]="post"
-                [show] = "true"
-                [mode] = " 'create-comment' "
-            ></view-component>
-        </div>
-    </div><!--/.post-->
-          
-      </section><!--/section.center-->
-      <aside class="right col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
+        <aside class="left col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
+        <section class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
+            <hr>
+            <!-- create a  post -->
+            <edit-component *ngIf = " showPostCreateFrom "
+                [mode]    = " 'create-post' "
+                [active]  = " true "
+                [post_id] = " post_id "
+                [posts]   = " posts "
+                (error)   = " editComponentOnError( $event ) "
+                (cancel)  = " editComponentOnCancel() "
+                (success) = " editComponentOnSuccess() "
+            ></edit-component>
+            <button (click)="onClickPostCreate()">Post Write</button>
+            <hr>
+            <div *ngIf=" posts " class="posts">
+                <div class="post" *ngFor=" let post of posts; trackBy: post?.idx ">
+                    <view-component
+                        [post]="post" [root]="post"
+                        [show]="true"
+                        [mode] = " 'create-comment' "
+                    ></view-component>
+                    <div *ngIf=" post?.comments " class="comments">
+                        <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
+                        <view-component
+                            [post]="comment" [root]="post"
+                            [show] = "true"
+                            [mode] = " 'create-comment' "
+                        ></view-component>
+                        </div>
+                    </div><!--/.comments-->
+                </div><!--/.post-->
+            </div><!--/.posts-->
+        </section><!--/section.center-->
+        <aside class="right col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
     </div><!--/.row-->
-  </section><!--/section.content-->
+    </section><!--/section.content-->
 <sonub-footer></sonub-footer>

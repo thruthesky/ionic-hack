@@ -29,6 +29,10 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* 오프라인에서 테스트를 해서 각종 에럴르 없앤다.
+
+* 그룹 글 검색이 되는 지 확인.
+
 * forum, latest post  and job - show all the data in whatever circumstance. even the internet is offline.
 
 * image 크기를 최대한 resize 해서 작게 한다. 매우 작게 해서, 빨리 로드되도록 한다.
