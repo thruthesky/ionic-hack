@@ -10,8 +10,11 @@
     "ionic:serve": "ionic-app-scripts serve --address 192.168.26.2 --port 8000"
   },
   "config": {
-    "ionic_source_map_type": "source-map"
+    "ionic_source_map_type": "source-map",
+    "ionic_copy": "./copy-hack.config.js",
+    "ionic_watch": "./watch-hack.config.js"
   },
+
   "dependencies": {
     "@angular/common": "2.2.4",
     "@angular/compiler": "2.2.4",
