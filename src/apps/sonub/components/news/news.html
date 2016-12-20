@@ -1,0 +1,24 @@
+{{ title }}
+<div *ngIf=" posts " class="page_no">
+  <div class="left" *ngIf=" posts[0] ">
+    <div class="photo">
+      <img src="{{posts[0].photos[0].url_thumbnail}}">
+    </div>
+    <div class="subject" routerLink="{{ posts[0].url }}"><span>{{ posts[0].subject }}</span></div>
+  </div>
+  <div class="right">
+    <div class="right-top" *ngIf=" posts[1] " routerLink="{{ posts[1].url }}">
+      <div class="subject"><span>{{ posts[1].subject }}</span></div>
+      <div class="content"><span>{{ posts[1].content }}</span></div>
+    </div>
+    <div class="bottom-subject" *ngIf=" posts[2] " routerLink="{{ posts[2].url }}">
+      <div class="subject"><span>{{ posts[2].subject }}</span></div>
+    </div>
+    <div class="bottom-subject" *ngIf=" posts[3] " routerLink="{{ posts[3].url }}">
+      <div class="subject"><span>{{ posts[3].subject }}</span></div>
+    </div>
+    <div class="bottom-subject" *ngIf=" posts[4] " routerLink="{{ posts[4].url }}">
+      <div class="subject"><span>{{ posts[4].subject }}</span></div>
+    </div>
+  </div>
+</div>
