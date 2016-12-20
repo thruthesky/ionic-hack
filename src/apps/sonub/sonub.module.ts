@@ -8,6 +8,7 @@ import { BaseComponentsModule } from '../../pages/base-components/base.component
 import { PhilgoApiModule } from '../../api/philgo-api/v2/philgo-api-module';
 import { SonubHomePage } from './pages/home/home';
 
+import { LatestPostComponent } from './components/latest-post/latest-post-component';
 //
 import { LanguagePipeModule } from '../../pipes/language/language.pipe.module';
 
@@ -30,7 +31,8 @@ import { ForumService } from './providers/forum'
         SonubFooter,
         SonubRight,
         SonubLeft,
-        SonubNews
+        SonubNews,
+        LatestPostComponent
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,7 @@
+<span class="title"><i [class]="title_icon"></i> {{ title }}<span>
+<hr>
+<ul *ngIf=" posts ">
+    <li *ngFor=" let post of posts ">   
+        <span routerLink="{{ post.url }}" class="item">{{ post.subject }} ( {{ post.no_of_comment }})</span>
+    </li>
+</ul>

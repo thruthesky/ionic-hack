@@ -1,0 +1,35 @@
+latest-post-component{
+   
+    li{
+        // background: blue;
+        white-space: nowrap;
+        overflow: hidden;
+        word-wrap: normal;
+        text-overflow: ellipsis;
+        list-style-position:inside;
+        font-size: 0.8em;
+        padding:0;
+        margin:0;
+      
+          
+        span{
+             padding:0;
+             margin:0;
+              left:0;
+        }
+
+        ul{
+            background: black;
+            padding:0;
+            margin:0;
+           
+        }
+    }
+
+    hr{
+        border-top: dotted 1px;
+    }
+
+}
+
+
