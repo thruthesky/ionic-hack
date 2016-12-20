@@ -1,5 +1,4 @@
 import { Component, Renderer, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { PhilippineRegion } from  '../../providers/philippine-region'
 import { PAGES } from '../../../../api/philgo-api/v2/philgo-api-interface';
 import { Member, MEMBER_LOGIN } from '../../../../api/philgo-api/v2/member';
@@ -14,7 +13,9 @@ declare var Array;
 })
 export class JobIndexComponent implements OnInit {
 
-  login: MEMBER_LOGIN = null;
+  login: MEMBER_LOGIN = {
+    id: ''
+  };
   page: number = 1;
   range: number[] = [18, 60];
   searching: boolean = false;
@@ -62,13 +63,14 @@ export class JobIndexComponent implements OnInit {
 
   constructor(private region: PhilippineRegion,
               private post: Post,
-              private router: Router,
               private member: Member,
               private renderer: Renderer
   ) {
 
     // this.login = this.member.getLoginData();
-    member.getLogin( x => this.login = x );
+    member.getLogin( x => {
+      this.login = x;
+    } );
 
     region.get_province( re => {
       this.provinces = re;
@@ -254,30 +256,6 @@ export class JobIndexComponent implements OnInit {
     this.inPageLoading = false;
   }
 
-  onClickEdit(idx){
-    this.router.navigate(['/job/post', idx]);
-  }
-
-  onClickShare(idx) {
-    console.log("onClickShare", idx);
-
-  }
-
-
-
-  onClickDelete( post ) {
-    let re = confirm("Are you sure you want to delete this post?");
-    if ( re ) {
-      this.post.delete( post.idx, re => {
-            //console.log('delete: re: ', re);
-          },
-          error => alert("delete error: " + error )
-      );
-    }
-    else {
-      //console.log('delete Was Canceled');
-    }
-  }
 
   onChange() {
       this.search();

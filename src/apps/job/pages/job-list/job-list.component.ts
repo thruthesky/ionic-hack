@@ -11,7 +11,10 @@ import * as _ from 'lodash';
 })
 export class JobListComponent {
 
-  login: MEMBER_LOGIN = null;
+  login: MEMBER_LOGIN = {
+    id:''
+  };
+  shareUrl = 'http://192.168.26.2:8000/job/view/';
   today = new Date();
   currentYear = this.today.getFullYear();
   moreButton = [];
@@ -33,9 +36,9 @@ export class JobListComponent {
   ) {
     member.getLogin( x => {
       this.login = x;
-      this.loadPage();
-      this.beginScroll();
     });
+    this.loadPage();
+    this.beginScroll();
   }
 
 
@@ -138,7 +141,7 @@ export class JobListComponent {
 
   }
 
-
+/*
   onClickEdit(idx){
     this.router.navigate(['/job/post', idx]);
   }
@@ -157,6 +160,6 @@ export class JobListComponent {
       //console.log('delete Was Canceled');
     }
   }
-
+*/
 
 }
