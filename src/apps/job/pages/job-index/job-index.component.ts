@@ -17,12 +17,9 @@ export class JobIndexComponent implements OnInit {
     id: ''
   };
   page: number = 1;
-  range: number[] = [18, 60];
-  searching: boolean = false;
   numbers = Array.from(new Array(20), (x,i) => i+1);
 
   //variables used in range
-
   shareUrl = 'http://192.168.26.2:8000/job/view/';
   minAge: number = 18;
   maxAge: number = 60;
@@ -34,8 +31,6 @@ export class JobIndexComponent implements OnInit {
 
   today = new Date();
   currentYear = this.today.getFullYear();
-
-  moreButton = [];
 
   provinces: Array<string> = [];
   cities = [];

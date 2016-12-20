@@ -17,6 +17,7 @@ import { SonubHeader } from './components/header/header';
 import { SonubFooter } from './components/footer/footer';
 import { SonubLeft } from './components/left/left';
 import { SonubRight } from './components/right/right';
+import { SonubNews } from './components/news/news';
 
 // services
 import { ForumService } from './providers/forum'
@@ -30,6 +31,7 @@ import { ForumService } from './providers/forum'
         SonubFooter,
         SonubRight,
         SonubLeft,
+        SonubNews,
         LatestPostComponent
     ],
     imports: [

@@ -92,23 +92,19 @@
     <i class="close fa fa-times" (click)=" searchBy = {} "></i>
   </nav>
 
-  <div class="card card-block">
-    Searching:
-    <span *ngIf="query.sub_category">{{query.sub_category}} with </span>
-    Age between {{ minAgeSelected }} and {{ maxAgeSelected }}
-    <span *ngIf="query.male">and Male</span>
-    <span *ngIf="query.female">and Female</span>
-    <span *ngIf="query.int_1 != 'all'">and {{query.int_1}} year of experience</span>
-    <span *ngIf="query.varchar_2 != 'all'">and province "{{query.varchar_2}}"</span>
-    <span *ngIf="query.varchar_3 != 'all' && query.varchar_2 != query.varchar_3">and city "{{query.varchar_3}}"</span>
-    <span *ngIf="query.name">and name like "{{query.name}}"</span>
-  </div>
-
-  <div *ngIf="searching">
-    <i class="fa fa-spinner fa-pulse fa-fw"></i>
-    <span class="sr-only">Loading...</span>
-  </div>
   <div *ngIf=" pages.length " class="pages container">
+    <div class="card card-block">
+      Searching:
+      <span *ngIf="query.sub_category">{{query.sub_category}} with </span>
+      Age between {{ minAgeSelected }} and {{ maxAgeSelected }}
+      <span *ngIf="query.male">and Male</span>
+      <span *ngIf="query.female">and Female</span>
+      <span *ngIf="query.int_1 != 'all'">and {{query.int_1}} year of experience</span>
+      <span *ngIf="query.varchar_2 != 'all'">and province "{{query.varchar_2}}"</span>
+      <span *ngIf="query.varchar_3 != 'all' && query.varchar_2 != query.varchar_3">and city "{{query.varchar_3}}"</span>
+      <span *ngIf="query.name">and name like "{{query.name}}"</span>
+    </div>
+
     <div *ngFor=" let page of pages " class="page posts row">
       <div class="post col-xs-6" *ngFor=" let post of page.search ">
         <job-base-list-component

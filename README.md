@@ -197,6 +197,8 @@ If you clone a repository which was forked, then you do not need to do 'git subm
 * git submodule foreach git checkout master
 
 ## Plugin Insallation
+ionic platform add browser
+ionic platform add android
 ionic plugin add cordova-plugin-camera
 ionic plugin add cordova-plugin-file-transfer
 ionic plugin add cordova-plugin-dialogs
