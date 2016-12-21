@@ -7,6 +7,8 @@ import { Component} from '@angular/core';
     selector: 'latest-post-component',
     templateUrl: 'latest-post-component.html'
 })
+
 export class LatestPostComponent { }
+
 
 

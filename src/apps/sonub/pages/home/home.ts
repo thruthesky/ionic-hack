@@ -13,5 +13,9 @@ export class SonubHomePage {
         this.forums = forum.forums;
         this.forum_group = Object.keys( this.forums );
         console.log( this.forums);
+
+
+        
+
     }
 }
