@@ -14,9 +14,13 @@
           <div class="sonub-main-banner">
             <img src="assets/img/ads.png">
           </div>
-        <div class="row">
-          <latest-post-component class="col-sm-12 col-xs-12"></latest-post-component>
-         </div>
+          <div class="row">
+            <latest-post-component class="col-sm-12 col-xs-12"></latest-post-component>
+          </div>
+          <sonub-latest-photo
+            [post_id]   = " 'freetalk' "
+            [limit]     = " 10 "
+          ></sonub-latest-photo>
           <!--div class="col-xs-4 col-sm-4">
             <latest-component
               [title]     = " ['Discussion', '자유게시판'] | ek "

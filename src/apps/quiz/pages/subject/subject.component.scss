@@ -5,6 +5,10 @@ input {
     text-decoration: inherit;
 }
 
-a{
-    cursor: pointer;
+[action]{
+    cursor: pointer; 
+    display: inline;
+    @media(max-width: 480px){
+        display: block;
+    }   
 }

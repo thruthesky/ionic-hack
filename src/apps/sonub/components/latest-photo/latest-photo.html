@@ -1,0 +1,28 @@
+<div class="title" *ngIf="title">{{ title }}</div>
+<div *ngIf=" posts ">
+  <div *ngFor=" let post of posts " routerLink="{{ post.url }}" class="post">
+    <table>
+      <tr>
+        <td class="left">
+          <div class="photo">
+            <img src="{{post.photos[0].url_thumbnail}}">
+          </div>
+        </td>
+        <td class="right">
+          <div class="info">
+            <span class="name">{{post.user_name}}</span><span>Date:{{post.stamp | date:'yyyy-MM-dd'}} Viewed:{{post.no_of_view}}</span>
+          </div>
+          <div class="subject">
+            <span class="title">{{ post.subject }}</span><span *ngIf="post.no_of_comment">({{post.no_of_comment}})</span>
+          </div>
+          <div class="content" *ngIf="post.content">
+            <span>{{post.content}}</span>
+          </div>
+          <div class="comment" *ngIf="post.comments">
+            <span>{{post.comments[0].content}}</span>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

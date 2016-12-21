@@ -115,9 +115,6 @@ export class SubjectformComponent implements OnInit {
 
 
 
-
-
-
   onClickSubmit(){
 
     let subject           = <POST_DATA>{};

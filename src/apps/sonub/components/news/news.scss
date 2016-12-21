@@ -1,14 +1,16 @@
 sonub-news {
   .page_no {
+    padding: 0 5px;
     .left {
       display: block;
-      margin: 0px 2% 0 4px;
+      margin: 0 2% 0 4px;
       float: left;
       width: 34%;
       height: 100%;
       .photo {
         width: 92%;
         padding-right: 8%;
+        cursor: pointer;
         img {
           width: 100%;
         }
@@ -29,6 +31,9 @@ sonub-news {
       }
     }
     .right {
+      span{
+        cursor: pointer;
+      }
       .right-top {
         .subject {
           font-weight: bold;

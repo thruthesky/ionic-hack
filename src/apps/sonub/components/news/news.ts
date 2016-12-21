@@ -4,9 +4,7 @@
  */
 import { Component, Input } from '@angular/core';
 import { Post, PAGE, PAGE_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
-import { ONE_HOUR_STAMP } from '../../../../etc/share';
-import * as _ from 'lodash';
-
+import { ONE_MINUTE_STAMP } from '../../../../etc/share';
 
 @Component({
   selector: 'sonub-news',
@@ -24,7 +22,7 @@ export class SonubNews {
     let option: PAGE_OPTION = {
       post_id: this.post_id,
       limit: this.limit,
-      //expire: ONE_HOUR_STAMP,
+      expire: ONE_MINUTE_STAMP,
       fields: 'idx,idx_parent,subject,SUBSTRING(content_stripped,1,50) as content,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
     };
     console.log('option::',option);
