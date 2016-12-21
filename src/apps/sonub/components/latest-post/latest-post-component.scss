@@ -12,11 +12,13 @@ latest-post-component{
             border-spacing: 2px;
             border:1px solid #cacaca;
             margin :1%;
+           
         }
     
         table > tbody{
             display: table-row-group;
             vertical-align: middle; 
+          
         }
 
         table > tbody >   tr:first-child td:first-child latest-component .title:before{     
@@ -40,7 +42,7 @@ latest-post-component{
         
         table > tbody > tr > td{
             width: 50%;
-            padding: 5px;
+            padding: 10px;
         }
 
         table > tbody > tr > td > latest-component .title{
