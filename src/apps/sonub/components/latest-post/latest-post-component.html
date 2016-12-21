@@ -1,93 +1,25 @@
-
-
-<!--<section class="container">
-
-    <div class="right">
-       <article class="">
-            <div class="title"><i [class]="options.right.icon"></i> {{ options.right.title }}</div>
-                <div *ngIf=" latest.right " class="content">
-                    <div *ngFor=" let post of latest.right" class="subject">   
-                        &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                    </div>
-                </div>
-        </article>
-    </div>
-
-    <div class="left">
-
-        <article class="left-top">
-                <div class="title"><i [class]="options.left_top.icon"></i> {{ options.left_top.title }}</div>
-                <div *ngIf=" latest.left_top" class="content">
-                    <div *ngFor=" let post of latest.left_top " class="subject">   
-                       &bull; <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                    </div>
-                </div>
-        </article>
-
-        <article class="left-bottom">
-             <div class="title"><i [class]="options.left_bottom.icon"></i> {{ options.left_bottom.title }}</div>
-                <div *ngIf=" latest.left_bottom " class="content">
-                    <div *ngFor=" let post of latest.left_bottom" class="subject">   
-                      &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                    </div>
-                </div>
-        </article>
-
-    </div>
-</section>-->
-
-
 <table cellpadding="0" cellspacing="0" border="0"  >
     <tbody>
         <tr valign="top">
-        <td rowspan="2">
-            <latest-component
-              [title]     = " ['Discussion', '자유게시판'] | ek "
-              [post_id]   = " 'freetalk' "
-            ></latest-component>
-            <!--<div class="forum">
-                    <div class="title">
-                        <i [class]="options.right.icon"></i> {{ options.right.title }}
-                    </div>
-                    <div *ngIf=" latest.right " class="content">
-                        <div *ngFor=" let post of latest.right" class="subject">   
-                            &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                        </div>
-                    </div>
-                 
-                  
-                   
-            </div>-->
-        </td>
-         <td>
-              <latest-component
-                [title]     = " ['Buy&amp;Sell', '회원장터'] | ek "
-              [post_id]   = " 'qna' "
-            ></latest-component>
-                <!--<div class="forum">
-                    <div class="title"><i [class]="options.left_top.icon"></i> {{ options.left_top.title }}</div>
-                    <div *ngIf=" latest.left_top" class="content">
-                        <div *ngFor=" let post of latest.left_top " class="subject">   
-                        &bull; <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                        </div>
-                    </div>
-                </div>-->
+            <td rowspan="2">
+                <latest-component
+                [title]     = " ['Discussion', '자유게시판'] | ek "
+                [post_id]   = " 'freetalk' "
+                ></latest-component>
+            </td>
+            <td>
+                <latest-component
+                    [title]     = " ['Buy&amp;Sell', '회원장터'] | ek "
+                [post_id]   = " 'buyandsell' "
+                ></latest-component>      
             </td>
         </tr>
         <tr valign="top">    
             <td>
                  <latest-component
                     [title]     = " ['QnA', '질문과답변'] | ek "
-                    [post_id]   = " 'buyandsell' "
-                    ></latest-component>
-                <!--<div class="forum">
-                    <div class="title"><i [class]="options.left_bottom.icon"></i> {{ options.left_bottom.title }}</div>
-                    <div *ngIf=" latest.left_bottom " class="content">
-                        <div *ngFor=" let post of latest.left_bottom" class="subject">   
-                        &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                        </div>
-                    </div>
-                </div>-->
+                    [post_id]   = " 'qna' "
+                ></latest-component>
             </td>
         </tr>
     </tbody>
