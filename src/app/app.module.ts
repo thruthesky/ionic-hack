@@ -18,6 +18,7 @@ import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
 import { PushModule } from  '../apps/push/push.module';
 import { JobModule } from '../apps/job/app/job.module';
 import { SonubModule } from '../apps/sonub/sonub.module';
+import { QuizModule } from '../apps/quiz/app/quiz.module';
 @NgModule({
   declarations: [
     RootComponent
@@ -32,7 +33,8 @@ import { SonubModule } from '../apps/sonub/sonub.module';
     ForumModule,
     PushModule,
     JobModule,
-    SonubModule
+    SonubModule,
+    QuizModule
   ],
   bootstrap: [ RootComponent ],
   providers: [ ]

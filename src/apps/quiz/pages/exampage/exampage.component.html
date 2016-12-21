@@ -1,0 +1,28 @@
+<quiz-base-nav></quiz-base-nav>
+<br><br><br>
+<div class="container">
+ <div timer *ngIf="countdown"> <span>{{ countdown }}</span></div>
+    <div></div>
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+     
+    <h3 class="display-5" *ngIf="countdown">{{ subject_data.post?.content }}</h3>
+    <p class="lead">{{ current_question?.content }}</p>
+
+      <fieldset class="form-group">
+        <p>Choices</p>
+        <div class="form-check" *ngFor="let c of current_choices">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="radio" id="choice1" value="{{c.key}}" [(ngModel)]="radio">
+            {{ c.value }}
+          </label>
+        </div>
+
+      </fieldset>
+      <button type="button" class="btn btn-primary btn-sm btn-block" (click)="onClickNext(radio)">Next</button>
+      <button type="button" class="btn btn-primary btn-sm btn-block" (click)="onClickFinish()">End Exam</button>
+  </div>
+</div>
+</div>

@@ -1,0 +1,54 @@
+<quiz-base-nav></quiz-base-nav>
+<br><br><br>
+<div class="container">
+  <div *ngIf="!subjectInfo.content">loading</div>
+  <div class="jumbotron jumbotron-fluid" *ngIf="subjectInfo.content">
+    <div class="container">
+      <h1 class="display-3">{{ subjectInfo.content }}</h1>
+      
+      <p class="lead">Status: 
+        <span *ngIf="subjectInfo.varchar_1 == 'true'"><span class="tag tag-success">Active</span></span>
+        <span *ngIf="subjectInfo.varchar_1 == 'false'"><span class="tag tag-danger">Inactive</span></span>
+      </p>
+      <p class="lead">Time Limit: {{ subjectInfo.varchar_3 }} mins.</p>
+    </div>
+  </div>
+
+</div>
+
+<br>
+<div class="container-fluid">
+<div *ngIf="switch"><app-questionform 
+[mode]    = " 'create-post' "
+[posts]   = " question_data "
+(cancel)  = " editComponentOnCancel() "
+(success) = " editComponentOnSuccess() "></app-questionform></div>
+</div>
+
+<hr/>
+<div class="container-fluid">
+  <button class="btn btn-secondary btn-sm" (click)="onClickAddQuestions()" *ngIf="activeCheck">Add Question</button>
+  <button class="btn btn-secondary btn-sm" disabled *ngIf="!activeCheck">Add Question</button>
+<br/> <br/>
+
+  <div class="card" *ngFor="let exam of question_data; let i = index">
+    <div class="card-block">
+      <h4 class="card-title">Question: {{ exam.content }}</h4>
+        <div  *ngIf="exam.more">
+          <ol choices>
+            <li>{{ exam.varchar_1 }} </li>
+            <li>{{ exam.varchar_2 }} </li>
+            <li>{{ exam.varchar_3 }} </li>
+            <li>{{ exam.varchar_4 }} </li>
+          </ol>
+           <h4>Answer: {{ exam.varchar_5 }}</h4>
+        </div>
+
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-secondary btn-sm" (click)=" exam.more = ! exam.more " >{{ exam.more  ? 'Less' : 'More' }}</button> 
+          <button class="btn btn-success btn-sm" (click)="onClickEdit( exam, i )">EDIT</button>
+          <button class="btn btn-danger btn-sm" (click)="onClickDelete( exam.idx, i )">DELETE</button>  
+        </div>
+    </div>
+  </div>
+</div>

@@ -58,8 +58,8 @@ export class LatestPostComponent {
 
          let option: PAGE_OPTION = {
             post_id: post_id,
-            limit: limit,
-            expire: ONE_HOUR_STAMP,
+            limit: 5,
+            // expire: ONE_HOUR_STAMP,
             fields: 'idx,idx_parent,subject,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
         };
 
