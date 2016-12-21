@@ -29,7 +29,12 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
-* 오프라인에서 테스트를 해서 각종 에럴르 없앤다.
+* Show 10 next posts and 10 previous posts under a post view page.
+
+* Message. 쪽지 기능과 push 기능을 연동한다.
+
+* 오프라인에서 테스트를 해서 각종 에러 없앤다.
+    Test all error handlings without internet.
 
 * 그룹 글 검색이 되는 지 확인.
 

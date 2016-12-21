@@ -59,13 +59,15 @@ export class LatestPostComponent {
          let option: PAGE_OPTION = {
             post_id: post_id,
             limit: limit,
-            // expire: ONE_HOUR_STAMP,
+            expire: ONE_HOUR_STAMP,
             fields: 'idx,idx_parent,subject,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
         };
 
 
           this.post.page( option, ( page: PAGE ) => {
-            console.log("latest: ", page);        
+            console.log("latest: ", page);
+            
+            this.posts = [];
             page.posts.map( ( v, i ) => {
                 setTimeout( () => {
                     v.url = this.post.getLink( v );

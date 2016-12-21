@@ -2,4 +2,16 @@ sonub-left {
     display: block;
     background-color: #876;
     width: 100%;
+
+    latest-component {
+        .title {
+
+        }
+        .title:before {
+            font-family: "FontAwesome";
+            content: '\f0e5';
+            color: blue;
+        }
+    }
 }
+
