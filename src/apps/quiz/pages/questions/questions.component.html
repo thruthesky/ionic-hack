@@ -31,24 +31,25 @@
   <button class="btn btn-secondary btn-sm" disabled *ngIf="!activeCheck">Add Question</button>
 <br/> <br/>
 
-  <div class="card" *ngFor="let exam of question_data; let i = index">
-    <div class="card-block">
-      <h4 class="card-title">Question: {{ exam.content }}</h4>
-        <div  *ngIf="exam.more">
-          <ol choices>
-            <li>{{ exam.varchar_1 }} </li>
-            <li>{{ exam.varchar_2 }} </li>
-            <li>{{ exam.varchar_3 }} </li>
-            <li>{{ exam.varchar_4 }} </li>
-          </ol>
-           <h4>Answer: {{ exam.varchar_5 }}</h4>
-        </div>
+  <div *ngIf="activeCheck">
+    <div class="card"  *ngFor="let exam of question_data; let i = index">
+      <div class="card-block">
+        <h4 class="card-title">Question: {{ exam.content }}</h4>
+          <div  *ngIf="exam.more">
+            <ol choices>
+              <li>{{ exam.varchar_1 }} </li>
+              <li>{{ exam.varchar_2 }} </li>
+              <li>{{ exam.varchar_3 }} </li>
+              <li>{{ exam.varchar_4 }} </li>
+            </ol>
+            <h4>Answer: {{ exam.varchar_5 }}</h4>
+          </div>
 
-        <div class="btn-group" role="group">
-          <button type="button" class="btn btn-secondary btn-sm" (click)=" exam.more = ! exam.more " >{{ exam.more  ? 'Less' : 'More' }}</button> 
-          <button class="btn btn-success btn-sm" (click)="onClickEdit( exam, i )">EDIT</button>
-          <button class="btn btn-danger btn-sm" (click)="onClickDelete( exam.idx, i )">DELETE</button>  
-        </div>
+          
+            <button type="button" class="btn btn-secondary btn-sm" (click)=" exam.more = ! exam.more " >{{ exam.more  ? 'Less' : 'More' }}</button> 
+            <button class="btn btn-success btn-sm" (click)="onClickEdit( exam, i )">EDIT</button>
+            <button class="btn btn-danger btn-sm" (click)="onClickDelete( exam.idx, i )">DELETE</button>  
+      </div>
     </div>
   </div>
 </div>
