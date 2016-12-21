@@ -1,37 +1,92 @@
+<header>
 
-<nav class="navbar navbar-fixed-top navbar-dark bg-primary">
- 
-           <ul class="nav navbar-nav">
-
-
-              <li class="nav-item">
-                     <a class="nav-link" routerLink="/">Sonub</a>
-              </li>
-              <li class="nav-item"><a *ngIf="!sessionSrvc.sessionData" class="nav-link " routerLink="/user/login">Login</a></li>    
-              <li class="nav-item">
-                     <a class="nav-link" routerLink="/quiz" *ngIf="sessionSrvc.sessionData">Home</a>
-              </li>  
-
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData"><a  
-                  class="nav-link"
-                  routerLink="/quiz/quiz">Quiz</a>
-              </li>
-
-             <li class="nav-item"><a *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id != sessionSrvc.adminroute?.id " 
-                 class="nav-link"
-                 routerLink="/quiz/results">Results</a>
-             </li>
-
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id == sessionSrvc.adminroute?.id">
-                     <a class="nav-link" routerLink="/quiz/subjects">Subjects</a>
-              </li> 
+  <nav class="navbar navbar-fixed-top">
+    <table cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td class="left" width="99%">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr valign="top">
+              <td>
+                <div class="menu home" routerLink="/" title="Home">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-home fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Sonub</em>
+                </div>
 
 
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData">
-                  <a   class="nav-link" routerLink="" (click)="onClickLogout()">logout</a>
-              </li>           
- 
+              </td>
+              <td *ngIf="!sessionSrvc.sessionData">
+                <div class="menu" routerLink="/user/login" title="Quiz" >
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Login</em>
+                </div>
+              </td>
 
-           </ul>
-   </nav>
+              <!--<td *ngIf="sessionSrvc.sessionData">
+                <div class="menu" routerLink="/quiz" title="Quiz" >
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Home</em>
+                </div>
+              </td>-->
+              
+              <td *ngIf="sessionSrvc.sessionData">
+                <div class="menu" routerLink="/quiz/quiz" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-pencil-square-o fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Quiz</em>
+                </div>
+              </td>
+
+              <td *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id != sessionSrvc.adminroute?.id ">
+                <div class="menu" routerLink="/quiz/results" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-list-alt fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Results</em>
+                </div>
+              </td>
+
+
+              <td *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id == sessionSrvc.adminroute?.id">
+                <div class="menu" routerLink="/quiz/subjects" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Subjects</em>
+                </div>
+              </td>
+
+
+              <td>
+                <div class="menu" routerLink="" title="Posting" (click)="onClickLogout()" *ngIf="sessionSrvc.sessionData">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-sign-out fa-stack-1x fa-inverse"></i>
+                  </span>
+                  <em>Logout</em>
+                </div>
+              </td>
+
+
+            </tr>
+          </table>
+        </td>
+
+      </tr>
+    </table>
+  </nav>
+
    
+</header>
