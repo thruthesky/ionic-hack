@@ -7,10 +7,10 @@ import { Post, PAGE, PAGE_OPTION, POSTS } from '../../../../api/philgo-api/v2/po
 import { ONE_MINUTE_STAMP } from '../../../../etc/share';
 
 @Component({
-  selector: 'sonub-news',
-  templateUrl: 'news.html'
+  selector: 'sonub-latest-photo',
+  templateUrl: 'latest-photo.html'
 })
-export class SonubNews {
+export class SonubLatestPhoto {
   @Input() title: string = null;
   @Input() post_id: string = null;
   @Input() limit: number = 1;

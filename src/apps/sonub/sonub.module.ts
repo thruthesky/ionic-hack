@@ -18,9 +18,11 @@ import { SonubFooter } from './components/footer/footer';
 import { SonubLeft } from './components/left/left';
 import { SonubRight } from './components/right/right';
 import { SonubNews } from './components/news/news';
+import { SonubLatestPhoto } from "./components/latest-photo/latest-photo";
 
 // services
 import { ForumService } from './providers/forum'
+
 @NgModule( {
     declarations: [
         SonubHomePage,
@@ -32,7 +34,8 @@ import { ForumService } from './providers/forum'
         SonubRight,
         SonubLeft,
         SonubNews,
-        LatestPostComponent
+        LatestPostComponent,
+        SonubLatestPhoto
     ],
     imports: [
         BrowserModule,
