@@ -1,0 +1,79 @@
+<div>
+
+    <h5 class="modal-title container">
+      Add
+    </h5>
+
+
+    <div class="modal-body">
+
+      <form>
+
+        <div class="form-group row">
+          <label for="question" class="col-xs-3 col-form-label" >Question</label>
+          <div class="col-xs-9">
+            <input class="form-control form-control-sm"   type="text" id="question" name="question" [(ngModel)]="questionForm.question">
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="choice1" class="col-xs-3 col-form-label">Choice1</label>
+          <div class="col-xs-9">
+            <input class="form-control form-control-sm"   type="text" id="choice1" name="choice1"  [(ngModel)]="questionForm.choice1">
+          </div>
+        </div>
+
+
+
+
+        <div class="form-group row">
+          <label for="choice2" class="col-xs-3 col-form-label">Choice2</label>
+          <div class="col-xs-9">
+            <input class="form-control form-control-sm"   type="text" id="choice2" name="choice2" [(ngModel)]="questionForm.choice2">
+          </div>
+        </div>
+
+
+
+        <div class="form-group row">
+          <label for="choice3" class="col-xs-3 col-form-label">Choice3</label>
+          <div class="col-xs-9">
+            <input class="form-control form-control-sm"   type="text" id="choice3" name="choice3" [(ngModel)]="questionForm.choice3">
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="choice4" class="col-xs-3 col-form-label">Choice4</label>
+          <div class="col-xs-9">
+            <input class="form-control form-control-sm"   type="text" id="choice4" name="choice4" [(ngModel)]="questionForm.choice4">
+          </div>
+        </div>
+
+
+
+      <div class="form-group row">
+        <label for="answer" class="col-xs-3 col-form-label">Answer</label>
+        <div class="col-xs-9">
+          <select class="form-control form-control-sm" [(ngModel)]="questionForm.answer" name="answer" id="answer">
+            <option [value]='1' >{{ questionForm.choice1 }}</option>
+            <option [value]='2' >{{ questionForm.choice2 }}</option>
+            <option [value]='3' >{{ questionForm.choice3 }}</option>
+            <option [value]='4' >{{ questionForm.choice4 }}</option>          
+          </select>
+        </div>
+      </div>
+
+
+
+      
+      </form>
+    <div class="modal-footer">
+      <button type="button"class="btn btn-secondary btn-sm" (click)="onClickSubmit()">Save</button>
+      <button type="button" class="btn btn-secondary btn-sm" (click)="onClickCancel()">Cancel</button>  
+    </div>
+
+    </div>
+
+</div>

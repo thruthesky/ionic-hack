@@ -37,6 +37,16 @@ import { JobListComponent } from "../apps/job/pages/job-list/job-list.component"
 import { JobEditComponent } from "../apps/job/pages/job-edit/job-edit.component";
 import { JobViewComponent } from "../apps/job/pages/job-view/job-view.component";
 
+///QUIZ
+import { DashboardComponent } from '../apps/quiz/pages/dashboard/dashboard.component';
+import { SubjectComponent } from '../apps/quiz/pages/subject/subject.component';
+import { QuestionsComponent } from '../apps/quiz/pages/questions/questions.component';
+import { ExamhomeComponent } from '../apps/quiz/pages/examhome/examhome.component';
+import { ExampageComponent } from '../apps/quiz/pages/exampage/exampage.component';
+import { FinalComponent } from '../apps/quiz/pages/final/final.component';
+import { ResultsComponent } from '../apps/quiz/pages/results/results.component';
+
+
 // sonub site
 // sonub forum index.
 import { SonubForumIndexPage } from '../apps/sonub/pages/forum/index/forum-index';
@@ -59,6 +69,16 @@ let appRoutes: Routes = [
     { path: "job/post/:idx", component: JobEditComponent },
     { path: "job/list", component: JobListComponent },
     { path: "job/view/:idx", component: JobViewComponent },
+
+
+    //quiz
+    { path:'quiz', component: DashboardComponent },
+    { path:'quiz/subjects', component: SubjectComponent },
+    { path:'quiz/subjects/questions/:idx', component: QuestionsComponent },
+    { path:'quiz/quiz', component: ExamhomeComponent },
+    { path:'quiz/exam', component: ExampageComponent },
+    { path:'quiz/final', component: FinalComponent },
+    { path:'quiz/results', component: ResultsComponent },
 
     // forum
     { path: 'forum-b', component: ForumIndexPage },

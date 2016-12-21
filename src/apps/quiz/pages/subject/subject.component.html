@@ -1,0 +1,101 @@
+<quiz-base-nav></quiz-base-nav>
+<br><br><br>
+<!--<template ngbModalContainer></template>-->
+<div *ngIf="switch" class="container"><app-subjectform
+[mode]    = " 'create-post' "
+[posts]   = " subject_data "
+(cancel)  = " editComponentOnCancel() "
+(success) = " editComponentOnSuccess() "></app-subjectform></div>
+<div class="container-fluid">
+
+
+
+
+<div class="row">
+  <button class="col-xs-3 btn btn-primary" (click)="onClickCreateSubjectModal()"><i class="fa fa-plus" aria-hidden="true"></i> Add</button>
+  <div class="col-xs-9">
+    <input class="form-control"  type="text" placeholder="&#xF002; Search" [(ngModel)]="search" (ngModelChange)="getSubject()" (keydown)="onEnterSearch($event)" style="font-family: Arial, FontAwesome">
+  </div>
+</div>
+<br/>
+
+<div class="">
+
+
+<table class="table table-hover table-bordered">
+  <thead>
+    <tr>
+
+      <th>Subject</th>
+      <th>Time</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let subject of subject_data; let i = index">
+    <tr>
+      <td>{{ subject.content }}</td>
+
+      <td>{{ subject.varchar_3 }}</td>
+      <td>
+
+        <span class="tag tag-success" *ngIf="subject.varchar_1 == 'true'">
+          Active
+        </span>
+        <span class="tag tag-danger" *ngIf="subject.varchar_1 == 'false'">Inactive</span>
+
+      </td>
+
+      <td>
+<!--ACTIONS-->
+
+
+
+
+      <a class="dropdown-item" (click)="onClickEdit( subject, i )">
+          <span class="tag tag-success">
+            <i class="fa fa-pencil-square-o" aria-hidden="true">
+            </i>
+          </span> 
+          EDIT
+      </a>
+
+
+    <a class="dropdown-item" (click)="onClickDelete( subject.idx, i )">
+        <span class="tag tag-danger" (click)="onClickDelete( category.idx, i )">
+          <i class="fa fa-trash-o" aria-hidden="true">
+          </i>
+        </span>
+        DELETE
+    </a>
+
+
+
+    <a class="dropdown-item" (click)="onClickAddQuestions(subject.idx, subject.varchar_2 )">
+      <span class="tag tag-info" >
+        <i class="fa fa-list-ul" aria-hidden="true">
+        </i>
+      </span>
+        EXAM LIST
+    </a>
+
+  
+
+
+  
+
+
+
+
+
+<!--ACTIONS-->
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+</div>
