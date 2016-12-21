@@ -41,7 +41,11 @@
     <tbody>
         <tr valign="top">
         <td rowspan="2">
-            <div class="forum">
+            <latest-component
+              [title]     = " ['Discussion', '자유게시판'] | ek "
+              [post_id]   = " 'freetalk' "
+            ></latest-component>
+            <!--<div class="forum">
                     <div class="title">
                         <i [class]="options.right.icon"></i> {{ options.right.title }}
                     </div>
@@ -53,29 +57,37 @@
                  
                   
                    
-            </div>
+            </div>-->
         </td>
          <td>
-                <div class="forum">
+              <latest-component
+              [title]     = " ['QnA', '질문과답변'] | ek "
+              [post_id]   = " 'qna' "
+            ></latest-component>
+                <!--<div class="forum">
                     <div class="title"><i [class]="options.left_top.icon"></i> {{ options.left_top.title }}</div>
                     <div *ngIf=" latest.left_top" class="content">
                         <div *ngFor=" let post of latest.left_top " class="subject">   
                         &bull; <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </td>
         </tr>
         <tr valign="top">    
             <td>
-                <div class="forum">
+                 <latest-component
+                    [title]     = " ['Buy&amp;Sell', '회원장터'] | ek "
+                    [post_id]   = " 'buyandsell' "
+                    ></latest-component>
+                <!--<div class="forum">
                     <div class="title"><i [class]="options.left_bottom.icon"></i> {{ options.left_bottom.title }}</div>
                     <div *ngIf=" latest.left_bottom " class="content">
                         <div *ngFor=" let post of latest.left_bottom" class="subject">   
                         &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </td>
         </tr>
     </tbody>
