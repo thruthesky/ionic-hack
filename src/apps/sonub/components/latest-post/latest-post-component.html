@@ -1,11 +1,10 @@
 
 
-<div class="container">
+<!--<section class="container">
 
     <div class="right">
        <article class="">
             <div class="title"><i [class]="options.right.icon"></i> {{ options.right.title }}</div>
-
                 <div *ngIf=" latest.right " class="content">
                     <div *ngFor=" let post of latest.right" class="subject">   
                         &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
@@ -18,7 +17,6 @@
 
         <article class="left-top">
                 <div class="title"><i [class]="options.left_top.icon"></i> {{ options.left_top.title }}</div>
-
                 <div *ngIf=" latest.left_top" class="content">
                     <div *ngFor=" let post of latest.left_top " class="subject">   
                        &bull; <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
@@ -28,7 +26,6 @@
 
         <article class="left-bottom">
              <div class="title"><i [class]="options.left_bottom.icon"></i> {{ options.left_bottom.title }}</div>
-
                 <div *ngIf=" latest.left_bottom " class="content">
                     <div *ngFor=" let post of latest.left_bottom" class="subject">   
                       &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
@@ -37,4 +34,55 @@
         </article>
 
     </div>
-</div>
+</section>-->
+
+
+<table cellpadding="0" cellspacing="0" border="0"  >
+    <tbody>
+        <tr valign="top">
+        <td rowspan="2">
+            <div class="forum">
+                    <div class="title">
+                        <i [class]="options.left_top.icon"></i> {{ options.left_top.title }}
+                    </div>
+                    <div *ngIf=" latest.right " class="content">
+                        <div *ngFor=" let post of latest.right" class="subject">   
+                            &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
+                        </div>
+                    </div>
+                    <div *ngIf=" latest.right " class="content">
+                        <div *ngFor=" let post of latest.right" class="subject">   
+                            &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
+                        </div>
+                    </div>
+                  
+                   
+            </div>
+        </td>
+         <td>
+                <div class="forum">
+                    <div class="title"><i [class]="options.left_top.icon"></i> {{ options.left_top.title }}</div>
+                    <div *ngIf=" latest.left_top" class="content">
+                        <div *ngFor=" let post of latest.left_top " class="subject">   
+                        &bull; <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr valign="top">    
+            <td>
+                <div class="forum">
+                    <div class="title"><i [class]="options.left_bottom.icon"></i> {{ options.left_bottom.title }}</div>
+                    <div *ngIf=" latest.left_bottom " class="content">
+                        <div *ngFor=" let post of latest.left_bottom" class="subject">   
+                        &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+ 
