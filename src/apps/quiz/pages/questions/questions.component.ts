@@ -104,8 +104,8 @@ export class QuestionsComponent implements OnInit {
 
   onClickDelete( idx, index ){
     let confirmDelete = confirm( 'Are you sure you want to delete this?' );
+    if( confirmDelete == false ) return;
 
-    if( confirmDelete == true ){
       console.log( 'deleting' , idx );
       this.post.delete( idx, res=>{
         console.info('deleted ' + idx, ' res ' , res);
@@ -113,7 +113,7 @@ export class QuestionsComponent implements OnInit {
 
       }, error=>alert( 'error '+ error ) )
 
-    }else console.log( 'canceled!' )
+    
   }
   
 

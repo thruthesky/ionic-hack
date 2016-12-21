@@ -50,8 +50,6 @@
   <!--ACTIONS-->
 
 
-
-
         <span action (click)="onClickEdit( subject, i )">
             <span class="tag tag-success">
               <i class="fa fa-pencil-square-o" aria-hidden="true">
@@ -62,7 +60,7 @@
 
 
       <span action (click)="onClickDelete( subject.idx, i )">
-          <span class="tag tag-danger" (click)="onClickDelete( category.idx, i )">
+          <span class="tag tag-danger">
             <i class="fa fa-trash-o" aria-hidden="true">
             </i>
             DELETE
@@ -71,7 +69,7 @@
 
 
 
-      <span action (click)="onClickAddQuestions(subject.idx, subject.varchar_2 )">
+      <span action (click)="onClickAddQuestions( subject.idx, subject.varchar_2 )">
         <span class="tag tag-info" >
           <i class="fa fa-list-ul" aria-hidden="true">
           </i>
