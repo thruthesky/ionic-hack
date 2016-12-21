@@ -43,18 +43,14 @@
         <td rowspan="2">
             <div class="forum">
                     <div class="title">
-                        <i [class]="options.left_top.icon"></i> {{ options.left_top.title }}
+                        <i [class]="options.right.icon"></i> {{ options.right.title }}
                     </div>
                     <div *ngIf=" latest.right " class="content">
                         <div *ngFor=" let post of latest.right" class="subject">   
                             &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
                         </div>
                     </div>
-                    <div *ngIf=" latest.right " class="content">
-                        <div *ngFor=" let post of latest.right" class="subject">   
-                            &bull;  <a routerLink="{{ post.url }}" >{{ post.subject }} ( {{ post.no_of_comment }})</a>
-                        </div>
-                    </div>
+                 
                   
                    
             </div>
