@@ -1,5 +1,8 @@
 quiz-base-nav{
     header nav {
+        .fa-lg {
+            color: black;
+        }
         .menu {
             display: block;
             padding: 0 .5em;
@@ -20,6 +23,7 @@ quiz-base-nav{
         }
         em {
             font-style: normal;
+            color: black;
         }
     }
 
