@@ -10,6 +10,7 @@ sonub-news {
       .photo {
         width: 92%;
         padding-right: 8%;
+        cursor: pointer;
         img {
           width: 100%;
         }
@@ -30,6 +31,9 @@ sonub-news {
       }
     }
     .right {
+      span{
+        cursor: pointer;
+      }
       .right-top {
         .subject {
           font-weight: bold;

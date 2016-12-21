@@ -3,8 +3,7 @@
  *
  */
 import { Component, Input } from '@angular/core';
-import { Post, PAGE, PAGE_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
-import { ONE_MINUTE_STAMP } from '../../../../etc/share';
+import { Post, PAGE, PHOTO_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
 
 @Component({
   selector: 'sonub-latest-photo',
@@ -19,25 +18,23 @@ export class SonubLatestPhoto {
     //console.log("LatestComponent::constructor()");
   }
   ngOnInit() {
-    let option: PAGE_OPTION = {
+    let option: PHOTO_OPTION = {
       post_id: this.post_id,
-      limit: this.limit,
-      expire: ONE_MINUTE_STAMP,
-      fields: 'idx,idx_parent,subject,SUBSTRING(content_stripped,1,50) as content,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
+      limit: this.limit
     };
     console.log('option::',option);
-    this.post.page( option, ( page: PAGE ) => {
-        console.log("latest: ", page);
-        page.posts.map( ( v:any, i ) => {
-          setTimeout( () => {
-            v.url = this.post.getLink( v );
-            this.posts.push( v );
-          }, i * 50 );
-        } );
-      },
-      error => alert( "Latest error: " + error ),
-      () => {});
-    console.log('this.posts',this.posts);
+
+    this.post.latestPhotos( option, (posts: POSTS) => {
+      console.log("posts: ", posts);
+      this.posts = [];
+      posts.map( ( v:any, i ) => {
+        setTimeout( () => {
+          v.url = this.post.getLink( v );
+          this.posts.push( v );
+        }, i * 50 );
+      });
+    },
+    error => alert("LatestPhotos Error " + error));
   }
 
 }
