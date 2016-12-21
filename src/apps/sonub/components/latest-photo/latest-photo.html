@@ -10,7 +10,7 @@
         </td>
         <td class="right">
           <div class="info">
-            <span class="name">{{post.member.nickname}}</span><span>Date: {{post.stamp | date:'yyyy-MM-dd'}} Viewed: {{post.no_of_view}}</span>
+            <span class="name">{{post.user_name}}</span><span>Date:{{post.stamp | date:'yyyy-MM-dd'}} Viewed:{{post.no_of_view}}</span>
           </div>
           <div class="subject">
             <span class="title">{{ post.subject }}</span><span *ngIf="post.no_of_comment">({{post.no_of_comment}})</span>

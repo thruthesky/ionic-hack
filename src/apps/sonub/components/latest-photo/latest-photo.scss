@@ -1,6 +1,7 @@
 sonub-latest-photo {
   .post{
     padding: 0 5px;
+    margin-bottom: 3px;
     tr {
       span{
         color: #898989;
@@ -33,12 +34,19 @@ sonub-latest-photo {
         .subject {
           font-weight: bold;
         }
-        .content {
+        .content, .comment {
           margin-left: 6px;
           font-size: 0.95em;
+          overflow: hidden;
+        }
+        .content {
+          max-height: 22px;
         }
         .comment {
-
+          max-height: 44px;
+          span:before {
+            content: '...@';
+          }
         }
       }
     }
