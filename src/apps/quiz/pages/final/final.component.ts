@@ -35,13 +35,6 @@ export class FinalComponent implements OnInit {
 
   ngOnInit() {
   }
-  
-
-
-
-
-
-
 
   
 

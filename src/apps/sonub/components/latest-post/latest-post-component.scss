@@ -1,65 +1,79 @@
 latest-post-component{
+        
+        
+        color : #a9a9a9;
 
-    
-    color : #a9a9a9;
 
-    table{
-        width: 98%;
-        table-layout: fixed;
-        display: table;
-        border-collapse: separate;
-        border-spacing: 2px;
-        border:1px solid #a9a9a9;
-       margin :1%;
-     
-        tbody{
-                display: table-row-group;
-                vertical-align: middle;
-             
+        table{
+            width: 98%;
+            table-layout: fixed;
+            display: table;
+            border-collapse: separate;
+            border-spacing: 2px;
+            border:1px solid #a9a9a9;
+            margin :1%;
         }
-        td{
-            width: 50%;
+    
+        table > tbody{
+            display: table-row-group;
+            vertical-align: middle; 
+        }
 
-                latest-component{
-                        .forum{
-                    padding: 10px;
-                    .title{
-                                font-weight: bold;
-                                margin-bottom: 4px;
-                                padding-bottom: 4px;
-                                border-bottom: 1px dotted #a9a9a9;
-                        }
-                    .content{
-                        display: block;
-                        padding-left:0.5em;
+        table > tbody >   tr:first-child td:first-child latest-component .title:before{     
+            font-family: "FontAwesome";
+            content: '\f0f4';
+            padding-right : 3px;        
+        }
 
-                                .subject{
-                                    text-overflow: ellipsis;
-                                    overflow: hidden;
-                                    white-space: nowrap;
-                                    overflow: hidden;
-                                
-                                    padding: 2.5px;
-                                    a{          
-                                        cursor: auto;  
-                                        color: #292929;
-                                        text-decoration: none;
-                                        font-family: 굴림,Gulim,AppleGothic;
-                                        font-size: 9pt;
-                                    }//a
+        table > tbody >   tr:first-child td:nth-child(2) latest-component .title:before {       
+            font-family: "FontAwesome";
+            content: '\f290';
+            padding-right : 3px;          
+        }
+
+        table > tbody >   tr:nth-child(2) td:first-child latest-component .title:before{        
+            font-family: "FontAwesome";
+            content: '\f059';          
+            padding-right : 3px;
                     
-                                }//subject
+        }
+        
+        table > tbody > tr > td{
+            width: 50%;
+            padding: 10px;
+        }
 
-                    }//content
+        table > tbody > tr > td > latest-component .title{
+            font-weight: bold;
+            margin-bottom: 4px;
+            padding-bottom: 4px;
+            border-bottom: 1px dotted #a9a9a9;
+        }
 
-                }//forum  
-            }//latest-component
-           
+        table > tbody > tr > td > latest-component > div{
+            display: block;
+            padding-left:0.5em;
+        }
 
-         }//td  
+        table > tbody > tr> td > latest-component > div > div {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            overflow: hidden;
+            padding: 3.5px;   
+            margin-right : 2em;
+            cursor: auto;  
+            color: #292929;
+            font-family: 굴림,Gulim,AppleGothic;
+            font-size: 9pt;
+        }
 
-    }//table
 
+        table > tbody > tr > td > latest-component > div > div  :before {
+            color : #a9a9a9;
+            content:"• ";
+        }
+                
 }//latest component
 
 

@@ -3,7 +3,7 @@ import { Post, SEARCH_QUERY_DATA, POST_RESPONSE } from '../../../../api/philgo-a
 import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data-service/data.service';
-import { MemberRoutingService } from '../../services/user-routing/member-routing.service'
+import { MemberRoutingService } from '../../services/user-routing/member-routing.service';
 
 import * as _ from 'lodash';
 
@@ -93,28 +93,30 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
 
 
-
-
   startTimer(){
-    console.log( 'duration' )
 
     ///checking and computing mins if it's value is 60 or more.
     if( this.min >= 60 ){
-      this.hr = Math.round( this.min / 60 );
-      console.log('checking value ', Math.round( this.min / 60 ))
-      this.min =  this.min - (60 * Math.round( this.min / 60 ) );
+      this.hr = Math.floor( this.min / 60 );
+      console.log('checking value ', Math.floor( this.min / 60 ))
+      this.min =  this.min - (60 * this.hr );
       
       console.log('Hour ', this.hr )
     }
-
-    
 
     if( this.sec == 0){
       
       if( this.min != 0 ){
         this.min--;
         this.sec = 60;
-      } else this.onClickFinish();
+      } else{
+        if( this.hr > 0 ){
+        this.hr--;
+        this.min = 59;
+        this.sec = 60;
+        }
+      }
+      if(this.hr==0 && this.sec ==0 &&this.min ==0) this.onClickFinish();
       
       
       console.log('check minutes ',this.min)
