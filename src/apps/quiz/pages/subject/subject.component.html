@@ -32,15 +32,17 @@
     </thead>
     <tbody *ngFor="let subject of subject_data; let i = index">
       <tr>
-        <td>{{ subject.content }}</td>
+        <td style="vertical-align:middle">{{ subject.content }}</td>
 
-        <td>{{ subject.varchar_3 }}</td>
-        <td>
+        <td style="vertical-align:middle">{{ subject.varchar_3 }}</td>
+        <td style="vertical-align:middle">
 
           <span class="tag tag-success" *ngIf="subject.varchar_1 == 'true'">
             Active
           </span>
-          <span class="tag tag-danger" *ngIf="subject.varchar_1 == 'false'">Inactive</span>
+          <span class="tag tag-danger" *ngIf="subject.varchar_1 == 'false'">
+            Inactive
+          </span>
 
         </td>
 
@@ -50,40 +52,32 @@
 
 
 
-        <a class="dropdown-item" (click)="onClickEdit( subject, i )">
+        <span action (click)="onClickEdit( subject, i )">
             <span class="tag tag-success">
               <i class="fa fa-pencil-square-o" aria-hidden="true">
               </i>
+              EDIT
             </span> 
-            EDIT
-        </a>
+        </span>
 
 
-      <a class="dropdown-item" (click)="onClickDelete( subject.idx, i )">
+      <span action (click)="onClickDelete( subject.idx, i )">
           <span class="tag tag-danger" (click)="onClickDelete( category.idx, i )">
             <i class="fa fa-trash-o" aria-hidden="true">
             </i>
-          </span>
-          DELETE
-      </a>
+            DELETE
+          </span> 
+      </span>
 
 
 
-      <a class="dropdown-item" (click)="onClickAddQuestions(subject.idx, subject.varchar_2 )">
+      <span action (click)="onClickAddQuestions(subject.idx, subject.varchar_2 )">
         <span class="tag tag-info" >
           <i class="fa fa-list-ul" aria-hidden="true">
           </i>
-        </span>
-          EXAM LIST
-      </a>
-
-    
-
-
-    
-
-
-
+          QUESTIONS
+        </span> 
+      </span>
 
 
   <!--ACTIONS-->
