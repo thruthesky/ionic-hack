@@ -76,14 +76,10 @@ export class SubjectComponent {
 
 
 
-
-
     editComponentOnSuccess() {
         this.switch = false;
         
     }
-
-
 
 
   onClickEdit( subject, index ){
