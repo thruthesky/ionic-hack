@@ -1,37 +1,135 @@
+<header>
 
-<nav class="navbar navbar-fixed-top navbar-dark bg-primary">
- 
-           <ul class="nav navbar-nav">
-
-
-              <li class="nav-item">
-                     <a class="nav-link" routerLink="/">Sonub</a>
-              </li>
-              <li class="nav-item"><a *ngIf="!sessionSrvc.sessionData" class="nav-link " routerLink="/user/login">Login</a></li>    
-              <li class="nav-item">
-                     <a class="nav-link" routerLink="/quiz" *ngIf="sessionSrvc.sessionData">Home</a>
-              </li>  
-
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData"><a  
-                  class="nav-link"
-                  routerLink="/quiz/quiz">Quiz</a>
-              </li>
-
-             <li class="nav-item"><a *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id != sessionSrvc.adminroute?.id " 
-                 class="nav-link"
-                 routerLink="/quiz/results">Results</a>
-             </li>
-
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id == sessionSrvc.adminroute?.id">
-                     <a class="nav-link" routerLink="/quiz/subjects">Subjects</a>
-              </li> 
+    <!--<nav class="navbar navbar-fixed-top">
+    
+            <ul class="nav navbar-nav">
 
 
-              <li class="nav-item" *ngIf="sessionSrvc.sessionData">
-                  <a   class="nav-link" routerLink="" (click)="onClickLogout()">logout</a>
-              </li>           
- 
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/">Sonub</a>
+                </li>
+                <li class="nav-item"><a *ngIf="!sessionSrvc.sessionData" class="nav-link " routerLink="/user/login">Login</a></li>    
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/quiz" *ngIf="sessionSrvc.sessionData">Home</a>
+                </li>  
 
-           </ul>
-   </nav>
+                <li class="nav-item" *ngIf="sessionSrvc.sessionData"><a  
+                    class="nav-link"
+                    routerLink="/quiz/quiz">Quiz</a>
+                </li>
+
+                <li class="nav-item"><a *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id != sessionSrvc.adminroute?.id " 
+                    class="nav-link"
+                    routerLink="/quiz/results">Results</a>
+                </li>
+
+                <li class="nav-item" *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id == sessionSrvc.adminroute?.id">
+                        <a class="nav-link" routerLink="/quiz/subjects">Subjects</a>
+                </li> 
+
+
+                <li class="nav-item" *ngIf="sessionSrvc.sessionData">
+                    <a   class="nav-link" routerLink="" (click)="onClickLogout()">logout</a>
+                </li>           
+    
+
+            </ul>
+    </nav>-->
+
+  <nav class="navbar navbar-fixed-top">
+    <table cellpadding="0" cellspacing="0">
+      <tr valign="top">
+        <td class="left" width="99%">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tr valign="top">
+              <td>
+                <div class="menu home" routerLink="/" title="Home">
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-home fa-stack-2x"></i>-->
+                  </span>
+                  <em>Sonub</em>
+                </div>
+
+
+              </td>
+              <td *ngIf="!sessionSrvc.sessionData">
+                <div class="menu" routerLink="/user/login" title="Quiz" >
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-suitcase fa-stack-2x"></i>-->
+                  </span>
+                  <em>Login</em>
+                </div>
+              </td>
+
+              </td>
+              <td *ngIf="sessionSrvc.sessionData">
+                <div class="menu" routerLink="/quiz" title="Quiz" >
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-suitcase fa-stack-2x"></i>-->
+                  </span>
+                  <em>Home</em>
+                </div>
+              </td>
+              
+              <td *ngIf="sessionSrvc.sessionData">
+                <div class="menu" routerLink="/quiz/quiz" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-pencil-square-o fa-stack-2x"></i>-->
+                  </span>
+                  <em>Quiz</em>
+                </div>
+              </td>
+
+              <td *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id != sessionSrvc.adminroute?.id ">
+                <div class="menu" routerLink="/quiz/results" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-list-alt fa-stack-2x"></i>-->
+                  </span>
+                  <em>Results</em>
+                </div>
+              </td>
+
+
+              <td *ngIf="sessionSrvc.sessionData && sessionSrvc.sessionData.id == sessionSrvc.adminroute?.id">
+                <div class="menu" routerLink="/quiz/subjects" title="Posting">
+                  <span class="fa-stack fa-lg">
+                    <!--<i class="fa fa-list-alt fa-stack-2x"></i>-->
+                  </span>
+                  <em>Subjects</em>
+                </div>
+              </td>
+
+
+              <td>
+                <div class="menu" routerLink="" title="Posting" (click)="onClickLogout()" *ngIf="sessionSrvc.sessionData">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-list-alt fa-stack-2x"></i>
+                  </span>
+                  <em>logout</em>
+                </div>
+              </td>
+
+
+            </tr>
+          </table>
+        </td>
+        <td class="right">
+          <span class="all menu" title="All Menu" (click)="isAllMenuActive = ! isAllMenuActive">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-reorder fa-stack-2x"></i>
+            </span>
+            <em>Menu</em>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </nav>
+  <em style="display:none;" class="all-menu" [class.active]="isAllMenuActive">
+    <h3>{{ title }} </h3>
+    <hr>
+    <a routerLink="/about">About</a>
+    <a routerLink="/user/login">User Login</a>
+    <a routerLink="/user/profile">My Page</a>
+  </em>
    
+</header>
