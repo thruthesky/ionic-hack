@@ -1,7 +1,3 @@
-/**
- * @see ../../../README.md
- * 
- */
 import { Component} from '@angular/core';
 @Component({
     selector: 'latest-post-component',
