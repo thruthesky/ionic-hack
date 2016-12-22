@@ -2,16 +2,132 @@ sonub-left {
     display: block;
     background-color: #876;
     width: 100%;
+    padding :15px;
+  
+    .top{
+        top: 30px;
+        margin : 0px;   
+        background: white;
+        padding : 2px;
+        margin-bottom : 10px;
+        .container{
+            border : 1px solid #a8a8a8;
+            padding : 0px;
+            border-radius : 2px;
+            latest-component {   
+                .title{
+                    padding :  15px;
+                    background : #e8e8e8;
+                    font-size: 14pt;
+                }
 
-    latest-component {
-        .title {
+                 .title:before {
+                    font-family: "FontAwesome";
+                    font-weight: bold;
+                    content: '\f0e5';
+                    color: #2a2a2a;
+                    margin-right: 5pt;
+                }
+              
+                div:nth-child(2) > div >div:before{
+                    border-bottom : 1px solid #5a5a5a;
+                     border-right: 1px solid #5a5a5a;
+                    padding:2pt 4pt 1pt 4pt;
+                    border-radius:2px;
+                     
+                     content: counter(number);
+                     font-weight: bold;
+                     font-size : 11pt;
+                     background:#aaaafa;
+                    color: #f8f8f8;
+                    margin-right: 4pt; 
+                }
+                   div:nth-child(2)>div{
+                     counter-increment: number;
+                }
+
+                div{
+                    padding :  10px 15px 15px 15px;
+                } 
+
+                div > div  {
+                       
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        padding: 0px;   
+                        margin-right : 0.5em;
+                        cursor: auto;  
+                        color: #5a5a5a;
+                        font-family: 굴림,Gulim,AppleGothic;
+                        font-size: 14pt;
+                    }
+               
+            }
 
         }
-        .title:before {
-            font-family: "FontAwesome";
-            content: '\f0e5';
-            color: blue;
-        }
+        
+        
     }
+
+
+
+    .bottom{
+        top: 30px;
+        margin : 0px;   
+        background: #e8e8e8;
+        padding : 5px;
+        
+        .container{
+            border : 1px solid #a8a8a8;
+            padding : 5px 15px 15px 15px;
+            border-radius : 5px;
+            latest-component {   
+                .title{
+                    margin-bottom: 2px;   
+                    color:#5a5a5a;
+                    border-bottom: 1px solid #a2a2a2;
+                    padding:0px;   
+                    padding-bottom: 5px;
+                    vertical-align: middle;
+                    font-size: 14pt;
+                }
+
+            
+
+                div{
+                    padding :  10px 0px 5px 0px;
+                } 
+                div > div  {
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        padding: 0px;   
+                    
+                        cursor: auto;  
+                        color: #5a5a5a;
+                        font-family: 굴림,Gulim,AppleGothic;
+                        font-size: 14pt;
+                    }
+
+                div > div > div:before{
+                    color : #bababa;
+                    content:"• ";
+                    font-weight: bold;
+                    font-size:13px;
+                    padding :0px;
+                    margin :0px;
+                }
+               
+            }
+
+        }
+        
+        
+    }
+
+    
 }
 
