@@ -122,7 +122,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
       console.log( 'check minutes ',this.min )
     }
     this.sec -- ;
-    ///formating Hours, Minutes, and Seconds for display
+    ///formating Hours, Minutes, and Seconds for timer display
     let hrDisplay  = this.hr  >= 10 ? "" + this.hr  : "0" + this.hr;
     let minDisplay = this.min >= 10 ? "" + this.min : "0" + this.min;
     let secDisplay = this.sec >= 10 ? "" + this.sec : "0" + this.sec;
@@ -181,6 +181,9 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
 
 
+
+
+
   getCurrentQuestion(){
       this.ctrRandom = Math.floor( Math.random() * ( this.exam_data.length - 1 + 1 ) ) + 0;//// randomizing a number within the range of the max quantity of questions
       this.current_question = this.exam_data[ this.ctrRandom ]; ///using the random number as index to get the random current question.      
@@ -195,14 +198,14 @@ export class ExampageComponent implements OnInit, OnDestroy {
   onClickNext( radio? ){
     if( this.validate_exam( this.radio ) == false)///validates if the user selected an answer.
 
-    console.log( 'answer',  radio, ' right answer', this.current_question.varchar_5 )
+    console.log( 'selected ',  radio, ' right answer', this.current_question.varchar_5 )
     if( this.validate_exam( radio ) == false ) return;
     this.validate = '';
     this.ctr+=1;
 
     if( radio == this.current_question.varchar_5 ){
-      this.score+= 2;
-      console.log( 'check', this.score )
+      this.score+= 1;
+      console.log( 'check current score ', this.score )
     }
     this.randomizedQuestions(); 
     this.radio = '';
@@ -214,7 +217,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
   validate_exam( val ){
     ///form validation
-    if( val == null || val == '' ){
+    if( val == null || val == '' ){ 
       this.validate = 'No answer selected'
       console.log( this.validate );
       return false;
@@ -247,7 +250,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
       this.onClickFinish();
     }
 
-    this.exam_data.splice( this.ctrRandom, 1 );///removes the item/question from array so it won't repeat.    
+    this.exam_data.splice( this.ctrRandom, 1 );///removes the current question from array so it won't repeat.    
     this.ctrRandom = Math.floor( Math.random() * ( this.exam_data.length - 1 + 1 ) );///getting a random number within the range of the max number of quesiton.
     
     this.current_question = this.exam_data[ this.ctrRandom ];/// getting the next random question using the ctrRandom as index

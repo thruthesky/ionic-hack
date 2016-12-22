@@ -20,7 +20,6 @@ export class QuestionformComponent implements OnInit {
   questions_list =[];
   question = <POST_DATA>{};
   content;
-  subjectidx:''
   questionForm: form = <form>{};
   exam_idx:number;
   activeCheck:boolean = true;
@@ -30,7 +29,6 @@ export class QuestionformComponent implements OnInit {
   switch:boolean = false;
   subjectInfo: POST_DATA = <POST_DATA>[];
 
-  temp = <POST_DATA> {};
   inDeleting: boolean = false;
   inPosting: boolean = false;
 
@@ -55,7 +53,6 @@ export class QuestionformComponent implements OnInit {
 
 
 
-
   ngOnInit() {
     this.initialize_data();
   }
@@ -63,6 +60,7 @@ export class QuestionformComponent implements OnInit {
 
 
   initialize_data(){
+    ////initializing form data for editing
     if( this.dataService.question_data.idx ){
       this.questionForm.question = this.dataService.question_data.content;
       this.questionForm.choice1  = this.dataService.question_data.varchar_1;
@@ -94,7 +92,6 @@ export class QuestionformComponent implements OnInit {
         }
         catch ( e ) { alert("Please restart the app." + e ); }
     }
-    this.temp = {};
     this.questionForm = <form>{};
     this.dataService.question_data = <POST_DATA>{};
     this.success.emit();
@@ -129,13 +126,13 @@ export class QuestionformComponent implements OnInit {
   onClickSubmit(){
     console.log('save question');
     let question_data           = <POST_DATA>{};
-    let data = this.passing_question_data( question_data );
+    let data = this.passing_question_data( question_data );/// getting the return of passing_question_data( )
         console.log('idx' + this.subject_idx)
     if( this.dataService.question_data.idx ){
-      this.update( data )
+      this.update( data );///post.update
       return;
     }
-    this.create( data );
+    this.create( data );///post.create
   }
 
   passing_question_data( question_data ){
