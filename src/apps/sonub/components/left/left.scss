@@ -38,7 +38,7 @@ sonub-left {
             text-overflow: ellipsis;
             overflow: hidden;  
             white-space: nowrap;
-            cursor: auto;  
+            cursor: pointer;  
             color: #5a5a5a;
             font-family: 굴림,Gulim,AppleGothic;
             font-size: 9pt;
@@ -122,6 +122,7 @@ sonub-left {
                 padding :  10px 0px 5px 0px;     
         }
 
+        
         .bottom .container  latest-component  div > div  {
                 padding: 0px;  
               
@@ -129,9 +130,7 @@ sonub-left {
                 overflow: hidden;
                 white-space: nowrap;
                 overflow: hidden;
-                 
-            
-                cursor: auto;  
+                cursor: pointer;  
                 color: #5a5a5a;
                 font-family: 굴림,Gulim,AppleGothic;
                 font-size: 9pt;
