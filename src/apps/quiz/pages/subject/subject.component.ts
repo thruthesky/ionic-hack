@@ -76,14 +76,10 @@ export class SubjectComponent {
 
 
 
-
-
     editComponentOnSuccess() {
         this.switch = false;
         
     }
-
-
 
 
   onClickEdit( subject, index ){
@@ -102,7 +98,7 @@ export class SubjectComponent {
 
   onClickDelete( idx, index ){
     let confirmDelete = confirm( 'Are you sure you want to delete this?' );
-    if( confirmDelete == true ){
+    if( confirmDelete == false ) return;
 
       console.log( 'delete' , idx );
       this.post.delete( idx, res=>{
@@ -110,7 +106,7 @@ export class SubjectComponent {
         console.log( 'deleted ' + idx );
       }, error=>alert( 'error '+ error ) )
 
-    }else console.log( 'canceled!' )
+    
   }
 
 

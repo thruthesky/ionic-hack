@@ -3,8 +3,7 @@
  *
  */
 import { Component, Input } from '@angular/core';
-import { Post, PAGE, PAGE_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
-import { ONE_MINUTE_STAMP } from '../../../../etc/share';
+import { Post, PAGE, PAGE_OPTION, POSTS, ONE_MINUTE_STAMP } from '../../../../api/philgo-api/v2/post';
 
 @Component({
   selector: 'sonub-news',

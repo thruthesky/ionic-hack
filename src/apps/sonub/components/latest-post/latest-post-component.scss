@@ -5,18 +5,28 @@ latest-post-component{
 
 
         table{
+            margin:0px;
             width: 98%;
+            margin :1%;
+
+
             table-layout: fixed;
             display: table;
+            background: #fafafa;
+           
             border-collapse: separate;
             border-spacing: 2px;
-            border:1px solid #cacaca;
-            margin :1%;
+            border-top:2px solid #e8e8e8;
+            border-bottom:5px solid #e8e8e8;
+            border-left:5px solid #e8e8e8;
+            border-right:5px solid #e8e8e8;
+           
         }
     
         table > tbody{
             display: table-row-group;
             vertical-align: middle; 
+          
         }
 
         table > tbody >   tr:first-child td:first-child latest-component .title:before{     
@@ -40,14 +50,14 @@ latest-post-component{
         
         table > tbody > tr > td{
             width: 50%;
-            padding: 5px;
+            padding: 10px;
         }
 
         table > tbody > tr > td > latest-component .title{
             
             margin-bottom: 2px;
-            color:#a2a2a2;
-            border-bottom: 1px dotted #a9a9a9;
+            color:#5a5a5a;
+            border-bottom: 2px solid #e2e2e2;
             padding:0px;
             padding-left:5px;
             padding-bottom: 5px;
@@ -68,7 +78,7 @@ latest-post-component{
             padding: 2px;   
             margin-right : 2em;
             cursor: auto;  
-            color: #292929;
+            color: #5a5a5a;
             font-family: 굴림,Gulim,AppleGothic;
             font-size: 9pt;
         }
