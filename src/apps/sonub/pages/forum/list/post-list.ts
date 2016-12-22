@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Renderer } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post, PAGE, POSTS, POST, PAGE_OPTION, ADS, POST_TOP_ADS, POST_TOP_PREMIUM_ADS } from "../../../../../api/philgo-api/v2/post";
+import * as _ from 'lodash';
 @Component({
     selector: 'sonub-post-list',
     templateUrl: 'post-list.html'
@@ -8,43 +9,118 @@ import { Post, PAGE, POSTS, POST, PAGE_OPTION, ADS, POST_TOP_ADS, POST_TOP_PREMI
 export class SonubPostListPage {
     // pages: PAGES = <PAGES> [];
     posts: POSTS = <POSTS> [];
+    view: POST = null;
     showPostCreateFrom: boolean = false;
     post_id: string = '';
     page_no: number = 1;
-    limit: 10;
+    limit: number =  2;
     ads: ADS = null;
     post_top_ad: POST_TOP_ADS = null;
     post_top_premium_ad: POST_TOP_PREMIUM_ADS = null;
-    constructor( private post: Post, activated: ActivatedRoute ) {
+    scrollListener = null;
+    scrollCount = 0;
+    inPageLoading: boolean = false; // true while loading a page of posts.
+
+    noMorePosts: boolean = false; // true when there are no more posts of a page.
+    constructor( private post: Post,
+                 activated: ActivatedRoute,
+                 private renderer: Renderer) {
         console.log("SonubPostListPage::constructor()");
         // this.post_id = activated.snapshot.params['post_id'];
         activated.params.subscribe( param => {
-            this.post_id = param['post_id'];
-            this.post_id = this.post_id.replace('--', ',');
-            this.page_no = 0;
-            this.loadPage();
+            this.posts = <POSTS> [];
+            if ( param['post_id'] !== void 0 ) {
+                this.requestPostList( param['post_id'] );
+            }
+            else if ( param['idx_post'] !== void 0 ) {
+                this.requestPostView( param['idx_post'] );
+            }
         } );
     }
 
+    requestPostView( idx_post: string ) {
+        this.loadPost( idx_post );
+    }
+
+    requestPostList( post_id: string ) {
+            this.post_id = post_id;
+            this.post_id = this.post_id.replace('--', ',');
+            this.page_no = 0;
+            if ( this.post_id ) {
+              this.loadPage();
+            }
+            else {
+              alert("No post id provided");
+            }
+            this.beginScroll();
+    }
+
+    
+
+    loadPost(idx_post){
+
+        this.post.debug = true;
+        this.post.load(idx_post, response =>{
+            this.view = <POST> response.post;
+            console.log("Load a post for view : ", this.view );
+            console.log("Load post success on idx : ", idx_post);
+            this.requestPostList( this.view.post_id );
+        },error =>{
+            alert("Load post error" + error);
+        });
+
+    }
+
+
+
+    beginScroll() {
+      this.scrollListener = this.renderer.listenGlobal( 'document', 'scroll', _.debounce( () => this.pageScrolled(), 50));
+    }
+    endScroll() {
+        if ( this.scrollListener ) this.scrollListener();
+    }
+    pageScrolled() {
+      console.log("scrolled:", this.scrollCount++);
+      let pages = document.querySelector(".pages");
+      if ( pages === void 0 || ! pages || pages['offsetTop'] === void 0) return; // @attention this is error handling for some reason, especially on first loading of each forum, it creates "'offsetTop' of undefined" error.
+      let pagesHeight = pages['offsetTop'] + pages['clientHeight'];
+      let pageOffset = window.pageYOffset + window.innerHeight;
+      if( pageOffset > pagesHeight - 200) { // page scrolled. the distance to the bottom is within 200 px from
+        console.log("page scroll reaches at bottom: pageOffset=" + pageOffset + ", pagesHeight=" + pagesHeight);
+        this.loadPage();
+      }
+    }
+    ngOnDestroy() {
+      this.endScroll();
+    }
+
     loadPage() {
+      if ( this.inPageLoading ) {
+        console.info("in page loading");
+        return;
+      }
+      this.inPageLoading = true;
 
         let option: PAGE_OPTION = {
             post_id: this.post_id,
-            page_no: this.page_no,
+            page_no: this.page_no++,
             limit: this.limit
         };
         // this.post.debug = true;
         this.post.page( option, (page: PAGE) => {
-            
+
             console.log("Page: ", page);
+            this.inPageLoading = false;
+            if ( page.posts.length == 0 ) {
+              this.noMorePosts = true;
+              this.endScroll();
+            }
 
             if ( page.page_no == 1 ) {
                 this.replacePush( page, option );
-                
                 if ( page.ads !== void 0 ) this.ads = page.ads;
                 if ( page.post_top_ad !== void 0 && page.post_top_ad.length ) this.post_top_ad = page.post_top_ad;
                 if ( page.post_top_premium_ad !== void 0 ) this.post_top_premium_ad = page.post_top_premium_ad;
-
                 // this.removeFirstPage( option );
             }
             else this.delayPush( page );
@@ -93,14 +169,14 @@ export class SonubPostListPage {
         post.url = this.post.getPermalink( post );
         return post;
     }
-    
+
     onClickPostCreate( ) {
         this.showPostCreateFrom = true;
     }
     editComponentOnCancel() {
         this.showPostCreateFrom = false;
     }
-    
+
     editComponentOnSuccess() {
         this.showPostCreateFrom = false;
     }

@@ -61,7 +61,7 @@ let appRoutes: Routes = [
     // for new forum.
     { path: "forum", component: SonubForumIndexPage },
     { path: "forum/:post_id", component: SonubPostListPage },
-    { path: "article/:idx_post", component: SonubPostViewPage },
+    { path: "article/:idx_post", component: SonubPostListPage },
 
     // job
     { path: "job", component: JobIndexComponent },
