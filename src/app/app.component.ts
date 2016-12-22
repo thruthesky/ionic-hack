@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Deploy, DeployDownloadOptions } from '@ionic/cloud-angular';
+import { IonicApi } from '../api/ionic-api-0.2/ionic-api';
 @Component({
   selector: `root-component`,
   template: `
@@ -11,13 +12,15 @@ export class RootComponent {
   
   constructor(
     private router: Router,
-    public deploy: Deploy
+    public deploy: Deploy,
+    private ionic: IonicApi
     ) {
     document.addEventListener("deviceready", () => this.onDevinceReady(), false);
   }
   onDevinceReady() {
     console.log("yes, I am running in cordova.");
     this.updateApp();
+    this.registerPushNotification();
   }
   updateApp() {
     this.updateNewSnapshot();
@@ -49,5 +52,14 @@ export class RootComponent {
         }
       });
   }
+
+
+  registerPushNotification() {
+    this.ionic.registerPushNotification(
+      re => {},
+      error => alert("Failed on push notification: " + error )
+      );
+  }
+
 
 }
