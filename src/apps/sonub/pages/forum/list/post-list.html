@@ -19,6 +19,22 @@
 
 
 
+      <div *ngIf=" view " class="view">
+          <view-component
+            [post]="view" [root]="view"
+            [show]="true"
+            [mode] = " 'create-comment' "
+          ></view-component>
+          <div *ngIf=" view?.comments " class="comments">
+              <div class="comment" *ngFor=" let comment of view.comments; trackBy: comment?.idx ">
+              <view-component
+                  [post]="comment" [root]="view"
+                  [show] = "true"
+                  [mode] = " 'create-comment' "
+              ></view-component>
+              </div>
+          </div><!--/.comments-->
+        </div><!--/.view-->
 
 
       <div *ngIf=" posts " class="pages posts">

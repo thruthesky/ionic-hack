@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 export class SonubPostListPage {
     // pages: PAGES = <PAGES> [];
     posts: POSTS = <POSTS> [];
+    view: POST = null;
     showPostCreateFrom: boolean = false;
     post_id: string = '';
     page_no: number = 1;
@@ -27,10 +28,24 @@ export class SonubPostListPage {
         console.log("SonubPostListPage::constructor()");
         // this.post_id = activated.snapshot.params['post_id'];
         activated.params.subscribe( param => {
-            this.post_id = param['post_id'];
+            this.posts = <POSTS> [];
+            if ( param['post_id'] !== void 0 ) {
+                this.requestPostList( param['post_id'] );
+            }
+            else if ( param['idx_post'] !== void 0 ) {
+                this.requestPostView( param['idx_post'] );
+            }
+        } );
+    }
+
+    requestPostView( idx_post: string ) {
+        this.loadPost( idx_post );
+    }
+
+    requestPostList( post_id: string ) {
+            this.post_id = post_id;
             this.post_id = this.post_id.replace('--', ',');
             this.page_no = 0;
-
             if ( this.post_id ) {
               this.loadPage();
             }
@@ -38,14 +53,31 @@ export class SonubPostListPage {
               alert("No post id provided");
             }
             this.beginScroll();
-        } );
     }
+
+    
+
+    loadPost(idx_post){
+
+        this.post.debug = true;
+        this.post.load(idx_post, response =>{
+            this.view = <POST> response.post;
+            console.log("Load a post for view : ", this.view );
+            console.log("Load post success on idx : ", idx_post);
+            this.requestPostList( this.view.post_id );
+        },error =>{
+            alert("Load post error" + error);
+        });
+
+    }
+
+
 
     beginScroll() {
       this.scrollListener = this.renderer.listenGlobal( 'document', 'scroll', _.debounce( () => this.pageScrolled(), 50));
     }
     endScroll() {
-      this.scrollListener();
+        if ( this.scrollListener ) this.scrollListener();
     }
     pageScrolled() {
       console.log("scrolled:", this.scrollCount++);
@@ -86,11 +118,9 @@ export class SonubPostListPage {
 
             if ( page.page_no == 1 ) {
                 this.replacePush( page, option );
-
                 if ( page.ads !== void 0 ) this.ads = page.ads;
                 if ( page.post_top_ad !== void 0 && page.post_top_ad.length ) this.post_top_ad = page.post_top_ad;
                 if ( page.post_top_premium_ad !== void 0 ) this.post_top_premium_ad = page.post_top_premium_ad;
-
                 // this.removeFirstPage( option );
             }
             else this.delayPush( page );
