@@ -24,7 +24,7 @@ export class SubjectformComponent implements OnInit {
   category_data = [];
 
   submit = new EventEmitter();
-  temp   = <POST_DATA> {};
+  // temp   = <POST_DATA> {};
   inDeleting: boolean = false;
   inPosting: boolean  = false;
   
@@ -33,7 +33,6 @@ export class SubjectformComponent implements OnInit {
     @Input()  active    : boolean = false; // adding '.show' CSS Class to FORM
     @Input()  mode      : 'create-post';
     @Output() postLoad    = new EventEmitter();
-    @Output() error       = new EventEmitter();
     @Output() success     = new EventEmitter();
     @Output() cancel      = new EventEmitter();
     @Input()  root: POST  = null;
@@ -54,6 +53,17 @@ export class SubjectformComponent implements OnInit {
   }
 
 
+    initialize_data(){
+    ////initializing form data for editing
+    if( this.dataService.subject_data.idx ){
+      this.subject_form.idx       = this.dataService.subject_data.idx;
+      this.subject_form.isActive  = this.dataService.check_status( this.dataService.subject_data.varchar_1 );
+      this.subject_form.duration  = this.dataService.subject_data.varchar_3;
+      this.subject_form.subject   = this.dataService.subject_data.content;
+    }
+  }
+
+
   successCallback( re: POST_RESPONSE ) {
       if ( this.mode == "create-post" ) {
           try {
@@ -61,14 +71,11 @@ export class SubjectformComponent implements OnInit {
                   console.log ("posts: ", this.posts );
                   console.log( "re: ", re );
                   this.posts.push( re.post );
-              }else{
-                console.log( 'index', this.dataService.subject_index )
-                this.posts.splice( this.dataService.subject_index, 1, re.post )
-              }
+              }else this.posts.splice( this.dataService.subject_index, 1, re.post )
           }
           catch ( e ) { alert("Please restart the app." + e ); }
       }
-      this.temp = {};
+      
       this.success.emit();
       this.dataService.subject_data = {};
       this.subject_form = <form>{};
@@ -82,9 +89,10 @@ export class SubjectformComponent implements OnInit {
   }
 
 
+
+
   completeCallback() {
       this.inPosting = false;
-
   }
 
 
@@ -104,7 +112,7 @@ export class SubjectformComponent implements OnInit {
 
   onClickSubmit(){
       let subject           = <POST_DATA>{};
-      let data = this.passing_subject_data( subject );
+      let data = this.passing_subject_data( subject );///getting the return of passing_subject_data( )
 
       if( this.dataService.subject_data.idx ) {
           data.idx       = this.dataService.subject_data.idx;
@@ -113,8 +121,6 @@ export class SubjectformComponent implements OnInit {
       }
       this.create( data );
   }
-
-
 
 
 
@@ -128,16 +134,12 @@ export class SubjectformComponent implements OnInit {
 
 
 
-
-
   create( data ){
       this.post.create( data,            
             s => this.successCallback( s ),
             e => this.errorCallback( e ),
-            () => this.completeCallback())
+            () => this.completeCallback() )
   }
-
-
 
 
 
@@ -152,18 +154,6 @@ export class SubjectformComponent implements OnInit {
       subject.varchar_1 = this.subject_form.isActive.toString();
       subject.varchar_3 = this.subject_form.duration;
       return subject;
-  }
-
-
-
-
-  initialize_data(){
-    if( this.dataService.subject_data.idx ){
-      this.subject_form.idx       = this.dataService.subject_data.idx;
-      this.subject_form.isActive  = this.dataService.check_status( this.dataService.subject_data.varchar_1 );
-      this.subject_form.duration  = this.dataService.subject_data.varchar_3;
-      this.subject_form.subject   = this.dataService.subject_data.content;
-    }
   }
 
 

@@ -50,7 +50,7 @@ export class ExamhomeComponent implements OnInit {
         if(this.subject_data.length == 0) this.enabled = false;
         else this.enabled = true;
         console.log( 'fetched subject', this.subject_data.length )
-      }, error =>{})
+      }, error =>alert( 'something went wrong' + error ) )
   }
 
 
