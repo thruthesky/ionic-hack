@@ -1,134 +1,153 @@
 sonub-left {
+  
+  
     display: block;
-    background-color: #876;
     width: 100%;
     padding :15px;
+
+    background-color: #876;
   
-    .top{
-        top: 30px;
-        margin : 0px;   
-        background: white;
-        padding : 2px;
-        margin-bottom : 10px;
-        .container{
-            border : 1px solid #a8a8a8;
+  /*
+   *
+   * //------.top-------//
+   *
+   */
+       .top{
+            top: 30px;  
+            padding : 5px;
+            margin : 0px; 
+            margin-bottom : 10px;
+
+            background: white;
+        }
+   
+       .top .container{
             padding : 0px;
-            border-radius : 2px;
-            latest-component {   
-                .title{
-                    padding :  15px;
-                    background : #e8e8e8;
-                   color:#2a2a2a;
-                  
-                }
-
-                 .title:before {
-                    font-family: "FontAwesome";
-                    font-weight: bold;
-                    content: '\f0e5';
-                     color:#5a5a5a;
-                    margin-right: 5pt;
-                }
-              
-                div:nth-child(2) > div >div:before{
-                    border-bottom : 1px solid #5a5a5a;
-                     border-right: 1px solid #5a5a5a;
-                    padding:2pt 4pt 1pt 4pt;
-                    border-radius:2px;
-                     
-                     content: counter(number);
-                     font-weight: bold;
-                     font-size: 9pt;
-                     background:#a8a8b8;
-                    color: #f8f8f8;
-                    margin-right: 4pt; 
-                }
-                   div:nth-child(2)>div{
-                     counter-increment: number;
-                }
-
-                div{
-                    padding :  10px 15px 15px 15px;
-                } 
-
-                div > div  {
-                       
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        overflow: hidden;
-                       padding: 2px;     
-                        margin-right : 0.5em;
-                        cursor: auto;  
-                        color: #5a5a5a;
-                        font-family: 굴림,Gulim,AppleGothic;
-                       font-size: 9pt;
-                    }
-               
-            }
-
-        }
-        
-        
-    }
-
-
-
-    .bottom{
-        top: 30px;
-        margin : 0px;   
-        background: #f8f8f8;
-        padding : 5px;
-        
-        .container{
             border : 1px solid #a8a8a8;
-            padding : 5px 15px 15px 15px;
-            border-radius : 5px;
-            latest-component {   
-                .title{
-                    margin-bottom: 2px;   
-                     color:#2a2a2a;
-                    border-bottom: 1px solid #a2a2a2;
-                    padding:0px;   
-                    padding-bottom: 5px;
-                    vertical-align: middle;
-                   
-                }
+            border-radius : 2px;
+        }
 
-            
+        .top .container   latest-component > div{
+             padding :  10px 15px 15px 15px;  
+        }
 
-                div{
-                    padding :  10px 0px 5px 0px;
-                } 
-                div > div  {
-                        text-overflow: ellipsis;
-                        overflow: hidden;
-                        white-space: nowrap;
-                        overflow: hidden;
-                       padding: 2px;    
-                    
-                        cursor: auto;  
-                        color: #5a5a5a;
-                        font-family: 굴림,Gulim,AppleGothic;
-                        font-size: 9pt;
-                    }
+        .top .container   latest-component > div > div{ 
+            padding: 2px;     
+            margin-right : 0.5em;
 
-                div > div > div:before{
-                    color : #bababa;
-                    content:"• ";
-                    font-weight: bold;
-                    font-size:13px;
-                    padding :0px;
-                    margin :0px;
-                }
-               
+            text-overflow: ellipsis;
+            overflow: hidden;  
+            white-space: nowrap;
+            cursor: auto;  
+            color: #5a5a5a;
+            font-family: 굴림,Gulim,AppleGothic;
+            font-size: 9pt;
+        } 
+
+         .top .container   latest-component  .title{
+              padding :  15px;
+              
+              background : #e8e8e8;
+              color:#2a2a2a;
+         }
+
+         .top .container   latest-component  .title:before {
+            margin-right: 5pt;
+
+            font-family: "FontAwesome";
+            font-weight: bold;
+            content: '\f0e5';
+            color:#5a5a5a;
+         }
+
+
+       .top .container   latest-component {  
+
+            div:nth-child(2) >div {
+                counter-increment: number;
             }
 
+            div:nth-child(2) > div > div:before{
+                padding:2pt 4pt 1pt 4pt;
+                margin-right: 4pt; 
+               
+                border-bottom : 1px solid #5a5a5a;
+                border-right: 1px solid #5a5a5a;
+                border-radius:2px;   
+               
+                content: counter(number);
+                font-weight: bold;
+                font-size: 9pt;
+                background:#a8a8b8;
+                color: #f8f8f8;
+               
+            }
         }
-        
-        
-    }
 
-    
-}
+      
+    /*
+   *
+   * //------.bottom-------//
+   *
+   */
+
+        .bottom{
+                top: 30px;
+                padding : 5px;
+                margin : 0px;  
+
+
+                background: #f8f8f8;
+               
+        }
+
+        .bottom  .container{
+                padding : 5px 15px 15px 15px;
+
+                border : 1px solid #a8a8a8;
+                border-radius : 5px;
+        }
+
+        .bottom  .container  latest-component   .title{
+                padding:0px;   
+                padding-bottom: 5px;
+                margin-bottom: 2px; 
+
+                border-bottom: 1px solid #a2a2a2;  
+               
+                color:#2a2a2a;
+                vertical-align: middle;
+        }
+
+        .bottom  .container  latest-component   div{
+                padding :  10px 0px 5px 0px;     
+        }
+
+        .bottom .container  latest-component  div > div  {
+                padding: 2px;  
+              
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                overflow: hidden;
+                 
+            
+                cursor: auto;  
+                color: #5a5a5a;
+                font-family: 굴림,Gulim,AppleGothic;
+                font-size: 9pt;
+        } 
+        .bottom .container  latest-component  div > div :before{       
+                padding :0px;
+                margin :0px;
+               
+                color : #bababa;
+                content:"• ";
+                font-weight: bold;
+                font-size:13px;
+               
+        }
+               
+             
+}/*--- End of sonub-left---*/
 
