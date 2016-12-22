@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Post, PAGE, POSTS, POST, PAGE_OPTION } from "../../../../../api/philgo-api/v2/post";
+import { Post, PAGE, POSTS, POST, PAGE_OPTION, ADS, POST_TOP_ADS, POST_TOP_PREMIUM_ADS } from "../../../../../api/philgo-api/v2/post";
 @Component({
     selector: 'sonub-post-list',
     templateUrl: 'post-list.html'
@@ -11,6 +11,10 @@ export class SonubPostListPage {
     showPostCreateFrom: boolean = false;
     post_id: string = '';
     page_no: number = 1;
+    limit: 10;
+    ads: ADS = null;
+    post_top_ad: POST_TOP_ADS = null;
+    post_top_premium_ad: POST_TOP_PREMIUM_ADS = null;
     constructor( private post: Post, activated: ActivatedRoute ) {
         console.log("SonubPostListPage::constructor()");
         // this.post_id = activated.snapshot.params['post_id'];
@@ -27,12 +31,20 @@ export class SonubPostListPage {
         let option: PAGE_OPTION = {
             post_id: this.post_id,
             page_no: this.page_no,
-            limit: 10
+            limit: this.limit
         };
         // this.post.debug = true;
         this.post.page( option, (page: PAGE) => {
+            
+            console.log("Page: ", page);
+
             if ( page.page_no == 1 ) {
                 this.replacePush( page, option );
+                
+                if ( page.ads !== void 0 ) this.ads = page.ads;
+                if ( page.post_top_ad !== void 0 && page.post_top_ad.length ) this.post_top_ad = page.post_top_ad;
+                if ( page.post_top_premium_ad !== void 0 ) this.post_top_premium_ad = page.post_top_premium_ad;
+
                 // this.removeFirstPage( option );
             }
             else this.delayPush( page );
@@ -47,7 +59,7 @@ export class SonubPostListPage {
             setTimeout( () => {
                 this.posts.push ( this.pre(v) );
             },
-            100 + i * 10 );
+            100 + i * 50 );
         });
     }
     /**
@@ -61,7 +73,7 @@ export class SonubPostListPage {
         for( let i = 0; i < option.limit; i ++ ) {
             setTimeout( () => {
                 this.posts[i] = page.posts[i];
-            }, i * 100);
+            }, 100 + i * 30);
         }
     }
     /**
