@@ -61,13 +61,12 @@ sonub-left {
          }
 
 
-       .top .container   latest-component {  
+       .top .container >  latest-component  > div:nth-child(2) > div {
+           counter-increment: number;
+            
+       }
 
-            div:nth-child(2) >div {
-                counter-increment: number;
-            }
-
-            div:nth-child(2) > div > div:before{
+       .top .container >  latest-component  > div:nth-child(2) > div > :before{
                 padding:2pt 4pt 1pt 4pt;
                 margin-right: 4pt; 
                
@@ -78,10 +77,10 @@ sonub-left {
                 content: counter(number);
                 font-weight: bold;
                 font-size: 9pt;
+              
+
                 background:#a8a8b8;
-                color: #f8f8f8;
-               
-            }
+                color: #f8f8f8;    
         }
 
       
@@ -102,7 +101,7 @@ sonub-left {
         }
 
         .bottom  .container{
-                padding : 5px 15px 15px 15px;
+                padding : 5px 15px 20px 15px;
 
                 border : 1px solid #a8a8a8;
                 border-radius : 5px;
@@ -110,8 +109,8 @@ sonub-left {
 
         .bottom  .container  latest-component   .title{
                 padding:0px;   
-                padding-bottom: 5px;
-                margin-bottom: 2px; 
+                padding-bottom: 2px;
+                margin-bottom: 1px; 
 
                 border-bottom: 1px solid #a2a2a2;  
                
@@ -124,7 +123,7 @@ sonub-left {
         }
 
         .bottom .container  latest-component  div > div  {
-                padding: 2px;  
+                padding: 0px;  
               
                 text-overflow: ellipsis;
                 overflow: hidden;
