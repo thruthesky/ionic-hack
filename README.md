@@ -29,6 +29,10 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* .hidden-xx-up/down is no good since it produce HTML and run all the JS code.
+    * it never needs on mobile.
+    
+
 * Show 10 next posts and 10 previous posts under a post view page.
 
 * Message. 쪽지 기능과 push 기능을 연동한다.
