@@ -3,9 +3,9 @@
   <div *ngFor=" let post of posts " routerLink="{{ post.url }}" class="post">
     <table>
       <tr>
-        <td class="left">
+        <td class="left" *ngIf="post?.photos?.length">
           <div class="photo">
-            <img src="{{post.photos[0].url_thumbnail}}">
+            <img [src]="post.photos[0]?.url_thumbnail">
           </div>
         </td>
         <td class="right">
@@ -18,7 +18,7 @@
           <div class="content" *ngIf="post.content">
             <span>{{post.content}}</span>
           </div>
-          <div class="comment" *ngIf="post.comments">
+          <div class="comment" *ngIf="post?.comments?.length">
             <span>{{post.comments[0].content}}</span>
           </div>
         </td>

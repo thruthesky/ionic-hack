@@ -3,7 +3,7 @@
  *
  */
 import { Component, Input } from '@angular/core';
-import { Post, PAGE, PHOTO_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
+import { Post, PHOTO_OPTION, POSTS } from '../../../../api/philgo-api/v2/post';
 
 @Component({
   selector: 'sonub-latest-photo',
