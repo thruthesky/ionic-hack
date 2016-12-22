@@ -1,65 +1,88 @@
 <sonub-header></sonub-header>
-    <section class="content container-fluid">
-    <div class="row">
-        <aside class="left hidden-sm-down col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
-        <section class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
-            <hr>
-            <!-- create a  post -->
-            <edit-component *ngIf = " showPostCreateFrom "
-                [mode]    = " 'create-post' "
-                [active]  = " true "
-                [post_id] = " post_id "
-                [posts]   = " posts "
-                (error)   = " editComponentOnError( $event ) "
-                (cancel)  = " editComponentOnCancel() "
-                (success) = " editComponentOnSuccess() "
-            ></edit-component>
-            <button (click)="onClickPostCreate()">Post Write</button>
-            <hr>
+<section class="content container-fluid">
+  <div class="row">
+    <aside class="left hidden-sm-down col-sm-4 col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
+    <section class="center col-sm-8 col-md-9 col-lg-6 col-xl-8">
+      <hr>
+      <!-- create a  post -->
+      <edit-component *ngIf = " showPostCreateFrom "
+                      [mode]    = " 'create-post' "
+                      [active]  = " true "
+                      [post_id] = " post_id "
+                      [posts]   = " posts "
+                      (error)   = " editComponentOnError( $event ) "
+                      (cancel)  = " editComponentOnCancel() "
+                      (success) = " editComponentOnSuccess() "
+      ></edit-component>
+      <button (click)="onClickPostCreate()">Post Write</button>
+      <hr>
 
 
 
 
 
-            <div *ngIf=" posts " class="posts">
-                <div class="post" *ngFor=" let post of posts; let i = index; trackBy: post?.idx ">
+      <div *ngIf=" posts " class="pages posts">
+        <div class="post" *ngFor=" let post of posts; let i = index; trackBy: post?.idx ">
 
 
-                    <!-- post_top_ad -->
+          <!-- post_top_ad -->
+          <div *ngIf=" post_top_ad && ! (i % limit) " class="post_top_ad">
+            <div *ngFor=" let top_ad of post_top_ad " class="top_ad">
+              <div class="image">
+                <a [href]=" 'http://www.philgo.com/' + top_ad.url " target="_blank">
+                  <img [src]="top_ad.src">
+                </a>
+              </div>
+            </div>
+          </div><!-- post_top_ad -->
 
-                    <!-- post_top_preminum -->
+          <!-- post_top_preminum -->
+          <div *ngIf=" post_top_premium_ad && ! (i % limit) " class="post_top_premium_ad">
+            <div *ngFor=" let premium_ad of post_top_premium_ad " class="top_premium_ad">
+              <div class="image">
+                <a [href]=" 'http://www.philgo.com/' + premium_ad.url " target="_blank">
+                  <img [src]="premium_ad.src">
+                </a>
+              </div>
+              <div class="text">
+                <div class="subject">{{ premium_ad.subject }}</div>
+                <div class="sub_subject">{{ premium_ad.sub_subject }}</div>
+              </div>
+            </div>
+          </div><!-- post_top_preminum -->
 
+          <!-- ads -->
+          <div *ngIf=" ads && ! (i % limit) " class="ads">
+            <div *ngFor=" let ad of ads " class="ad">
+              <a [href]=" 'http://www.philgo.com/' + ad.url " target="_blank">
+                <img [src]="ad.src_thumbnail">
+                {{ ad.subject }}
+              </a>
+            </div>
+          </div><!-- ads -->
 
-                    <div *ngIf=" ads && ! (i % 3) " class="ads">
-                        <div *ngFor=" let ad of ads " class="ad">
-                            <a [href]=" 'http://www.philgo.com/' + ad.url " target="_blank">
-                                <img [src]="ad.src_thumbnail">
-                                {{ ad.subject }}
-                            </a>
-                        </div>
-                    </div>
+          <view-component
+            [post]="post" [root]="post"
+            [show]="true"
+            [mode] = " 'create-comment' "
+          ></view-component>
+          <div *ngIf=" post?.comments " class="comments">
+              <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
+              <view-component
+                  [post]="comment" [root]="post"
+                  [show] = "true"
+                  [mode] = " 'create-comment' "
+              ></view-component>
+              </div>
+          </div><!--/.comments-->
+        </div><!--/.post-->
 
-                    <view-component
-                        [post]="post" [root]="post"
-                        [show]="true"
-                        [mode] = " 'create-comment' "
-                    ></view-component>
-                    <div *ngIf=" post?.comments " class="comments">
-                        <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
-                        <view-component
-                            [post]="comment" [root]="post"
-                            [show] = "true"
-                            [mode] = " 'create-comment' "
-                        ></view-component>
-                        </div>
-                    </div><!--/.comments-->
-                </div><!--/.post-->
+      </div><!--/.posts-->
+      <div *ngIf=" inPageLoading " class="in-page-loading"><i class="fa fa-spinner fa-spin"></i> Loading ...</div>
+      <div *ngIf=" noMorePosts " class="no-more-posts">No more posts</div>
 
-            </div><!--/.posts-->
-
-
-        </section><!--/section.center-->
-        <aside class="right col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
-    </div><!--/.row-->
-    </section><!--/section.content-->
+    </section><!--/section.center-->
+    <aside class="right hidden-sm-down col-sm-12 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
+  </div><!--/.row-->
+</section><!--/section.content-->
 <sonub-footer></sonub-footer>

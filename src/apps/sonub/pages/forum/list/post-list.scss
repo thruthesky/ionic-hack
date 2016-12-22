@@ -1,6 +1,6 @@
 
 .posts {
-    
+
     .uploaded-files {
         img {
             max-width: 100%;
@@ -30,6 +30,66 @@
                 border-radius: 50%;
             }
         }
+    }
+
+    .post_top_ad {
+      position: relative;
+      display: block;
+      .top_ad {
+        display: inline-block;
+        width:25%;
+        .image {
+          display: inline-block;
+          max-width: 172px;
+          max-height: 172px;
+          padding: 2px;
+          margin-left: 5px;
+          overflow: hidden;
+          border: 1px solid #d3d3d3;
+          img {
+            width:100%;
+            height:100%;
+          }
+        }
+      }
+    }
+
+    .post_top_premium_ad {
+      position: relative;
+      display: block;
+      .top_premium_ad {
+        position: relative;
+        border-top: 1px solid #e7e7e7;
+        padding: 6px 10px 6px 10px;
+        .image {
+          float: left;
+          margin-right: 8px;
+          img {
+            width: 66px;
+            height: 36px;
+            border: 1px solid #dfdfdf;
+            padding: 2px;
+            border-radius: 2px;
+          }
+        }
+        .text {
+          .subject {
+            font-weight: bold;
+            font-size: 10pt;
+            font-family: "맑은 고딕", "Malgun Gothic", Gulim;
+            line-height: 22px;
+            height: 22px;
+            overflow: hidden;
+          }
+          .sub_subject {
+            line-height: 20px;
+            font-size: 9pt;
+            font-family: "맑은 고딕", "Malgun Gothic", Gulim;
+            height: 20px;
+            overflow: hidden;
+          }
+        }
+      }
     }
 
 }

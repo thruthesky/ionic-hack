@@ -95,7 +95,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
   startTimer(){
 
-    ///checking and computing mins if it's value is 60 or more.
+    ///checking and computing mins if it's value is 60 or more then convert 60mins : 1hr
     if( this.min >= 60 ){
       this.hr = Math.floor( this.min / 60 );
       console.log('checking value ', Math.floor( this.min / 60 ))
@@ -116,13 +116,13 @@ export class ExampageComponent implements OnInit, OnDestroy {
         this.sec = 60;
         }
       }
-      if(this.hr==0 && this.sec ==0 &&this.min ==0) this.onClickFinish();
+      if( this.hr==0 && this.sec ==0 &&this.min ==0 ) this.onClickFinish();
       
       
-      console.log('check minutes ',this.min)
+      console.log( 'check minutes ',this.min )
     }
     this.sec -- ;
-    ///formating Hours, Minutes, and Seconds for display
+    ///formating Hours, Minutes, and Seconds for timer display
     let hrDisplay  = this.hr  >= 10 ? "" + this.hr  : "0" + this.hr;
     let minDisplay = this.min >= 10 ? "" + this.min : "0" + this.min;
     let secDisplay = this.sec >= 10 ? "" + this.sec : "0" + this.sec;
@@ -161,8 +161,9 @@ export class ExampageComponent implements OnInit, OnDestroy {
   randomizeChoices( i ){
     ///changing the structure of choices for randomization without requesting from server.
     let temp                 = []
-    let restructured_choices ={}
+    let restructured_choices = {}
     let currentquestion      = this.exam_data[ i ]
+    console.log('first structure ', currentquestion )
     for( let key in currentquestion ){
       temp.push( currentquestion[ key ] )
     }
@@ -173,10 +174,13 @@ export class ExampageComponent implements OnInit, OnDestroy {
         { 'key': 3, 'value':temp[ 4 ] },
         { 'key': 4, 'value':temp[ 5 ] } 
         ]};
-        
+        console.log('restrucured choices ', restructured_choices)
     this.current_choices = _.shuffle( restructured_choices[ 'choices' ] )
     console.log( '2nd ', _.shuffle( restructured_choices[ 'choices' ] ) );
   }
+
+
+
 
 
 
@@ -194,14 +198,14 @@ export class ExampageComponent implements OnInit, OnDestroy {
   onClickNext( radio? ){
     if( this.validate_exam( this.radio ) == false)///validates if the user selected an answer.
 
-    console.log( 'answer',  radio, ' right answer', this.current_question.varchar_5 )
+    console.log( 'selected ',  radio, ' right answer', this.current_question.varchar_5 )
     if( this.validate_exam( radio ) == false ) return;
     this.validate = '';
     this.ctr+=1;
 
     if( radio == this.current_question.varchar_5 ){
-      this.score+= 2;
-      console.log( 'check', this.score )
+      this.score+= 1;
+      console.log( 'check current score ', this.score )
     }
     this.randomizedQuestions(); 
     this.radio = '';
@@ -213,7 +217,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
   validate_exam( val ){
     ///form validation
-    if( val == null || val == '' ){
+    if( val == null || val == '' ){ 
       this.validate = 'No answer selected'
       console.log( this.validate );
       return false;
@@ -230,9 +234,9 @@ export class ExampageComponent implements OnInit, OnDestroy {
   onClickFinish(){
       this.router.navigate( [ 'quiz/final' ] );
       /////passing data to data service.
-      this.dataService.playerStats.score = this.score;
+      this.dataService.playerStats.score           = this.score;
       this.dataService.playerStats.total_questions = this.questionCount.length;
-      this.dataService.playerStats.subject = this.subject_data.post.content;
+      this.dataService.playerStats.subject         = this.subject_data.post.content;
   }
 
 
@@ -246,7 +250,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
       this.onClickFinish();
     }
 
-    this.exam_data.splice( this.ctrRandom, 1 );///removes the item/question from array so it won't repeat.    
+    this.exam_data.splice( this.ctrRandom, 1 );///removes the current question from array so it won't repeat.    
     this.ctrRandom = Math.floor( Math.random() * ( this.exam_data.length - 1 + 1 ) );///getting a random number within the range of the max number of quesiton.
     
     this.current_question = this.exam_data[ this.ctrRandom ];/// getting the next random question using the ctrRandom as index
