@@ -95,7 +95,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
 
   startTimer(){
 
-    ///checking and computing mins if it's value is 60 or more.
+    ///checking and computing mins if it's value is 60 or more then convert 60mins : 1hr
     if( this.min >= 60 ){
       this.hr = Math.floor( this.min / 60 );
       console.log('checking value ', Math.floor( this.min / 60 ))
@@ -116,10 +116,10 @@ export class ExampageComponent implements OnInit, OnDestroy {
         this.sec = 60;
         }
       }
-      if(this.hr==0 && this.sec ==0 &&this.min ==0) this.onClickFinish();
+      if( this.hr==0 && this.sec ==0 &&this.min ==0 ) this.onClickFinish();
       
       
-      console.log('check minutes ',this.min)
+      console.log( 'check minutes ',this.min )
     }
     this.sec -- ;
     ///formating Hours, Minutes, and Seconds for display
@@ -161,8 +161,9 @@ export class ExampageComponent implements OnInit, OnDestroy {
   randomizeChoices( i ){
     ///changing the structure of choices for randomization without requesting from server.
     let temp                 = []
-    let restructured_choices ={}
+    let restructured_choices = {}
     let currentquestion      = this.exam_data[ i ]
+    console.log('first structure ', currentquestion )
     for( let key in currentquestion ){
       temp.push( currentquestion[ key ] )
     }
@@ -173,7 +174,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
         { 'key': 3, 'value':temp[ 4 ] },
         { 'key': 4, 'value':temp[ 5 ] } 
         ]};
-        
+        console.log('restrucured choices ', restructured_choices)
     this.current_choices = _.shuffle( restructured_choices[ 'choices' ] )
     console.log( '2nd ', _.shuffle( restructured_choices[ 'choices' ] ) );
   }
@@ -230,9 +231,9 @@ export class ExampageComponent implements OnInit, OnDestroy {
   onClickFinish(){
       this.router.navigate( [ 'quiz/final' ] );
       /////passing data to data service.
-      this.dataService.playerStats.score = this.score;
+      this.dataService.playerStats.score           = this.score;
       this.dataService.playerStats.total_questions = this.questionCount.length;
-      this.dataService.playerStats.subject = this.subject_data.post.content;
+      this.dataService.playerStats.subject         = this.subject_data.post.content;
   }
 
 
