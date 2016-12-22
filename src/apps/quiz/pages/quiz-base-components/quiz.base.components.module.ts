@@ -5,11 +5,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { QuizBaseNavComponent } from '../../pages/quiz-base-components/quiz-base-nav/quiz-base-nav';
+import { QuizBaseFooter } from './quiz-base-footer/quiz-base-footer'
 
 
 @NgModule({
   declarations: [
-      QuizBaseNavComponent
+      QuizBaseNavComponent,
+      QuizBaseFooter
   ],
   imports: [
     BrowserModule,
@@ -19,6 +21,6 @@ import { QuizBaseNavComponent } from '../../pages/quiz-base-components/quiz-base
   ],
   providers: [ ],
   entryComponents:[  ],
-  exports:[ QuizBaseNavComponent ]
+  exports:[ QuizBaseNavComponent, QuizBaseFooter ]
 })
 export class QuizBaseModule { }
