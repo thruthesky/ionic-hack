@@ -11,9 +11,9 @@ export class SonubLeft {
     constructor(
         forum: ForumService
     ) {
-        console.log("SonubLeft::constructor()");
+        // console.log("SonubLeft::constructor()");
         this.forums = forum.forums;
         this.forum_group = Object.keys( this.forums );
-        console.log( this.forums);
+        // console.log( this.forums);
     }
 }

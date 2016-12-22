@@ -24,9 +24,9 @@ export class SonubNews {
       expire: ONE_MINUTE_STAMP,
       fields: 'idx,idx_parent,subject,SUBSTRING(content_stripped,1,50) as content,deleted,gid,good,no_of_comment,no_of_view,post_id,stamp'
     };
-    console.log('option::',option);
+    // console.log('option::',option);
     this.post.page( option, ( page: PAGE ) => {
-        console.log("latest: ", page);
+        // console.log("latest: ", page);
         page.posts.map( ( v:any, i ) => {
           setTimeout( () => {
             v.url = this.post.getLink( v );
@@ -36,7 +36,7 @@ export class SonubNews {
       },
       error => alert( "Latest error: " + error ),
       () => {});
-    console.log('this.posts',this.posts);
+    // console.log('this.posts',this.posts);
   }
 
 }

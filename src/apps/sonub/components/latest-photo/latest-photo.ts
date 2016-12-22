@@ -22,10 +22,10 @@ export class SonubLatestPhoto {
       post_id: this.post_id,
       limit: this.limit
     };
-    console.log('option::',option);
+    // console.log('option::',option);
 
     this.post.latestPhotos( option, (posts: POSTS) => {
-      console.log("posts: ", posts);
+      // console.log("posts: ", posts);
       this.posts = [];
       posts.map( ( v:any, i ) => {
         setTimeout( () => {
