@@ -31,6 +31,9 @@ sonub-left {
              padding :  10px 15px 15px 15px;  
         }
 
+         .top .container   latest-component > div > div:hover{ 
+              color: #080808;    
+         }
         .top .container   latest-component > div > div{ 
             padding: 2px;     
             margin-right : 0.5em;
@@ -45,7 +48,7 @@ sonub-left {
         } 
 
          .top .container   latest-component  .title{
-              padding :  15px;
+              padding :  10px 15px 10px 15px;
               
               background : #e8e8e8;
               color:#2a2a2a;
@@ -60,6 +63,16 @@ sonub-left {
             color:#5a5a5a;
          }
 
+
+
+         .top .container >  latest-component  > div:nth-child(2) > div:hover{
+                //background:#5252f8;
+                 color: #282828;    
+        }
+        // .top .container >  latest-component  > div:nth-child(2) > div:hover > :before{
+        //         background:#5252f8;
+               
+        // }
 
        .top .container >  latest-component  > div:nth-child(2) > div {
            counter-increment: number;
@@ -122,6 +135,9 @@ sonub-left {
                 padding :  10px 0px 5px 0px;     
         }
 
+         .bottom .container  latest-component  div > div:hover  {
+             color: #2a2a2a;
+         }
         
         .bottom .container  latest-component  div > div  {
                 padding: 0px;  
