@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SonubForumIndexPage } from './pages/forum/index/forum-index';
 import { SonubPostListPage } from './pages/forum/list/post-list';
@@ -20,6 +21,9 @@ import { SonubRight } from './components/right/right';
 import { SonubNews } from './components/news/news';
 import { SonubLatestPhoto } from "./components/latest-photo/latest-photo";
 
+import { SonubLoginPage } from './pages/user/login/login';
+import { SonubRegisterPage } from './pages/user/register/register';
+
 // services
 import { ForumService } from './providers/forum'
 
@@ -35,11 +39,14 @@ import { ForumService } from './providers/forum'
         SonubLeft,
         SonubNews,
         LatestPostComponent,
-        SonubLatestPhoto
+        SonubLatestPhoto,
+        SonubLoginPage,
+        SonubRegisterPage
     ],
     imports: [
         BrowserModule,
         RouterModule,
+        FormsModule,
         BaseComponentsModule,
         PhilgoApiModule,
         LanguagePipeModule

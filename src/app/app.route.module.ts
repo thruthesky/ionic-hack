@@ -28,8 +28,8 @@ import { PostViewPage } from '../pages/forum/post-view/post-view';
 //import { HomePage } from '../pages/base/home/home';
 import { FileNotFoundPage } from '../pages/base/file-not-found/file-not-found';
 
-import { RegisterPage } from '../pages/base/user/register/register';
-import { LoginPage } from '../pages/base/user/login/login';
+//import { RegisterPage } from '../pages/base/user/register/register';
+//import { LoginPage } from '../pages/base/user/login/login';
 
 
 import { JobIndexComponent } from '../apps/job/pages/job-index/job-index.component';
@@ -51,10 +51,13 @@ import { ResultsComponent } from '../apps/quiz/pages/results/results.component';
 // sonub forum index.
 import { SonubForumIndexPage } from '../apps/sonub/pages/forum/index/forum-index';
 import { SonubPostListPage } from '../apps/sonub/pages/forum/list/post-list';
-import { SonubPostViewPage } from '../apps/sonub/pages/forum/view/post-view';
+//import { SonubPostViewPage } from '../apps/sonub/pages/forum/view/post-view';
 // sonub home
 import { SonubHomePage } from '../apps/sonub/pages/home/home';
 
+
+import { SonubLoginPage } from '../apps/sonub/pages/user/login/login';
+import { SonubRegisterPage } from '../apps/sonub/pages/user/register/register';
 
 let appRoutes: Routes = [
 
@@ -86,8 +89,8 @@ let appRoutes: Routes = [
     { path: 'b-/:idx_post', component: PostViewPage },
 
     // base user
-    { path: 'user/register', component: RegisterPage },
-    { path: 'user/login', component: LoginPage },
+    { path: 'user/register', component: SonubRegisterPage },
+    { path: 'user/login', component: SonubLoginPage },
 
     // default pages.
     { path: '', component: SonubHomePage },

@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import { DataService } from '../../services/data-service/data.service';
 import { MemberRoutingService } from '../../services/user-routing/member-routing.service';
-
 import * as _ from 'lodash';
 
 
@@ -15,7 +14,6 @@ import * as _ from 'lodash';
   templateUrl: './exampage.component.html'
 })
 export class ExampageComponent implements OnInit, OnDestroy {
-
   today = new Date();
 
   min:number = 0;
@@ -130,7 +128,6 @@ export class ExampageComponent implements OnInit, OnDestroy {
     this.countdown = hrDisplay+ ":" +minDisplay + ":" + secDisplay;
 
     console.log( 'timer' , this.countdown )
-
   }
  
 
@@ -174,9 +171,7 @@ export class ExampageComponent implements OnInit, OnDestroy {
         { 'key': 3, 'value':temp[ 4 ] },
         { 'key': 4, 'value':temp[ 5 ] } 
         ]};
-        console.log('restrucured choices ', restructured_choices)
     this.current_choices = _.shuffle( restructured_choices[ 'choices' ] )
-    console.log( '2nd ', _.shuffle( restructured_choices[ 'choices' ] ) );
   }
 
 
