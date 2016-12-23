@@ -26,14 +26,11 @@ export class SonubLoginPage {
         //this.onClickLogin();
 
 //        this.login();
-
-
     }
     onClickLogin() {
         console.log("LoginPage::onClickLogin()");
         this.login();
     }
-
 
     login() {
         //this.process.loader = true;
