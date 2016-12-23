@@ -4,16 +4,13 @@ latest-post-component{
         color : #a9a9a9;
 
 
-        table{
+        .main{
             margin:0px;
-            width: 98%;
-            margin :1%;
+            margin:5px; 
+            padding-top:5px; 
+            padding-bottom:10px;
 
-
-            table-layout: fixed;
-            display: table;
-            background: #fafafa;
-           
+            background: #fafafa;    
             border-collapse: separate;
             border-spacing: 2px;
             border-top:2px solid #e8e8e8;
@@ -23,54 +20,46 @@ latest-post-component{
            
         }
     
-        table > tbody{
-            display: table-row-group;
-            vertical-align: middle; 
-          
-        }
-
-        table > tbody >   tr:first-child td:first-child latest-component .title:before{     
+      
+        .main > div:first-child > div latest-component .title:before{     
             font-family: "FontAwesome";
             content: '\f0f4';
             padding-right : 3px;        
         }
 
-        table > tbody >   tr:first-child td:nth-child(2) latest-component .title:before {       
+         .main > div:nth-child(2) > div:first-child latest-component .title:before {       
             font-family: "FontAwesome";
             content: '\f290';
             padding-right : 3px;          
         }
 
-        table > tbody >   tr:nth-child(2) td:first-child latest-component .title:before{        
+         .main > div:nth-child(2) > div:nth-child(2) latest-component .title:before{        
             font-family: "FontAwesome";
             content: '\f059';          
             padding-right : 3px;
                     
         }
         
-        table > tbody > tr > td{
-            width: 50%;
-            padding: 10px;
-        }
+     
 
-        table > tbody > tr > td > latest-component .title{
+         .main-col > div > latest-component .title{
             
             margin-bottom: 2px;
             color:#5a5a5a;
             border-bottom: 2px solid #e2e2e2;
-            padding:0px;
+            padding-top:10px;
             padding-left:5px;
             padding-bottom: 5px;
             vertical-align: middle;
            
         }
 
-        table > tbody > tr > td > latest-component > div{
+       .main-col > div > latest-component > div{
             display: block;
             padding-left:0.5em;
         }
 
-        table > tbody > tr> td > latest-component > div > div {
+        .main-col > div > latest-component > div > div {
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -84,7 +73,7 @@ latest-post-component{
         }
 
 
-        table > tbody > tr > td > latest-component > div > div  :before {
+       .main-col > div > latest-component > div > div  :before {
             color : #bababa;
             content:"• ";
             font-weight: bold;
