@@ -27,6 +27,9 @@ import { SonubRegisterPage } from './pages/user/register/register';
 // services
 import { ForumService } from './providers/forum'
 
+
+// message
+import { SonubMessagePage } from './pages/message/message';
 @NgModule( {
     declarations: [
         SonubHomePage,
@@ -41,7 +44,8 @@ import { ForumService } from './providers/forum'
         LatestPostComponent,
         SonubLatestPhoto,
         SonubLoginPage,
-        SonubRegisterPage
+        SonubRegisterPage,
+        SonubMessagePage
     ],
     imports: [
         BrowserModule,

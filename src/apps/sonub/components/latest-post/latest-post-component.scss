@@ -1,88 +1,52 @@
-latest-post-component{
-        
-        
-        color : #a9a9a9;
+@mixin title_icon( $icon ) {
+    .title:before {
+        font-family: "FontAwesome";
+        padding-right : 3px; 
+        content: $icon;
+    }
+}
+latest-post-component {
+    margin: 0.25em;
+    padding: 0.3em 0 .6em;
+    background-color: #fafafa;
+    color : #a9a9a9;
 
 
-        .main{
-            margin:0px;
-            margin:5px; 
-            padding-top:5px; 
-            padding-bottom:10px;
-
-            background: #fafafa;    
-            border-collapse: separate;
-            border-spacing: 2px;
-            border-top:2px solid #e8e8e8;
-            border-bottom:5px solid #e8e8e8;
-            border-left:5px solid #e8e8e8;
-            border-right:5px solid #e8e8e8;
-           
-        }
+    .freetalk       { @include title_icon( '\f0f4' ); }
+    .qna            { @include title_icon( '\f290' ); }
+    .buyandsell     { @include title_icon( '\f059' ); }
     
-      
-        .main > div:first-child > div latest-component .title:before{     
-            font-family: "FontAwesome";
-            content: '\f0f4';
-            padding-right : 3px;        
-        }
-
-         .main > div:nth-child(2) > div:first-child latest-component .title:before {       
-            font-family: "FontAwesome";
-            content: '\f290';
-            padding-right : 3px;          
-        }
-
-         .main > div:nth-child(2) > div:nth-child(2) latest-component .title:before{        
-            font-family: "FontAwesome";
-            content: '\f059';          
-            padding-right : 3px;
-                    
-        }
-        
-     
-
-         .main-col > div > latest-component .title{
-            
+    .posts {
+        padding-left:0.5em;
+        .title {
             margin-bottom: 2px;
-            color:#5a5a5a;
+            padding: .7em 0 .3em .3em;
             border-bottom: 2px solid #e2e2e2;
-            padding-top:10px;
-            padding-left:5px;
-            padding-bottom: 5px;
+            color:#5a5a5a;
             vertical-align: middle;
-           
         }
-
-       .main-col > div > latest-component > div{
-            display: block;
-            padding-left:0.5em;
-        }
-
-        .main-col > div > latest-component > div > div {
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-            overflow: hidden;
-            padding: 2px;   
+        .subject {
             margin-right : 2em;
-            cursor: auto;  
-            color: #5a5a5a;
-            font-family: 굴림,Gulim,AppleGothic;
+            padding: 2px;   
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-family: "Malgun Gothic",AppleGothic,sans-serif;
             font-size: 9pt;
+            color: #5a5a5a;
+            cursor: auto;  
+            &:before {
+                margin :0px;
+                padding :0px;
+                content:"• ";
+                font-weight: bold;
+                font-size:13px;
+                color : #bababa;
+            }
         }
+    }
 
-
-       .main-col > div > latest-component > div > div  :before {
-            color : #bababa;
-            content:"• ";
-            font-weight: bold;
-            font-size:13px;
-            padding :0px;
-            margin :0px;
-           
-        }
-                
+    
 }//latest component
 
 

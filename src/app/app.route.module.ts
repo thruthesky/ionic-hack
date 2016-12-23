@@ -59,7 +59,10 @@ import { SonubHomePage } from '../apps/sonub/pages/home/home';
 import { SonubLoginPage } from '../apps/sonub/pages/user/login/login';
 import { SonubRegisterPage } from '../apps/sonub/pages/user/register/register';
 
+import { SonubMessagePage } from '../apps/sonub/pages/message/message';
 let appRoutes: Routes = [
+
+    { path: "message", component: SonubMessagePage },
 
     // for new forum.
     { path: "forum", component: SonubForumIndexPage },

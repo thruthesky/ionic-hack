@@ -1,28 +1,24 @@
-<div class="row main"  >
-        <div class="col-xs-12 col-sm-6 main-col">
-            <div >
-                <latest-component
-                    [title]     = " ['Discussion', '자유게시판'] | ek "
-                    [post_id]   = " 'freetalk' "
-                    [limit]     = "13"
-                ></latest-component>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 left">
+            <latest-component class="freetalk"
+                [title]     = " ['Discussion', '자유게시판'] | ek "
+                [post_id]   = " 'freetalk' "
+                [limit]     = "13"
+            ></latest-component>
         </div>
-        <div class="col-xs-12 col-sm-6 main-col">    
-            <div>
-                 <latest-component
-                    [title]     = " ['QnA', '질문과답변'] | ek "
-                    [post_id]   = " 'qna' "
-                    [limit]     = "5"
-                ></latest-component>
-            </div>
-             <div>
-                <latest-component
-                    [title]      = " ['Buy&amp;Sell', '회원장터'] | ek "
-                    [post_id]   = " 'buyandsell' "
-                    [limit]     = "6"
-                ></latest-component>      
-            </div>
+        <div class="col-xs-12 col-sm-6 right">
+            <latest-component class="qna"
+                [title]     = " ['QnA', '질문과답변'] | ek "
+                [post_id]   = " 'qna' "
+                [limit]     = "5"
+            ></latest-component>
+            
+            <latest-component class="buyandsell"
+                [title]      = " ['Buy&amp;Sell', '회원장터'] | ek "
+                [post_id]   = " 'buyandsell' "
+                [limit]     = "6"
+            ></latest-component>
         </div>
+    </div>
 </div>
-
