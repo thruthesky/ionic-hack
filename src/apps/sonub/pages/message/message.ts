@@ -1,4 +1,4 @@
-import { Component, style, state, animate, transition, trigger } from '@angular/core';
+import { Component, style, animate, transition, trigger } from '@angular/core';
 import { Message, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
@@ -17,6 +17,7 @@ import { Message, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 ]
 })
 export class SonubMessagePage {
+    loading = {};
     ShowContent = {};
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
     constructor(
@@ -50,6 +51,13 @@ export class SonubMessagePage {
         this.ShowContent[idx] = void 0;   
     }
 
+    loading_start(idx : string){
+        this.loading[idx] = true;
+    }
+    loading_done(idx : string){
+        this.loading[idx] = false;
+    }
+
     onClickReply(){
         alert("You we're clicking the Reply button");
     }
@@ -57,5 +65,6 @@ export class SonubMessagePage {
     onClickDelete(){
         alert("You we're clicking the Delete button");        
     }
+
 
 }
