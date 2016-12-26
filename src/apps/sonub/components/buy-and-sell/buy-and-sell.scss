@@ -5,9 +5,13 @@ sonub-buy-and-sell {
     .photos {
       .photo {
         text-align: center;
+        padding: .1rem;
         img {
-          padding: 0 .2rem;
           max-height: 90px;
+        }
+        &.multi {
+          width: 50%;
+          display: inline;
         }
       }
     }
