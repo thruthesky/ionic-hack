@@ -25,6 +25,9 @@
 
     .ads {
         .ad {
+            a {
+              color: #000;
+            }
             img {
                 max-width: 60px;
                 border-radius: 50%;
@@ -73,23 +76,39 @@
           }
         }
         .text {
-          .subject {
-            font-weight: bold;
-            font-size: 10pt;
-            font-family: "맑은 고딕", "Malgun Gothic", Gulim;
-            line-height: 22px;
-            height: 22px;
-            overflow: hidden;
-          }
-          .sub_subject {
-            line-height: 20px;
-            font-size: 9pt;
-            font-family: "맑은 고딕", "Malgun Gothic", Gulim;
-            height: 20px;
-            overflow: hidden;
+          a {
+            color: #000;
+            text-decoration: none;
+            .subject {
+              font-weight: bold;
+              font-size: 10pt;
+              font-family: "Malgun Gothic",AppleGothic,sans-serif;
+              line-height: 22px;
+              height: 22px;
+              overflow: hidden;
+            }
+            .sub_subject {
+              line-height: 20px;
+              font-size: 9pt;
+              font-family: "Malgun Gothic",AppleGothic,sans-serif;
+              height: 20px;
+              overflow: hidden;
+            }
+            &:hover {
+              color: #8d8d8d;
+            }
           }
         }
       }
     }
 
+}
+
+
+.in-page-loading {
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  .fa.fa-spinner {
+    font-size: 2rem;
+  }
 }

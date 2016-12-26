@@ -13,7 +13,8 @@ export class SonubBuyAndSell {
   @Input() limit: number = 1;
   @Input() photo: number = 1;
   posts: POSTS = <POSTS> [];
-  num_of_photo = Array.from(new Array(this.photo), (x,i) => i+1);
+  num_of_photo:number = 1;
+  photo_to_display = [];
   constructor(private post: Post) {
     //console.log("LatestComponent::constructor()");
   }
@@ -26,7 +27,10 @@ export class SonubBuyAndSell {
     // console.log('option::',option);
 
     this.post.latestPhotos(option, (posts: POSTS) => {
+        this.num_of_photo = this.photo != 1 ? 2 : 1;
+        this.photo_to_display = Array.from( new Array( this.num_of_photo ), (x,i) => i+1);
         console.log("posts "+ this.post_id +" : ", posts);
+        console.log(this.photo + "this.photo_to_display "+ this.photo_to_display + " this.number_of_photo " + this.num_of_photo);
         this.posts = [];
         posts.map((v: any, i) => {
           setTimeout(() => {
