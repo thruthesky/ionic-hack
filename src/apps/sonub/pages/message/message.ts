@@ -14,7 +14,15 @@ export class SonubMessagePage {
 
         this.message.list( {}, ( data: MESSAGE_LIST ) => {
             console.log("this.message.list() data: ", data);
-            this.data = data;
+
+            this.data.messages = [];
+             data.messages.map( ( v, i ) => {
+                setTimeout( () => {   
+                    this.data.messages.push( v );
+                }, i * 50 );
+            } );
+
+            //this.data = data;
         },
         error => alert("error:" + error),
         () => {
@@ -28,6 +36,14 @@ export class SonubMessagePage {
 
      onClickHideContent(idx : string){
         this.HideContent[idx] = false;   
+    }
+
+    onClickReply(){
+        alert("You we're clicking the Reply button");
+    }
+
+    onClickDelete(){
+        alert("You we're clicking the Delete button");        
     }
 
 }

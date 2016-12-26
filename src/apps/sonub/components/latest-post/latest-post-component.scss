@@ -8,10 +8,9 @@
 latest-post-component {
   
     .container{
-
         width : 99%;
         margin: 0em 4.25em 0.25em 0.25em;  
-       
+        padding-bottom : 0.5em;
         border-style: solid;
         border-width: 3px 5px 5px 5px;
         border-color:#e2e2e2; 
@@ -43,7 +42,7 @@ latest-post-component {
             font-family: "Malgun Gothic",AppleGothic,sans-serif;
             font-size: 9pt;
             color: #5a5a5a;
-            cursor: auto;  
+            cursor: pointer;  
             &:before {
                 margin :0px;
                 padding :0px;
