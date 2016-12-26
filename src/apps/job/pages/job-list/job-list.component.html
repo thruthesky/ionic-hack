@@ -1,7 +1,7 @@
 <job-base-header [title]="title"></job-base-header>
 
 <section class="content">
-  <div *ngIf=" pages.length " class="pages container">
+  <div *ngIf=" pages.length " class="pages row">
     <div *ngFor=" let page of pages " class="page posts">
       <div class="post col-xs-6" *ngFor=" let post of page.posts;">
         <job-base-list-component
@@ -15,5 +15,3 @@
   <div *ngIf=" inPageLoading " class="in-page-loading"><i class="fa fa-spinner fa-spin"></i> Loading ...</div>
   <div *ngIf=" noMorePosts " class="no-more-posts">No more posts</div>
 </section>
-
-<job-base-footer></job-base-footer>

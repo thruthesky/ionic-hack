@@ -1,6 +1,6 @@
 sonub-buy-and-sell {
   .posts {
-    padding: .5rem .2rem;
+    padding: .5rem .5rem;
     border-top: 1px solid #bcbcbc;
     .photos {
       .photo {
@@ -18,15 +18,15 @@ sonub-buy-and-sell {
           overflow: hidden;
           color: #3b5998;
           font-weight: bold;
-          font-size: 16px;
-          line-height: 16px;
+          font-size: 14px;
+          line-height: 14px;
           white-space: nowrap;
         }
       }
       .subject {
         .title {
-          font-size: 14px;
-          line-height: 16px;
+          font-size: 12px;
+          line-height: 14px;
         }
       }
     }
