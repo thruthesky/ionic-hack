@@ -54,10 +54,10 @@ message-page {
        
        
         .content{
-           
+           overflow-y: hidden;
             border: 1px solid #dfdfdf;
             padding: 10px;
-
+          
             .menu{
                 float: right;
                 overflow: auto;
