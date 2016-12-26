@@ -1,0 +1,17 @@
+<div *ngIf=" posts " class=" posts ">
+  <div *ngFor=" let post of posts " routerLink="{{ post.url }}" class="post">
+    <div class="photos" *ngIf="post?.photos?.length">
+      <div class="photo">
+        <img [src]="post.photos[0]?.url_thumbnail">
+      </div>
+    </div>
+    <div class="info">
+      <div class="user">
+        <span class="name">{{post.user_name}}</span>
+      </div>
+      <div class="subject">
+        <span class="title">{{ post.subject }}</span><span *ngIf="post.no_of_comment">({{post.no_of_comment}})</span>
+      </div>
+    </div>
+  </div>
+</div>
