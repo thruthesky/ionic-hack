@@ -1,0 +1,72 @@
+message-page {
+
+   
+    [message]{
+            position: relative;
+            padding: 2px 0;
+            border-top: 1px solid #dfdfdf;
+            background: #f8f8f8;
+
+            font-size: 9pt;
+       &:nth-child(odd){
+          background-color: #f5f8fa;
+       }
+        .title{
+            padding: 10px 4px;
+          
+         
+            &:hover{
+            background-color: #e0e0ea;
+            cursor: pointer;
+            }
+
+          .from{
+                float: left;
+                width: 100px;
+                font-weight: bold;
+                color: #494949;
+           }
+
+          .subject{
+             float: left;
+          }
+
+          .date{
+              float: right;
+          }
+        }
+       
+       
+        .content{
+           
+            border: 1px solid #dfdfdf;
+            padding: 10px;
+
+            .menu{
+                float: right;
+                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: hidden;  
+
+                button{
+                    border-left: 1px solid #dfdfdf;
+                    border-top-left-radius: 2px;
+                    border-bottom-left-radius: 2px;
+
+                    padding-left: 28px;
+
+                    float: left;
+                    line-height: 17px;
+                    border: 1px solid #d7d7d7;
+                    padding: 5px 10px 5px 10px;
+                    font-size: 9pt;
+                    background-color: #f9f9f9!important;
+                    color: black;
+                    font-family: Helvetica,Tahoma,Verdana;
+                }     
+            }
+        }
+    }
+   
+
+}
