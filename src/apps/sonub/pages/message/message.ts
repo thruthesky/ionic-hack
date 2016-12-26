@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, style, state, animate, transition, trigger } from '@angular/core';
 import { Message, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
-    templateUrl: 'message.html'
+    templateUrl: 'message.html',
+    animations: [
+    trigger('slideInOut', [
+        transition(':enter', [   // :enter is alias to 'void => *'
+         style({height: 0, margin:0}),
+        animate(500, style({ height:'*' })) 
+        ]),
+        transition(':leave', [   // :leave is alias to '* => void'
+        style({ margin:0}),
+        animate(500, style({ height:0 })) 
+        ])
+  ])
+]
 })
 export class SonubMessagePage {
-    HideContent = {};
+    ShowContent = {};
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
     constructor(
         private message: Message
@@ -31,11 +43,11 @@ export class SonubMessagePage {
     }
 
     onClickShowContent(idx : string){
-        this.HideContent[idx] = true;   
+        this.ShowContent[idx] = '*';   
     }
 
      onClickHideContent(idx : string){
-        this.HideContent[idx] = false;   
+        this.ShowContent[idx] = void 0;   
     }
 
     onClickReply(){
