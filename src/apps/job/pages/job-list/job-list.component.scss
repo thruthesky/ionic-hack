@@ -1,20 +1,16 @@
 app-job-list {
   .content {
-    .container {
-      padding-left: 0;
-      padding-right: 0;
+    .pages {
+      padding:.5rem 0;
       .post {
         padding-left: 5px;
         padding-right: 5px;
       }
-    }
-    font-size: .8rem;
-    .info {
-      padding: 0;
-      .text {
+      .btn-group {
         margin-bottom: 5px;
       }
     }
+    font-size: .8rem;
     nav {
       button {
         padding-top: .4em;
@@ -44,22 +40,6 @@ app-job-list {
       margin-right: 0;
     }
   }
-  $break-small: 320px;
-  $break-large: 1200px;
-  .profile {
-    @media screen and (min-width: $break-small) {
-      overflow: hidden;
-      width: 65px;
-      height: 65px;
-      float: left;
-      padding: 5px;
-    }
-    @media screen and (min-width: $break-large) {
-      float: left;
-    }
-    .profile-photo{
-      width: 100%;
-      max-width: 10em;
-    }
-  }
+
+
 }

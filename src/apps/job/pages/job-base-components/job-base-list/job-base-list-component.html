@@ -1,8 +1,8 @@
 <article class="card post">
-    <div class="profile col-md-3">
+    <div class="profile col-sm-3 col-md-4 col-lg-5">
       <img class="profile-photo" src="{{post.photos.length ? post.photos[0]['url_thumbnail'] : urlPhoto}}" alt="Card image {{post.text_1}}">
     </div>
-    <div class="info col-md-9">
+    <div class="info col-sm-9 col-md-8 col-lg-7" >
       <div>
         <p class="text">{{post.sub_category}}</p>
         <p class="text">{{ post.char_1=='M' ? 'Male' : 'Female'}}</p>
@@ -17,9 +17,9 @@
         <li class="list-group-item">City : {{post.varchar_3}}</li>
         <li class="list-group-item">Applicant Message : {{post.varchar_6}}</li>
       </ul>
-      <div>
-        <label>Share link</label>
-        <input class="shareLink text" onClick="this.setSelectionRange(0, this.value.length)" value="{{shareUrl+post.idx}}" readonly/>
+      <div class="share">
+        <label (click)="post.share = !post.share"><i class="fa fa-share-alt"></i> Share</label>
+        <input *ngIf="post.share" class="shareLink text" onClick="this.setSelectionRange(0, this.value.length)" value="{{shareUrl+post.idx}}" readonly/>
       </div>
 
       <div class="btn-group" role="group">

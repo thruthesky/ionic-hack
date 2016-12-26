@@ -1,30 +1,35 @@
-job-base-list-component {
-  $break-small: 320px;
-  $break-large: 1200px;
-  .profile {
-    @media screen and (min-width: $break-small) {
-      overflow: hidden;
-      width: 65px;
-      height: 65px;
-      float: left;
-    }
-    @media screen and (min-width: $break-large) {
-      float: left;
-    }
-    .profile-photo{
-      width: 100%;
-      max-width: 10em;
-      padding: 5px;
-    }
+$break-xs: 360px;
 
-  }
-  .info {
-    padding: 0;
-    .text {
-      margin-bottom: 5px;
+job-base-list-component {
+  .card {
+    .profile {
+      overflow: hidden;
+      height:auto;
+      padding: 0;
+      float: left;
+      @media screen and (max-width: $break-xs) {
+        width: 60px;
+        height: 60px;
+      }
+      .profile-photo{
+        width: 100%;
+        padding: .2rem;
+      }
+
     }
-    .shareLink {
-      width: 100%;
+    .info {
+      padding: 0;
+      .share {
+        overflow: hidden;
+        line-height: 21px;
+        .shareLink {
+          display: inline-block;
+          line-height: 16px;
+        }
+      }
+      .btn-group {
+        margin-top: .2rem;
+      }
     }
   }
 }
