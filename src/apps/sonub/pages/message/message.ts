@@ -17,7 +17,17 @@ export class SonubMessagePage {
 
 
     onClickShowContent(message : MESSAGE){
-        message['show_content'] = true;  
+        message['show_content'] = true;
+
+        if ( message.stamp_open != "0" ) return;
+
+        this.message.opened( message.idx, data => {
+            console.log("onClickShowContent() : data: ", data);
+            message.stamp_open = "1";
+        },
+        error => alert("error on reading: " + error ),
+        () => {}
+        );  
     }
 
 

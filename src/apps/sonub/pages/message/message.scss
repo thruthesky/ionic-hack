@@ -52,6 +52,10 @@ message-page {
 
     .subject{
         float: left;
+        &[open="0"] {
+            font-weight: bold;
+            color: blue;
+        }
     }
 
     .date{
