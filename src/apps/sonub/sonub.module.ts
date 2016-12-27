@@ -31,6 +31,9 @@ import { ForumService } from './providers/forum'
 
 // message
 import { SonubMessagePage } from './pages/message/message';
+
+
+
 @NgModule( {
     declarations: [
         SonubHomePage,

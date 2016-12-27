@@ -8,10 +8,7 @@ import { IonicApiModule } from '../api/ionic-api-0.2/ionic-api.module';
 import { RootComponent } from './app.component';
 
  //import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppRouteModule } from './app.route.module';
-
-
 import { BaseModule } from '../pages/base/base.module';
 import { ForumModule } from '../pages/forum/forum.module';
 import { PhilgoApiModule } from '../api/philgo-api/v2/philgo-api-module';
