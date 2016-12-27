@@ -1,10 +1,10 @@
 import { Component, style, animate, transition, trigger } from '@angular/core';
-import { Message, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
+import { Message, MESSAGE, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
     templateUrl: 'message.html',
     animations: [
-    trigger('slideInOut', [
+    trigger('slide', [
         transition(':enter', [   // :enter is alias to 'void => *'
          style({height: 0, margin:0}),
         animate(500, style({ height:'*' })) 
@@ -17,8 +17,6 @@ import { Message, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 ]
 })
 export class SonubMessagePage {
-    loading = {};
-    ShowContent = {};
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
     constructor(
         private message: Message
@@ -34,8 +32,6 @@ export class SonubMessagePage {
                     this.data.messages.push( v );
                 }, i * 50 );
             } );
-
-            //this.data = data;
         },
         error => alert("error:" + error),
         () => {
@@ -43,19 +39,20 @@ export class SonubMessagePage {
         });
     }
 
-    onClickShowContent(idx : string){
-        this.ShowContent[idx] = '*';   
+    onClickShowContent(message : MESSAGE){
+        message['show_content'] = true;  
     }
 
-     onClickHideContent(idx : string){
-        this.ShowContent[idx] = void 0;   
+     onClickHideContent(message : MESSAGE){
+       message['show_content'] = false;  
     }
 
-    loading_start(idx : string){
-        this.loading[idx] = true;
+    loading_content_start(message : MESSAGE){
+        message['loading_content']  = true;
     }
-    loading_done(idx : string){
-        this.loading[idx] = false;
+
+    loading_content_done(message : MESSAGE){
+       message['loading_content'] = false;
     }
 
     onClickReply(){
