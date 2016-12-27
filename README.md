@@ -29,6 +29,13 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
 
 # TODO
 
+* @bug
+ view-component p {
+    display: table-column-group;
+}
+
+* 메뉴에 캐시 리셋 기능.
+
 * 검토) 각 라우트마다 새로운 컴포넌트가 로드되므로 top,left,right,bottom 을 모두 코딩 해야한다.
     하지만 모든 서브 경로를 IndexComponent 로 통일하고,
         IndexComponent 에서 top, left, right, bottom 을 한번씩만 코딩학,
@@ -39,7 +46,6 @@ Ionic 2 project hack by JaeHo Song to use Angular2 framework with ionic 2.
         와 같이 하는 것도 좋은 생각인 것 같기도 하다.
         하지만 또 한편으로는 이렇게 할 필요가 있을 까 생각이 들기도 한다.
         만약, 각 페이지별로 top, left, right, bottom 을 커스터마징 해야하는 경우에는 이 경우가 오히려 불편해진다.
-        
 
 
 * .hidden-xx-up/down is no good since it produce HTML and run all the JS code.
