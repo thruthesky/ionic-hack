@@ -44,7 +44,8 @@ export class SonubMessagePage {
     getMessages(){
         this.message.list( {}, ( data: MESSAGE_LIST ) => {
             console.log("this.message.list() data: ", data);
-            this.lazyProcess(data);      
+             if ( data.messages.length == 0 ) return;
+             this.lazyProcess(data);      
         },
         error => alert("error:" + error),
         () => {
@@ -56,10 +57,8 @@ export class SonubMessagePage {
 
 
      lazyProcess( data: MESSAGE_LIST ) {
-        if ( data.messages.length == 0 ) return;
 
         this.processMessageDate(data); 
-
         this.data.messages = [];
             data.messages.map( ( v, i ) => {
                     setTimeout( () => {   
@@ -86,18 +85,18 @@ export class SonubMessagePage {
            
             let date: string;
             date = d.getFullYear() + "-";
-            date += this.formatTo2Digit_date(d.getMonth()) + "-";
-            date += this.formatTo2Digit_date(d.getDate()) + " ";
-            date += this.formatTo2Digit_date(d.getHours()) + ":";
-            date += this.formatTo2Digit_date(d.getMinutes());
+            date += this.addZero(d.getMonth()) + "-";
+            date += this.addZero(d.getDate()) + " ";
+            date += this.addZero(d.getHours()) + ":";
+            date += this.addZero(d.getMinutes());
                 
             return date;
      }
 
 
 
-     formatTo2Digit_date(n : number){       
-           return n>=10? n : "0"+n;     
+     addZero(i : number){       
+           return i >= 10 ? i : "0" + i;     
      }
 
 
