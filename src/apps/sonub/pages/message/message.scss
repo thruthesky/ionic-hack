@@ -1,0 +1,90 @@
+@mixin title_icon( $icon ) {
+    &:before {
+        font-family: "FontAwesome";
+        padding-right : 3px; 
+        content: $icon;
+        color:grey;
+        font-size: 10pt;
+        vertical-align: middle;
+    }
+}
+
+message-page {
+
+    font-family: "Malgun Gothic",AppleGothic,sans-serif;
+    .message{
+            position: relative;
+            padding: 2px 0;
+            border-top: 1px solid #dfdfdf;
+            background: #f8f8f8;
+
+            font-size: 9pt;
+       &:nth-child(odd){
+          background-color: #f5f8fa;
+       }
+
+
+        .hide       { @include title_icon( '\f151' ); }
+        .reply           { @include title_icon( '\f112' ); }
+        .delete     { @include title_icon( '\f014' ); }
+        .title{
+            padding: 10px 4px;
+            vertical-align: middle;
+         
+            &:hover{
+            background-color: #e0e0ea;
+            cursor: pointer;
+            }
+
+          .from{
+                float: left;
+                width: 100px;
+                font-weight: bold;
+                color: #494949;
+           }
+
+          .subject{
+             float: left;
+          }
+
+          .date{
+              float: right;
+          }
+        }
+       
+       
+        .content{
+           overflow-y: hidden;
+            border: 1px solid #dfdfdf;
+            padding: 10px;
+          
+            .menu{
+                float: right;
+                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: hidden;  
+
+                button{
+                  
+                    &:hover{
+                        color:blue;
+                    }
+                
+                    float: left;
+                    line-height: 17px;
+                    border: 1px solid #d7d7d7;
+                    padding: 5px 10px 5px 10px;
+                   
+                    background-color: #f9f9f9!important;
+                  
+                    cursor :pointer;
+                    color: black;
+                    font-size: 9pt;
+                    
+                }     
+            }
+        }
+    }
+   
+
+}

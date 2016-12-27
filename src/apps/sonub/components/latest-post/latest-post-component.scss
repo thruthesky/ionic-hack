@@ -6,25 +6,33 @@
     }
 }
 latest-post-component {
-    margin: 0.25em;
-    padding: 0.3em 0 .6em;
-    background-color: #fafafa;
-    color : #a9a9a9;
-
-
+  
+    .container{
+        width : 99%;
+        margin: 0em 4.25em 0.25em 0.25em;  
+        padding-bottom : 0.5em;
+        border-style: solid;
+        border-width: 3px 5px 5px 5px;
+        border-color:#e2e2e2; 
+       
+        background-color: #fafafa;
+        color : #a9a9a9;
+    }
+    
     .freetalk       { @include title_icon( '\f0f4' ); }
     .qna            { @include title_icon( '\f290' ); }
     .buyandsell     { @include title_icon( '\f059' ); }
     
+    .title {
+        margin-bottom: 2px;
+        padding: .7em 0 .3em .3em;
+        border-bottom: 2px solid #e2e2e2;
+        color:#5a5a5a;
+        vertical-align: middle;
+    }
+
     .posts {
-        padding-left:0.5em;
-        .title {
-            margin-bottom: 2px;
-            padding: .7em 0 .3em .3em;
-            border-bottom: 2px solid #e2e2e2;
-            color:#5a5a5a;
-            vertical-align: middle;
-        }
+        padding-left:0.5em;   
         .subject {
             margin-right : 2em;
             padding: 2px;   
@@ -34,7 +42,7 @@ latest-post-component {
             font-family: "Malgun Gothic",AppleGothic,sans-serif;
             font-size: 9pt;
             color: #5a5a5a;
-            cursor: auto;  
+            cursor: pointer;  
             &:before {
                 margin :0px;
                 padding :0px;

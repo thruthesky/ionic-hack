@@ -1,0 +1,38 @@
+sonub-buy-and-sell {
+  .posts {
+    padding: .5rem .5rem;
+    border-top: 1px solid #bcbcbc;
+    .photos {
+      .photo {
+        text-align: center;
+        padding: .1rem;
+        img {
+          max-height: 90px;
+        }
+        &.multi {
+          width: 50%;
+          display: inline;
+        }
+      }
+    }
+    .info {
+      .user {
+        .name {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          color: #3b5998;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 14px;
+          white-space: nowrap;
+        }
+      }
+      .subject {
+        .title {
+          font-size: 12px;
+          line-height: 14px;
+        }
+      }
+    }
+  }
+}

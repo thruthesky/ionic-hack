@@ -4,5 +4,5 @@ import { Component } from '@angular/core';
     templateUrl: 'right.html'
 })
 export class SonubRight {
-    
+
 }

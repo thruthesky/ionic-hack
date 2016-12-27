@@ -1,0 +1,19 @@
+<div *ngIf=" posts " class=" posts ">
+  <div *ngFor=" let post of posts " routerLink="{{ post.url }}" class="post">
+    <div class="photos" *ngIf="post?.photos?.length">
+      <ng-container *ngFor="let x of photo_to_display">
+      <div class="photo"  *ngIf="post?.photos[x-1]?.url_thumbnail" [ngClass]="post?.photos?.length >= photo && photo!= 1 ? 'multi' : ''">
+        <img [src]="post.photos[x -1]?.url_thumbnail" >
+      </div>
+      </ng-container>
+    </div>
+    <div class="info">
+      <div class="user">
+        <span class="name">{{post.user_name}}</span>
+      </div>
+      <div class="subject">
+        <span class="title">{{ post.subject }}</span>
+      </div>
+    </div>
+  </div>
+</div>

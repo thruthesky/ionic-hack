@@ -4,7 +4,7 @@
     <table>
       <tr>
         <td class="left" *ngIf="post?.photos?.length">
-          <div class="photo">
+          <div class="photo" *ngIf="post.photos[0]?.url_thumbnail">
             <img [src]="post.photos[0]?.url_thumbnail">
           </div>
         </td>

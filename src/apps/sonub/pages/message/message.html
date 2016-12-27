@@ -2,10 +2,28 @@
 <section class="content container-fluid">
   <div class="row">
     <aside class="left hidden-sm-down col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
-    <section class="center col-sm-12 col-md-7 col-lg-6 col-xl-8">
+    <section class="center col-sm-12 col-md-7 col-lg-6 col-xl-8 message"  *ngFor = "let message of data.messages">
 
-        .message.
+        <div class="title" (click)="onClickShowContent(message.idx.toString())" *ngIf="message">
+           <div class="from" [innerHTML]="message.from.nickname"></div>
+           <div class="subject" [innerHTML]="message.subject"></div>
+           <div class="date" [innerHTML]="message.stamp_created | date:'yyyy-MM-dd HH:mm'"></div>
+           <div  style="clear:right;"></div>  
+        </div>
+        <div class="content" (@slideInOut.start)="loading_start(message.idx.toString())" 
+                              (@slideInOut.done)="loading_done(message.idx.toString())" 
+                              [@slideInOut]="ShowContent[message.idx.toString()]" 
+                              *ngIf="ShowContent[message.idx.toString()]">
 
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw small" *ngIf="loading[message.idx.toString()]"></i>
+           <div class="message_content" [innerHTML]="message.content"></div>
+           <div class="menu" >
+             <button class="hide" (click)="onClickHideContent(message.idx.toString())">HIDE</button>
+             <button class="reply" (click)="onClickReply()">REPLY</button>
+             <button class="delete"  (click)="onClickDelete()">DELETE</button>   
+           </div>  
+           <div  style="clear:right;"></div> 
+        </div>
     </section><!--/section.center-->
     <aside class="right hidden-sm-down col-md-2 col-lg-3 col-xl-2"><sonub-right></sonub-right></aside>
   </div><!--/.row-->

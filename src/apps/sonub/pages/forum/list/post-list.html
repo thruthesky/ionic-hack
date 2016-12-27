@@ -20,21 +20,21 @@
 
 
       <div *ngIf=" view " class="view">
-          <view-component
-            [post]="view" [root]="view"
-            [show]="true"
-            [mode] = " 'create-comment' "
-          ></view-component>
-          <div *ngIf=" view?.comments " class="comments">
-              <div class="comment" *ngFor=" let comment of view.comments; trackBy: comment?.idx ">
-              <view-component
-                  [post]="comment" [root]="view"
-                  [show] = "true"
-                  [mode] = " 'create-comment' "
-              ></view-component>
-              </div>
-          </div><!--/.comments-->
-        </div><!--/.view-->
+        <view-component
+          [post]="view" [root]="view"
+          [show]="true"
+          [mode] = " 'create-comment' "
+        ></view-component>
+        <div *ngIf=" view?.comments " class="comments">
+          <div class="comment" *ngFor=" let comment of view.comments; trackBy: comment?.idx ">
+            <view-component
+              [post]="comment" [root]="view"
+              [show] = "true"
+              [mode] = " 'create-comment' "
+            ></view-component>
+          </div>
+        </div><!--/.comments-->
+      </div><!--/.view-->
 
 
       <div *ngIf=" posts " class="pages posts">
@@ -44,7 +44,7 @@
           <!-- post_top_ad -->
           <div *ngIf=" post_top_ad && ! (i % limit) " class="post_top_ad">
             <div *ngFor=" let top_ad of post_top_ad " class="top_ad">
-              <div class="image">
+              <div class="image" *ngIf="top_ad.src">
                 <a [href]=" 'http://www.philgo.com/' + top_ad.url " target="_blank">
                   <img [src]="top_ad.src">
                 </a>
@@ -55,14 +55,16 @@
           <!-- post_top_preminum -->
           <div *ngIf=" post_top_premium_ad && ! (i % limit) " class="post_top_premium_ad">
             <div *ngFor=" let premium_ad of post_top_premium_ad " class="top_premium_ad">
-              <div class="image">
+              <div class="image" >
                 <a [href]=" 'http://www.philgo.com/' + premium_ad.url " target="_blank">
-                  <img [src]="premium_ad.src">
+                  <img [src]="premium_ad.src" *ngIf="premium_ad.src">
                 </a>
               </div>
               <div class="text">
-                <div class="subject">{{ premium_ad.subject }}</div>
-                <div class="sub_subject">{{ premium_ad.sub_subject }}</div>
+                <a [href]=" 'http://www.philgo.com/' + premium_ad.url " target="_blank">
+                  <div class="subject">{{ premium_ad.subject }}</div>
+                  <div class="sub_subject">{{ premium_ad.sub_subject }}</div>
+                </a>
               </div>
             </div>
           </div><!-- post_top_preminum -->
@@ -70,10 +72,12 @@
           <!-- ads -->
           <div *ngIf=" ads && ! (i % limit) " class="ads">
             <div *ngFor=" let ad of ads " class="ad">
-              <a [href]=" 'http://www.philgo.com/' + ad.url " target="_blank">
-                <img [src]="ad.src_thumbnail">
-                {{ ad.subject }}
-              </a>
+              <div class="image">
+                <a [href]=" 'http://www.philgo.com/' + ad.url " target="_blank">
+                  <img [src]="ad.src_thumbnail" *ngIf="ad.src_thumbnail">
+                  {{ ad.subject }}
+                </a>
+              </div>
             </div>
           </div><!-- ads -->
 
@@ -83,13 +87,13 @@
             [mode] = " 'create-comment' "
           ></view-component>
           <div *ngIf=" post?.comments " class="comments">
-              <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
+            <div class="comment" *ngFor=" let comment of post.comments; trackBy: comment?.idx ">
               <view-component
-                  [post]="comment" [root]="post"
-                  [show] = "true"
-                  [mode] = " 'create-comment' "
+                [post]="comment" [root]="post"
+                [show] = "true"
+                [mode] = " 'create-comment' "
               ></view-component>
-              </div>
+            </div>
           </div><!--/.comments-->
         </div><!--/.post-->
 
