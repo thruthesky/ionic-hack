@@ -2,36 +2,22 @@ import { Component, style, animate, transition, trigger } from '@angular/core';
 import { Message, MESSAGE, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
-    templateUrl: 'message.html',
-    animations: [
-    trigger('slide', [
-        transition(':enter', [   // :enter is alias to 'void => *'
-         style({height: 0, margin:0}),
-        animate(500, style({ height:'*' })) 
-        ]),
-        transition(':leave', [   // :leave is alias to '* => void'
-        style({ margin:0}),
-        animate(500, style({ height:0 })) 
-        ])
-  ])
-]
+    templateUrl: 'message.html'
 })
 export class SonubMessagePage {
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
+   
     constructor(
         private message: Message
     ) {
         console.log("SonubMessagePage::constructor()");
+        this.getMessages(); 
+    }
 
+    getMessages(){
         this.message.list( {}, ( data: MESSAGE_LIST ) => {
             console.log("this.message.list() data: ", data);
-
-            this.data.messages = [];
-             data.messages.map( ( v, i ) => {
-                setTimeout( () => {   
-                    this.data.messages.push( v );
-                }, i * 50 );
-            } );
+            this.lazyProcess(data);      
         },
         error => alert("error:" + error),
         () => {
@@ -39,6 +25,7 @@ export class SonubMessagePage {
         });
     }
 
+    
     onClickShowContent(message : MESSAGE){
         message['show_content'] = true;  
     }
@@ -47,14 +34,7 @@ export class SonubMessagePage {
        message['show_content'] = false;  
     }
 
-    loading_content_start(message : MESSAGE){
-        message['loading_content']  = true;
-    }
-
-    loading_content_done(message : MESSAGE){
-       message['loading_content'] = false;
-    }
-
+    
     onClickReply(){
         alert("You we're clicking the Reply button");
     }
@@ -63,5 +43,40 @@ export class SonubMessagePage {
         alert("You we're clicking the Delete button");        
     }
 
+    lazyProcess( data: MESSAGE_LIST ) {
+        if ( data.messages.length == 0 ) {
+        return;
+        }
+
+        // for date.
+        data.messages.map( message  => {   
+             message['date_created'] = this.getDate( message['stamp_created'] );
+             console.log('stamp', message['stamp_created'] )
+        });
+
+        //for lazy loading message
+        this.data.messages = [];
+                data.messages.map( ( v, i ) => {
+                    setTimeout( () => {   
+                        this.data.messages.push( v );
+                    }, i * 50 );
+            } );
+  }
+
+     getDate( stamp ) {
+            let m = parseInt(stamp) * 1000;
+            let d = new Date( m );
+            let date: string;
+                date = d.getFullYear() + "-";
+                date += this.formatTo2Digit_date(d.getMonth()) + "-";
+                date += this.formatTo2Digit_date(d.getDate()) + " ";
+                date += this.formatTo2Digit_date(d.getHours()) + ":";
+                date += this.formatTo2Digit_date(d.getMinutes()) + ":";
+                
+               return date;
+        }
+     formatTo2Digit_date(n : number){       
+           return n>=10? n : "0"+n;     
+     }
 
 }

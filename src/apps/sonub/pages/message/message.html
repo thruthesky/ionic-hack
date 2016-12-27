@@ -7,15 +7,11 @@
         <div class="title" (click)="onClickShowContent(message)" *ngIf="message">
            <div class="from" [innerHTML]="message.from.nickname"></div>
            <div class="subject" [innerHTML]="message.subject"></div>
-           <div class="date" [innerHTML]="message.stamp_created | date:'yyyy-MM-dd HH:mm'"></div>
+           <div class="date" [innerHTML]="message['date_created']"></div>
            <div  style="clear:right;"></div>  
         </div>
-        <div class="content" (@slide.start)="loading_content_start(message)" 
-                              (@slide.done)="loading_content_done(message)" 
-                              [@slide]="message['show_content']" 
-                              *ngIf="message['show_content']">
-
-           <i class="fa fa-spinner fa-pulse fa-3x fa-fw small" *ngIf="message['loading_content']"></i>
+        <div class="content" *ngIf="message['show_content']">
+           <!--<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" *ngIf="loading_content"></i>-->
            <div class="message_content" [innerHTML]="message.content"></div>
            <div class="menu" >
              <button class="hide" (click)="onClickHideContent(message)" >HIDE</button>
