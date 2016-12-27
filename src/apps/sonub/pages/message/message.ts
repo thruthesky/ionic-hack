@@ -14,22 +14,31 @@ export class SonubMessagePage {
         this.getMessages(); 
     }
 
+
+
     onClickShowContent(message : MESSAGE){
         message['show_content'] = true;  
     }
+
+
 
      onClickHideContent(message : MESSAGE){
        message['show_content'] = false;  
     }
 
     
+
     onClickReply(){
         alert("You we're clicking the Reply button");
     }
 
+
+
+
     onClickDelete(){
         alert("You we're clicking the Delete button");        
     }
+
 
 
     getMessages(){
@@ -43,11 +52,14 @@ export class SonubMessagePage {
         });
     }
 
+
+
+
      lazyProcess( data: MESSAGE_LIST ) {
         if ( data.messages.length == 0 ) return;
 
         this.processMessageDate(data); 
-        
+
         this.data.messages = [];
             data.messages.map( ( v, i ) => {
                     setTimeout( () => {   
@@ -56,12 +68,17 @@ export class SonubMessagePage {
             } );
      }
 
+
+
+
      processMessageDate(data: MESSAGE_LIST){
             data.messages.map( message  => {   
                 message['date_created'] = this.getDate( message['stamp_created'] );
                 console.log('stamp', message['stamp_created'] )
             });
      }
+
+
 
      getDate( stamp ) {
             let m = parseInt(stamp) * 1000;
@@ -77,8 +94,13 @@ export class SonubMessagePage {
             return date;
      }
 
+
+
      formatTo2Digit_date(n : number){       
            return n>=10? n : "0"+n;     
      }
+
+
+
 
 }

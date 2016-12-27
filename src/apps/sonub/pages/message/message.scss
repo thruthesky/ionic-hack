@@ -4,8 +4,10 @@
         padding-right : 3px;   
         content: $icon;
         font-family: "FontAwesome";
-        font-size: 10pt;
         color:grey;
+
+
+        font-size: 10pt; 
         vertical-align: middle;
     }
 }
@@ -52,9 +54,10 @@ message-page {
     }
           
     .content{
-        padding: 10px; 
-        overflow-y: hidden;  
+       
+        padding: 10px;   
         border: 1px solid #dfdfdf; 
+        overflow-y: hidden;  
     }
 
 
@@ -75,9 +78,9 @@ message-page {
             line-height: 17px;  
             border: 1px solid #d7d7d7;   
             background-color: #f9f9f9!important;
-            
-           
             color: black;
+
+
             font-size: 9pt;
             cursor :pointer;
 
