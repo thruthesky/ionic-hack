@@ -1,0 +1,27 @@
+sonub-currency {
+  .exchange_rate{
+    margin-bottom: 10px;
+    padding: .5em;
+    border: 1px solid #808080;
+    background-color: #f3f4f3;
+    .info {
+      margin-bottom: 6px;
+      padding: 6px 0 6px 0;
+      border-top: 1px solid #898989;
+      border-bottom: 1px solid #898989;
+      font-size: 0.85em;
+      line-height: 160%;
+      letter-spacing: -1px;
+      .text {
+        padding-left: 10px;
+        .rate {
+          font-weight: bold;
+        }
+
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+}

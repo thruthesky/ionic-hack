@@ -29,8 +29,8 @@ export class SonubBuyAndSell {
     this.post.latestPhotos(option, (posts: POSTS) => {
         this.num_of_photo = this.photo != 1 ? 2 : 1;
         this.photo_to_display = Array.from( new Array( this.num_of_photo ), (x,i) => i+1);
-        console.log("posts "+ this.post_id +" : ", posts);
-        console.log(this.photo + "this.photo_to_display "+ this.photo_to_display + " this.number_of_photo " + this.num_of_photo);
+        //console.log("posts "+ this.post_id +" : ", posts);
+        //console.log(this.photo + "this.photo_to_display "+ this.photo_to_display + " this.number_of_photo " + this.num_of_photo);
         this.posts = [];
         posts.map((v: any, i) => {
           setTimeout(() => {
