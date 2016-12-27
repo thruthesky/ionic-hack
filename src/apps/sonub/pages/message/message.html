@@ -16,9 +16,9 @@
            
            <div class="message_content" [innerHTML]="message.content"></div>
            <div class="menu" >
-             <button class="hide" (click)="onClickHideContent(message)" >HIDE</button>
-             <button class="reply" (click)="onClickReply()">REPLY</button>
-             <button class="delete"  (click)="onClickDelete()">DELETE</button>   
+             <button class="hide menu-item" (click)="onClickHideContent(message)" >HIDE</button>
+             <button class="reply menu-item" (click)="onClickReply()">REPLY</button>
+             <button class="delete menu-item"  (click)="onClickDelete()">DELETE</button>   
            </div>  
            <div  style="clear:right;"></div> 
         </div>
