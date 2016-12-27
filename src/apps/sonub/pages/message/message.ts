@@ -14,18 +14,6 @@ export class SonubMessagePage {
         this.getMessages(); 
     }
 
-    getMessages(){
-        this.message.list( {}, ( data: MESSAGE_LIST ) => {
-            console.log("this.message.list() data: ", data);
-            this.lazyProcess(data);      
-        },
-        error => alert("error:" + error),
-        () => {
-            console.log("message list complete");
-        });
-    }
-
-    
     onClickShowContent(message : MESSAGE){
         message['show_content'] = true;  
     }
@@ -43,38 +31,52 @@ export class SonubMessagePage {
         alert("You we're clicking the Delete button");        
     }
 
-    lazyProcess( data: MESSAGE_LIST ) {
-        if ( data.messages.length == 0 ) {
-        return;
-        }
 
-        // for date.
-        data.messages.map( message  => {   
-             message['date_created'] = this.getDate( message['stamp_created'] );
-             console.log('stamp', message['stamp_created'] )
+    getMessages(){
+        this.message.list( {}, ( data: MESSAGE_LIST ) => {
+            console.log("this.message.list() data: ", data);
+            this.lazyProcess(data);      
+        },
+        error => alert("error:" + error),
+        () => {
+            console.log("message list complete");
         });
+    }
 
-        //for lazy loading message
+     lazyProcess( data: MESSAGE_LIST ) {
+        if ( data.messages.length == 0 ) return;
+
+        this.processMessageDate(data); 
+        
         this.data.messages = [];
-                data.messages.map( ( v, i ) => {
+            data.messages.map( ( v, i ) => {
                     setTimeout( () => {   
                         this.data.messages.push( v );
                     }, i * 50 );
             } );
-  }
+     }
+
+     processMessageDate(data: MESSAGE_LIST){
+            data.messages.map( message  => {   
+                message['date_created'] = this.getDate( message['stamp_created'] );
+                console.log('stamp', message['stamp_created'] )
+            });
+     }
 
      getDate( stamp ) {
             let m = parseInt(stamp) * 1000;
             let d = new Date( m );
+           
             let date: string;
-                date = d.getFullYear() + "-";
-                date += this.formatTo2Digit_date(d.getMonth()) + "-";
-                date += this.formatTo2Digit_date(d.getDate()) + " ";
-                date += this.formatTo2Digit_date(d.getHours()) + ":";
-                date += this.formatTo2Digit_date(d.getMinutes()) + ":";
+            date = d.getFullYear() + "-";
+            date += this.formatTo2Digit_date(d.getMonth()) + "-";
+            date += this.formatTo2Digit_date(d.getDate()) + " ";
+            date += this.formatTo2Digit_date(d.getHours()) + ":";
+            date += this.formatTo2Digit_date(d.getMinutes());
                 
-               return date;
-        }
+            return date;
+     }
+
      formatTo2Digit_date(n : number){       
            return n>=10? n : "0"+n;     
      }

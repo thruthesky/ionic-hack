@@ -12,6 +12,8 @@
         </div>
         <div class="content" *ngIf="message['show_content']">
            <!--<i class="fa fa-spinner fa-pulse fa-3x fa-fw small" *ngIf="loading_content"></i>-->
+
+           
            <div class="message_content" [innerHTML]="message.content"></div>
            <div class="menu" >
              <button class="hide" (click)="onClickHideContent(message)" >HIDE</button>
