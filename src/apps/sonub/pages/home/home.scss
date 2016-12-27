@@ -5,4 +5,14 @@ sonub-home-page {
       width: 100%;
     }
   }
+
+  .for_sale {
+    sonub-buy-and-sell {
+      .posts {
+        float: left;
+        overflow: hidden;
+        width: 25%;
+      }
+    }
+  }
 }
