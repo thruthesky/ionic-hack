@@ -2,36 +2,50 @@ import { Component, style, animate, transition, trigger } from '@angular/core';
 import { Message, MESSAGE, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
-    templateUrl: 'message.html',
-    animations: [
-    trigger('slide', [
-        transition(':enter', [   // :enter is alias to 'void => *'
-         style({height: 0, margin:0}),
-        animate(500, style({ height:'*' })) 
-        ]),
-        transition(':leave', [   // :leave is alias to '* => void'
-        style({ margin:0}),
-        animate(500, style({ height:0 })) 
-        ])
-  ])
-]
+    templateUrl: 'message.html'
 })
 export class SonubMessagePage {
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
+   
     constructor(
         private message: Message
     ) {
         console.log("SonubMessagePage::constructor()");
+        this.getMessages(); 
+    }
 
+
+
+    onClickShowContent(message : MESSAGE){
+        message['show_content'] = true;  
+    }
+
+
+
+     onClickHideContent(message : MESSAGE){
+       message['show_content'] = false;  
+    }
+
+    
+
+    onClickReply(){
+        alert("You we're clicking the Reply button");
+    }
+
+
+
+
+    onClickDelete(){
+        alert("You we're clicking the Delete button");        
+    }
+
+
+
+    getMessages(){
         this.message.list( {}, ( data: MESSAGE_LIST ) => {
             console.log("this.message.list() data: ", data);
-
-            this.data.messages = [];
-             data.messages.map( ( v, i ) => {
-                setTimeout( () => {   
-                    this.data.messages.push( v );
-                }, i * 50 );
-            } );
+             if ( data.messages.length == 0 ) return;
+             this.lazyProcess(data);      
         },
         error => alert("error:" + error),
         () => {
@@ -39,29 +53,53 @@ export class SonubMessagePage {
         });
     }
 
-    onClickShowContent(message : MESSAGE){
-        message['show_content'] = true;  
-    }
 
-     onClickHideContent(message : MESSAGE){
-       message['show_content'] = false;  
-    }
 
-    loading_content_start(message : MESSAGE){
-        message['loading_content']  = true;
-    }
 
-    loading_content_done(message : MESSAGE){
-       message['loading_content'] = false;
-    }
+     lazyProcess( data: MESSAGE_LIST ) {
 
-    onClickReply(){
-        alert("You we're clicking the Reply button");
-    }
+        this.processMessageDate(data); 
+        this.data.messages = [];
+            data.messages.map( ( v, i ) => {
+                    setTimeout( () => {   
+                        this.data.messages.push( v );
+                    }, i * 50 );
+            } );
+     }
 
-    onClickDelete(){
-        alert("You we're clicking the Delete button");        
-    }
+
+
+
+     processMessageDate(data: MESSAGE_LIST){
+            data.messages.map( message  => {   
+                message['date_created'] = this.getDate( message['stamp_created'] );
+                console.log('stamp', message['stamp_created'] )
+            });
+     }
+
+
+
+     getDate( stamp ) {
+            let m = parseInt(stamp) * 1000;
+            let d = new Date( m );
+           
+            let date: string;
+            date = d.getFullYear() + "-";
+            date += this.addZero(d.getMonth()) + "-";
+            date += this.addZero(d.getDate()) + " ";
+            date += this.addZero(d.getHours()) + ":";
+            date += this.addZero(d.getMinutes());
+                
+            return date;
+     }
+
+
+
+     addZero(i : number){       
+           return i >= 10 ? i : "0" + i;     
+     }
+
+
 
 
 }
