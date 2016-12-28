@@ -100,6 +100,21 @@ message-page {
             
         } // button    
     }// menu
- }
-   
+
+
+    .create-form {
+        padding: .4em;
+        box-sizing: border-box;
+        input, button, textarea {
+            display: block;
+            margin: .4em 0;
+            padding: .25em;
+            box-sizing: border-box;
+            width: 100%;
+        }
+    }
+}
+
+
+
 

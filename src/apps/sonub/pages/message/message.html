@@ -2,25 +2,45 @@
 <section class="content container-fluid">
   <div class="row">
     <aside class="left hidden-sm-down col-md-3 col-lg-3 col-xl-2"><sonub-left></sonub-left></aside>
-    <section class="center col-sm-12 col-md-7 col-lg-6 col-xl-8 message"  *ngFor = "let message of data.messages">
+    
 
-        <div class="title" (click)="onClickShowContent(message)" *ngIf="message">
-           <div class="from" [innerHTML]="message.from.nickname"></div>
-           
-           <div class="subject" [attr.open]=" message.stamp_open ">{{ message.subject }}</div>
 
-           <div class="date">{{ message['date_created'] }}</div>
-           <div  style="clear:right;"></div>  
-        </div>
 
-        <div class="content" *ngIf="message['show_content']"> 
-           <div class="message_content" [innerHTML]="message.content"></div>
-           <div class="menu" >
-             <button class="hide menu-item" (click)="onClickHideContent(message)" >HIDE</button>
-             <button class="reply menu-item" (click)="onClickReply()">REPLY</button>
-             <button class="delete menu-item"  (click)="onClickDelete()">DELETE</button>   
-           </div>  
-           <div  style="clear:right;"></div> 
+
+    <section class="center col-sm-12 col-md-7 col-lg-6 col-xl-8">
+
+
+      <button (click)=" showCreateForm = true ">Send a Message</button>
+      <button>Make all read</button>
+      <button>Search</button>
+
+      <div *ngIf="showCreateForm" class="create-form">
+        <input name="id_recv" placeholder="User ID">
+        <input name="subject" placeholder="Subject">
+        <textarea name="content" placeholder="Content"></textarea>
+        <button (click)="onClickCreateFormSubmit()">SUBMIT</button>
+      </div>
+      
+
+        <div class="message" *ngFor = "let message of data.messages">
+
+          <div class="title" (click)="onClickShowContent(message)" *ngIf="message">
+            <div class="from" [innerHTML]="message.from.nickname"></div>
+            <div class="subject" [attr.open]=" message.stamp_open ">{{ message.subject }}</div>
+            <div class="date">{{ message['date_created'] }}</div>
+            <div  style="clear:right;"></div>  
+          </div>
+
+          <div class="content" *ngIf="message['show_content']"> 
+            <div class="message_content" [innerHTML]="message.content"></div>
+            <div class="menu" >
+              <button class="hide menu-item" (click)="onClickHideContent(message)" >HIDE</button>
+              <button class="reply menu-item" (click)="onClickReply()">REPLY</button>
+              <button class="delete menu-item"  (click)="onClickDelete()">DELETE</button>   
+            </div>  
+            <div  style="clear:right;"></div> 
+          </div>
+
         </div>
 
     </section><!--/section.center-->
