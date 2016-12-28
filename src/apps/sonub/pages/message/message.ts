@@ -1,18 +1,24 @@
 import { Component, style, animate, transition, trigger } from '@angular/core';
-import { Message, MESSAGE, MESSAGE_LIST, MESSAGE_FORM } from '../../../../api/philgo-api/v2/message';
+import { Message, MESSAGE, MESSAGES, MESSAGE_LIST, MESSAGE_FORM } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
     templateUrl: 'message.html'
 })
 export class SonubMessagePage {
-    data : MESSAGE_LIST = <MESSAGE_LIST>{};
+    // data : MESSAGE_LIST = <MESSAGE_LIST>{};
+    messages: MESSAGES = [];
     showCreateForm: boolean = false;
     form: MESSAGE_FORM = <MESSAGE_FORM> {};
+    showSearchForm: boolean = false;
+    key: string = null;
+    page_no: number = 0;
     constructor(
         private message: Message
     ) {
         console.log("SonubMessagePage::constructor()");
-        this.getMessages(); 
+        this.getMessages();
+        // setTimeout ( () => this.getMessages(), 1000 );
+        // setTimeout ( () => this.getMessages(), 2000 );
     }
 
     onClickShowContent(message : MESSAGE){
@@ -37,21 +43,20 @@ export class SonubMessagePage {
 
     
 
-    onClickReply(){
-        alert("You we're clicking the Reply button");
+    onClickReplyFormSubmit( message: MESSAGE ) {
+        console.log("onClickReplyFormSubmit(): ", message);
+        this.form.id_recv = message.from.id;
+        this.message.send( this.form, data => {
+            console.log("reply sucess: ", data);
+            message['showReplyForm'] = false;
+        },
+        error => alert("error on reply: " + error),
+        () => {} );
     }
 
-
-
-
-    onClickDelete(){
-        alert("You we're clicking the Delete button");        
-    }
-
-
-
-    getMessages(){
-        this.message.list( {}, ( data: MESSAGE_LIST ) => {
+    getMessages( key = '' ) {
+        this.page_no ++;
+        this.message.list( { key: key, page_no: this.page_no }, ( data: MESSAGE_LIST ) => {
             console.log("this.message.list() data: ", data);
              if ( data.messages.length == 0 ) return;
              this.lazyProcess(data);      
@@ -68,12 +73,12 @@ export class SonubMessagePage {
      lazyProcess( data: MESSAGE_LIST ) {
 
         this.processMessageDate(data); 
-        this.data.messages = [];
-            data.messages.map( ( v, i ) => {
-                    setTimeout( () => {   
-                        this.data.messages.push( v );
-                    }, i * 50 );
-            } );
+        //this.data.messages = [];
+        data.messages.map( ( v, i ) => {
+                setTimeout( () => {   
+                    this.messages.push( v );
+                }, i * 50 );
+        } );
      }
 
 
@@ -112,12 +117,49 @@ export class SonubMessagePage {
 
     onClickCreateFormSubmit() {
         this.message.send( this.form, re => {
-
+            console.log("message send success: ", re);
         },
         error => alert("message sending error: " + error ),
         () => { }
         );
     }
+
+
+    onClickMakeAllRead() {
+        this.message.makeAllRead( re => {
+            console.log("make all read sucess: ", re);
+            //this.data = <MESSAGE_LIST>{};
+            this.messages = [];
+            this.getMessages();
+        },
+        error => alert("error on make all read: " + error),
+        () => {} );
+    }
+
+    onClickSearchFormSubmit() {
+        if ( this.showSearchForm === false ) {
+            this.showSearchForm = true;
+            return;
+        }
+        
+        //this.data = <MESSAGE_LIST>{};
+        //this.message.debug = true;
+        this.messages = [];
+        this.getMessages( this.key );
+    }
+
+
+    onClickDelete( message: MESSAGE ) {
+        let re = confirm("Do you want to delete this message?");
+        if ( ! re ) return;
+        this.message.delete( message.idx, re => {
+            console.log("message delete success: ", re);
+            message.idx = null;
+        },
+        error => alert("error on message delete: " + error ),
+        () => {} );
+    }
+
 
 
 }
