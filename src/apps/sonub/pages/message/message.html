@@ -7,9 +7,9 @@
         <div class="title" (click)="onClickShowContent(message)" *ngIf="message">
            <div class="from" [innerHTML]="message.from.nickname"></div>
            
-           <div class="subject" [attr.open]=" message.stamp_open " [innerHTML]="message.subject"></div>
+           <div class="subject" [attr.open]=" message.stamp_open ">{{ message.subject }}</div>
 
-           <div class="date" [innerHTML]="message['date_created']"></div>
+           <div class="date">{{ message['date_created'] }}</div>
            <div  style="clear:right;"></div>  
         </div>
 
