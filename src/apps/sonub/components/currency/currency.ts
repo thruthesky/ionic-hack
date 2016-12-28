@@ -18,11 +18,11 @@ export class SonubCurrency {
       .subscribe( data => {
         try {
           let re = JSON.parse( data['_body'] );
-          console.log('re::', re);
+          //console.log('re::', re);
           if ( re['code'] ) console.log( re['message'] );
           else {
             this.currency = re.currency;
-            console.log( 're data' , this.currency );
+            //console.log( 're data' , this.currency );
           }
         }
         catch( e ){

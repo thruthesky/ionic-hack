@@ -78,6 +78,7 @@ export class JobListComponent {
       if ( page.posts.length == 0 ) {
         this.noMorePosts = true;
         this.endScroll();
+        return;
       }
       if ( page.page_no == 1 ) this.pages[0] = page;
       else this.pages.push( page );

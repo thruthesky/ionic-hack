@@ -48,7 +48,7 @@ export class JobViewComponent {
     let idx = this.route.snapshot.params['idx'];
     if( idx ){ //if idx exist then edit
       this.post.load(idx, re=> {
-        console.log('re data',re.post);
+        //console.log('re data',re.post);
         if(re.post) {
           this.form = re.post;
           re.post.photos.map( e => this.files.push(e) );

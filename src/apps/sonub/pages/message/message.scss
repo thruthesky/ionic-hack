@@ -1,118 +1,121 @@
 @mixin title_icon( $icon ) {
-  
-    &:before {
-     
-        padding-right : 3px;   
-        content: $icon;
-        font-family: "FontAwesome";
-        color:dimgrey;
+
+  &:before {
+
+    padding-right : 3px;
+    content: $icon;
+    font-family: "FontAwesome";
+    color:dimgrey;
 
 
-        font-size: 1.2em; 
-        vertical-align: middle;
-    }
+    font-size: 1.2em;
+    vertical-align: middle;
+  }
 }
 
 message-page {
-    font-family: "Malgun Gothic",AppleGothic,sans-serif;
-    
-    .message{
-        position: relative;
-       
-        padding: 0.2em;
-        border-top: 1px solid #dfdfdf;
-        background: #fefefe;
+  font-family: "Malgun Gothic",AppleGothic,sans-serif;
+  .messages {
+    padding: 0 .3em;
 
-        font-size: 0.75em;
-      
-        &:nth-child(odd){
+    .message{
+      position: relative;
+
+      padding: 0.2em;
+      border-top: 1px solid #dfdfdf;
+      background: #fefefe;
+
+      font-size: 0.75em;
+
+      &:nth-child(odd){
         background-color: #f5f8fa;
-        }
+      }
 
     }
-            
-    .title{ 
-       
-        padding:0.5em 0.4em;
-        
-        vertical-align: middle;     
-        &:hover{
+
+    .title{
+
+      padding:0.5em 0.4em;
+
+      vertical-align: middle;
+      &:hover{
         background-color: #e0e0ea;
         cursor: pointer;
-        } 
+      }
 
     }
 
     .from{
-        float: left;
-        width: 100px;
-        font-weight: bold;
-        color: #494949;
+      float: left;
+      width: 100px;
+      font-weight: bold;
+      color: #494949;
     }
 
     .subject{
-        float: left;
-        &[open="0"] {
-            font-weight: bold;
-            color: blue;
-        }
+      float: left;
+      &[open="0"] {
+        font-weight: bold;
+        color: blue;
+      }
     }
 
     .date{
-        float: right;
+      float: right;
     }
-          
+
     .content{
-     
-        padding:1em;
-        
-        border: 1px solid #dfdfdf; 
-        overflow-y: hidden;  
+
+      padding:1em;
+
+      border: 1px solid #dfdfdf;
+      overflow-y: hidden;
     }
 
 
     .menu{
-        float: right;
-        overflow: auto;
-        overflow-x: hidden;
-        overflow-y: hidden;  
+      float: right;
+      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: hidden;
 
-        .hide       { @include title_icon( '\f151' ); }
-        .reply      { @include title_icon( '\f112' ); }
-        .delete     { @include title_icon( '\f014' ); }
-        
-        button{  
-            float: left;
-            padding: 5px 10px;  
+      .hide       { @include title_icon( '\f151' ); }
+      .reply      { @include title_icon( '\f112' ); }
+      .delete     { @include title_icon( '\f014' ); }
 
-            line-height: 17px;  
-            border: 1px solid #d7d7d7;   
-            background-color: #f5f5f5!important;
-            color: black;
+      button{
+        float: left;
+        padding: 5px 10px;
+
+        line-height: 17px;
+        border: 1px solid #d7d7d7;
+        background-color: #f5f5f5!important;
+        color: black;
 
 
-            font-size: 0.9em;
-            cursor :pointer;
+        font-size: 0.9em;
+        cursor :pointer;
 
-            &:hover{
-            color:blue;
-            }
-            
-        } // button    
+        &:hover{
+          color:blue;
+        }
+
+      } // button
     }// menu
 
 
     .create-form {
-        padding: .4em;
+      padding: .4em;
+      box-sizing: border-box;
+      input, button, textarea {
+        display: block;
+        margin: .4em 0;
+        padding: .25em;
         box-sizing: border-box;
-        input, button, textarea {
-            display: block;
-            margin: .4em 0;
-            padding: .25em;
-            box-sizing: border-box;
-            width: 100%;
-        }
+        width: 100%;
+      }
     }
+  }
 }
 
 
