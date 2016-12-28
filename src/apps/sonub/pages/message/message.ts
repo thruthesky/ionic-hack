@@ -1,12 +1,13 @@
 import { Component, style, animate, transition, trigger } from '@angular/core';
-import { Message, MESSAGE, MESSAGE_LIST } from '../../../../api/philgo-api/v2/message';
+import { Message, MESSAGE, MESSAGE_LIST, MESSAGE_FORM } from '../../../../api/philgo-api/v2/message';
 @Component({
     selector: 'message-page',
     templateUrl: 'message.html'
 })
 export class SonubMessagePage {
     data : MESSAGE_LIST = <MESSAGE_LIST>{};
-   
+    showCreateForm: boolean = false;
+    form: MESSAGE_FORM = <MESSAGE_FORM> {};
     constructor(
         private message: Message
     ) {
@@ -14,16 +15,24 @@ export class SonubMessagePage {
         this.getMessages(); 
     }
 
-
-
     onClickShowContent(message : MESSAGE){
-        message['show_content'] = true;  
+        message['show_content'] = true;
+
+        if ( message.stamp_open != "0" ) return;
+
+        this.message.opened( message.idx, data => {
+            console.log("onClickShowContent() : data: ", data);
+            message.stamp_open = "1";
+        },
+        error => alert("error on reading: " + error ),
+        () => {}
+        );  
     }
 
 
 
-     onClickHideContent(message : MESSAGE){
-       message['show_content'] = false;  
+    onClickHideContent(message : MESSAGE){
+        message['show_content'] = false;  
     }
 
     
@@ -95,11 +104,20 @@ export class SonubMessagePage {
 
 
 
-     addZero(i : number){       
-           return i >= 10 ? i : "0" + i;     
-     }
+    addZero(i : number){       
+        return i >= 10 ? i : "0" + i;     
+    }
 
 
+
+    onClickCreateFormSubmit() {
+        this.message.send( this.form, re => {
+
+        },
+        error => alert("message sending error: " + error ),
+        () => { }
+        );
+    }
 
 
 }
